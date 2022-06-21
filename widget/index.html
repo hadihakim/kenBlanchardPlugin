@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <!--
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="style.css" />
+	<!--
     NOTE:
     1. You can reference the file in SDK via relative path
     2. The Control and Widget Should NOT share resources. Only the Widget folder will make it to the device
@@ -11,58 +12,62 @@
         to keep you plugin as light weight as possible for performance and transport reasons
   -->
 
-    <!-- You can load helper.css to use our helper classes.
+	<!-- You can load helper.css to use our helper classes.
   <link href="../../../../styles/helper.css" rel="stylesheet">
   -->
-<link rel="stylesheet" href="./style.css">
-    <!-- JS -->
-    <script src="../../../scripts/buildfire.js"></script>
-    <script src="./JS/dummyData.js"></script>
-    <!--
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="../../../../styles/helper.css">
+	<!-- JS -->
+	<script src="../../../scripts/buildfire.js"></script>
+	<script src="./JS/dummyData.js"></script>
+	<!--
    <script src="../../../../scripts/angular/angular.min.js"></script>
    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
    -->
-  </head>
-  <body>
-    <!-- template -->
-    <template id="template1">
-      <span></span>
-    </template>
+</head>
 
-    <template id="template1">
-      <span></span>
-    </template>
+<body>
+	<!-- template -->
+	<template id="template1">
+		<span></span>
+	</template>
 
-    <template id="for-you-template" class="for-you-template">
-      <div class="for-you-data">
-      <img src=""id="for-you-img" class="for-you-img"/>
-      <div class="info-for-you-container" id="info-for-you-container">
-      <h1 id="for-you-header" class="for-you-header"></h1>
-      <p id="for-you-note" class="for-you-note"></p>
-    </div>
-  </div>
-    </template>
+	<template id="template1">
+		<span></span>
+	</template>
+
+	<template id="for-you-template" class="for-you-template">
+		<div class="border-radius-four for-you-data" id="for-you-data">
+			<!-- <img src="" id="for-you-img" class="border-radius-four for-you-img " /> -->
+			<div class="info-for-you-container" id="info-for-you-container">
+				<h1 id="for-you-header" class="for-you-header"></h1>
+				<p id="for-you-note" class="for-you-note"></p>
+			</div>
+		</div>
+	</template>
 
 
-    <!-- end template -->
+	<!-- end template -->
 
-    <!-- section -->
-    <section id="for-you-section">
-      <div id="for-you-container"></div>
-    </section>
+	<!-- section -->
+	<section id="for-you-section">
+		<p class="sectionTitle"> Just For You </p>
+		<div id="for-you-container"></div>
+	</section>
 
-    <section id="section1">
-      <div id="container1"></div>
-      <div id="container2"></div>
-    </section>
-    <!-- end section -->
+	<section id="section1">
+		<div id="container1"></div>
+		<div id="container2"></div>
+	</section>
+	<!-- end section -->
 
-    <!-- Bundle:scripts -->
-    <script src="./JS/app.js"></script>
-    <script src="./JS/templates/template1.js"></script>
-    <script src="./JS/templates/template2.js"></script>
-    <script src="./JS/templates/template3.js"></script>
-    <!-- end bundle:scripts -->
-  </body>
+	<!-- Bundle:scripts -->
+	<script src="./JS/app.js"></script>
+	<script src="./JS/templates/template1.js"></script>
+	<script src="./JS/templates/template2.js"></script>
+	<script src="./JS/templates/template3.js"></script>
+	<!-- end bundle:scripts -->
+</body>
+
 </html>

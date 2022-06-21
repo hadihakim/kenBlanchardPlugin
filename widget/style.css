@@ -1,62 +1,91 @@
-.for-you-template {
-    /* width: 268px;
-    height: 150px; */
-    /* background-color: blueviolet; */
-}
-
 .info-for-you-container {
- position: absolute;
- bottom: 0px;
+	position: absolute;
+	bottom: 0px;
+	gap: 8px;
+	text-align: center;
+	left: 0;
+	right: 0;
 }
 
 .for-you-img {
-    width:100%;
-    height:100%;
-  
+	width: 100%;
+	height: 100%;
 }
 
-.for-you-header{
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 20px;
-letter-spacing: 0.5px;
-/* color: #FFFFFF; */
-flex: none;
-order: 0;
-align-self: stretch;
-flex-grow: 0;
+.for-you-header {
+	width: 252px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	color: #FFFFFF;
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+	margin: auto;
+	text-align: start;
+	margin-bottom: 8px;
 }
 
-
-.for-you-note{
-    /* Caption 12 */
-
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 16px;
-/* color: #FFFFFF; */
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 0;
+.for-you-note {
+	width: 252px;
+	height: 32px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 16px;
+	color: #FFFFFF;
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 0;
+	overflow: hidden;
+	margin: auto;
+	text-align: start;
 }
 
-.for-you-data{
-    position: relative;
-    width: 268px;
-height: 150px;
-
+.for-you-data {
+	position: relative;
+	width: 268px;
+	height: 150px;
+	margin: 16px;
+	box-shadow: 0px 2px 6px rgb(0 0 0 / 16%);
+	background-size: cover;
+	background-repeat: no-repeat;
+    margin-right: 0;
 }
 
-#for-you-container{
-    display: flex;
-    grid-template-columns: repeat(auto-fill,minmax(268px,1fr));
-    margin: 20px -5px 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+#for-you-container {
+	display: flex;
+	flex-direction: row;
+	width: max-content;
+	overflow-x: scroll;
+	overflow: auto;
+}
+
+#for-you-section {
+	overflow: auto;
+	position: relative;
+	min-width: 100%;
+	min-height: 215px;
+    padding-right: 16px;
+}
+
+.sectionTitle {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	color: #101010;
+	position: sticky;
+	top: 24px;
+	left: 16px;
+	margin-left: 16px;
+	margin-bottom: 12px;
 }
