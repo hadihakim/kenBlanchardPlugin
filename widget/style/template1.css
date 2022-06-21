@@ -33,7 +33,7 @@ font-family: 'Roboto';
 	overflow: auto;
 }
 
-#for-you-container .mdc-card {
+#for-you-container .body-card {
 	position: relative;
 	width: 268px;
 	height: 150px;
@@ -44,7 +44,7 @@ font-family: 'Roboto';
     margin-right: 0;
 }
 
-#for-you-container .mdc-card .card-Text {
+#for-you-container .body-card .card-Text {
 	position: absolute;
 	bottom: 0px;
 	gap: 8px;
@@ -54,7 +54,7 @@ font-family: 'Roboto';
 
 }
 
-#for-you-container .mdc-card .card-Text .card-Text-Header {
+#for-you-container .body-card .card-Text .card-Text-Header {
 	width: 252px;
 	font-style: normal;
 	font-weight: 500;
@@ -71,7 +71,7 @@ font-family: 'Roboto';
 	margin-bottom: 8px;
 }
 
-#for-you-container .mdc-card .card-Text .card-Text-Note {
+#for-you-container .body-card .card-Text .card-Text-Note {
 	width: 252px;
 	height: 32px;
 	font-style: normal;
