@@ -3,21 +3,22 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="style.css" />
-	<!--
-    NOTE:
-    1. You can reference the file in SDK via relative path
-    2. The Control and Widget Should NOT share resources. Only the Widget folder will make it to the device
-    3. You may include any JS framework you want with your Widget and Control folders. However, keep in mind
-        to keep you plugin as light weight as possible for performance and transport reasons
-  -->
+	<meta name="buildfire" content="enableMDTheme" />
 
-	<!-- You can load helper.css to use our helper classes.
-  <link href="../../../../styles/helper.css" rel="stylesheet">
-  -->
+	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="./style.css">
 	<link rel="stylesheet" href="../../../../styles/helper.css">
+	<!-- Include material design css and js -->
+    <link
+      href="../../../styles/materialDesign/material-components-web@4.0.0.min.css"
+      rel="stylesheet"
+    />
+
 	<!-- JS -->
+    <script
+      src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js"
+      type="text/javascript"
+    ></script>
 	<script src="../../../scripts/buildfire.js"></script>
 	<script src="./JS/dummyData.js"></script>
 	<!--
@@ -26,8 +27,8 @@
    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
    -->
 </head>
-
 <body>
+
 	<!-- template -->
 	<template id="template1">
 		<span></span>
@@ -38,15 +39,13 @@
 	</template>
 
 	<template id="template_1" class="template_1">
-		<div class="border-radius-four card_body" id="card_body">
+		<div class="border-radius-four mdc-card" id="card_body">
 			<div class="card-Text" id="card-Text">
 				<h1 id="card-Text-Header" class="card-Text-Header"></h1>
 				<p id="card-Text-Note" class="card-Text-Note"></p>
 			</div>
 		</div>
 	</template>
-
-
 	<!-- end template -->
 
 	<!-- section -->
@@ -66,7 +65,7 @@
 	<script src="./JS/templates/template1.js"></script>
 	<script src="./JS/templates/template2.js"></script>
 	<script src="./JS/templates/template3.js"></script>
-	<!-- end bundle:scripts -->
+	<!-- endbundle:scripts -->
 </body>
 
 </html>
