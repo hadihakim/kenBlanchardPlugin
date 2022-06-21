@@ -6,8 +6,8 @@ apiCall().then((res) => {
 });
 
 const render = () => {
-  const section1 = document.getElementById("section1");
-  const template1 = document.getElementById("template1");
-  const firstClone = template1.content.cloneNode(true);
-  section1.appendChild(firstClone);
+    const container1 = document.getElementById("container1");
+    const container2 = document.getElementById("container2");
+    render1(dummyData,container1,true);
+    render1(dummyData,container2,false);
 };
