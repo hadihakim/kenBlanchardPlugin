@@ -2,7 +2,26 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="buildfire" content="enableMDTheme" />
+    <!-- Include material design css and js -->
+    <link
+      href="../../../styles/materialDesign/material-components-web@4.0.0.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js"
+      type="text/javascript"
+    ></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style/template2.css" />
+    <link href="../../../styles/helper.css" rel="stylesheet" />
+    <link href="../../../styles/siteStyle.css" rel="stylesheet" />
+    <link
+      href="../../../styles/control/siteIcons-control.css"
+      rel="stylesheet"
+    />
+    <!-- <link href="../../../styles/control/bf-base.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="../../../styles/material-icons.css" />
     <!--
     NOTE:
     1. You can reference the file in SDK via relative path
@@ -17,7 +36,12 @@
 
     <!-- JS -->
     <script src="../../../scripts/buildfire.js"></script>
+    <script src="./JS/helper/ui.js"></script>
+    <script src="./JS/helper/sectionsConfig.js"></script>
     <script src="./JS/dummyData.js"></script>
+    <script src="./JS/templates/template1.js"></script>
+    <script src="./JS/templates/template2.js"></script>
+    <script src="./JS/templates/template3.js"></script>
     <!--
    <script src="../../../../scripts/angular/angular.min.js"></script>
    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
@@ -26,30 +50,36 @@
   </head>
   <body>
     <!-- template -->
-    <template id="template1">
-      <span></span>
-    </template>
+    <template id="template1"> </template>
 
     <!-- end template -->
 
+    <!-- template 2-->
+    <template id="template2">
+      <div class="mdc-card">
+        <div class="image"></div>
+        <div class="mdc-card-body">
+          <div class="category"></div>
+          <div class="title"></div>
+        </div>
+        <div class="mdc-card-footer">
+          <div class="duration"></div>
+        </div>
+      </div>
+    </template>
 
+    <!-- end template2 -->
 
-
-
-
-
-    <!-- section -->
-    <section id="section1">
-      <div id="container1"></div>
-      <div id="container2"></div>
-    </section>
+    <!-- section1 -->
+    <section id="section1"></section>
     <!-- end section -->
+
+
+
+    <section id="sectionsContainer"></section>
 
     <!-- Bundle:scripts -->
     <script src="./JS/app.js"></script>
-    <script src="./JS/templates/template1.js"></script>
-    <script src="./JS/templates/template2.js"></script>
-    <script src="./JS/templates/template3.js"></script>
     <!-- end bundle:scripts -->
   </body>
 </html>

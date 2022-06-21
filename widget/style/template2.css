@@ -1,0 +1,106 @@
+#section2 .container-header,
+#section3 .container-header ,
+#section4  .container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+#section2 .container-header .title,
+#section3 .container-header .title ,
+#section4 .container-header .title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+}
+#section2 .container-header .seeAll-btn,
+#section3 .container-header .seeAll-btn ,
+#section4 .container-header .seeAll-btn {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0297a0;
+}
+#section2 #recommendedCoursesContainer,
+#section3 #recommendedBooksContainer,
+#section4 #recommendedVideosContainer {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+#section2 #recommendedCoursesContainer .mdc-card,
+#section3 #recommendedBooksContainer .mdc-card ,
+#section4 #recommendedVideosContainer  .mdc-card {
+  position: relative;
+  width: 138px;
+  height: 172px;
+  overflow: hidden;
+  margin: 1rem;
+  display: inline-block;
+}
+#section3 #recommendedBooksContainer .mdc-card ,
+#section4 #recommendedVideosContainer  .mdc-card {
+    height: 148px;
+}
+
+#section2 #recommendedCoursesContainer .mdc-card .image,
+#section3 #recommendedBooksContainer .mdc-card .image ,
+#section4 #recommendedVideosContainer  .mdc-card .image {
+  width: 138px;
+  height: 78px;
+  background-size: cover;
+}
+
+#section2 #recommendedCoursesContainer .mdc-card .mdc-card-body,
+#section3 #recommendedBooksContainer .mdc-card .mdc-card-body ,
+#section4 #recommendedVideosContainer .mdc-card .mdc-card-body {
+  margin-top: 0.25px;
+  padding: 0.25rem;
+}
+
+#section2 #recommendedCoursesContainer .mdc-card .category,
+#section3 #recommendedBooksContainer .mdc-card .category ,
+#section4 #recommendedVideosContainer .mdc-card .category {
+  color: #5f5f5f;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+#section2 #recommendedCoursesContainer .mdc-card .title,
+#section3 #recommendedBooksContainer .mdc-card .title ,
+#section4 #recommendedVideosContainer  .mdc-card .title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #101010;
+}
+#section2 #recommendedCoursesContainer .mdc-card .mdc-card-footer,
+#section3 #recommendedBooksContainer .mdc-card .mdc-card-footer ,
+#section4 #recommendedVideosContainer  .mdc-card .mdc-card-footer {
+  padding: 0.25rem;
+  position: absolute;
+  bottom: 0;
+}
+#section2 #recommendedCoursesContainer .mdc-card .duration,
+#section3 #recommendedBooksContainer .mdc-card .duration ,
+#section4 #recommendedVideosContainer .mdc-card .duration {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5f5f5f;
+  margin-top: 0.5rem;
+}
+#section2 #recommendedCoursesContainer .mdc-card .duration span,
+#section3 #recommendedBooksContainer .mdc-card .duration span ,
+#section4 #recommendedVideosContainer  .duration span {
+  margin-right: 0.35rem;
+  color: #0297a0;
+}
