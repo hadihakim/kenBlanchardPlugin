@@ -32,4 +32,6 @@ const render = () => {
   });
 };
 
+forYouRender(dummyData, document.getElementById("for-you-container"), false);
 render();
+
