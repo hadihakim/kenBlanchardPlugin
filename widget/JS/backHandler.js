@@ -24,9 +24,15 @@ function initBack() {
 			subPage.classList.add("hidden");
 			userContainer.classList.remove("hidden");
 			sortIcon.classList.add("hidden");
-			
+			scrollTop();
 		}
 	};
 }
+
+
+const scrollTop=()=>{
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 
 initBack();

@@ -4,6 +4,7 @@
     height: 32px;
     margin: 16px;
     overflow: scroll;
+    margin-bottom: 0;
 }
 
 

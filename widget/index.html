@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="./style/template1.css" />
 	<link rel="stylesheet" href="./style/template2.css" />
 	<link rel="stylesheet" href="./style/trendingTemplate.css" />
+	<link rel="stylesheet" href="./style/exploreCard.css" />
+
 
 	<link rel="stylesheet" href="./style/userSection.css" />
 	<!-- Include material design css and js -->
@@ -29,6 +31,7 @@
 	<script src="./JS/helper/ui.js"></script>
 	<script src="./JS/helper/searchBar.js" defer></script>
 	<script src="./JS/helper/sectionsConfig.js"></script>
+	<script src="./JS/helper/exploreConfig.js"></script>
 	<script src="./JS/dummyData.js"></script>
 	<script src="./JS/templates/template1.js"></script>
 	<script src="./JS/templates/template2.js"></script>
@@ -49,7 +52,7 @@
 
 	<!-- template -->
 	<template id="template2">
-		<div class="mdc-card">
+		<div class="mdc-card cards-container">
 			<div class="image"></div>
 			<div class="mdc-card-body">
 				<div class="category"></div>
@@ -128,6 +131,8 @@
 		<h3 class="trending-title">Trending</h3>
 		<div class="trendingContainer" id="trendingContainer"></div>
 	</section>
+
+	<section id="exploreContainer"></section>
 </div>
 	<!-- end section -->
 
