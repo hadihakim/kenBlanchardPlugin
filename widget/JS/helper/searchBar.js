@@ -7,9 +7,9 @@ function testDrawer() {
 			multiSelection: true,
 			height: '100%',
 			allowSelectAll: true,
-			multiSelectionActionButton: { text: 'Apply', type: 'info' },
+			multiSelectionActionButton: { text: 'Apply' },
 			enableFilter: true,
-			isHTML: false,
+			isHTML: true,
 			triggerCallbackOnUIDismiss: false,
 			autoUseImageCdn: true,
 			listItems: [
@@ -37,3 +37,11 @@ function testDrawer() {
 
 let filterIcon = document.getElementById("filterIcon");
 filterIcon.addEventListener("click", testDrawer);
+
+// let exploreButton = document.getElementById("exploreButton");
+// if(exploreButton){
+// 	exploreButton.addEventListener("click", function () {
+// 		buildfire.history.push("Personal Home Page");
+// 	});
+// }
+

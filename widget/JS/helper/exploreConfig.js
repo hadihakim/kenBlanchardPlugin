@@ -1,0 +1,51 @@
+const exploreConfig = [
+    {
+      id: "section2",
+      className: ["section2"],
+      title: "All Courses",
+      seeAllBtn: "See All",
+      containerId: "allCoursesContainer",
+      duration: true,
+    },
+    {
+      id: "section3",
+      className: ["section3"],
+      title: "All Books",
+      seeAllBtn: "See All",
+      containerId: "allBooksContainer",
+      duration: false,
+    },
+    {
+      id: "section4",
+      className: ["section4"],
+      title: "All Videos",
+      seeAllBtn: "See All",
+      containerId: "allVideosContainer",
+      duration: false,
+    },
+    {
+      id: "section5",
+      className: ["section5"],
+      title: "All Articles",
+      seeAllBtn: "See All",
+      containerId: "allArticlesContainer",
+      duration: false,
+    },
+    {
+      id: "section6",
+      className: ["section6"],
+      title: "All Podcasts",
+      seeAllBtn: "See All",
+      containerId: "allPodcastsContainer",
+      duration: false,
+    },
+    {
+      id: "section7",
+      className: ["section7"],
+      title: "All Graphical Summaries",
+      seeAllBtn: "See All",
+      containerId: "allGraphicalSummariesContainer",
+      duration: false,
+    },
+  ];
+  
