@@ -37,3 +37,7 @@
 .action-list li .checkbox {
 	margin-right: 16px !important;
 }
+
+.btn-info{
+	background-color: #0297a0 !important;
+}

@@ -1,36 +1,36 @@
-*{
-box-sizing: border-box;
-font-family: 'Roboto';
+* {
+  box-sizing: border-box;
+  font-family: "Roboto";
 }
 
 #for-you-section {
-	overflow: auto;
-	position: relative;
-	min-width: 100%;
-	min-height: 215px;
-    margin-right: 16px;
+  overflow: auto;
+  position: relative;
+  min-width: 100%;
+  min-height: 215px;
+  margin-right: 16px;
 }
 
 .sectionTitle {
-	font-style: normal;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	color: #101010;
-	position: sticky;
-	top: 24px;
-	left: 16px;
-	margin-left: 16px;
-	margin-bottom: 12px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: #101010;
+  position: sticky;
+  top: 24px;
+  left: 16px;
+  margin-left: 16px;
+  margin-bottom: 12px;
 }
 
 #for-you-container {
-	display: flex;
-	flex-direction: row;
-	width: max-content;
-	overflow-x: scroll;
-	overflow: auto;
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  overflow-x: scroll;
+  overflow: auto;
 }
 
 #for-you-container .mdc-card {
@@ -87,4 +87,3 @@ font-family: 'Roboto';
 	margin: auto;
 	text-align: start;
 }
-

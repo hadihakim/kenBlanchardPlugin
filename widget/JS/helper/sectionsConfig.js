@@ -32,14 +32,6 @@ const sectionConfig = [
     duration: false,
   },
   {
-    id: "section5",
-    className: ["section5"],
-    title: "Recommended Articles",
-    seeAllBtn: "See All",
-    containerId: "recommendedArticlesContainer",
-    duration: false,
-  },
-  {
     id: "section6",
     className: ["section6"],
     title: "Recommended Podcasts",

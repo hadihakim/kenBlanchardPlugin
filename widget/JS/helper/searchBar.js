@@ -7,7 +7,7 @@ function testDrawer() {
 			multiSelection: true,
 			height: '100%',
 			allowSelectAll: true,
-			multiSelectionActionButton: { text: 'Apply', type: 'success' },
+			multiSelectionActionButton: { text: 'Apply', type: 'info' },
 			enableFilter: true,
 			isHTML: false,
 			triggerCallbackOnUIDismiss: false,
