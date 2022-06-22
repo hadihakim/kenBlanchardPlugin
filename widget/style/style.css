@@ -1,3 +1,29 @@
-body{
-    margin: 0;
+body {
+  margin: 0;
+}
+
+.exploreAll-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.exploreAll-btn-container .mdc-button {
+  width: 143px !important;
+  height: 40px !important;
+  background-color: #0297a0 !important;
+  border-radius: 4px !important;
+}
+
+.exploreAll-btn-container .mdc-button .mdc-button__label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
 }
