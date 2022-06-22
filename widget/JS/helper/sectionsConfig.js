@@ -47,4 +47,12 @@ const sectionConfig = [
     containerId: "recommendedGraphicalSummariesContainer",
     duration: false,
   },
+  {
+    id: "explore",
+    className: ["explore"],
+    title: "explore",
+    seeAllBtn: "See All",
+    containerId: "seeAllContainer",
+    duration: true,
+  }
 ];

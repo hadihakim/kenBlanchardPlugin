@@ -3,7 +3,7 @@
     margin-bottom: 0;
     top: 16px;
     left: 16px;
-    z-index: inherit;
+    z-index: 1;
 	position: sticky;
 }
 
