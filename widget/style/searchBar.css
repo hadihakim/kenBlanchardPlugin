@@ -1,0 +1,39 @@
+.mdc-layout-grid__cell--span-12{
+	margin: 16px;
+    margin-bottom: 0;
+    top: 16px;
+    left: 16px;
+    z-index: inherit;
+	position: sticky;
+}
+
+.searchItem{
+	box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.search-container{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 15px 12px 15px;
+}
+
+.bodyTextTheme {
+	width: -webkit-fill-available;
+    border: none;
+    margin-left: 11.5px;
+    margin-right: 11.5px;
+}
+
+
+.action-list li{
+    flex-direction: row-reverse !important;
+}
+
+.action-list li .action-item-texts{
+    margin-right: auto !important;
+}
+
+.action-list li .checkbox {
+	margin-right: 16px !important;
+}
