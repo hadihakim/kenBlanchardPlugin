@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="./style/style.css" />
     <link rel="stylesheet" href="./style/template1.css" />
     <link rel="stylesheet" href="./style/template2.css" />
-    <link rel="stylesheet" href="./style/userSection.css" />
+    <link rel="stylesheet" href="./style/trendingTemplate.css" />
+    <link rel="stylesheet" href="./style/exploreCard.css" />
     <link rel="stylesheet" href="./style/explore.css" />
+    <link rel="stylesheet" href="./style/searchBar.css" />
+    <link rel="stylesheet" href="./style/userSection.css" />
     <!-- Include material design css and js -->
 
+    <link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
     <link rel="stylesheet" href="../../../../styles/helper.css" />
     <!-- Include material design css and js -->
     <link rel="stylesheet" href="../../../styles/material-icons.css" />
@@ -33,11 +37,14 @@
     <script src="./JS/helper/searchBar.js" defer></script>
     <script src="./JS/helper/sectionsConfig.js"></script>
     <script src="./JS/dummyData.js"></script>
-	<script src="./JS/fakeData.js"></script>
-	<script src="./JS/helper/timeConvert.js"></script>
+    <script src="./JS/fakeData.js"></script>
+    <script src="./JS/helper/timeConvert.js"></script>
+    <script src="./JS/helper/exploreConfig.js"></script>
     <script src="./JS/templates/template1.js"></script>
     <script src="./JS/templates/template2.js"></script>
     <script src="./JS/templates/template3.js"></script>
+    <script src="./JS/templates/trendingTemplate.js"></script>
+    <script src="./JS/backHandler.js" defer></script>
     <script src="./JS/app.js" defer></script>
     <!-- endbundle:scripts -->
     <!--
@@ -47,10 +54,10 @@
    -->
   </head>
 
-  <body>
+  <body class="slide-in">
     <!-- template -->
     <template id="template2">
-      <div class="mdc-card">
+      <div class="mdc-card cards-container">
         <div class="image"></div>
         <div class="mdc-card-body">
           <div class="category"></div>
@@ -68,6 +75,12 @@
           <h1 id="card-Text-Header" class="card-Text-Header"></h1>
           <p id="card-Text-Note" class="card-Text-Note"></p>
         </div>
+      </div>
+    </template>
+
+    <template id="trendingTemplate" class="trendingTemplate">
+      <div class="trending-card" id="trending-card">
+        <span class="trending-span" id="trending-span"></span>
       </div>
     </template>
 
@@ -89,9 +102,9 @@
     </template>
     <!-- end template -->
 
+    <!-- user section -->
     <div id="mainContainer">
-      <!-- user section -->
-      <div class="user-container">
+      <div class="user-container" id="userContainer">
         <div class="user-image-container">
           <img
             class="main-image"
@@ -111,6 +124,7 @@
       <!-- end user section -->
 
       <!-- section -->
+      <!-- search bar -->
       <div class="mdc-layout-grid__cell--span-12">
         <div class="searchItem mdc-card">
           <div class="search-container">
@@ -125,6 +139,12 @@
               placeholder="Search"
               autocomplete="off"
             />
+            <label
+              for="searchInput"
+              class="material-icons icon hidden"
+              id="sortIcon"
+              >sort</label
+            >
             <label id="filterIcon" class="material-icons icon" id="filterIcon"
               >filter</label
             >
@@ -132,21 +152,32 @@
         </div>
       </div>
 
-      <section id="for-you-section">
-        <p class="sectionTitle">Just For You</p>
-        <div id="for-you-container"></div>
-      </section>
+      <!-- user list of cards -->
 
-      <section id="sectionsContainer"></section>
+      <div class="mainPage" id="mainPage">
+        <section id="for-you-section">
+          <p class="sectionTitle">Just For You</p>
+          <div id="for-you-container"></div>
+        </section>
 
-      <div class="exploreAll-btn-container">
-        <button class="mdc-button mdc-button--raised">
-          <span class="mdc-button__label">Explore All</span>
-        </button>
+        <section id="sectionsContainer"></section>
+
+        <div class="exploreAll-btn-container">
+          <a class="mdc-button mdc-button--raised" id="exploreButton">
+            <span class="mdc-button__label">Explore All</span>
+          </a>
+        </div>
+      </div>
+      <div class="subPage hidden" id="subPage">
+        <section class="trendingSection" id="trendingSection">
+          <h3 class="trending-title">Trending</h3>
+          <div class="trendingContainer" id="trendingContainer"></div>
+        </section>
+
+        <section id="exploreContainer"></section>
       </div>
     </div>
-    <!-- end section -->
-
     <div id="seeAllContainer" class="hidden"></div>
+    <!-- end section -->
   </body>
 </html>
