@@ -1,90 +1,88 @@
-*{
-box-sizing: border-box;
-font-family: 'Roboto';
+* {
+  box-sizing: border-box;
+  font-family: "Roboto";
 }
 
 #for-you-section {
-	overflow: auto;
-	position: relative;
-	min-width: 100%;
-	min-height: 215px;
-    margin-right: 16px;
+  overflow: auto;
+  position: relative;
+  min-width: 100%;
+  min-height: 215px;
+  margin-right: 16px;
 }
 
 .sectionTitle {
-	font-style: normal;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	color: #101010;
-	position: sticky;
-	top: 24px;
-	left: 16px;
-	margin-left: 16px;
-	margin-bottom: 12px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: #101010;
+  position: sticky;
+  top: 24px;
+  left: 16px;
+  margin-left: 16px;
+  margin-bottom: 12px;
 }
 
 #for-you-container {
-	display: flex;
-	flex-direction: row;
-	width: max-content;
-	overflow-x: scroll;
-	overflow: auto;
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  overflow-x: scroll;
+  overflow: auto;
 }
 
 #for-you-container .body-card {
-	position: relative;
-	width: 268px;
-	height: 150px;
-	margin: 16px;
-	box-shadow: 0px 2px 6px rgb(0 0 0 / 16%);
-	background-size: cover;
-	background-repeat: no-repeat;
-    margin-right: 0;
+  position: relative;
+  width: 268px;
+  height: 150px;
+  margin: 16px;
+  box-shadow: 0px 2px 6px rgb(0 0 0 / 16%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 0;
 }
 
 #for-you-container .body-card .card-Text {
-	position: absolute;
-	bottom: 0px;
-	gap: 8px;
-	text-align: center;
-	left: 0;
-	right: 0;
-
+  position: absolute;
+  bottom: 0px;
+  gap: 8px;
+  text-align: center;
+  left: 0;
+  right: 0;
 }
 
 #for-you-container .body-card .card-Text .card-Text-Header {
-	width: 252px;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	color: #FFFFFF;
-	flex: none;
-	order: 0;
-	align-self: stretch;
-	flex-grow: 0;
-	margin: auto;
-	text-align: start;
-	margin-bottom: 8px;
+  width: 252px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: auto;
+  text-align: start;
+  margin-bottom: 8px;
 }
 
 #for-you-container .body-card .card-Text .card-Text-Note {
-	width: 252px;
-	height: 32px;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 12px;
-	line-height: 16px;
-	color: #FFFFFF;
-	flex: none;
-	order: 1;
-	align-self: stretch;
-	flex-grow: 0;
-	overflow: hidden;
-	margin: auto;
-	text-align: start;
+  width: 252px;
+  height: 32px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  overflow: hidden;
+  margin: auto;
+  text-align: start;
 }
-
