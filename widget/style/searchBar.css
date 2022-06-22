@@ -30,7 +30,7 @@
 	display: none;
 }
 
-.action-list li{
+li{
     flex-direction: row-reverse !important;
 }
 
@@ -42,6 +42,6 @@
 	margin-right: 16px !important;
 }
 
-.btn-info{
+#drawerButton{
 	background-color: #0297a0 !important;
 }

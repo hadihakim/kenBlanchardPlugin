@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="./style/style.css" />
 	<link rel="stylesheet" href="./style/template1.css" />
 	<link rel="stylesheet" href="./style/template2.css" />
+	<link rel="stylesheet" href="./style/trendingTemplate.css" />
+
 	<link rel="stylesheet" href="./style/userSection.css" />
 	<!-- Include material design css and js -->
 
@@ -31,15 +33,16 @@
 	<script src="./JS/templates/template1.js"></script>
 	<script src="./JS/templates/template2.js"></script>
 	<script src="./JS/templates/template3.js"></script>
+	<script src="./JS/templates/trendingTemplate.js"></script>
 	<script src="./JS/app.js" defer></script>
-	<script src="./JS/backHandler.js"></script>
+	<script src="./JS/backHandler.js" defer></script>
 	<!-- endbundle:scripts -->
 	<!--
    <script src="../../../../scripts/angular/angular.min.js"></script>
    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
    -->
-
+   <link rel="stylesheet" href="./style/searchBar.css" />
 </head>
 
 <body class="slide-in">
@@ -66,10 +69,17 @@
 			</div>
 		</div>
 	</template>
+
+	<template id="trendingTemplate" class="trendingTemplate">
+		<div class="trending-card" id="trending-card">
+			<span class="trending-span" id="trending-span"></span>
+		</div>
+	</template>
+
 	<!-- end template -->
 
 	<!-- user section -->
-	<div class="user-container">
+	<div class="user-container" id="userContainer">
 		<div class="user-image-container">
 			<img class="main-image"
 				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU" />
@@ -99,6 +109,7 @@
 
 	<!-- user list of cards -->
 
+	<div class="mainPage" id="mainPage">
 	<section id="for-you-section">
 		<p class="sectionTitle">Just For You</p>
 		<div id="for-you-container"></div>
@@ -107,10 +118,17 @@
 	<section id="sectionsContainer"></section>
 
 	<div class="exploreAll-btn-container">
-		<a href="./explore.html" class="mdc-button mdc-button--raised" id="exploreButton">
+		<a class="mdc-button mdc-button--raised" id="exploreButton">
 			<span class="mdc-button__label">Explore All</span>
 		</a>
 	</div>
+</div>
+<div class="subPage hidden" id="subPage" >
+	<section class="trendingSection" id="trendingSection">
+		<h3 class="trending-title">Trending</h3>
+		<div class="trendingContainer" id="trendingContainer"></div>
+	</section>
+</div>
 	<!-- end section -->
 
 </body>

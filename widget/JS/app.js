@@ -30,8 +30,26 @@ const render = () => {
     );
     render2(dummyData, container, element.duration);
   });
+
+
+  const exploreBtn=document.getElementById("exploreButton");
+  exploreBtn.addEventListener("click",()=>{
+    mainPage.classList.add("hidden");
+    subPage.classList.remove("hidden");
+    userContainer.classList.add("hidden");
+    sortIcon.classList.remove("hidden");
+  });
+
 };
 
-forYouRender(dummyData, document.getElementById("for-you-container"), false);
+const forYouContainer =document.getElementById("for-you-container");
+forYouRender(dummyData,forYouContainer , false);
+
+
+const trendingContainer= document.getElementById("trendingContainer");
+trendingRender(dummyData, trendingContainer)
+
 render();
+
+
 
