@@ -52,6 +52,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  padding-right: 1rem;
 }
 #section2 #recommendedCoursesContainer .mdc-card,
 #section3 #recommendedBooksContainer .mdc-card ,
@@ -63,7 +64,8 @@
   width: 138px;
   height: 172px;
   overflow: hidden;
-  margin: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
   display: inline-block;
 }
 #section3 #recommendedBooksContainer .mdc-card,

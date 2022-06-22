@@ -1,5 +1,10 @@
 'use strict';
 
+
+const scrollTop = () => {
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function testDrawer() {
 	buildfire.components.drawer.open(
 		{
@@ -38,10 +43,4 @@ function testDrawer() {
 let filterIcon = document.getElementById("filterIcon");
 filterIcon.addEventListener("click", testDrawer);
 
-// let exploreButton = document.getElementById("exploreButton");
-// if(exploreButton){
-// 	exploreButton.addEventListener("click", function () {
-// 		buildfire.history.push("Personal Home Page");
-// 	});
-// }
 
