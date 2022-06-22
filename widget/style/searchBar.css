@@ -21,10 +21,14 @@
 .bodyTextTheme {
 	width: -webkit-fill-available;
     border: none;
+	outline: none;
     margin-left: 11.5px;
     margin-right: 11.5px;
 }
 
+.hidden{
+	display: none;
+}
 
 .action-list li{
     flex-direction: row-reverse !important;

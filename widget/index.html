@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="buildfire" content="enableMDTheme" />
 
-    <link rel="stylesheet" href="./style/style.css" />
-    <link rel="stylesheet" href="./style/template1.css" />
-    <link rel="stylesheet" href="./style/template2.css" />
-    <link rel="stylesheet" href="./style/userSection.css" />
-    <!-- Include material design css and js -->
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="buildfire" content="enableMDTheme" />
 
+	<link rel="stylesheet" href="./style/style.css" />
+	<link rel="stylesheet" href="./style/template1.css" />
+	<link rel="stylesheet" href="./style/template2.css" />
+	<link rel="stylesheet" href="./style/userSection.css" />
+	<!-- Include material design css and js -->
+
+	<link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
 	<link rel="stylesheet" href="../../../../styles/helper.css">
 	<!-- Include material design css and js -->
 	<link rel="stylesheet" href="../../../styles/material-icons.css" />
@@ -21,7 +23,6 @@
 	<script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
 	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
 
-
 	<!-- Bundle:scripts -->
 	<script src="./JS/helper/ui.js"></script>
 	<script src="./JS/helper/searchBar.js" defer></script>
@@ -31,6 +32,7 @@
 	<script src="./JS/templates/template2.js"></script>
 	<script src="./JS/templates/template3.js"></script>
 	<script src="./JS/app.js" defer></script>
+	<script src="./JS/backHandler.js"></script>
 	<!-- endbundle:scripts -->
 	<!--
    <script src="../../../../scripts/angular/angular.min.js"></script>
@@ -40,7 +42,7 @@
 
 </head>
 
-<body>
+<body class="slide-in">
 
 	<!-- template -->
 	<template id="template2">
@@ -67,51 +69,50 @@
 	<!-- end template -->
 
 	<!-- user section -->
-    <div class="user-container">
+	<div class="user-container">
 		<div class="user-image-container">
-		  <img
-			class="main-image"
-			src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU"
-		  />
-		  <img
-			src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png"
-			alt=""
-			class="achievement-image"
-		  />
+			<img class="main-image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU" />
+			<img src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" alt=""
+				class="achievement-image" />
 		</div>
 		<div class="text-container">
-		  <h2 class="user-name">Michel Scott</h2>
-		  <span class="growth-user-profile">Newcomer</span>
+			<h2 class="user-name">Michel Scott</h2>
+			<span class="growth-user-profile">Newcomer</span>
 		</div>
-	  </div>
-	  <!-- end user section -->
+	</div>
+	<!-- end user section -->
 
 	<!-- section -->
+	<!-- search bar -->
 	<div class="mdc-layout-grid__cell--span-12">
 		<div class="searchItem mdc-card">
 			<div class="search-container">
 				<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
 				<input class="bodyTextTheme " type="search" name="search" id="searchInput" placeholder="Search"
 					autocomplete="off" />
-				<label id="filterIcon" class="material-icons icon"
-					id="filterIcon">filter</label>
+				<label for="searchInput" class="material-icons icon hidden" id="sortIcon">sort</label>
+				<label id="filterIcon" class="material-icons icon" id="filterIcon">filter</label>
 			</div>
 		</div>
 	</div>
 
-    <section id="for-you-section">
-      <p class="sectionTitle">Just For You</p>
-      <div id="for-you-container"></div>
-    </section>
+	<!-- user list of cards -->
 
-    <section id="sectionsContainer"></section>
+	<section id="for-you-section">
+		<p class="sectionTitle">Just For You</p>
+		<div id="for-you-container"></div>
+	</section>
 
-    <div class="exploreAll-btn-container">
-      <button class="mdc-button mdc-button--raised">
-        <span class="mdc-button__label">Explore All</span>
-      </button>
-    </div>
-    <!-- end section -->
+	<section id="sectionsContainer"></section>
 
-  </body>
+	<div class="exploreAll-btn-container">
+		<a href="./explore.html" class="mdc-button mdc-button--raised" id="exploreButton">
+			<span class="mdc-button__label">Explore All</span>
+		</a>
+	</div>
+	<!-- end section -->
+
+</body>
+
 </html>
