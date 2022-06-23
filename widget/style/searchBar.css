@@ -31,6 +31,7 @@
 }
 
 li{
+	background-color: red;
     flex-direction: row-reverse !important;
 }
 
@@ -45,3 +46,11 @@ li{
 #drawerButton{
 	background-color: #0297a0 !important;
 }
+
+.material-symbols-outlined {
+	font-variation-settings:
+	'FILL' 0,
+	'wght' 400,
+	'GRAD' 0,
+	'opsz' 24
+  }
