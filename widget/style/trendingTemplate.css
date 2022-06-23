@@ -1,67 +1,44 @@
-.trendingContainer{
-    display: flex;
-    gap: 8px;
-    height: 32px;
-    margin: 16px;
-    overflow: scroll;
-    margin-bottom: 0;
+.trendingContainer {
+	display: flex;
+	gap: 8px;
+	height: 32px;
+	margin: 16px;
+	overflow: scroll;
+	margin-bottom: 0;
 }
 
 
-.trending-span{
-    align-items: center;
-padding: 6px 12px;
-/* gap: 10px; */
+.trending-span {
+	cursor: pointer;
+	align-items: center;
+	padding: 6px 12px;
+	width: 77px;
+	height: 32px;
 
-width: 77px;
-height: 32px;
-
-background: rgba(150, 150, 150, 0.2);
-border-radius: 20px;
-
-/* Inside auto layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
-width: 53px;
-height: 12px;
-
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 12px;
-/* identical to box height, or 100% */
-
-text-align: center;
-letter-spacing: 0.25px;
-
-/* Body Text */
-
-color: #5F5F5F;
+	background: rgba(150, 150, 150, 0.2);
+	border-radius: 20px;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+	width: 53px;
+	height: 12px;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: center;
+	letter-spacing: 0.25px;
+	color: #5F5F5F;
 
 }
 
-.trending-title{
-font-family: 'Roboto';
-margin: 16px;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 20px;
-/* identical to box height, or 125% */
-
-letter-spacing: 0.5px;
-
-/* Header Text */
-
-color: #101010;
-
-
-/* Inside auto layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
+.trending-title {
+	margin: 16px;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	color: #101010;
+	flex: none;
+	order: 0;
+	flex-grow: 0;
 }

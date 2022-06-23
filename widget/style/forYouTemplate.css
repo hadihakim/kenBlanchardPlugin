@@ -13,7 +13,7 @@
 
 .sectionTitle {
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0.5px;
@@ -22,7 +22,7 @@
   top: 24px;
   left: 16px;
   margin-left: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 1rem;
 }
 
 #for-you-container {

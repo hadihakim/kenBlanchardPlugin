@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
 	<link rel="stylesheet" href="../../../../styles/helper.css" />
 	<!-- Include material design css and js -->
-	
+
 	<link href="../../../styles/materialDesign/material-components-web@4.0.0.min.css" rel="stylesheet" />
 	<link rel="stylesheet" href="./style/searchBar.css" />
 
@@ -33,7 +33,7 @@
 	<script src="./js/helper/searchBar.js" defer></script>
 	<script src="./js/helper/uiConfig.js"></script>
 	<script src="./js/utilities/fakeData.js"></script>
-	<script src="./js/helper/timeConvert.js"></script>
+	<script src="./js/utilities/utilities.js"></script>
 	<script src="./js/templates/template.js"></script>
 	<script src="./js/helper/backHandler.js" defer></script>
 	<script src="./js/app.js" defer></script>
@@ -69,7 +69,7 @@
 					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
 					<input class="bodyTextTheme" type="search" name="search" id="searchInput" placeholder="Search"
 						autocomplete="off" />
-					<label for="searchInput" class="material-icons icon hidden" id="sortIcon">sort</label>
+					<label class="material-icons icon hidden" id="sortIcon">sort</label>
 					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="subPage hidden" id="subPage">
+		<div class="subPage hidden slide-in" id="subPage">
 			<section class="trendingSection" id="trendingSection">
 				<h3 class="trending-title">Trending</h3>
 				<div class="trendingContainer" id="trendingContainer"></div>

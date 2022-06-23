@@ -13,31 +13,45 @@ body {
 }
 
 .exploreAll-btn-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
 }
 
 .exploreAll-btn-container .mdc-button {
-  width: 143px !important;
-  height: 40px !important;
-  background-color: #0297a0 !important;
-  border-radius: 4px !important;
+	width: 143px !important;
+	height: 40px !important;
+	background-color: #0297a0 !important;
+	border-radius: 4px !important;
 }
 
 .exploreAll-btn-container .mdc-button .mdc-button__label {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  text-align: center;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #ffffff;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #ffffff;
 }
 
-.hidden{
-  display: none;
+.hidden {
+	display: none;
+}
+
+.recommendedSections .recommendedContainer .mdc-card .duration .schedule-icon,
+#seeAllContainer .column .mdc-card-footer .duration .schedule-icon {
+	margin-right: 0.35rem;
+	color: #0297a0;
+	font-size: 18px !important;
+}
+
+.recommendedSections .recommendedContainer .mdc-card .duration .schedule-text,
+#seeAllContainer .column .mdc-card-footer .duration .schedule-text {
+	font-size: 12px;
+	line-height: 16px;
+	color: var(--c-gray6);
 }
