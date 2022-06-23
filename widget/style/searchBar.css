@@ -46,7 +46,9 @@ li{
 #drawerButton{
 	background-color: #0297a0 !important;
 }
-
+#sortIcon{
+	margin-right: 0.5rem;
+}
 .material-symbols-outlined {
 	font-variation-settings:
 	'FILL' 0,

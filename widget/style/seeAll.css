@@ -11,6 +11,7 @@
   width: 127px;
   background-size: cover;
   height: 88px;
+  border-radius: 4px;
 }
 
 #seeAllContainer .mdc-card .column .mdc-card-body .title {

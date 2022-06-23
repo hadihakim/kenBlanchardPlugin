@@ -1,3 +1,5 @@
+
+const {timeConvert, cropImage} = utilities();
 const templates = () => {
 	const forYouRender = (apiData, container, duration) => {
 		let assetsId = apiData.data.sections[1].assets[0];
@@ -13,7 +15,8 @@ const templates = () => {
 			let image = firstClone.getElementById("card_body");
 			title[0].innerHTML = data.meta.title;
 			note[0].innerHTML = data.meta.description;
-			image.style.backgroundImage = `linear-gradient(0deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)), url('${data.meta.image}')`;
+			image.style.backgroundImage = `linear-gradient(0deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
+			url('${cropImage(data.meta.image)}')`;
 			container.appendChild(firstClone);
 		}
 	};
@@ -29,7 +32,7 @@ const templates = () => {
 			let category = nodesClone.querySelectorAll(".category");
 			let title = nodesClone.querySelectorAll(".title");
 			let duration = nodesClone.querySelectorAll(".duration");
-			image[0].style.backgroundImage = `url('${data.meta.image}')`;
+			image[0].style.backgroundImage = `url('${cropImage(data.meta.image)}')`;
 			category[0].innerText = data.type;
 			title[0].innerText = data.meta.title;
 			if (durationState) {
@@ -54,7 +57,7 @@ const templates = () => {
 			let title = nodesClone.querySelectorAll(".title");
 			let duration = nodesClone.querySelectorAll(".duration");
 			let description = nodesClone.querySelectorAll(".description");
-			image[0].style.backgroundImage = `url('${data.meta.image}')`;
+			image[0].style.backgroundImage = `url('${cropImage(data.meta.image,"full_width", "4:3")}')`;
 			title[0].innerText = data.meta.title;
 			description[0].innerText = data.meta.description;
 			if (durationState) {
