@@ -10,7 +10,8 @@ const config = {
     },
     {
       id: "section2",
-      className: ["section2"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "Recommended Courses",
       seeAllBtn: "See All",
       containerId: "recommendedCoursesContainer",
@@ -18,7 +19,8 @@ const config = {
     },
     {
       id: "section3",
-      className: ["section3"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "Recommended Books",
       seeAllBtn: "See All",
       containerId: "recommendedBooksContainer",
@@ -26,7 +28,8 @@ const config = {
     },
     {
       id: "section4",
-      className: ["section4"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "Recommended Videos",
       seeAllBtn: "See All",
       containerId: "recommendedVideosContainer",
@@ -34,7 +37,8 @@ const config = {
     },
     {
       id: "section5",
-      className: ["section5"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "Recommended Articles",
       seeAllBtn: "See All",
       containerId: "recommendedArticlesContainer",
@@ -42,7 +46,8 @@ const config = {
     },
     {
       id: "section6",
-      className: ["section6"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "Recommended Podcasts",
       seeAllBtn: "See All",
       containerId: "recommendedPodcastsContainer",
@@ -50,7 +55,8 @@ const config = {
     },
     {
       id: "section7",
-      className: ["section7"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "Recommended Graphical Summaries",
       seeAllBtn: "See All",
       containerId: "recommendedGraphicalSummariesContainer",
@@ -68,7 +74,8 @@ const config = {
   exploreConfig: [
     {
       id: "section2",
-      className: ["section2"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "All Courses",
       seeAllBtn: "See All",
       containerId: "allCoursesContainer",
@@ -76,7 +83,8 @@ const config = {
     },
     {
       id: "section3",
-      className: ["section3"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "All Books",
       seeAllBtn: "See All",
       containerId: "allBooksContainer",
@@ -84,7 +92,8 @@ const config = {
     },
     {
       id: "section4",
-      className: ["section4"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "All Videos",
       seeAllBtn: "See All",
       containerId: "allVideosContainer",
@@ -92,7 +101,8 @@ const config = {
     },
     {
       id: "section5",
-      className: ["section5"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "All Articles",
       seeAllBtn: "See All",
       containerId: "allArticlesContainer",
@@ -100,7 +110,8 @@ const config = {
     },
     {
       id: "section6",
-      className: ["section6"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "All Podcasts",
       seeAllBtn: "See All",
       containerId: "allPodcastsContainer",
@@ -108,7 +119,8 @@ const config = {
     },
     {
       id: "section7",
-      className: ["section7"],
+      className: ["recommendedSections"],
+      containerClassName: "recommendedContainer",
       title: "All Graphical Summaries",
       seeAllBtn: "See All",
       containerId: "allGraphicalSummariesContainer",

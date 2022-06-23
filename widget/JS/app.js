@@ -7,15 +7,19 @@ const {
   trendingRender,
 } = templates();
 const exploreContainer = (sectionName) => {
+  console.log("seeAll")
   let mainContainer = document.getElementById("mainPage");
   let seeAllContainer = document.getElementById("seeAllContainer");
   if (!mainContainer.classList.contains("hidden")) {
     buildfire.history.push("Personal Home Page from See All");
     mainContainer.classList.add("hidden");
-    seeAllContainer.classList.remove("hidden");
     userContainer.classList.add("hidden");
     sortIcon.classList.remove("hidden");
+  } else if (!subPage.classList.contains("hidden")) {
+    buildfire.history.push("Explore page");
+    subPage.classList.add("hidden");
   }
+  seeAllContainer.classList.remove("hidden");
   scrollTop();
 };
 
@@ -45,7 +49,7 @@ const cardRender = (sectionId, data) => {
           <p class="title">${element.title}</p>
           <span class="seeAll-btn" onclick="exploreContainer('${element.id}')">${element.seeAllBtn}</span>
       </div>
-          <div id="${element.containerId}">
+          <div id="${element.containerId}" class="${element.containerClassName}">
       </div>
   `;
 
