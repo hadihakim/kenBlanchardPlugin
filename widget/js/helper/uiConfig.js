@@ -125,6 +125,6 @@ const config = {
       seeAllBtn: "See All",
       containerId: "allGraphicalSummariesContainer",
       duration: false,
-    },
+    }
   ],
 };

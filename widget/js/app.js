@@ -41,7 +41,7 @@ const cardRender = (sectionId, data) => {
         element.id
       );
       const container = document.getElementById(element.containerId);
-      forYouRender(dummyData, container, element.duration);
+      forYouRender(fakeData, container, element.duration);
     } else {
       let sectionInnerHTML = `
       <div class="container-header">
@@ -79,7 +79,7 @@ const cardRender = (sectionId, data) => {
 const init = () => {
   cardRender("sectionsContainer", config.sectionConfig);
   cardRender("exploreContainer", config.exploreConfig);
-  trendingRender(dummyData, "trendingContainer");
+  trendingRender(fakeData, "trendingContainer");
 };
 
 init();
