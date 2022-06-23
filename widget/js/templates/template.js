@@ -1,23 +1,26 @@
 const templates = () => {
-  const forYouRender = (dummyData, container, duration) => {
+  const forYouRender = (apiData, container, duration) => {
+    let assetsId = apiData.data.sections[1].assets[0];
+    let data = apiData.data.assets_info[assetsId];
+
     const template = document.getElementById("forYouTemplate");
-    for (let i = 0; i < dummyData.length; i++) {
+   
+
+    for (let i = 0; i <6; i++) {
       const firstClone = template.content.cloneNode(true);
-
-      let header = firstClone.getElementById("card-Text-Header");
-      header.innerHTML = dummyData[i].title;
-      let note = firstClone.getElementById("card-Text-Note");
-      note.innerHTML = dummyData[i].description;
+      let title = firstClone.querySelectorAll(".card-Text-Header");
+      let note = firstClone.querySelectorAll(".card-Text-Note");
       let image = firstClone.getElementById("card_body");
-
-      image.style.backgroundImage = `linear-gradient(0deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)), url(${dummyData[i].image})`;
+      title[0].innerHTML = data.meta.title;
+      note[0].innerHTML =data.meta.description;
+      image.style.backgroundImage = `linear-gradient(0deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)), url('${data.meta.image}')`;
       container.appendChild(firstClone);
     }
   };
 
-  const recommendedCardRender = (dummyData, container, durationState) => {
-    let assetsId = dummyData.data.sections[1].assets[0];
-    let data = dummyData.data.assets_info[assetsId];
+  const recommendedCardRender = (apiData, container, durationState) => {
+    let assetsId = apiData.data.sections[1].assets[0];
+    let data = apiData.data.assets_info[assetsId];
     const recommendedTemplate = document.getElementById("recommendedTemplate");
 
     for (let index = 0; index < 6; index++) {
@@ -38,9 +41,9 @@ const templates = () => {
     }
   };
 
-  const seeAllCardsRender = (dummyData, container, durationState) => {
-    let assetsId = dummyData.data.sections[1].assets[0];
-    let data = dummyData.data.assets_info[assetsId];
+  const seeAllCardsRender = (apiData, container, durationState) => {
+    let assetsId = apiData.data.sections[1].assets[0];
+    let data = apiData.data.assets_info[assetsId];
 
     const recommendedTemplate = document.getElementById("seeAllTemplate");
     for (let index = 0; index < 6; index++) {
@@ -64,13 +67,12 @@ const templates = () => {
   const trendingRender = (data, containerId) => {
     const container = document.getElementById(containerId);
     const trendingTemplate = document.getElementById("trendingTemplate");
-    data.forEach((el, idx) => {
-      console.log();
+   for(let i = 0; i < 6 ; i++){
       const nodesClone = trendingTemplate.content.cloneNode(true);
       let title = nodesClone.querySelectorAll(".trending-span");
       title[0].innerHTML = "trending";
       container.appendChild(nodesClone);
-    });
+    };
   };
 
   return { forYouRender, recommendedCardRender, seeAllCardsRender, trendingRender };

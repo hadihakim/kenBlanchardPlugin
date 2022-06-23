@@ -39,7 +39,33 @@ function filterDrawer() {
 	);
 }
 
+function sortDrawer() {
+	buildfire.components.drawer.open(
+		{
+			content: 'Sort',
+			enableFilter: true,
+			multiSelectionActionButton: { text: 'Apply' },
+			isHTML: true,
+			triggerCallbackOnUIDismiss: false,
+			autoUseImageCdn: true,
+			listItems: [
+				{ text: 'Default', selected: false },
+				{ text: 'Most Popular', selected: false },
+				{ text: 'Most Recent', selected: false }
+			]
+		},
+		(err, result) => {
+			if (err) return console.error(err);
+			console.log("Selected Contacts", result);
+		}
+
+	);
+}
+
 let filterIcon = document.getElementById("filterIcon");
 filterIcon.addEventListener("click", filterDrawer);
+
+let sortIcon = document.getElementById("sortIcon");
+sortIcon.addEventListener("click", sortDrawer);
 
 
