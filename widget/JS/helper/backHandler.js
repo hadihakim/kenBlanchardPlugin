@@ -16,8 +16,10 @@ function initBack() {
 						sortIcon.classList.add("hidden");
 						break;
 					case "Personal Home Page from See All":
-						mainContainer.classList.remove("hidden");
+						mainPage.classList.remove("hidden");
 						seeAllContainer.classList.add("hidden");
+						userContainer.classList.remove("hidden");
+						sortIcon.classList.add("hidden");
 						break;
 					default:
 

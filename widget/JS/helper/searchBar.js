@@ -5,12 +5,11 @@ const scrollTop = () => {
 	window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function testDrawer() {
+function filterDrawer() {
 	buildfire.components.drawer.open(
 		{
 			content: 'Topics',
 			multiSelection: true,
-			height: '100%',
 			allowSelectAll: true,
 			multiSelectionActionButton: { text: 'Apply' },
 			enableFilter: true,
@@ -41,6 +40,6 @@ function testDrawer() {
 }
 
 let filterIcon = document.getElementById("filterIcon");
-filterIcon.addEventListener("click", testDrawer);
+filterIcon.addEventListener("click", filterDrawer);
 
 
