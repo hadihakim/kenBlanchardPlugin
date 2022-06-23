@@ -7,7 +7,6 @@ const templates = () => {
 
 		const template = document.getElementById("forYouTemplate");
 
-
 		for (let i = 0; i < 6; i++) {
 			const firstClone = template.content.cloneNode(true);
 			let title = firstClone.querySelectorAll(".card-Text-Header");
