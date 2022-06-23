@@ -1,6 +1,6 @@
 const templates = () => {
   const forYouRender = (dummyData, container, duration) => {
-    const template = document.getElementById("template_1");
+    const template = document.getElementById("forYouTemplate");
     for (let i = 0; i < dummyData.length; i++) {
       const firstClone = template.content.cloneNode(true);
 
@@ -18,10 +18,10 @@ const templates = () => {
   const recommendedCardRender = (dummyData, container, durationState) => {
     let assetsId = dummyData.data.sections[1].assets[0];
     let data = dummyData.data.assets_info[assetsId];
-    const template2 = document.getElementById("template2");
+    const recommendedTemplate = document.getElementById("recommendedTemplate");
 
     for (let index = 0; index < 6; index++) {
-      const nodesClone = template2.content.cloneNode(true);
+      const nodesClone = recommendedTemplate.content.cloneNode(true);
       let image = nodesClone.querySelectorAll(".image");
       let category = nodesClone.querySelectorAll(".category");
       let title = nodesClone.querySelectorAll(".title");
@@ -42,9 +42,9 @@ const templates = () => {
     let assetsId = dummyData.data.sections[1].assets[0];
     let data = dummyData.data.assets_info[assetsId];
 
-    const template2 = document.getElementById("template3");
+    const recommendedTemplate = document.getElementById("seeAllTemplate");
     for (let index = 0; index < 6; index++) {
-      const nodesClone = template2.content.cloneNode(true);
+      const nodesClone = recommendedTemplate.content.cloneNode(true);
       let image = nodesClone.querySelectorAll(".image");
       let title = nodesClone.querySelectorAll(".title");
       let duration = nodesClone.querySelectorAll(".duration");

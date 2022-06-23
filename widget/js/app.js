@@ -6,8 +6,7 @@ const {
   seeAllCardsRender,
   trendingRender,
 } = templates();
-const exploreContainer = (sectionName) => {
-  console.log("seeAll")
+const seeAllBtnAction = () => {
   let mainContainer = document.getElementById("mainPage");
   let seeAllContainer = document.getElementById("seeAllContainer");
   if (!mainContainer.classList.contains("hidden")) {
@@ -47,7 +46,7 @@ const cardRender = (sectionId, data) => {
       let sectionInnerHTML = `
       <div class="container-header">
           <p class="title">${element.title}</p>
-          <span class="seeAll-btn" onclick="exploreContainer('${element.id}')">${element.seeAllBtn}</span>
+          <span class="seeAll-btn" onclick="seeAllBtnAction('${element.id}')">${element.seeAllBtn}</span>
       </div>
           <div id="${element.containerId}" class="${element.containerClassName}">
       </div>
