@@ -1,5 +1,15 @@
+html[safe-area="true"] body {
+  -webkit-overflow-scrolling: auto;
+}
+
+html[buildfire][safe-area="true"] body {
+  -webkit-overflow-scrolling: auto !important;
+}
+
 body {
   margin: 0;
+  height: 100%;
+  overflow: scroll;
 }
 
 .exploreAll-btn-container {
