@@ -24,7 +24,7 @@
     />
     <link rel="stylesheet" href="./style/searchBar.css" />
 
-    <!-- JS -->
+    <!-- js -->
     <script src="../../../scripts/buildfire.js"></script>
     <script
       src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js"
@@ -33,19 +33,15 @@
     <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
 
     <!-- Bundle:scripts -->
-    <script src="./JS/helper/ui.js"></script>
-    <script src="./JS/helper/searchBar.js" defer></script>
-    <script src="./JS/helper/sectionsConfig.js"></script>
-    <script src="./JS/dummyData.js"></script>
-    <script src="./JS/fakeData.js"></script>
-    <script src="./JS/helper/timeConvert.js"></script>
-    <script src="./JS/helper/exploreConfig.js"></script>
-    <script src="./JS/templates/template1.js"></script>
-    <script src="./JS/templates/template2.js"></script>
-    <script src="./JS/templates/template3.js"></script>
-    <script src="./JS/templates/trendingTemplate.js"></script>
-    <script src="./JS/backHandler.js" defer></script>
-    <script src="./JS/app.js" defer></script>
+    <script src="./js/helper/ui.js"></script>
+    <script src="./js/helper/searchBar.js" defer></script>
+    <script src="./js/helper/uiConfig.js"></script>
+    <script src="./js/utilities/dummyData.js"></script>
+    <script src="./js/utilities/fakeData.js"></script>
+    <script src="./js/helper/timeConvert.js"></script>
+    <script src="./js/templates/template.js"></script>
+    <script src="./js/helper/backHandler.js" defer></script>
+    <script src="./js/app.js" defer></script>
     <!-- endbundle:scripts -->
     <!--
    <script src="../../../../scripts/angular/angular.min.js"></script>
@@ -72,7 +68,7 @@
     <template id="template_1" class="template_1">
       <div class="border-radius-four mdc-card" id="card_body">
         <div class="card-Text" id="card-Text">
-          <h1 id="card-Text-Header" class="card-Text-Header"></h1>
+          <p id="card-Text-Header" class="card-Text-Header"></p>
           <p id="card-Text-Note" class="card-Text-Note"></p>
         </div>
       </div>
@@ -155,11 +151,6 @@
       <!-- user list of cards -->
 
       <div class="mainPage slide-in" id="mainPage">
-        <section id="for-you-section">
-          <p class="sectionTitle">Just For You</p>
-          <div id="for-you-container"></div>
-        </section>
-
         <section id="sectionsContainer"></section>
 
         <div class="exploreAll-btn-container">
@@ -173,11 +164,10 @@
           <h3 class="trending-title">Trending</h3>
           <div class="trendingContainer" id="trendingContainer"></div>
         </section>
-
         <section id="exploreContainer"></section>
       </div>
+      <div id="seeAllContainer" class="hidden slide-in"></div>
     </div>
-    <div id="seeAllContainer" class="hidden slide-in"></div>
     <!-- end section -->
   </body>
 </html>
