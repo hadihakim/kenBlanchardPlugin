@@ -11,6 +11,7 @@
   width: 127px;
   background-size: cover;
   height: 88px;
+  border-radius: 4px;
 }
 
 #seeAllContainer .mdc-card .column .mdc-card-body .title {
@@ -43,8 +44,4 @@
   line-height: 16px;
   color: #5f5f5f;
   margin-top: 0.5rem;
-}
-#seeAllContainer .column .mdc-card-footer .duration span {
-  margin-right: 0.35rem;
-  color: #0297a0;
 }

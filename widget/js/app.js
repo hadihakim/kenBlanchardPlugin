@@ -1,11 +1,27 @@
 "use strict";
 
+const { getAppTheme, setAppTheme } = utilities();
+
+const appConfig = {
+  fetchingNextList: false,
+  isSeeAllScreen: false,
+}
+
 const {
   forYouRender,
   recommendedCardRender,
   seeAllCardsRender,
   trendingRender,
 } = templates();
+
+const _fetchNextList = () => {
+  if (config.fetchingNextList) return;
+  config.fetchingNextList = true;
+  seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
+    config.fetchingNextList = false;
+  });
+}
+
 const seeAllBtnAction = () => {
   let mainContainer = document.getElementById("mainPage");
   let seeAllContainer = document.getElementById("seeAllContainer");
@@ -18,8 +34,11 @@ const seeAllBtnAction = () => {
     buildfire.history.push("Explore page");
     subPage.classList.add("hidden");
   }
-  seeAllContainer.classList.remove("hidden");
   scrollTop();
+  seeAllContainer.innerHTML = '';
+  _fetchNextList()
+  seeAllContainer.classList.remove("hidden");
+  appConfig.isSeeAllScreen = true;
 };
 
 const cardRender = (sectionId, data) => {
@@ -27,10 +46,10 @@ const cardRender = (sectionId, data) => {
   data.forEach((element) => {
     if (element.id === "explore") {
       const container = document.getElementById(element.containerId);
-      seeAllCardsRender(fakeData, container, element.duration);
+      seeAllCardsRender(fakeData, container, element.duration, () => { });
     } else if (element.id === "for-you-section") {
       let sectionInnerHTML = `
-			<p class="sectionTitle">${element.title}</p>
+			<p class="sectionTitle headerText-AppTheme">${element.title}</p>
 			<div id="${element.containerId}"></div>
   `;
       ui.createElement(
@@ -45,8 +64,8 @@ const cardRender = (sectionId, data) => {
     } else {
       let sectionInnerHTML = `
       <div class="container-header">
-          <p class="title">${element.title}</p>
-          <span class="seeAll-btn" onclick="seeAllBtnAction('${element.id}')">${element.seeAllBtn}</span>
+          <p class="title headerText-AppTheme">${element.title}</p>
+          <span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id}')">${element.seeAllBtn}</span>
       </div>
           <div id="${element.containerId}" class="${element.containerClassName}">
       </div>
@@ -76,10 +95,24 @@ const cardRender = (sectionId, data) => {
   });
 };
 
+
+
 const init = () => {
+  getAppTheme();
   cardRender("sectionsContainer", config.sectionConfig);
   cardRender("exploreContainer", config.exploreConfig);
   trendingRender(fakeData, "trendingContainer");
-};
+  setAppTheme();
+  mainContainer.onscroll = (e) => {
+    if (appConfig.isSeeAllScreen) {
+      //console.log( window.getComputedStyle(document.getElementById("seeAllContainer")).display);
+      if (
+        (((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) === 1)
+      ) {
+        _fetchNextList();
+      }
+    }
+  };
+}
 
 init();

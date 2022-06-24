@@ -21,6 +21,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  cursor: pointer;
   color: #0297a0;
 }
 .recommendedSections .recommendedContainer {
@@ -81,8 +82,4 @@
   line-height: 16px;
   color: #5f5f5f;
   margin-top: 0.5rem;
-}
-.recommendedSections .recommendedContainer .mdc-card .duration span {
-  margin-right: 0.35rem;
-  color: #0297a0;
 }

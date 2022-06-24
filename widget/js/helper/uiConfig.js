@@ -127,4 +127,7 @@ const config = {
       duration: false,
     }
   ],
+  appTheme:{
+
+  }
 };
