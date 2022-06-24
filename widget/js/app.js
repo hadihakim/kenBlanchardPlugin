@@ -2,6 +2,11 @@
 
 const { getAppTheme, setAppTheme } = utilities();
 
+const appConfig = {
+  fetchingNextList: false,
+  isSeeAllScreen: false,
+}
+
 const {
 	forYouRender,
 	recommendedCardRender,
@@ -20,8 +25,9 @@ const seeAllBtnAction = () => {
 		buildfire.history.push("Explore page");
 		subPage.classList.add("hidden");
 	}
+  scrollTop();
 	seeAllContainer.classList.remove("hidden");
-	scrollTop();
+  appConfig.isSeeAllScreen = true;
 };
 
 const cardRender = (sectionId, data) => {
@@ -29,7 +35,7 @@ const cardRender = (sectionId, data) => {
 	data.forEach((element) => {
 		if (element.id === "explore") {
 			const container = document.getElementById(element.containerId);
-			seeAllCardsRender(fakeData, container, element.duration);
+			seeAllCardsRender(fakeData, container, element.duration, ()=>{});
 		} else if (element.id === "for-you-section") {
 			let sectionInnerHTML = `
 			<p class="sectionTitle headerText-AppTheme">${element.title}</p>
@@ -78,12 +84,32 @@ const cardRender = (sectionId, data) => {
 	});
 };
 
+
+
 const init = () => {
 	getAppTheme();
 	cardRender("sectionsContainer", config.sectionConfig);
 	cardRender("exploreContainer", config.exploreConfig);
 	trendingRender(fakeData, "trendingContainer");
 	setAppTheme();
+  mainContainer.onscroll = (e) => {
+    if(appConfig.isSeeAllScreen) {
+      //console.log( window.getComputedStyle(document.getElementById("seeAllContainer")).display);
+      if (
+      (((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) === 1)
+    ) {
+      _fetchNextList();
+    }
+    } 
+  };
+
+  function _fetchNextList() {
+    if (config.fetchingNextList) return;
+    config.fetchingNextList = true;
+    seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
+      config.fetchingNextList = false;
+    });
+  }
 }
 
 init();

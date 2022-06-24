@@ -9,7 +9,12 @@ html[buildfire][safe-area="true"] body {
 html, body {
   margin: 0;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
+}
+
+#mainContainer {
+	height: 100vh;
+	overflow-y: scroll;
 }
 
 .exploreAll-btn-container {
