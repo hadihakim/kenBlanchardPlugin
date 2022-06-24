@@ -33,7 +33,15 @@ function filterDrawer() {
 		},
 		(err, result) => {
 			if (err) return console.error(err);
-			console.log("Selected Contacts", result);
+			appConfig.topics = result;
+			console.log("Selected Contacts", appConfig.topics);
+
+			config.sectionConfig.forEach((el) => {
+				(el.id != "for-you-section" && el.id != "explore") ?
+				recommendedCardRender(fakeData, document.getElementById(`${el.containerId}`), el.duration, el.title) 
+				: false;
+			})
+			
 		}
 
 	);
@@ -42,7 +50,9 @@ function filterDrawer() {
 function sortDrawer() {
 	buildfire.components.drawer.open(
 		{
-			content: 'Sort',
+			content: 'Sorting',
+			multiSelection: true,
+			allowSelectAll: true,
 			enableFilter: true,
 			multiSelectionActionButton: { text: 'Apply' },
 			isHTML: true,

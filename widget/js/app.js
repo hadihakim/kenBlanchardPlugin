@@ -5,6 +5,7 @@ const { getAppTheme, setAppTheme } = utilities();
 const appConfig = {
   fetchingNextList: false,
   isSeeAllScreen: false,
+  topics: []
 }
 
 const {
@@ -80,7 +81,7 @@ const cardRender = (sectionId, data) => {
       );
 
       const container = document.getElementById(element.containerId);
-      recommendedCardRender(fakeData, container, element.duration);
+      recommendedCardRender(fakeData, container, element.duration, element.title);
     }
   });
 
@@ -104,14 +105,12 @@ const init = () => {
   trendingRender(fakeData, "trendingContainer");
   setAppTheme();
   mainContainer.onscroll = (e) => {
-    if (appConfig.isSeeAllScreen) {
       //console.log( window.getComputedStyle(document.getElementById("seeAllContainer")).display);
       if (
-        (((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) === 1)
+        ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.97) && !appConfig.fetchingNextList && appConfig.isSeeAllScreen)
       ) {
         _fetchNextList();
       }
-    }
   };
 }
 
