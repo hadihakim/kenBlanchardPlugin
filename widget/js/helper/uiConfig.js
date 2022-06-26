@@ -3,7 +3,7 @@ const config = {
     {
       id: "for-you-section",
       className: ["for-you-section"],
-      title: "Just For You",
+      title: "Just for you",
       seeAllBtn: "",
       containerId: "for-you-container",
       duration: false,
@@ -129,5 +129,6 @@ const config = {
   ],
   appTheme:{
 
-  }
+  },
+  filterArr:[]
 };

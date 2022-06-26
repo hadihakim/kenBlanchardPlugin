@@ -5,6 +5,10 @@ const scrollTop = () => {
 	mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+let filterTopics = ['Coaching', 'Conflict','Customer Service','Change & Innovation',
+'Diversity, Equity & Inclusion ', 'Change & Innovation', 'Leading People', 'Performance Management',
+'Personal Effectiveness', 'Team Effectiveness', 'Working with Others','Trust' ]
+
 function filterDrawer() {
 	buildfire.components.drawer.open(
 		{
@@ -16,34 +20,27 @@ function filterDrawer() {
 			isHTML: true,
 			triggerCallbackOnUIDismiss: false,
 			autoUseImageCdn: true,
-			listItems: [
-				{ text: 'Coaching', selected: false },
-				{ text: 'Conflict', selected: false },
-				{ text: 'Customer Service', selected: false },
-				{ text: 'Change & Innovation', selected: false },
-				{ text: 'Diversity, Equity & Inclusion ', selected: false },
-				{ text: 'Change & Innovation', selected: false },
-				{ text: 'Leading People', selected: false },
-				{ text: 'Performance Management', selected: false },
-				{ text: 'Personal Effectiveness', selected: false },
-				{ text: 'Team Effectiveness', selected: false },
-				{ text: 'Trust', selected: false },
-				{ text: 'Working with Others', selected: false }
-			]
+			listItems: filterTopics.map(topic=>{
+				return{text:topic, selected: config.filterArr.includes(topic)}
+			})
 		},
 		(err, result) => {
 			if (err) return console.error(err);
-			appConfig.topics = result;
-			console.log("Selected Contacts", appConfig.topics);
+			config.filterArr = [];
+			result.forEach(topic=>{
+				config.filterArr.push(topic.text)
+			})
 
 			config.sectionConfig.forEach((el) => {
-				(el.id != "for-you-section" && el.id != "explore") ?
-				recommendedCardRender(fakeData, document.getElementById(`${el.containerId}`), el.duration, el.title) 
-				: false;
+				filterAndPrintData(fakeData, document.getElementById(`${el.containerId}`), el.duration, el.title)
 			})
-			
-		}
 
+			config.exploreConfig.forEach((element) => {
+				filterAndPrintData(fakeData, document.getElementById(`${element.containerId}`), element.duration, element.title)
+			})
+
+			trendingRender(fakeData, "trendingContainer");
+		}
 	);
 }
 
