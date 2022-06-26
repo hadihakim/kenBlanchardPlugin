@@ -22,7 +22,8 @@ const _fetchNextList = () => {
 	});
 }
 
-const seeAllBtnAction = () => {
+const seeAllBtnAction = (title) => {
+  config.activeSeeAll=title;
 	let mainContainer = document.getElementById("mainPage");
 	let seeAllContainer = document.getElementById("seeAllContainer");
 	if (!mainContainer.classList.contains("hidden")) {
@@ -35,7 +36,11 @@ const seeAllBtnAction = () => {
 		subPage.classList.add("hidden");
 	}
 	scrollTop();
-	seeAllContainer.innerHTML = '';
+  seeAllCardsRender(
+    fakeData,
+    document.getElementById("seeAllContainer"),
+    true
+  );
 	_fetchNextList()
 	seeAllContainer.classList.remove("hidden");
 	appConfig.isSeeAllScreen = true;
@@ -46,14 +51,14 @@ const cardRender = (sectionId, data) => {
 	data.forEach((element) => {
 		if (element.id === "explore") {
 			const container = document.getElementById(element.containerId);
-			seeAllCardsRender(fakeData, container, element.duration, () => { });
+			seeAllCardsRender(fakeData, container, element.duration,"Default");
 		} else {
 			let sectionInnerHTML;
 			if (element.title != "Just for you") {
 				sectionInnerHTML = `
 				<div class="container-header">
 					<p class="title headerText-AppTheme">${element.title}</p>
-					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id}')">${element.seeAllBtn}</span>
+					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.title}')">${element.seeAllBtn}</span>
 				</div>
 					<div id="${element.containerId}" class="${element.containerClassName}">
 				</div>

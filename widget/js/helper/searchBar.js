@@ -1,72 +1,92 @@
-'use strict';
-
+"use strict";
 
 const scrollTop = () => {
-	mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
-}
+  mainContainer.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 let filterTopics = ['Coaching', 'Conflict','Customer Service','Change & Innovation',
 'Diversity, Equity & Inclusion ', 'Change & Innovation', 'Leading People', 'Performance Management',
 'Personal Effectiveness', 'Team Effectiveness', 'Working with Others','Trust', 'Inactive Topic']
 
 function filterDrawer() {
-	buildfire.components.drawer.open(
-		{
-			content: 'Topics',
-			multiSelection: true,
-			allowSelectAll: true,
-			multiSelectionActionButton: { text: 'Apply' },
-			enableFilter: true,
-			isHTML: true,
-			triggerCallbackOnUIDismiss: false,
-			autoUseImageCdn: true,
-			listItems: filterTopics.map(topic=>{
-				return{text:topic, selected: config.filterArr.includes(topic)}
-			})
-		},
-		(err, result) => {
-			if (err) return console.error(err);
-			config.filterArr = [];
-			result.forEach(topic=>{
-				config.filterArr.push(topic.text)
-			})
+  buildfire.components.drawer.open(
+    {
+      content: "Topics",
+      multiSelection: true,
+      allowSelectAll: true,
+      multiSelectionActionButton: { text: "Apply" },
+      enableFilter: true,
+      isHTML: true,
+      triggerCallbackOnUIDismiss: false,
+      autoUseImageCdn: true,
+      listItems: filterTopics.map((topic) => {
+        return { text: topic, selected: config.filterArr.includes(topic) };
+      }),
+    },
+    (err, result) => {
+      if (err) return console.error(err);
+      config.filterArr = [];
+      result.forEach((topic) => {
+        config.filterArr.push(topic.text);
+      });
 
-			config.sectionConfig.forEach((el) => {
-				filterAndPrintData(fakeData, document.getElementById(`${el.containerId}`), el.duration, el.title)
-			})
+      config.sectionConfig.forEach((el) => {
+        filterAndPrintData(
+          fakeData,
+          document.getElementById(`${el.containerId}`),
+          el.duration,
+          el.title
+        );
+      });
 
-			config.exploreConfig.forEach((element) => {
-				filterAndPrintData(fakeData, document.getElementById(`${element.containerId}`), element.duration, element.title)
-			})
+      config.exploreConfig.forEach((element) => {
+        filterAndPrintData(
+          fakeData,
+          document.getElementById(`${element.containerId}`),
+          element.duration,
+          element.title
+        );
+      });
+      seeAllCardsRender(
+        fakeData,
+        document.getElementById("seeAllContainer"),
+        true,
+      );
 
-			trendingRender(fakeData, "trendingContainer");
-		}
-	);
+      trendingRender(fakeData, "trendingContainer");
+    }
+  );
 }
 
 function sortDrawer() {
-	buildfire.components.drawer.open(
-		{
-			content: 'Sorting',
-			multiSelection: true,
-			allowSelectAll: true,
-			enableFilter: true,
-			multiSelectionActionButton: { text: 'Apply' },
-			isHTML: true,
-			triggerCallbackOnUIDismiss: false,
-			autoUseImageCdn: true,
-			listItems: [
-				{ text: 'Default', selected: false },
-				{ text: 'Most Popular', selected: false },
-				{ text: 'Most Recent', selected: false }
-			]
-		},
-		(err, result) => {
-			if (err) return console.error(err);
-			console.log("Selected Contacts", result);
-		}
-
-	);
+  buildfire.components.drawer.open(
+    {
+      content: "Sorting",
+      multiSelection: false,
+      allowSelectAll: false,
+      enableFilter: true,
+      multiSelectionActionButton: { text: "Apply" },
+      isHTML: true,
+      triggerCallbackOnUIDismiss: true,
+      autoUseImageCdn: true,
+      listItems: [
+        { text: "Default", selected: true },
+        { text: "Most Popular", selected: false },
+        { text: "Most Recent", selected: false },
+      ],
+    },
+    (err, result) => {
+      if (err) return console.error(err);
+      buildfire.components.drawer.closeDrawer();
+      console.log("Selected Contacts", result);
+      config.sortType = result.text;
+      seeAllCardsRender(
+        fakeData,
+        document.getElementById("seeAllContainer"),
+        true,
+      );
+    }
+  );
 }
 
 let filterIcon = document.getElementById("filterIcon");
@@ -74,5 +94,3 @@ filterIcon.addEventListener("click", filterDrawer);
 
 let sortIcon = document.getElementById("sortIcon");
 sortIcon.addEventListener("click", sortDrawer);
-
-
