@@ -39,8 +39,7 @@ const seeAllBtnAction = (title) => {
   seeAllCardsRender(
     fakeData,
     document.getElementById("seeAllContainer"),
-    true,
-    _fetchNextList
+    true
   );
 	_fetchNextList()
 	seeAllContainer.classList.remove("hidden");

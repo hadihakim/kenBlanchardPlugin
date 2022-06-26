@@ -153,7 +153,6 @@ const templates = () => {
         });
       });
     });
-    callback();
   };
 
   const trendingRender = (apiData, containerId) => {
