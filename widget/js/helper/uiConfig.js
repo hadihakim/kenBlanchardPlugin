@@ -130,5 +130,6 @@ const config = {
   appTheme:{
 
   },
-  filterArr:[]
+  filterArr:[],
+  sortType:"Default"
 };

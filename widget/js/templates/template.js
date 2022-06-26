@@ -1,5 +1,4 @@
-
-const { timeConvert, cropImage } = utilities();
+const { timeConvert, cropImage, sort } = utilities();
 const templates = () => {
 	const printRecommended = (container, durationState, assets_info, topicTitle) => {
 		const recommendedTemplate = document.getElementById("recommendedTemplate");
@@ -80,30 +79,47 @@ const templates = () => {
 		})
 	};
 
-	const seeAllCardsRender = (apiData, container, durationState, callback) => {
-		let assetsId = apiData.data.sections[1].assets[0];
-		let data = apiData.data.assets_info[assetsId];
-
-		const recommendedTemplate = document.getElementById("seeAllTemplate");
-		for (let index = 0; index < 5; index++) {
-			const nodesClone = recommendedTemplate.content.cloneNode(true);
-			let image = nodesClone.querySelectorAll(".image");
-			let title = nodesClone.querySelectorAll(".title");
-			let duration = nodesClone.querySelectorAll(".duration");
-			let description = nodesClone.querySelectorAll(".description");
-			image[0].style.backgroundImage = `url('${cropImage(data.meta.image, "full_width", "4:3")}')`;
-			title[0].innerText = data.meta.title;
-			description[0].innerText = data.meta.description;
-			if (durationState) {
-				duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-				<span class="schedule-text">
-					${timeConvert(
-					data.meta.duration
-				)}</span>`;
-			}
-			container.appendChild(nodesClone);
-		}
-		callback();
+	const seeAllCardsRender = (apiData, container, durationState, sortDrawerResults) => {
+    document.getElementById("seeAllContainer").innerHTML="";
+    let coursesId = "e5bf59f3-507a-4703-af2a-bc4ba56cc4c2";
+    let data = apiData.data.sections.filter((t) => t.id === coursesId);
+    const recommendedTemplate = document.getElementById("seeAllTemplate");
+    let assetsInfo = [];
+    data.forEach((section) => {
+      if (section.hasOwnProperty("assets")) {
+        let assets = section.assets;
+        assets.forEach((assetId) => {
+          assetsInfo.push(apiData.data.assets_info[assetId]);
+        });
+      } else {
+        return;
+      }
+      assetsInfo = sort(assetsInfo,sortDrawerResults);
+      assetsInfo.forEach((el) => {
+        const nodesClone = recommendedTemplate.content.cloneNode(true);
+        let image = nodesClone.querySelectorAll(".image");
+        let title = nodesClone.querySelectorAll(".title");
+        let duration = nodesClone.querySelectorAll(".duration");
+        let description = nodesClone.querySelectorAll(".description");
+        description[0].innerText = el.meta.description;
+        image[0].style.backgroundImage = `url('${cropImage(
+          el.meta.image,
+          "full_width",
+          "4:3"
+        )}')`;
+        title[0].innerText = el.meta.title;
+        if (durationState) {
+          duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+              <span class="schedule-text">
+                ${timeConvert(el.meta.duration)}</span>`;
+        }
+        // let topics = apiData.data.topics.filter((topic) =>
+        //   assetsInfo.meta.topics.includes(topic.id)
+        // );
+        // topics.forEach((topic) => {});
+        container.appendChild(nodesClone);
+      });
+    });
 	};
 
 	const trendingRender = (apiData, containerId) => {

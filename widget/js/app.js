@@ -35,7 +35,6 @@ const seeAllBtnAction = () => {
 		subPage.classList.add("hidden");
 	}
 	scrollTop();
-	seeAllContainer.innerHTML = '';
 	_fetchNextList()
 	seeAllContainer.classList.remove("hidden");
 	appConfig.isSeeAllScreen = true;
@@ -46,7 +45,7 @@ const cardRender = (sectionId, data) => {
 	data.forEach((element) => {
 		if (element.id === "explore") {
 			const container = document.getElementById(element.containerId);
-			seeAllCardsRender(fakeData, container, element.duration, () => { });
+			seeAllCardsRender(fakeData, container, element.duration,"Default");
 		} else {
 			let sectionInnerHTML;
 			if (element.title != "Just for you") {
