@@ -131,5 +131,6 @@ const config = {
 
   },
   filterArr:[],
-  sortType:"Default"
+  sortType:"Default",
+  activeSeeAll:""
 };

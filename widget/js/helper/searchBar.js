@@ -58,12 +58,10 @@ function filterDrawer() {
           element.title
         );
       });
-
       seeAllCardsRender(
         fakeData,
         document.getElementById("seeAllContainer"),
         true,
-        config.sortType
       );
 
       trendingRender(fakeData, "trendingContainer");
@@ -97,7 +95,6 @@ function sortDrawer() {
         fakeData,
         document.getElementById("seeAllContainer"),
         true,
-        config.sortType
       );
     }
   );
