@@ -4,20 +4,9 @@ const scrollTop = () => {
   mainContainer.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-let filterTopics = [
-  "Coaching",
-  "Conflict",
-  "Customer Service",
-  "Change & Innovation",
-  "Diversity, Equity & Inclusion ",
-  "Change & Innovation",
-  "Leading People",
-  "Performance Management",
-  "Personal Effectiveness",
-  "Team Effectiveness",
-  "Working with Others",
-  "Trust",
-];
+let filterTopics = ['Coaching', 'Conflict','Customer Service','Change & Innovation',
+'Diversity, Equity & Inclusion ', 'Change & Innovation', 'Leading People', 'Performance Management',
+'Personal Effectiveness', 'Team Effectiveness', 'Working with Others','Trust', 'Inactive Topic']
 
 function filterDrawer() {
   buildfire.components.drawer.open(
