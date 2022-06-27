@@ -15,12 +15,11 @@ let total = 0;
 
 
 const seeAllBtnAction = (title) => {
-  setTimeout(()=>{
-    mainContainer.addEventListener('scroll', scrollFcn);
-  },500)
-  scrollTop();
-  document.getElementById("seeAllContainer").innerHTML = "";
-  config.activeSeeAll=title;
+	mainContainer.addEventListener('scroll', scrollFcn);
+
+	scrollTop();
+	document.getElementById("seeAllContainer").innerHTML = "";
+	config.activeSeeAll = title;
 	let mainPage = document.getElementById("mainPage");
 	let seeAllContainer = document.getElementById("seeAllContainer");
 	if (!mainPage.classList.contains("hidden")) {
@@ -32,12 +31,12 @@ const seeAllBtnAction = (title) => {
 		buildfire.history.push("Explore page");
 		subPage.classList.add("hidden");
 	}
-  seeAllCardsRender(
-    fakeData,
-    document.getElementById("seeAllContainer"),
-    true,
-    ()=>{}
-  );
+	seeAllCardsRender(
+		fakeData,
+		document.getElementById("seeAllContainer"),
+		true,
+		() => { }
+	);
 	seeAllContainer.classList.remove("hidden");
 	config.isSeeAllScreen = true;
 };
@@ -47,7 +46,7 @@ const cardRender = (sectionId, data) => {
 	data.forEach((element) => {
 		if (element.id === "explore") {
 			const container = document.getElementById(element.containerId);
-			seeAllCardsRender(fakeData, container, element.duration,()=>{});
+			seeAllCardsRender(fakeData, container, element.duration, () => { });
 		} else {
 			let sectionInnerHTML;
 			if (element.title != "Just for you") {
@@ -73,7 +72,7 @@ const cardRender = (sectionId, data) => {
 				element.id
 			);
 			const container = document.getElementById(element.containerId);
-			filterAndPrintData(fakeData, container, element.duration, element.title,element.id);
+			filterAndPrintData(fakeData, container, element.duration, element.title, element.id);
 		}
 	});
 
