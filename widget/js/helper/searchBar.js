@@ -69,7 +69,8 @@ function filterDrawer() {
       seeAllCardsRender(
         fakeData,
         document.getElementById("seeAllContainer"),
-        true
+        true,
+		()=>{}
       );
 
       trendingRender(fakeData, "trendingContainer");
@@ -113,7 +114,8 @@ function sortDrawer() {
       seeAllCardsRender(
         fakeData,
         document.getElementById("seeAllContainer"),
-        true
+        true,
+		()=>{}
       );
     }
   );

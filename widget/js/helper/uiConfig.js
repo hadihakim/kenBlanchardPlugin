@@ -131,6 +131,12 @@ const config = {
   filterArr: [],
   sortType: "Default",
   activeSeeAll: "",
-  cardsLimit: 10,
+  cardsLimit: 1,
+  isSeeAllScreen: false,
+  fetchingNextPage: false,
+  page: 1,
+  pageSize: 5,
+  lastIndex: 0,
+  renderedCard: 0,
   search:""
 };

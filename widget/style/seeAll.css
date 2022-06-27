@@ -4,6 +4,7 @@
   flex-direction: row;
   box-shadow: none;
 }
+
 #seeAllContainer .mdc-card .column {
   margin: 0.25rem;
 }

@@ -1,12 +1,6 @@
 "use strict";
 
-const { getAppTheme, setAppTheme, initBack } = utilities();
-
-const appConfig = {
-	fetchingNextList: false,
-	isSeeAllScreen: false,
-	topics: []
-}
+const { getAppTheme, setAppTheme, initBack, scrollFcn } = utilities();
 
 const {
 	filterAndPrintData,
@@ -14,36 +8,38 @@ const {
 	trendingRender,
 } = templates();
 
-const _fetchNextList = () => {
-	if (appConfig.fetchingNextList) return;
-	appConfig.fetchingNextList = true;
-	seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
-		appConfig.fetchingNextList = false;
-	});
-}
+// control variables
+let currentPage = 1;
+const limit = 10;
+let total = 0;
+
 
 const seeAllBtnAction = (title) => {
+  setTimeout(()=>{
+    mainContainer.addEventListener('scroll', scrollFcn);
+  },500)
+  scrollTop();
+  document.getElementById("seeAllContainer").innerHTML = "";
   config.activeSeeAll=title;
-	let mainContainer = document.getElementById("mainPage");
+	let mainPage = document.getElementById("mainPage");
 	let seeAllContainer = document.getElementById("seeAllContainer");
-	if (!mainContainer.classList.contains("hidden")) {
+	if (!mainPage.classList.contains("hidden")) {
 		buildfire.history.push("Personal Home Page from See All");
-		mainContainer.classList.add("hidden");
+		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		sortIcon.classList.remove("hidden");
 	} else if (!subPage.classList.contains("hidden")) {
 		buildfire.history.push("Explore page");
 		subPage.classList.add("hidden");
 	}
-	scrollTop();
   seeAllCardsRender(
     fakeData,
     document.getElementById("seeAllContainer"),
-    true
+    true,
+    ()=>{}
   );
-	_fetchNextList()
 	seeAllContainer.classList.remove("hidden");
-	appConfig.isSeeAllScreen = true;
+	config.isSeeAllScreen = true;
 };
 
 const cardRender = (sectionId, data) => {
@@ -51,7 +47,7 @@ const cardRender = (sectionId, data) => {
 	data.forEach((element) => {
 		if (element.id === "explore") {
 			const container = document.getElementById(element.containerId);
-			seeAllCardsRender(fakeData, container, element.duration,"Default");
+			seeAllCardsRender(fakeData, container, element.duration,()=>{});
 		} else {
 			let sectionInnerHTML;
 			if (element.title != "Just for you") {
@@ -101,14 +97,6 @@ const init = () => {
 	trendingRender(fakeData, "trendingContainer");
 	setAppTheme();
 	initBack();
-	mainContainer.onscroll = (e) => {
-		//console.log( window.getComputedStyle(document.getElementById("seeAllContainer")).display);
-		if (
-			((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.97) && !appConfig.fetchingNextList && appConfig.isSeeAllScreen)
-		) {
-			_fetchNextList();
-		}
-	};
 }
 
 init();

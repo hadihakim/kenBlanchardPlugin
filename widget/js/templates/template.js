@@ -153,7 +153,7 @@ const templates = () => {
   };
 
   const seeAllCardsRender = (apiData, container, durationState, callback) => {
-    document.getElementById("seeAllContainer").innerHTML = "";
+    console.log(config.lastIndex, "TE");
     let coursesId = "";
     apiData.data.sections.forEach((element) => {
       if (
@@ -166,53 +166,63 @@ const templates = () => {
     let data = apiData.data.sections.filter((t) => t.id === coursesId);
     const recommendedTemplate = document.getElementById("seeAllTemplate");
     let assetsInfo = [];
-    data.forEach((section) => {
-      if (section.hasOwnProperty("assets")) {
-        let assets = section.assets;
-        assets.forEach((assetId) => {
-          assetsInfo.push(apiData.data.assets_info[assetId]);
-        });
-      } else {
+    console.log(data, "data");
+    let section = data[0] || {};
+    if (config.renderedCard == (config.pageSize * config.page)) {
+      return;
+    }
+    if (section.hasOwnProperty("assets")) {
+      let assets = section.assets;
+      assets.forEach((assetId) => {
+        assetsInfo.push(apiData.data.assets_info[assetId]);
+      });
+    } else {
+      return;
+    }
+    // sort
+    assetsInfo = sort(assetsInfo, config.sortType);
+    let lastIndex = config.lastIndex;
+    for (let i = lastIndex; i < (lastIndex + config.pageSize); i++) {
+      if (config.renderedCard >= (config.pageSize * config.page) || i >= assetsInfo.length) {
         return;
-      }
-      // sort
-      assetsInfo = sort(assetsInfo, config.sortType);
-
-      assetsInfo.forEach((el) => {
-        let topicIdArray = el.meta.topics;
+      } else {
+        config.lastIndex = i;
+        let topicIdArray = assetsInfo[i].meta.topics;
         topicIdArray.forEach((topicId) => {
+          if (config.renderedCard >= (config.pageSize * config.page)) {
+            return;
+          }
           let data = apiData.data.topics.find(({ id }) => id === topicId);
           if (
            ( config.filterArr.includes(data.title) ||
-            config.filterArr.length === 0) && hasSearch(el)
+            config.filterArr.length === 0) && hasSearch(assetsInfo[i])
           ) {
+            config.renderedCard++;
             const nodesClone = recommendedTemplate.content.cloneNode(true);
-              let image = nodesClone.querySelectorAll(".image");
-              let title = nodesClone.querySelectorAll(".title");
-              let duration = nodesClone.querySelectorAll(".duration");
-              let description = nodesClone.querySelectorAll(".description");
-              description[0].innerText = el.meta.description;
-              image[0].style.backgroundImage = `url('${cropImage(
-                el.meta.image,
-                "full_width",
-                "4:3"
-              )}')`;
-              title[0].innerText = el.meta.title;
-              if (durationState) {
-                duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+            let image = nodesClone.querySelectorAll(".image");
+            let title = nodesClone.querySelectorAll(".title");
+            let duration = nodesClone.querySelectorAll(".duration");
+            let description = nodesClone.querySelectorAll(".description");
+            description[0].innerText = assetsInfo[i].meta.description;
+            image[0].style.backgroundImage = `url('${cropImage(
+              assetsInfo[i].meta.image,
+              "full_width",
+              "4:3"
+            )}')`;
+            title[0].innerText = assetsInfo[i].meta.title;
+            if (durationState) {
+              duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
             <span class="schedule-text">
-              ${timeConvert(el.meta.duration)}</span>`;
-              }
-
-              // let topics = apiData.data.topics.filter((topic) =>
-              //   assetsInfo.meta.topics.includes(topic.id)
-              // );
-              // topics.forEach((topic) => {});
-              container.appendChild(nodesClone);
+              ${timeConvert(assetsInfo[i].meta.duration)}</span>`;
             }
+          }
         });
-      });
-    });
+      }
+    }
+    callback();
+    if(config.lastIndex < assetsInfo.length) {
+      config.page++;
+    }
   };
 
   const trendingRender = (apiData, containerId) => {
@@ -230,6 +240,8 @@ const templates = () => {
 
         if (config.filterArr.indexOf(el.title) > -1) {
           title.classList.add("selectedTrending");
+        } else {
+          title.classList.add("unSelectedTrending");
         }
 
         title.addEventListener("click", () => {
