@@ -215,7 +215,9 @@ const templates = () => {
 
         if (config.filterArr.indexOf(el.title) > -1) {
           title.classList.add("selectedTrending");
-        }
+        }else{
+          title.classList.add("unSelectedTrending");
+		}
 
         title.addEventListener("click", () => {
           if (config.filterArr.indexOf(el.title) > -1) {
