@@ -39,10 +39,20 @@ const templates = () => {
     container.appendChild(firstClone);
   };
 
-  const filterAndPrintData = (apiData, container, durationState, section) => {
+  const filterAndPrintData = (
+    apiData,
+    container,
+    durationState,
+    section,
+    sectionsContainer
+  ) => {
+    sectionsContainer = document.getElementById(sectionsContainer);
     container.innerHTML = "";
+    let isEmpty = true;
     let assets = [];
+    let renderArray = [];
     let topicConfig = false;
+    let cardsNumber=0;
     // Filtering section to compare it with sections comming from an api Data
     if (section !== "explore" && section !== "Just for you") {
       section = section.split(" ")[1];
@@ -56,10 +66,16 @@ const templates = () => {
 
     // Get assets_info and topic from api Data then render section
     assets.forEach((el) => {
+      if (cardsNumber===config.cardsLimit) {
+        return;
+      }
       let topicTitle;
       let assets_info = apiData.data.assets_info[el];
 
       assets_info.meta.topics.forEach((topic) => {
+        if (cardsNumber===config.cardsLimit) {
+          return;
+        }
         let data = apiData.data.topics.find(({ id }) => id === topic);
         topicTitle = data.title;
         if (
@@ -67,31 +83,62 @@ const templates = () => {
           config.filterArr.length == 0
         ) {
           topicConfig = true;
+          cardsNumber+=1;
         } else {
           topicConfig = false;
         }
         if (topicConfig) {
+          isEmpty = false;
           switch (section) {
             case "Just for you":
               forYouRender(container, assets_info);
+              // renderArray.push({container,assets_info});
               break;
             case "explore":
               break;
             default:
-              printRecommended(
+              // printRecommended(
+              //   container,
+              //   durationState,
+              //   assets_info,
+              //   topicTitle
+              // );
+              renderArray.push({
                 container,
                 durationState,
                 assets_info,
-                topicTitle
-              );
+                topicTitle,
+                meta: assets_info.meta,
+              });
               break;
           }
         }
       });
+
     });
+
+    if (sectionsContainer) {
+      if (isEmpty) {
+        sectionsContainer.classList.add("hidden");
+      } else {
+        sectionsContainer.classList.remove("hidden");
+        renderArray = sort(renderArray, config.sortType);
+        console.log(renderArray);
+        renderArray.forEach((element) => {
+          if (section !== "Just for you") {
+            printRecommended(
+              element.container,
+              element.durationState,
+              element.assets_info,
+              element.topicTitle
+            );
+          }
+        });
+      }
+    }
   };
 
-  const seeAllCardsRender = (apiData, container, durationState,callback) => {
+  const seeAllCardsRender = (apiData, container, durationState, callback) => {
     document.getElementById("seeAllContainer").innerHTML = "";
     let coursesId = "";
     apiData.data.sections.forEach((element) => {
@@ -102,7 +149,6 @@ const templates = () => {
         coursesId = element.id;
       }
     });
-    console.log(coursesId);
     let data = apiData.data.sections.filter((t) => t.id === coursesId);
     const recommendedTemplate = document.getElementById("seeAllTemplate");
     let assetsInfo = [];
@@ -149,7 +195,6 @@ const templates = () => {
             // topics.forEach((topic) => {});
             container.appendChild(nodesClone);
           }
-          console.log(data);
         });
       });
     });
@@ -190,7 +235,8 @@ const templates = () => {
               fakeData,
               document.getElementById(`${element.containerId}`),
               element.duration,
-              element.title
+              element.title,
+              element.id
             );
           });
         });

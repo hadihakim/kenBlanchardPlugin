@@ -77,7 +77,7 @@ const cardRender = (sectionId, data) => {
 				element.id
 			);
 			const container = document.getElementById(element.containerId);
-			filterAndPrintData(fakeData, container, element.duration, element.title);
+			filterAndPrintData(fakeData, container, element.duration, element.title,element.id);
 		}
 	});
 

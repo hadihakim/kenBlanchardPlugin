@@ -73,7 +73,7 @@ const config = {
   ],
   exploreConfig: [
     {
-      id: "section2",
+      id: "exploreCourses",
       className: ["recommendedSections"],
       containerClassName: "recommendedContainer",
       title: "All Courses",
@@ -82,7 +82,7 @@ const config = {
       duration: true,
     },
     {
-      id: "section3",
+      id: "exploreBooks",
       className: ["recommendedSections"],
       containerClassName: "recommendedContainer",
       title: "All Books",
@@ -91,7 +91,7 @@ const config = {
       duration: false,
     },
     {
-      id: "section4",
+      id: "exploreVideos",
       className: ["recommendedSections"],
       containerClassName: "recommendedContainer",
       title: "All Videos",
@@ -100,7 +100,7 @@ const config = {
       duration: false,
     },
     {
-      id: "section5",
+      id: "exploreArticles",
       className: ["recommendedSections"],
       containerClassName: "recommendedContainer",
       title: "All Articles",
@@ -109,7 +109,7 @@ const config = {
       duration: false,
     },
     {
-      id: "section6",
+      id: "explorePodcasts",
       className: ["recommendedSections"],
       containerClassName: "recommendedContainer",
       title: "All Podcasts",
@@ -118,19 +118,18 @@ const config = {
       duration: false,
     },
     {
-      id: "section7",
+      id: "exploreGraphical",
       className: ["recommendedSections"],
       containerClassName: "recommendedContainer",
       title: "All Graphical Summaries",
       seeAllBtn: "See All",
       containerId: "allGraphicalSummariesContainer",
       duration: false,
-    }
+    },
   ],
-  appTheme:{
-
-  },
-  filterArr:[],
-  sortType:"Default",
-  activeSeeAll:""
+  appTheme: {},
+  filterArr: [],
+  sortType: "Default",
+  activeSeeAll: "",
+  cardsLimit: 1,
 };
