@@ -131,5 +131,6 @@ const config = {
   filterArr: [],
   sortType: "Default",
   activeSeeAll: "",
-  cardsLimit: 1,
+  cardsLimit: 10,
+  search:""
 };
