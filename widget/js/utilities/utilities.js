@@ -100,14 +100,14 @@ const utilities = () => {
             case "Personal Home Page from See All":
               mainPage.classList.remove("hidden");
               seeAllContainer.classList.add("hidden");
-              appConfig.seeAllScreen = false;
+              config.isSeeAllScreen = false;
               userContainer.classList.remove("hidden");
               sortIcon.classList.add("hidden");
               break;
             case "Explore page":
               subPage.classList.remove("hidden");
               seeAllContainer.classList.add("hidden");
-              appConfig.seeAllScreen = false;
+              config.isSeeAllScreen = false;
               break;
             default:
               break;

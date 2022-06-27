@@ -132,4 +132,9 @@ const config = {
   sortType: "Default",
   activeSeeAll: "",
   cardsLimit: 1,
+  isSeeAllScreen: false,
+  fetchingNextPage: false,
+  page: 1,
+  pageSize: 5,
+  lastIndex: 0
 };

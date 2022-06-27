@@ -53,6 +53,7 @@ function filterDrawer() {
         fakeData,
         document.getElementById("seeAllContainer"),
         true,
+		()=>{}
       );
 
       trendingRender(fakeData, "trendingContainer");
@@ -97,6 +98,7 @@ function sortDrawer() {
         fakeData,
         document.getElementById("seeAllContainer"),
         true,
+		()=>{}
       );
     }
   );

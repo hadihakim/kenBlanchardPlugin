@@ -139,7 +139,7 @@ const templates = () => {
   };
 
   const seeAllCardsRender = (apiData, container, durationState, callback) => {
-    document.getElementById("seeAllContainer").innerHTML = "";
+    let renderedCards = 0;
     let coursesId = "";
     apiData.data.sections.forEach((element) => {
       if (
@@ -153,6 +153,9 @@ const templates = () => {
     const recommendedTemplate = document.getElementById("seeAllTemplate");
     let assetsInfo = [];
     data.forEach((section) => {
+      if(renderedCards == (config.pageSize*config.page)){
+        return;
+      }
       if (section.hasOwnProperty("assets")) {
         let assets = section.assets;
         assets.forEach((assetId) => {
@@ -165,13 +168,20 @@ const templates = () => {
       assetsInfo = sort(assetsInfo, config.sortType);
 
       assetsInfo.forEach((el) => {
+        if(renderedCards == (config.pageSize*config.page)){
+          return;
+        }
         let topicIdArray = el.meta.topics;
         topicIdArray.forEach((topicId) => {
+          if(renderedCards == (config.pageSize*config.page)){
+            return;
+          }
           let data = apiData.data.topics.find(({ id }) => id === topicId);
           if (
             config.filterArr.includes(data.title) ||
             config.filterArr.length === 0
           ) {
+            renderedCards++;
             const nodesClone = recommendedTemplate.content.cloneNode(true);
             let image = nodesClone.querySelectorAll(".image");
             let title = nodesClone.querySelectorAll(".title");
@@ -198,6 +208,7 @@ const templates = () => {
         });
       });
     });
+    callback();
   };
 
   const trendingRender = (apiData, containerId) => {

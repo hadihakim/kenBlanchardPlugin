@@ -2,27 +2,15 @@
 
 const { getAppTheme, setAppTheme, initBack } = utilities();
 
-const appConfig = {
-	fetchingNextList: false,
-	isSeeAllScreen: false,
-	topics: []
-}
-
 const {
 	filterAndPrintData,
 	seeAllCardsRender,
 	trendingRender,
 } = templates();
 
-const _fetchNextList = () => {
-	if (appConfig.fetchingNextList) return;
-	appConfig.fetchingNextList = true;
-	seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
-		appConfig.fetchingNextList = false;
-	});
-}
 
 const seeAllBtnAction = (title) => {
+  document.getElementById("seeAllContainer").innerHTML = "";
   config.activeSeeAll=title;
 	let mainContainer = document.getElementById("mainPage");
 	let seeAllContainer = document.getElementById("seeAllContainer");
@@ -39,11 +27,11 @@ const seeAllBtnAction = (title) => {
   seeAllCardsRender(
     fakeData,
     document.getElementById("seeAllContainer"),
-    true
+    true,
+    ()=>{}
   );
-	_fetchNextList()
 	seeAllContainer.classList.remove("hidden");
-	appConfig.isSeeAllScreen = true;
+	config.isSeeAllScreen = true;
 };
 
 const cardRender = (sectionId, data) => {
@@ -51,7 +39,7 @@ const cardRender = (sectionId, data) => {
 	data.forEach((element) => {
 		if (element.id === "explore") {
 			const container = document.getElementById(element.containerId);
-			seeAllCardsRender(fakeData, container, element.duration,"Default");
+			seeAllCardsRender(fakeData, container, element.duration,()=>{});
 		} else {
 			let sectionInnerHTML;
 			if (element.title != "Just for you") {
@@ -101,14 +89,6 @@ const init = () => {
 	trendingRender(fakeData, "trendingContainer");
 	setAppTheme();
 	initBack();
-	mainContainer.onscroll = (e) => {
-		//console.log( window.getComputedStyle(document.getElementById("seeAllContainer")).display);
-		if (
-			((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.97) && !appConfig.fetchingNextList && appConfig.isSeeAllScreen)
-		) {
-			_fetchNextList();
-		}
-	};
 }
 
 init();
