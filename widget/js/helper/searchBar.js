@@ -35,7 +35,8 @@ function filterDrawer() {
           fakeData,
           document.getElementById(`${el.containerId}`),
           el.duration,
-          el.title
+          el.title,
+          el.id
         );
       });
 
@@ -44,7 +45,8 @@ function filterDrawer() {
           fakeData,
           document.getElementById(`${element.containerId}`),
           element.duration,
-          element.title
+          element.title,
+          element.id
         );
       });
       seeAllCardsRender(
@@ -80,6 +82,17 @@ function sortDrawer() {
       buildfire.components.drawer.closeDrawer();
       console.log("Selected Contacts", result);
       config.sortType = result.text;
+
+      config.exploreConfig.forEach((element) => {
+        filterAndPrintData(
+          fakeData,
+          document.getElementById(`${element.containerId}`),
+          element.duration,
+          element.title,
+          element.id
+        );
+      });
+
       seeAllCardsRender(
         fakeData,
         document.getElementById("seeAllContainer"),
