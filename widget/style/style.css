@@ -15,6 +15,7 @@ html, body {
 #mainContainer {
 	height: 100vh;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .exploreAll-btn-container {
