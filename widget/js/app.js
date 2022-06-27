@@ -1,6 +1,6 @@
 "use strict";
 
-const { getAppTheme, setAppTheme, initBack } = utilities();
+const { getAppTheme, setAppTheme, initBack, scrollFcn } = utilities();
 
 const {
 	filterAndPrintData,
@@ -8,22 +8,30 @@ const {
 	trendingRender,
 } = templates();
 
+// control variables
+let currentPage = 1;
+const limit = 10;
+let total = 0;
+
 
 const seeAllBtnAction = (title) => {
+  setTimeout(()=>{
+    mainContainer.addEventListener('scroll', scrollFcn);
+  },500)
+  scrollTop();
   document.getElementById("seeAllContainer").innerHTML = "";
   config.activeSeeAll=title;
-	let mainContainer = document.getElementById("mainPage");
+	let mainPage = document.getElementById("mainPage");
 	let seeAllContainer = document.getElementById("seeAllContainer");
-	if (!mainContainer.classList.contains("hidden")) {
+	if (!mainPage.classList.contains("hidden")) {
 		buildfire.history.push("Personal Home Page from See All");
-		mainContainer.classList.add("hidden");
+		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		sortIcon.classList.remove("hidden");
 	} else if (!subPage.classList.contains("hidden")) {
 		buildfire.history.push("Explore page");
 		subPage.classList.add("hidden");
 	}
-	scrollTop();
   seeAllCardsRender(
     fakeData,
     document.getElementById("seeAllContainer"),

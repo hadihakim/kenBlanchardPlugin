@@ -52,7 +52,7 @@ const templates = () => {
     let assets = [];
     let renderArray = [];
     let topicConfig = false;
-    let cardsNumber=0;
+    let cardsNumber = 0;
     // Filtering section to compare it with sections comming from an api Data
     if (section !== "explore" && section !== "Just for you") {
       section = section.split(" ")[1];
@@ -66,14 +66,14 @@ const templates = () => {
 
     // Get assets_info and topic from api Data then render section
     assets.forEach((el) => {
-      if (cardsNumber===config.cardsLimit) {
+      if (cardsNumber === config.cardsLimit) {
         return;
       }
       let topicTitle;
       let assets_info = apiData.data.assets_info[el];
 
       assets_info.meta.topics.forEach((topic) => {
-        if (cardsNumber===config.cardsLimit) {
+        if (cardsNumber === config.cardsLimit) {
           return;
         }
         let data = apiData.data.topics.find(({ id }) => id === topic);
@@ -83,7 +83,7 @@ const templates = () => {
           config.filterArr.length == 0
         ) {
           topicConfig = true;
-          cardsNumber+=1;
+          cardsNumber += 1;
         } else {
           topicConfig = false;
         }
@@ -139,7 +139,7 @@ const templates = () => {
   };
 
   const seeAllCardsRender = (apiData, container, durationState, callback) => {
-    let renderedCards = 0;
+    console.log(config.lastIndex, "TE");
     let coursesId = "";
     apiData.data.sections.forEach((element) => {
       if (
@@ -152,28 +152,30 @@ const templates = () => {
     let data = apiData.data.sections.filter((t) => t.id === coursesId);
     const recommendedTemplate = document.getElementById("seeAllTemplate");
     let assetsInfo = [];
-    data.forEach((section) => {
-      if(renderedCards == (config.pageSize*config.page)){
+    console.log(data, "data");
+    let section = data[0] || {};
+    if (config.renderedCard == (config.pageSize * config.page)) {
+      return;
+    }
+    if (section.hasOwnProperty("assets")) {
+      let assets = section.assets;
+      assets.forEach((assetId) => {
+        assetsInfo.push(apiData.data.assets_info[assetId]);
+      });
+    } else {
+      return;
+    }
+    // sort
+    assetsInfo = sort(assetsInfo, config.sortType);
+    let lastIndex = config.lastIndex;
+    for (let i = lastIndex; i < (lastIndex + config.pageSize); i++) {
+      if (config.renderedCard >= (config.pageSize * config.page) || i >= assetsInfo.length) {
         return;
-      }
-      if (section.hasOwnProperty("assets")) {
-        let assets = section.assets;
-        assets.forEach((assetId) => {
-          assetsInfo.push(apiData.data.assets_info[assetId]);
-        });
       } else {
-        return;
-      }
-      // sort
-      assetsInfo = sort(assetsInfo, config.sortType);
-
-      assetsInfo.forEach((el) => {
-        if(renderedCards == (config.pageSize*config.page)){
-          return;
-        }
-        let topicIdArray = el.meta.topics;
+        config.lastIndex = i;
+        let topicIdArray = assetsInfo[i].meta.topics;
         topicIdArray.forEach((topicId) => {
-          if(renderedCards == (config.pageSize*config.page)){
+          if (config.renderedCard >= (config.pageSize * config.page)) {
             return;
           }
           let data = apiData.data.topics.find(({ id }) => id === topicId);
@@ -181,23 +183,23 @@ const templates = () => {
             config.filterArr.includes(data.title) ||
             config.filterArr.length === 0
           ) {
-            renderedCards++;
+            config.renderedCard++;
             const nodesClone = recommendedTemplate.content.cloneNode(true);
             let image = nodesClone.querySelectorAll(".image");
             let title = nodesClone.querySelectorAll(".title");
             let duration = nodesClone.querySelectorAll(".duration");
             let description = nodesClone.querySelectorAll(".description");
-            description[0].innerText = el.meta.description;
+            description[0].innerText = assetsInfo[i].meta.description;
             image[0].style.backgroundImage = `url('${cropImage(
-              el.meta.image,
+              assetsInfo[i].meta.image,
               "full_width",
               "4:3"
             )}')`;
-            title[0].innerText = el.meta.title;
+            title[0].innerText = assetsInfo[i].meta.title;
             if (durationState) {
               duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
             <span class="schedule-text">
-              ${timeConvert(el.meta.duration)}</span>`;
+              ${timeConvert(assetsInfo[i].meta.duration)}</span>`;
             }
             // let topics = apiData.data.topics.filter((topic) =>
             //   assetsInfo.meta.topics.includes(topic.id)
@@ -206,9 +208,12 @@ const templates = () => {
             container.appendChild(nodesClone);
           }
         });
-      });
-    });
+      }
+    }
     callback();
+    if(config.lastIndex < assetsInfo.length) {
+      config.page++;
+    }
   };
 
   const trendingRender = (apiData, containerId) => {
@@ -226,9 +231,9 @@ const templates = () => {
 
         if (config.filterArr.indexOf(el.title) > -1) {
           title.classList.add("selectedTrending");
-        }else{
+        } else {
           title.classList.add("unSelectedTrending");
-		}
+        }
 
         title.addEventListener("click", () => {
           if (config.filterArr.indexOf(el.title) > -1) {

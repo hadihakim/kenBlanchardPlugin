@@ -136,5 +136,6 @@ const config = {
   fetchingNextPage: false,
   page: 1,
   pageSize: 5,
-  lastIndex: 0
+  lastIndex: 0,
+  renderedCard: 0,
 };

@@ -82,6 +82,25 @@ const utilities = () => {
     });
   };
 
+  const _fetchNextList = () => {
+    // if (config.fetchingNextPage) return;
+    config.fetchingNextPage = true;
+    seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
+        config.fetchingNextPage = false;
+    });
+    config.fetchingNextPage = false;
+  }
+
+  const scrollFcn = () => {
+    if(!seeAllContainer.classList.contains("hidden") && config.page !=1) {
+        if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
+            console.log(document.documentElement);
+            _fetchNextList();
+            // loadData(currentPage, limit);
+        }
+    }
+}
+
   const initBack = () => {
     buildfire.navigation.onBackButtonClick = () => {
       buildfire.history.get(
@@ -100,14 +119,22 @@ const utilities = () => {
             case "Personal Home Page from See All":
               mainPage.classList.remove("hidden");
               seeAllContainer.classList.add("hidden");
+              config.renderedCard = 0;
+              config.page = 1;
+              config.lastIndex = 0;
               config.isSeeAllScreen = false;
               userContainer.classList.remove("hidden");
               sortIcon.classList.add("hidden");
+              mainContainer.removeEventListener('scroll', scrollFcn);
               break;
             case "Explore page":
               subPage.classList.remove("hidden");
               seeAllContainer.classList.add("hidden");
+              config.renderedCard = 0;
+              config.page = 1;
+              config.lastIndex = 0;
               config.isSeeAllScreen = false;
+              mainContainer.removeEventListener('scroll', scrollFcn);
               break;
             default:
               break;
@@ -133,5 +160,5 @@ const utilities = () => {
     return data;
   };
 
-  return { cropImage, timeConvert, getAppTheme, setAppTheme, initBack, sort };
+  return { cropImage, timeConvert, getAppTheme, setAppTheme, initBack, sort, scrollFcn };
 };
