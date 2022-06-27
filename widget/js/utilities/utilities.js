@@ -94,7 +94,6 @@ const utilities = () => {
   const scrollFcn = () => {
     if(!seeAllContainer.classList.contains("hidden") && config.page !=1) {
         if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
-            console.log(document.documentElement);
             _fetchNextList();
             // loadData(currentPage, limit);
         }
@@ -108,7 +107,6 @@ const utilities = () => {
           pluginBreadcrumbsOnly: true,
         },
         (err, result) => {
-          console.info("Current Plugin Breadcrumbs", result);
           switch (result[result.length - 1].label) {
             case "Personal Home Page":
               mainPage.classList.remove("hidden");

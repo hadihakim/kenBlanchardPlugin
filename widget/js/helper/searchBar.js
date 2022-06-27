@@ -98,7 +98,6 @@ function sortDrawer() {
     (err, result) => {
       if (err) return console.error(err);
       buildfire.components.drawer.closeDrawer();
-      console.log("Selected Contacts", result);
       config.sortType = result.text;
 
       config.exploreConfig.forEach((element) => {
