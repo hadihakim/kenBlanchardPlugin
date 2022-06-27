@@ -160,3 +160,14 @@ const utilities = () => {
 
   return { cropImage, timeConvert, getAppTheme, setAppTheme, initBack, sort, scrollFcn };
 };
+
+
+const hasSearch = (data) => {
+return   config.search == "" ||
+data.meta.title
+  .toLowerCase()
+  .search(config.search.toLowerCase()) >= 0 ||
+data.meta.description
+  .toLowerCase()
+  .search(config.search.toLowerCase()) >= 0
+}
