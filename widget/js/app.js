@@ -108,7 +108,29 @@ function openDetails(id) {
   buildfire.history.push("Details Page");
 }
 
+const getUser = (data) => {
+  let userName = document.getElementById("userName");
+  let userProfilePicture = document.getElementById("userProfilePicture");
+  let userAchievementIcon = document.getElementById("userAchievementIcon");
+  let growthProfile = document.getElementById("growthProfile");
+  if (data.isLoggedIn) {
+    let userAchievements = data.badges.filter((el) => el.active === true);
+    userName.innerText = data.firstName + " " + data.lastName;
+    growthProfile.innerText = data.growthProfile;
+    userProfilePicture.src = data.profilePicture;
+    userProfilePicture.alt = data.firstName;
+    userAchievementIcon.src = userAchievements[0].achievementIcon;
+    userAchievementIcon.alt = userAchievements[0].achievementTitle;
+    config.filterArr = data.recommendedTags;
+  } else {
+    userProfilePicture.src = "../../../../styles/media/avatar-placeholder.png";
+    userName.innerText = "Anonymous";
+    growthProfile.innerText = "Profile Growth";
+    userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
+  }
+};
 const init = () => {
+  getUser(config.userConfig);
   getAppTheme();
   cardRender("sectionsContainer", config.sectionConfig);
   cardRender("exploreContainer", config.exploreConfig);
