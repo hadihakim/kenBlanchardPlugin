@@ -9,18 +9,21 @@ const {
 	setFilteredTopic,
 	scrollTop
 } = utilities();
-
-const {
-	filterAndPrintData,
-	seeAllCardsRender,
-	trendingRender
-} = templates();
+// detailsRender
+const { filterAndPrintData, seeAllCardsRender, trendingRender } = templates();
 
 // control variables
 let currentPage = 1;
 const limit = 10;
 let total = 0;
 
+const seeAllBtnHelper = (containerId) => {
+	fakeData.data.sections.forEach((el) => {
+		if (containerId.toLowerCase().includes(el.title.toLowerCase())) {
+			seeAllBtnAction(el.id);
+		}
+	});
+};
 
 const seeAllBtnAction = (id) => {
 	mainContainer.addEventListener('scroll', scrollNextPage);
@@ -79,26 +82,61 @@ const cardRender = (sectionId, data, type) => {
 		);
 		filterAndPrintData(fakeData, element, type);
 	});
+}
 
-	const exploreBtn = document.getElementById("exploreButton");
-	exploreBtn.addEventListener("click", () => {
-		mainPage.classList.add("hidden");
-		subPage.classList.remove("hidden");
-		userContainer.classList.add("hidden");
-		sortIcon.classList.remove("hidden");
-		buildfire.history.push("Personal Home Page");
-		scrollTop();
-	});
+const exploreBtn = document.getElementById("exploreButton");
+exploreBtn.addEventListener("click", () => {
+	mainPage.classList.add("hidden");
+	subPage.classList.remove("hidden");
+	userContainer.classList.add("hidden");
+	sortIcon.classList.remove("hidden");
+	buildfire.history.push("Personal Home Page");
+	scrollTop();
+});
+
+function openDetails(id) {
+	console.log(id);
+	pageDetails.innerHTML = ""
+	//   detailsRender(pageDetails, id);
+	mainPage.classList.add("hidden");
+	userContainer.classList.add("hidden");
+	sortIcon.classList.remove("hidden");
+	subPage.classList.add("hidden");
+	seeAllContainer.classList.add("hidden");
+	pageDetails.classList.remove("hidden");
+	buildfire.history.push("Details Page");
+}
+
+const getUser = (data) => {
+	let userName = document.getElementById("userName");
+	let userProfilePicture = document.getElementById("userProfilePicture");
+	let userAchievementIcon = document.getElementById("userAchievementIcon");
+	let growthProfile = document.getElementById("growthProfile");
+	if (data.isLoggedIn) {
+		let userAchievements = data.badges.filter((el) => el.active === true);
+		userName.innerText = data.firstName + " " + data.lastName;
+		growthProfile.innerText = data.growthProfile;
+		userProfilePicture.src = data.profilePicture;
+		userProfilePicture.alt = data.firstName;
+		userAchievementIcon.src = userAchievements[0].achievementIcon;
+		userAchievementIcon.alt = userAchievements[0].achievementTitle;
+		config.filterArr = data.recommendedTags;
+	} else {
+		userProfilePicture.src = "../../../../styles/media/avatar-placeholder.png";
+		userName.innerText = "Anonymous";
+		growthProfile.innerText = "Profile Growth";
+		userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
+	}
 };
-
 const init = () => {
+	getUser(config.userConfig);
 	getAppTheme();
-	setFilteredTopic(fakeData);
 	cardRender("sectionsContainer", fakeData.data.sections, "main");
 	cardRender("exploreContainer", fakeData.data.sections, "explore");
 	trendingRender(fakeData, "trendingContainer");
+	setFilteredTopic(fakeData);
 	initBack();
 	setAppTheme();
-}
+};
 
 init();

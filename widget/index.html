@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="buildfire" content="enableMDTheme" />
-	<meta name="buildfire" content="disableBootstrap"/>
+	<meta name="buildfire" content="disableBootstrap" />
 
 	<link rel="stylesheet" href="./style/style.css" />
 	<link rel="stylesheet" href="./style/forYouTemplate.css" />
@@ -13,8 +13,7 @@
 	<link rel="stylesheet" href="./style/seeAll.css" />
 	<link rel="stylesheet" href="./style/userSection.css" />
 	<link rel="stylesheet" href="../../../styles/material-icons.css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<!-- Include material design css and js -->
 	<link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
 	<link rel="stylesheet" href="../../../../styles/helper.css" />
@@ -27,7 +26,6 @@
 	<script src="../../../scripts/buildfire.js"></script>
 	<script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
 	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
-
 
 	<!-- Bundle:scripts -->
 	<script src="./js/helper/ui.js"></script>
@@ -50,14 +48,12 @@
 	<div class="slide-in" id="mainContainer">
 		<div class="user-container userContainer" id="userContainer">
 			<div class="user-image-container">
-				<img class="main-image"
-					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU" />
-				<img src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png"
-					alt="" class="achievement-image" />
+				<img class="main-image user-image-border" id="userProfilePicture" />
+				<img class="achievement-image" id="userAchievementIcon" />
 			</div>
 			<div class="text-container">
-				<h2 class="user-name barText-AppTheme">Michel Scott</h2>
-				<span class="growth-user-profile barText-AppTheme">Newcomer</span>
+				<h2 class="user-name barText-AppTheme" id="userName"></h2>
+				<span class="growth-user-profile barText-AppTheme" id="growthProfile"></span>
 			</div>
 		</div>
 		<!-- end user section -->
@@ -67,8 +63,8 @@
 			<div class="searchItem mdc-card">
 				<div class="search-container">
 					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
-					<input class="bodyTextTheme" id="search-input" type="text" name="search" id="searchInput" placeholder="Search"
-						autocomplete="off" />
+					<input class="bodyTextTheme" id="search-input" type="text" name="search" id="searchInput"
+						placeholder="Search" autocomplete="off" />
 					<label class="material-icons icon hidden" id="sortIcon">sort</label>
 					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
 				</div>
@@ -94,6 +90,7 @@
 			<section id="exploreContainer"></section>
 		</div>
 		<div id="seeAllContainer" class="hidden slide-in"></div>
+		<div id="pageDetails" class="hidden pageDetails slide-in"> Hello</div>
 		<!-- end section -->
 	</div>
 	<!-- user list of cards -->
@@ -102,8 +99,8 @@
 	<template id="forYouTemplate" class="forYouTemplate">
 		<div class="border-radius-four mdc-card" id="card_body">
 			<div class="card-Text" id="card-Text">
-				<p id="title" class="card-Text-Header  barText-AppTheme"></p>
-				<p id="description " class="card-Text-Note barText-AppTheme"></p>
+				<p id="card-Text-Header" class="card-Text-Header barText-AppTheme"></p>
+				<p id="card-Text-Note " class="card-Text-Note barText-AppTheme"></p>
 			</div>
 		</div>
 	</template>
@@ -111,26 +108,26 @@
 		<div class="mdc-card cards-container">
 			<div class="image"></div>
 			<div class="mdc-card-body">
-				<div id="category" class="category bodyText-AppTheme"></div>
-				<div id="title" class="title headerText-AppTheme"></div>
+				<div class="category bodyText-AppTheme"></div>
+				<div class="title headerText-AppTheme"></div>
 			</div>
 			<div class="mdc-card-footer">
-				<div id="duration" class="duration"></div>
+				<div class="duration"></div>
 			</div>
 		</div>
 	</template>
 	<template id="seeAllTemplate">
 		<div class="mdc-card">
 			<div class="column">
-				<div class="image" id="image"></div>
+				<div class="image"></div>
 			</div>
 			<div class="column">
 				<div class="mdc-card-body">
-					<div id="title" class="title headerText-AppTheme"></div>
-					<div id="description" class="description"></div>
+					<div class="title headerText-AppTheme"></div>
+					<div class="description"></div>
 				</div>
 				<div class="mdc-card-footer">
-					<div id="duration" class="duration"></div>
+					<div class="duration"></div>
 				</div>
 			</div>
 		</div>
@@ -140,8 +137,20 @@
 			<span class="trending-span" id="trending-span"></span>
 		</div>
 	</template>
+	<template id="detailsPageTemplate" class="detailsPageTemplate">
+		<div class="details-card" id="detailes-card">
+			<img id="details-img" src="" />
+			<p id="details-title" class="details-title"></p>
+			<p id="details-describtion-title" class="details-describtion-title"></p>
+			<p id="details-describtion-text" class="details-describtion-text"></p>
+			<div id="chapters-card" class="chapters-card">
+				<p id="chapter-munber" class="chapter-munber"></p>
+				<p id="chapter-title" class="chapter-title"></p>
+				<label class="material-icons icon" id="sortIcon">sort</label>
+			</div>
+		</div>
+	</template>
 	<!-- end template -->
-
 </body>
 
 </html>

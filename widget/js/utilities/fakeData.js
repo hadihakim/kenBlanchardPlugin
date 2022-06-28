@@ -57,6 +57,17 @@ const fakeData={
         "createdBy": "ckhawaja@madaincorp.com",
         "lastUpdatedOn": null,
         "lastUpdatedBy": null
+      },
+	  {
+        "id": "e5bf59f3-507a-4703-af2a-bc4ba56cc2",
+        "title": "Graphical",
+        "layout": "horizontal",
+        "assets": ["62b3439f864d49037aac9b26","62b3439f864d49037aac9b25"],
+        "isActive": true,
+        "createdOn": "2022-06-22T16:34:34.479Z",
+        "createdBy": "ckhawaja@madaincorp.com",
+        "lastUpdatedOn": null,
+        "lastUpdatedBy": null
       }
     ],
     "assets_info": {
