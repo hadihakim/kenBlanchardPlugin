@@ -138,4 +138,5 @@ const config = {
   pageSize: 5,
   lastIndex: 0,
   renderedCard: 0,
+  search:""
 };

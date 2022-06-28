@@ -3,10 +3,27 @@
 const scrollTop = () => {
   mainContainer.scrollTo({ top: 0, behavior: "smooth" });
 };
+// let filterTopics = [
+//   "Coaching",
+//   "Conflict",
+//   "Customer Service",
+//   "Change & Innovation",
+//   "Diversity, Equity & Inclusion ",
+//   "Change & Innovation",
+//   "Leading People",
+//   "Performance Management",
+//   "Personal Effectiveness",
+//   "Team Effectiveness",
+//   "Working with Others",
+//   "Trust",
+//   "Inactive Topic",
+// ];
 
-let filterTopics = ['Coaching', 'Conflict','Customer Service','Change & Innovation',
-'Diversity, Equity & Inclusion ', 'Change & Innovation', 'Leading People', 'Performance Management',
-'Personal Effectiveness', 'Team Effectiveness', 'Working with Others','Trust', 'Inactive Topic']
+let filterTopics=[];
+fakeData.data.topics.forEach((el) => {
+// console.log( el.title , " el.title;");
+filterTopics.push(el.title);
+})
 
 function filterDrawer() {
   buildfire.components.drawer.open(
@@ -108,3 +125,35 @@ filterIcon.addEventListener("click", filterDrawer);
 
 let sortIcon = document.getElementById("sortIcon");
 sortIcon.addEventListener("click", sortDrawer);
+
+let input = document.getElementById("search-input");
+input.addEventListener("keyup", () => {
+  setTimeout(() => {
+    config.search = input.value;
+    config.sectionConfig.forEach((el) => {
+      filterAndPrintData(
+        fakeData,
+        document.getElementById(`${el.containerId}`),
+        el.duration,
+        el.title,
+        el.id
+      );
+    });
+
+    config.exploreConfig.forEach((element) => {
+      filterAndPrintData(
+        fakeData,
+        document.getElementById(`${element.containerId}`),
+        element.duration,
+        element.title,
+        element.id
+      );
+    });
+
+    seeAllCardsRender(
+      fakeData,
+      document.getElementById("seeAllContainer"),
+      true
+    );
+  }, 500);
+});

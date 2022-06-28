@@ -35,8 +35,9 @@ li{
     flex-direction: row-reverse !important;
 }
 
-.action-list li .action-item-texts{
+div#bottomDrawerContainer .bottom-drawer-backdrop .bottom-drawer-holder .bottom-drawer.backgroundColorTheme .action-list li .action-item-texts{
     margin-right: auto !important;
+    background-color: red !important;
 }
 
 .action-list li .checkbox {
