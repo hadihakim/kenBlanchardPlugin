@@ -86,18 +86,18 @@ const utilities = () => {
     // if (config.fetchingNextPage) return;
     config.fetchingNextPage = true;
     seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
-        config.fetchingNextPage = false;
+      config.fetchingNextPage = false;
     });
   }
 
   const scrollFcn = () => {
-    if(!seeAllContainer.classList.contains("hidden") && config.page !=1) {
-        if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
-            _fetchNextList();
-            // loadData(currentPage, limit);
-        }
+    if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
+      if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
+        _fetchNextList();
+        // loadData(currentPage, limit);
+      }
     }
-}
+  }
 
   const initBack = () => {
     buildfire.navigation.onBackButtonClick = () => {
@@ -162,11 +162,11 @@ const utilities = () => {
 
 
 const hasSearch = (data) => {
-return   config.search == "" ||
-data.meta.title
-  .toLowerCase()
-  .search(config.search.toLowerCase()) >= 0 ||
-data.meta.description
-  .toLowerCase()
-  .search(config.search.toLowerCase()) >= 0
+  return config.search == "" ||
+    data.meta.title
+      .toLowerCase()
+      .search(config.search.toLowerCase()) >= 0 ||
+    data.meta.description
+      .toLowerCase()
+      .search(config.search.toLowerCase()) >= 0
 }
