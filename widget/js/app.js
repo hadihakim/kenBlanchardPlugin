@@ -87,7 +87,9 @@ const cardRender = (sectionId, data) => {
 	});
 };
 
-
+function open(id){
+console.log(id, "iffffffffffffff");
+}
 
 const init = () => {
 	getAppTheme();
