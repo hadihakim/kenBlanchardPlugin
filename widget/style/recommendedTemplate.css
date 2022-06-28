@@ -1,22 +1,22 @@
-.recommendedSections .container-header {
+.horizontal .container-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
 }
 
-.recommendedSections .container-header > h1 {
+.horizontal .container-header > h1 {
   width: 75%;
 }
 
-.recommendedSections .container-header .title {
+.horizontal .container-header .title {
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0.5px;
 }
-.recommendedSections .container-header .seeAll-btn{
+.horizontal .container-header .seeAll-btn{
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -24,13 +24,13 @@
   cursor: pointer;
   color: #0297a0;
 }
-.recommendedSections .recommendedContainer {
+.horizontal .main {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
   padding-right: 1rem;
 }
-.recommendedSections .recommendedContainer .mdc-card {
+.horizontal .main .mdc-card {
   position: relative;
   width: 138px;
   height: 172px;
@@ -39,41 +39,41 @@
   margin-bottom: 1rem;
   display: inline-block;
 }
-.recommendedSections .recommendedContainer .mdc-card {
+.horizontal .main .mdc-card {
     height: 148px;
 }
 
-.recommendedSections .recommendedContainer .mdc-card .image {
+.horizontal .main .mdc-card .image {
   width: 138px;
   height: 78px;
   background-size: cover;
 }
 
-.recommendedSections .recommendedContainer .mdc-card .mdc-card-body {
+.horizontal .main .mdc-card .mdc-card-body {
   margin-top: 0.25px;
   padding: 0.25rem;
 }
 
-.recommendedSections .recommendedContainer .mdc-card .category {
+.horizontal .main .mdc-card .category {
   color: #5f5f5f;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
 }
-.recommendedSections .recommendedContainer .mdc-card .title {
+.horizontal .main .mdc-card .title {
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
   line-height: 20px;
   color: #101010;
 }
-.recommendedSections .recommendedContainer .mdc-card .mdc-card-footer {
+.horizontal .main .mdc-card .mdc-card-footer {
   padding: 0.25rem;
   position: absolute;
   bottom: 0;
 }
-.recommendedSections .recommendedContainer .mdc-card .duration {
+.horizontal .main .mdc-card .duration {
   display: flex;
   justify-content: start;
   align-items: center;

@@ -1,11 +1,19 @@
 "use strict";
 
-const { getAppTheme, setAppTheme, initBack, scrollFcn } = utilities();
+const {
+	getAppTheme,
+	setAppTheme,
+	initBack,
+	scrollNextPage,
+	hasSearch,
+	setFilteredTopic,
+	scrollTop
+} = utilities();
 
 const {
 	filterAndPrintData,
 	seeAllCardsRender,
-	trendingRender,
+	trendingRender
 } = templates();
 
 // control variables
@@ -14,14 +22,12 @@ const limit = 10;
 let total = 0;
 
 
-const seeAllBtnAction = (title) => {
-	mainContainer.addEventListener('scroll', scrollFcn);
+const seeAllBtnAction = (id) => {
+	mainContainer.addEventListener('scroll', scrollNextPage);
 
 	scrollTop();
 	document.getElementById("seeAllContainer").innerHTML = "";
-	config.activeSeeAll = title;
-	let mainPage = document.getElementById("mainPage");
-	let seeAllContainer = document.getElementById("seeAllContainer");
+	config.activeSeeAll = id;
 	if (!mainPage.classList.contains("hidden")) {
 		buildfire.history.push("Personal Home Page from See All");
 		mainPage.classList.add("hidden");
@@ -41,39 +47,37 @@ const seeAllBtnAction = (title) => {
 	config.isSeeAllScreen = true;
 };
 
-const cardRender = (sectionId, data) => {
+const cardRender = (sectionId, data, type) => {
 	const sectionsContainer = document.getElementById(sectionId);
+
 	data.forEach((element) => {
-		if (element.id === "explore") {
-			const container = document.getElementById(element.containerId);
-			seeAllCardsRender(fakeData, container, element.duration, () => { });
-		} else {
-			let sectionInnerHTML;
-			if (element.title != "Just for you") {
-				sectionInnerHTML = `
+		if ((type == 'explore' && element.layout == "horizontal-1") || !element.isActive) {
+			return;
+		}
+		let sectionInnerHTML;
+		if (element.layout != "horizontal-1") {
+			sectionInnerHTML = `
 				<div class="container-header">
-					<p class="title headerText-AppTheme">${element.title}</p>
-					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.title}')">${element.seeAllBtn}</span>
+					<p class="title headerText-AppTheme">${type == 'explore' ? 'All' : 'Recommended'} ${element.title}</p>
+					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id}')">See All</span>
 				</div>
-					<div id="${element.containerId}" class="${element.containerClassName}">
+					<div id="${`${element.id}-container-${type}`}" class="main">
 				</div>
 				  `;
-			} else {
-				sectionInnerHTML = `
+		} else {
+			sectionInnerHTML = `
 				<p class="sectionTitle headerText-AppTheme">${element.title}</p>
-					<div id="${element.containerId}"></div>
+					<div id="${`${element.id}-container-${type}`}" class="main"></div>
 				`;
-			}
-			ui.createElement(
-				"section",
-				sectionsContainer,
-				sectionInnerHTML,
-				element.className,
-				element.id
-			);
-			const container = document.getElementById(element.containerId);
-			filterAndPrintData(fakeData, container, element.duration, element.title, element.id);
 		}
+		ui.createElement(
+			"section",
+			sectionsContainer,
+			sectionInnerHTML,
+			[element.layout],
+			`${element.id}-${type}`
+		);
+		filterAndPrintData(fakeData, element, type);
 	});
 
 	const exploreBtn = document.getElementById("exploreButton");
@@ -87,17 +91,14 @@ const cardRender = (sectionId, data) => {
 	});
 };
 
-function open(id){
-console.log(id, "iffffffffffffff");
-}
-
 const init = () => {
 	getAppTheme();
-	cardRender("sectionsContainer", config.sectionConfig);
-	cardRender("exploreContainer", config.exploreConfig);
+	setFilteredTopic(fakeData);
+	cardRender("sectionsContainer", fakeData.data.sections, "main");
+	cardRender("exploreContainer", fakeData.data.sections, "explore");
 	trendingRender(fakeData, "trendingContainer");
-	setAppTheme();
 	initBack();
+	setAppTheme();
 }
 
 init();
