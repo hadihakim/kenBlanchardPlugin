@@ -142,15 +142,16 @@ const utilities = () => {
 							config.isSeeAllScreen = false;
 							mainContainer.removeEventListener('scroll', scrollNextPage);
 							break;
-							case "Explore page":
-								subPage.classList.remove("hidden");
-								seeAllContainer.classList.add("hidden");
-								config.renderedCard = 0;
-								config.page = 1;
-								config.lastIndex = 0;
-								config.isSeeAllScreen = false;
-								mainContainer.removeEventListener('scroll', scrollNextPage);
+							case "Details Page":
+								mainPage.classList.add("hidden");
+								userContainer.classList.add("hidden");
+								sortIcon.classList.remove("hidden");
+								subPage.classList.add("hidden");
+								seeAllContainer.classList.remove("hidden");
+								pageDetails.classList.add("hidden");
+
 								break;
+
 						default:
 							break;
 					}
