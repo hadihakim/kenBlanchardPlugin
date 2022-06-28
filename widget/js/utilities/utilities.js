@@ -99,7 +99,7 @@ const utilities = () => {
 		});
 	}
 
-	const scrollFcn = () => {
+	const scrollNextPage = () => {
 		if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
 			if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
 				_fetchNextList();
@@ -131,7 +131,7 @@ const utilities = () => {
 							config.isSeeAllScreen = false;
 							userContainer.classList.remove("hidden");
 							sortIcon.classList.add("hidden");
-							mainContainer.removeEventListener('scroll', scrollFcn);
+							mainContainer.removeEventListener('scroll', scrollNextPage);
 							break;
 						case "Explore page":
 							subPage.classList.remove("hidden");
@@ -140,16 +140,7 @@ const utilities = () => {
 							config.page = 1;
 							config.lastIndex = 0;
 							config.isSeeAllScreen = false;
-							mainContainer.removeEventListener('scroll', scrollFcn);
-							break;
-						case "Details Page":
-							mainPage.classList.add("hidden");
-							userContainer.classList.add("hidden");
-							sortIcon.classList.remove("hidden");
-							subPage.classList.add("hidden");
-							seeAllContainer.classList.remove("hidden");
-							pageDetails.classList.add("hidden");
-
+							mainContainer.removeEventListener('scroll', scrollNextPage);
 							break;
 						default:
 							break;
@@ -175,16 +166,42 @@ const utilities = () => {
 		return data;
 	};
 
-	return { cropImage, timeConvert, getAppTheme, setAppTheme, initBack, sort, scrollFcn };
+
+	const hasSearch = (data) => {
+		return config.search == "" ||
+			data.meta.title
+				.toLowerCase()
+				.search(config.search.toLowerCase()) >= 0 ||
+			data.meta.description
+				.toLowerCase()
+				.search(config.search.toLowerCase()) >= 0
+	}
+
+	const setFilteredTopic = (apiData) => {
+		apiData.data.topics.forEach((topic) => {
+			if (topic.isActive) {
+				config.filterTopics.push(topic.title);
+			}
+			if (topic.isTrending) {
+				config.isTrending.push(topic.title);
+			}
+		})
+	}
+
+	const scrollTop = () => {
+		mainContainer.scrollTo({ top: 0, behavior: "smooth" });
+	};
+	return {
+		cropImage,
+		timeConvert,
+		getAppTheme,
+		setAppTheme,
+		initBack,
+		sort,
+		scrollNextPage,
+		hasSearch,
+		setFilteredTopic,
+		scrollTop
+	};
 };
 
-
-const hasSearch = (data) => {
-	return config.search == "" ||
-		data.meta.title
-			.toLowerCase()
-			.search(config.search.toLowerCase()) >= 0 ||
-		data.meta.description
-			.toLowerCase()
-			.search(config.search.toLowerCase()) >= 0
-}

@@ -1,8 +1,16 @@
 "use strict";
 
-const { getAppTheme, setAppTheme, initBack, scrollFcn } = utilities();
-
-const { filterAndPrintData, seeAllCardsRender, trendingRender,detailsRender } = templates();
+const {
+	getAppTheme,
+	setAppTheme,
+	initBack,
+	scrollNextPage,
+	hasSearch,
+	setFilteredTopic,
+	scrollTop
+} = utilities();
+// detailsRender
+const { filterAndPrintData, seeAllCardsRender, trendingRender } = templates();
 
 // control variables
 let currentPage = 1;
@@ -10,133 +18,125 @@ const limit = 10;
 let total = 0;
 
 const seeAllBtnHelper = (containerId) => {
-  fakeData.data.sections.forEach((el) => {
-    if (containerId.toLowerCase().includes(el.title.toLowerCase())) {
-      seeAllBtnAction(el.id);
-    }
-  });
+	fakeData.data.sections.forEach((el) => {
+		if (containerId.toLowerCase().includes(el.title.toLowerCase())) {
+			seeAllBtnAction(el.id);
+		}
+	});
 };
 
-const seeAllBtnAction = (sectionId) => {
-  mainContainer.addEventListener("scroll", scrollFcn);
-  scrollTop();
-  document.getElementById("seeAllContainer").innerHTML = "";
-  config.activeSeeAll = sectionId;
-  let mainPage = document.getElementById("mainPage");
-  let seeAllContainer = document.getElementById("seeAllContainer");
-  if (!mainPage.classList.contains("hidden")) {
-    buildfire.history.push("Personal Home Page from See All");
-    mainPage.classList.add("hidden");
-    userContainer.classList.add("hidden");
-    sortIcon.classList.remove("hidden");
-  } else if (!subPage.classList.contains("hidden")) {
-    buildfire.history.push("Explore page");
-    subPage.classList.add("hidden");
-  }
-  seeAllCardsRender(
-    fakeData,
-    document.getElementById("seeAllContainer"),
-    true,
-    () => {}
-  );
-  seeAllContainer.classList.remove("hidden");
-  config.isSeeAllScreen = true;
+const seeAllBtnAction = (id) => {
+	mainContainer.addEventListener('scroll', scrollNextPage);
+
+	scrollTop();
+	document.getElementById("seeAllContainer").innerHTML = "";
+	config.activeSeeAll = id;
+	if (!mainPage.classList.contains("hidden")) {
+		buildfire.history.push("Personal Home Page from See All");
+		mainPage.classList.add("hidden");
+		userContainer.classList.add("hidden");
+		sortIcon.classList.remove("hidden");
+	} else if (!subPage.classList.contains("hidden")) {
+		buildfire.history.push("Explore page");
+		subPage.classList.add("hidden");
+	}
+	seeAllCardsRender(
+		fakeData,
+		document.getElementById("seeAllContainer"),
+		true,
+		() => { }
+	);
+	seeAllContainer.classList.remove("hidden");
+	config.isSeeAllScreen = true;
 };
 
-const cardRender = (sectionId, data) => {
-  const sectionsContainer = document.getElementById(sectionId);
-  data.forEach((element) => {
-    if (element.id === "explore") {
-      const container = document.getElementById(element.containerId);
-      seeAllCardsRender(fakeData, container, element.duration, () => {});
-    } else {
-      let sectionInnerHTML;
-      if (element.title != "Just for you") {
-        sectionInnerHTML = `
+const cardRender = (sectionId, data, type) => {
+	const sectionsContainer = document.getElementById(sectionId);
+
+	data.forEach((element) => {
+		if ((type == 'explore' && element.layout == "horizontal-1") || !element.isActive) {
+			return;
+		}
+		let sectionInnerHTML;
+		if (element.layout != "horizontal-1") {
+			sectionInnerHTML = `
 				<div class="container-header">
-					<p class="title headerText-AppTheme">${element.title}</p>
-					<span class="seeAll-btn info-link-AppTheme" onclick=" seeAllBtnHelper('${element.containerId})')">${element.seeAllBtn}</span>
+					<p class="title headerText-AppTheme">${type == 'explore' ? 'All' : 'Recommended'} ${element.title}</p>
+					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id}')">See All</span>
 				</div>
-					<div id="${element.containerId}" class="${element.containerClassName}">
+					<div id="${`${element.id}-container-${type}`}" class="main">
 				</div>
 				  `;
-      } else {
-        sectionInnerHTML = `
+		} else {
+			sectionInnerHTML = `
 				<p class="sectionTitle headerText-AppTheme">${element.title}</p>
-					<div id="${element.containerId}"></div>
+					<div id="${`${element.id}-container-${type}`}" class="main"></div>
 				`;
-      }
-      ui.createElement(
-        "section",
-        sectionsContainer,
-        sectionInnerHTML,
-        element.className,
-        element.id
-      );
-      const container = document.getElementById(element.containerId);
-      filterAndPrintData(
-        fakeData,
-        container,
-        element.duration,
-        element.title,
-        element.id
-      );
-    }
-  });
+		}
+		ui.createElement(
+			"section",
+			sectionsContainer,
+			sectionInnerHTML,
+			[element.layout],
+			`${element.id}-${type}`
+		);
+		filterAndPrintData(fakeData, element, type);
+	});
+}
 
-  const exploreBtn = document.getElementById("exploreButton");
-  exploreBtn.addEventListener("click", () => {
-    mainPage.classList.add("hidden");
-    subPage.classList.remove("hidden");
-    userContainer.classList.add("hidden");
-    sortIcon.classList.remove("hidden");
-    buildfire.history.push("Personal Home Page");
-    scrollTop();
-  });
-};
+const exploreBtn = document.getElementById("exploreButton");
+exploreBtn.addEventListener("click", () => {
+	mainPage.classList.add("hidden");
+	subPage.classList.remove("hidden");
+	userContainer.classList.add("hidden");
+	sortIcon.classList.remove("hidden");
+	buildfire.history.push("Personal Home Page");
+	scrollTop();
+});
 
 function openDetails(id) {
-  console.log(id);
-  pageDetails.innerHTML=""
-  detailsRender(pageDetails, id);
-  mainPage.classList.add("hidden");
-  userContainer.classList.add("hidden");
-  sortIcon.classList.remove("hidden");
-  subPage.classList.add("hidden");
-  seeAllContainer.classList.add("hidden");
-  pageDetails.classList.remove("hidden");
-  buildfire.history.push("Details Page");
+	console.log(id);
+	pageDetails.innerHTML = ""
+	//   detailsRender(pageDetails, id);
+	mainPage.classList.add("hidden");
+	userContainer.classList.add("hidden");
+	sortIcon.classList.remove("hidden");
+	subPage.classList.add("hidden");
+	seeAllContainer.classList.add("hidden");
+	pageDetails.classList.remove("hidden");
+	buildfire.history.push("Details Page");
 }
 
 const getUser = (data) => {
-  let userName = document.getElementById("userName");
-  let userProfilePicture = document.getElementById("userProfilePicture");
-  let userAchievementIcon = document.getElementById("userAchievementIcon");
-  let growthProfile = document.getElementById("growthProfile");
-  if (data.isLoggedIn) {
-    let userAchievements = data.badges.filter((el) => el.active === true);
-    userName.innerText = data.firstName + " " + data.lastName;
-    growthProfile.innerText = data.growthProfile;
-    userProfilePicture.src = data.profilePicture;
-    userProfilePicture.alt = data.firstName;
-    userAchievementIcon.src = userAchievements[0].achievementIcon;
-    userAchievementIcon.alt = userAchievements[0].achievementTitle;
-    config.filterArr = data.recommendedTags;
-  } else {
-    userProfilePicture.src = "../../../../styles/media/avatar-placeholder.png";
-    userName.innerText = "Anonymous";
-    growthProfile.innerText = "Profile Growth";
-    userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
-  }
+	let userName = document.getElementById("userName");
+	let userProfilePicture = document.getElementById("userProfilePicture");
+	let userAchievementIcon = document.getElementById("userAchievementIcon");
+	let growthProfile = document.getElementById("growthProfile");
+	if (data.isLoggedIn) {
+		let userAchievements = data.badges.filter((el) => el.active === true);
+		userName.innerText = data.firstName + " " + data.lastName;
+		growthProfile.innerText = data.growthProfile;
+		userProfilePicture.src = data.profilePicture;
+		userProfilePicture.alt = data.firstName;
+		userAchievementIcon.src = userAchievements[0].achievementIcon;
+		userAchievementIcon.alt = userAchievements[0].achievementTitle;
+		config.filterArr = data.recommendedTags;
+	} else {
+		userProfilePicture.src = "../../../../styles/media/avatar-placeholder.png";
+		userName.innerText = "Anonymous";
+		growthProfile.innerText = "Profile Growth";
+		userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
+	}
 };
 const init = () => {
-  getUser(config.userConfig);
-  getAppTheme();
-  cardRender("sectionsContainer", config.sectionConfig);
-  cardRender("exploreContainer", config.exploreConfig);
-  trendingRender(fakeData, "trendingContainer");
-  setAppTheme();
-  initBack();
+	getUser(config.userConfig);
+	getAppTheme();
+	cardRender("sectionsContainer", fakeData.data.sections, "main");
+	cardRender("exploreContainer", fakeData.data.sections, "explore");
+	trendingRender(fakeData, "trendingContainer");
+	setFilteredTopic(fakeData);
+	initBack();
+	setAppTheme();
 };
 
 init();

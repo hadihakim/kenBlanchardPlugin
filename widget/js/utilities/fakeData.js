@@ -40,7 +40,18 @@ const fakeData={
         "id": "e5bf59f3-507a-4703-af2a-bc4ba56cc4d2",
         "title": "Articles",
         "layout": "horizontal",
-        "assets": ["62b3439f864d49037aac9b26","62b3439f864d49037aac9b25"],
+        "assets": ["62b3439f864d49037aac9b25", "62b3439f864d49037aac9b26"],
+        "isActive": true,
+        "createdOn": "2022-06-22T16:34:34.479Z",
+        "createdBy": "ckhawaja@madaincorp.com",
+        "lastUpdatedOn": null,
+        "lastUpdatedBy": null
+      },
+      {
+        "id": "e5bf59f3-507a-4703-af2a-bc4ba56c54d2",
+        "title": "Alaa",
+        "layout": "horizontal",
+        "assets": ["62b3439f864d49037aac9b25", "62b3439f864d49037aac9b26"],
         "isActive": true,
         "createdOn": "2022-06-22T16:34:34.479Z",
         "createdBy": "ckhawaja@madaincorp.com",
@@ -66,7 +77,7 @@ const fakeData={
           "title": "Another article",
           "description": "sfdfsdfsdf sdf sdf",
           "image": "https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88",
-          "topics": ["00236b7b-15a3-4e5f-a5ab-fc014ed652b3"],
+          "topics": ["00236b7b-15a3-4e5f-a5ab-fc014ed652b3","1730aa73-e201-4c90-ac5f-4103603f4305"],
           "duration": 1000,
           "createdOn": "2022-06-22T16:30:22.260Z"
         }
@@ -88,7 +99,7 @@ const fakeData={
           "title": "Article two",
           "description": "short description for this asset bblasdsa dasd sad",
           "image": "https://www.thespruce.com/thmb/tClzdZVdo_baMV7YA_9HjggPk9k=/4169x2778/filters:fill(auto,1)/the-difference-between-trees-and-shrubs-3269804-hero-a4000090f0714f59a8ec6201ad250d90.jpg",
-          "topics": ["c4aa1da7-8c81-487c-9632-3c7e4552272a"],
+          "topics": ["c4aa1da7-8c81-487c-9632-3c7e4552272a", "1730aa73-e201-4c90-ac5f-4103603f4305"],
           "duration": 3750,
           "createdOn": "2022-06-24T16:30:22.260Z"
         }
