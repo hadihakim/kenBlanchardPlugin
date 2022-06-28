@@ -2,19 +2,26 @@
 
 const { getAppTheme, setAppTheme, initBack, scrollFcn } = utilities();
 
-const { filterAndPrintData, seeAllCardsRender, trendingRender } = templates();
+const { filterAndPrintData, seeAllCardsRender, trendingRender,detailsRender } = templates();
 
 // control variables
 let currentPage = 1;
 const limit = 10;
 let total = 0;
 
-const seeAllBtnAction = (title) => {
-  mainContainer.addEventListener("scroll", scrollFcn);
+const seeAllBtnHelper = (containerId) => {
+  fakeData.data.sections.forEach((el) => {
+    if (containerId.toLowerCase().includes(el.title.toLowerCase())) {
+      seeAllBtnAction(el.id);
+    }
+  });
+};
 
+const seeAllBtnAction = (sectionId) => {
+  mainContainer.addEventListener("scroll", scrollFcn);
   scrollTop();
   document.getElementById("seeAllContainer").innerHTML = "";
-  config.activeSeeAll = title;
+  config.activeSeeAll = sectionId;
   let mainPage = document.getElementById("mainPage");
   let seeAllContainer = document.getElementById("seeAllContainer");
   if (!mainPage.classList.contains("hidden")) {
@@ -48,7 +55,7 @@ const cardRender = (sectionId, data) => {
         sectionInnerHTML = `
 				<div class="container-header">
 					<p class="title headerText-AppTheme">${element.title}</p>
-					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.title}')">${element.seeAllBtn}</span>
+					<span class="seeAll-btn info-link-AppTheme" onclick=" seeAllBtnHelper('${element.containerId})')">${element.seeAllBtn}</span>
 				</div>
 					<div id="${element.containerId}" class="${element.containerClassName}">
 				</div>
@@ -88,8 +95,17 @@ const cardRender = (sectionId, data) => {
   });
 };
 
-function open(id) {
-  console.log(id, "iffffffffffffff");
+function openDetails(id) {
+  console.log(id);
+  pageDetails.innerHTML=""
+  detailsRender(pageDetails, id);
+  mainPage.classList.add("hidden");
+  userContainer.classList.add("hidden");
+  sortIcon.classList.remove("hidden");
+  subPage.classList.add("hidden");
+  seeAllContainer.classList.add("hidden");
+  pageDetails.classList.remove("hidden");
+  buildfire.history.push("Details Page");
 }
 
 const getUser = (data) => {

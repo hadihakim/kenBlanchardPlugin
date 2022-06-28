@@ -39,6 +39,16 @@ const templates = () => {
     container.appendChild(firstClone);
   };
 
+  const detailsRender = (container, topicId) => {
+    let data = fakeData.data.topics.find(({ id }) => id === topicId);
+    const template = document.getElementById("detailsPageTemplate");
+    const firstClone = template.content.cloneNode(true);
+    let title = firstClone.querySelectorAll(".details-title");
+    console.log("data====>", data);
+    title[0].innerHTML = data.title;
+    container.appendChild(firstClone);
+  };
+
   const filterAndPrintData = (
     apiData,
     container,
@@ -146,16 +156,16 @@ const templates = () => {
   };
 
   const seeAllCardsRender = (apiData, container, durationState, callback) => {
-    let coursesId = "";
-    apiData.data.sections.forEach((element) => {
-      if (
-        element.title.toLowerCase() ===
-        config.activeSeeAll.toLowerCase().split(" ")[1]
-      ) {
-        coursesId = element.id;
-      }
-    });
-    let data = apiData.data.sections.filter((t) => t.id === coursesId);
+    // let coursesId = "";
+    // apiData.data.sections.forEach((element) => {
+    //   if (
+    //     element.title.toLowerCase() ===
+    //     config.activeSeeAll.toLowerCase().split(" ")[1]
+    //   ) {
+    //     coursesId = element.id;
+    //   }
+    // });
+    let data = apiData.data.sections.filter((t) => t.id == config.activeSeeAll);
     const recommendedTemplate = document.getElementById("seeAllTemplate");
     let assetsInfo = [];
     let section = data[0] || {};
@@ -271,5 +281,10 @@ const templates = () => {
     });
   };
 
-  return { filterAndPrintData, seeAllCardsRender, trendingRender };
+  return {
+    filterAndPrintData,
+    seeAllCardsRender,
+    trendingRender,
+    detailsRender,
+  };
 };
