@@ -46,7 +46,7 @@ const templates = () => {
     const firstClone = template.content.cloneNode(true);
     let title = firstClone.querySelectorAll(".details-title");
     console.log("data====>", data);
-    title[0].innerHTML = data.title;
+    title[0].innerHTML = data.meta.title;
     container.appendChild(firstClone);
   };
 
@@ -143,9 +143,11 @@ const templates = () => {
     let sectionData =
       apiData.data.sections.find(({ id }) => id == config.activeSeeAll) || {};
     let assetsInfo = [];
+let ids=[]
     let assets = sectionData.assets || [];
     assets.forEach((assetId) => {
       assetsInfo.push(apiData.data.assets_info[assetId]);
+ids.push(assetId);
     });
     // sort
     assetsInfo = sort(assetsInfo, config.sortType);
@@ -188,15 +190,17 @@ const templates = () => {
             "full_width",
             "4:3"
           )}')`;
+		  console.log( assetsInfo[lastIndex].meta.title,lastIndex);
+		  title[0].addEventListener("click", () => {
+			console.log(lastIndex);
+						openDetails(assetsInfo[lastIndex])
+					  });
           title[0].innerText = assetsInfo[lastIndex].meta.title;
           if (durationState) {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 								<span class="schedule-text">
 							${timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
           }
-          title[0].addEventListener("click", () => {
-			openDetails(assetsInfo[lastIndex].meta)
-          });
           container.appendChild(nodesClone);
         }
       }
