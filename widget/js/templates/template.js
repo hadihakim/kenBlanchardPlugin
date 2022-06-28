@@ -152,6 +152,7 @@ const templates = () => {
 		let assetsInfo = [];
 		let section = data[0] || {};
 		if (config.renderedCard == (config.pageSize * config.page)) {
+      callback();
 			return;
 		}
 		if (section.hasOwnProperty("assets")) {
@@ -160,19 +161,17 @@ const templates = () => {
 				assetsInfo.push(apiData.data.assets_info[assetId]);
 			});
 		} else {
+      callback();
 			return;
 		}
 		// sort
 		assetsInfo = sort(assetsInfo, config.sortType);
-
-		if (config.lastIndex < assetsInfo.length) {
-			config.page++;
-		}
-
 		let lastIndex = config.lastIndex;
 		for (lastIndex; lastIndex < (lastIndex + config.pageSize); lastIndex++) {
 			if (config.renderedCard >= (config.pageSize * config.page) || lastIndex >= assetsInfo.length) {
 				config.lastIndex = lastIndex;
+        callback();
+        config.page++;
 				return;
 			} else {
 
@@ -210,6 +209,7 @@ const templates = () => {
 				});
 			}
 		}
+    config.page++;
 		callback();
 	};
 

@@ -88,7 +88,6 @@ const utilities = () => {
     seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
         config.fetchingNextPage = false;
     });
-    config.fetchingNextPage = false;
   }
 
   const scrollFcn = () => {
