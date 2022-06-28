@@ -10,7 +10,7 @@ const {
 	scrollTop
 } = utilities();
 // detailsRender
-const { filterAndPrintData, seeAllCardsRender, trendingRender } = templates();
+const { filterAndPrintData, seeAllCardsRender, trendingRender,detailsRender } = templates();
 
 // control variables
 let currentPage = 1;
@@ -97,7 +97,7 @@ exploreBtn.addEventListener("click", () => {
 function openDetails(id) {
 	console.log(id);
 	pageDetails.innerHTML = ""
-	//   detailsRender(pageDetails, id);
+	  detailsRender(pageDetails, id);
 	mainPage.classList.add("hidden");
 	userContainer.classList.add("hidden");
 	sortIcon.classList.remove("hidden");
