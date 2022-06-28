@@ -149,11 +149,14 @@ input.addEventListener("keyup", () => {
         element.id
       );
     });
-
+	config.renderedCard = 0;
+	config.page = 1;
+	config.lastIndex = 0;
     seeAllCardsRender(
       fakeData,
       document.getElementById("seeAllContainer"),
-      true
+      true,
+      ()=>{}
     );
-  }, 500);
+  }, 300);
 });
