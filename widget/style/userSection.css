@@ -16,7 +16,7 @@
 .user-container .user-image-container .main-image {
   width: 64px;
   height: 64px;
-  border: 5px solid #03b2bb;
+  border: 5px solid;
   border-radius: 50%;
 }
 
@@ -26,6 +26,8 @@
   position: absolute;
   bottom: 0;
   right: 0;
+  border-radius: 50%;
+  background: linear-gradient(330deg, #1A203B 13.59%, #672F88 86.8%);
 }
 
 .user-container .text-container .user-name {

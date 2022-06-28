@@ -19,6 +19,7 @@ const utilities = () => {
   const getAppTheme = () => {
     buildfire.appearance.getAppTheme((err, appTheme) => {
       if (err) return console.error(err);
+      console.log(appTheme);
       config.appTheme = appTheme;
     });
   };
@@ -31,6 +32,9 @@ const utilities = () => {
           break;
         case "back":
           arr[i].style.backgroundColor = color;
+          break;
+        case "borderColor":
+          arr[i].style.borderColor = color;
           break;
         default:
           break;
@@ -64,6 +68,11 @@ const utilities = () => {
         elements: document.getElementsByClassName("userContainer"),
         colorType: "back",
         colorDegree: config.appTheme.colors.primaryTheme,
+      },
+      {
+        elements: document.getElementsByClassName("user-image-border"),
+        colorType: "borderColor",
+        colorDegree: config.appTheme.colors.infoTheme,
       },
       {
         elements: document.getElementsByClassName("info-btn-AppTheme"),
