@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="buildfire" content="enableMDTheme" />
+    <meta name="buildfire" content="disableBootstrap" />
 
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="buildfire" content="enableMDTheme" />
-	<meta name="buildfire" content="disableBootstrap" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/forYouTemplate.css" />
+    <link rel="stylesheet" href="./style/recommendedTemplate.css" />
+    <link rel="stylesheet" href="./style/trendingTemplate.css" />
+    <link rel="stylesheet" href="./style/seeAll.css" />
+    <link rel="stylesheet" href="./style/detailsPage.css" />
+    <link rel="stylesheet" href="./style/userSection.css" />
+    <link rel="stylesheet" href="./style/summaryTemplate.css" />
+    <link rel="stylesheet" href="./style/splide-default.min.css" />
+    <link rel="stylesheet" href="../../../styles/material-icons.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Include material design css and js -->
+    <link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
+    <link rel="stylesheet" href="../../../../styles/helper.css" />
+    <!-- Include material design css and js -->
 
-	<link rel="stylesheet" href="./style/style.css" />
-	<link rel="stylesheet" href="./style/forYouTemplate.css" />
-	<link rel="stylesheet" href="./style/recommendedTemplate.css" />
-	<link rel="stylesheet" href="./style/trendingTemplate.css" />
-	<link rel="stylesheet" href="./style/seeAll.css" />
-	<link rel="stylesheet" href="./style/userSection.css" />
-	<link rel="stylesheet" href="./style/detailsPage.css" />
+    <link
+      href="../../../styles/materialDesign/material-components-web@4.0.0.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/searchBar.css" />
 
-	<link rel="stylesheet" href="../../../styles/material-icons.css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-	<!-- Include material design css and js -->
-	<link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
-	<link rel="stylesheet" href="../../../../styles/helper.css" />
-	<!-- Include material design css and js -->
-
-	<link href="../../../styles/materialDesign/material-components-web@4.0.0.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="./style/searchBar.css" />
+    <!-- js -->
+    <script src="../../../scripts/buildfire.js"></script>
+    <script
+      src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
 
 	<!-- js -->
 	<script src="../../../scripts/buildfire.js"></script>
@@ -30,6 +41,7 @@
 	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
 
 	<!-- Bundle:scripts -->
+	<script src="./js/utilities/splide.min.js"></script>
 	<script src="./js/utilities/strings.js"></script>
 	<script src="./js/helper/ui.js"></script>
 	<script src="./js/helper/searchBar.js" defer></script>
@@ -40,63 +52,81 @@
 	<script src="./js/app.js" defer></script>
 	<!-- endbundle:scripts -->
 	<!--
+
    <script src="../../../../scripts/angular/angular.min.js"></script>
    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
    -->
-</head>
+  </head>
 
-<body id="mainBody">
-	<!-- user section -->
-	<div class="slide-in" id="mainContainer">
-		<div class="user-container userContainer" id="userContainer">
-			<div class="user-image-container">
-				<img class="main-image user-image-border" id="userProfilePicture" />
-				<img class="achievement-image" id="userAchievementIcon" />
-			</div>
-			<div class="text-container">
-				<h2 class="user-name barText-AppTheme" id="userName"></h2>
-				<span class="growth-user-profile barText-AppTheme" id="growthProfile"></span>
-			</div>
-		</div>
-		<!-- end user section -->
+  <body id="mainBody">
+    <!-- user section -->
+    <div class="slide-in " id="mainContainer">
+      <div class="user-container userContainer" id="userContainer">
+        <div class="user-image-container">
+          <img class="main-image user-image-border" id="userProfilePicture" />
+          <img class="achievement-image" id="userAchievementIcon" />
+        </div>
+        <div class="text-container">
+          <h2 class="user-name barText-AppTheme" id="userName"></h2>
+          <span
+            class="growth-user-profile barText-AppTheme"
+            id="growthProfile"
+          ></span>
+        </div>
+      </div>
+      <!-- end user section -->
 
-		<!-- search bar -->
-		<div id="searchBar" class="mdc-layout-grid__cell--span-12">
-			<div class="searchItem mdc-card">
-				<div class="search-container">
-					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
-					<input class="bodyTextTheme" id="search-input" type="text" name="search" id="searchInput"
-						placeholder="Search" autocomplete="off" />
-					<label class="material-icons icon hidden" id="sortIcon">sort</label>
-					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
-				</div>
-			</div>
-		</div>
-		<!-- end search bar -->
+      <!-- search bar -->
+      <div class="mdc-layout-grid__cell--span-12" id="searchBar">
+        <div class="searchItem mdc-card">
+          <div class="search-container">
+            <label for="searchInput" class="material-icons icon" id="searchIcon"
+              >search</label
+            >
+            <input
+              class="bodyTextTheme"
+              id="search-input"
+              type="text"
+              name="search"
+              id="searchInput"
+              placeholder="Search"
+              autocomplete="off"
+            />
+            <label class="material-icons icon hidden" id="sortIcon">sort</label>
+            <label id="filterIcon" class="material-icons icon" id="filterIcon"
+              >filter_alt</label
+            >
+          </div>
+        </div>
+      </div>
+      <!-- end search bar -->
 
-		<!-- user list of cards -->
-		<div class="mainPage slide-in" id="mainPage">
-			<!-- section -->
-			<section id="sectionsContainer"></section>
-			<div class="exploreAll-btn-container">
-				<a class="mdc-button mdc-button--raised info-btn-AppTheme" id="exploreButton">
-					<span class="mdc-button__label barText-AppTheme">Explore All</span>
-				</a>
-			</div>
-		</div>
-		<div class="subPage hidden slide-in" id="subPage">
-			<section class="trendingSection" id="trendingSection">
-				<h3 class="trending-title headerText-AppTheme">Trending</h3>
-				<div class="trendingContainer" id="trendingContainer"></div>
-			</section>
-			<section id="exploreContainer"></section>
-		</div>
-		<div id="seeAllContainer" class="hidden slide-in"></div>
-		<div id="pageDetails" class="hidden pageDetails slide-in"></div>
-		<!-- end section -->
-	</div>
-	<!-- user list of cards -->
+      <!-- user list of cards -->
+      <div class="mainPage slide-in" id="mainPage">
+        <!-- section -->
+        <section id="sectionsContainer"></section>
+        <div class="exploreAll-btn-container">
+          <a
+            class="mdc-button mdc-button--raised info-btn-AppTheme"
+            id="exploreButton"
+          >
+            <span class="mdc-button__label barText-AppTheme">Explore All</span>
+          </a>
+        </div>
+      </div>
+      <div class="subPage hidden slide-in" id="subPage">
+        <section class="trendingSection" id="trendingSection">
+          <h3 class="trending-title headerText-AppTheme">Trending</h3>
+          <div class="trendingContainer" id="trendingContainer"></div>
+        </section>
+        <section id="exploreContainer"></section>
+      </div>
+      <div id="seeAllContainer" class="hidden slide-in"></div>
+      <div id="pageDetails" class="hidden pageDetails slide-in"></div>
+      <!-- end section -->
+    </div>
+    <!-- user list of cards -->
 
 	<!-- template -->
 	<template id="forYouTemplate" class="forYouTemplate">
@@ -182,6 +212,178 @@
 		</div>
 	</template>
 	<!-- end template -->
-</body>
 
+    <div class="graphicalSummaries-container hidden">
+      <div class="first-page hidden">
+        <div class="top-image"></div>
+        <div class="body-content">
+          <h3 class="title">Coaching Skills: The Missing Link for Leaders</h3>
+          <span class="subtitle">Description</span>
+          <p class="description">
+            For years, coaching has been regarded as a useful strategy for
+            individual and organizational development. In their 2006 research
+            paper, “Keen to Help? Managers’ Implicit Person Theories and Their
+            Subsequent Employee Coaching,” Heslin, Vandewalle, and Latham noted
+            that manager coaching can facilitate employee development and
+            performance.
+          </p>
+        </div>
+        <div class="chapters-container">
+          <ul class="chapters-list">
+            <li class="chapter-item">
+              <h6 class="chapter-title">Chapter 1</h6>
+              <div class="sub-chapter-item">
+                <span class="chapter-subtitle">Listen to Learn</span>
+                <label for="searchInput" class="material-icons icon"
+                  >lock</label
+                >
+              </div>
+              <div class="bar"></div>
+            </li>
+            <li class="chapter-item">
+              <h6 class="chapter-title">Chapter 1</h6>
+              <div class="sub-chapter-item">
+                <span class="chapter-subtitle">Listen to Learn</span>
+                <label for="searchInput" class="material-icons icon"
+                  >lock</label
+                >
+              </div>
+              <div class="bar"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="third-page hidden">
+        <section class="splide hidden" aria-label="...">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <li class="splide__slide">
+                <div class="content-item">
+                  <img
+                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+                    alt=""
+                    class="top-image"
+                  />
+                  <div class="text-content">
+                    <p>
+                      Listening is one of the most important skills for
+                      managers, regardless of tenure.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide">
+                <div class="content-item">
+                  <!-- <img
+                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+                    alt=""
+                    class="top-image"
+                  /> -->
+                  <div class="text-content">
+                    <p>
+                      Listening is one of the most important skills for
+                      managers, regardless of tenure.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide">
+                <div class="content-item">
+                  <img
+                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+                    alt=""
+                    class="top-image"
+                  />
+                  <div class="text-content">
+                    <p>
+                      Listening is one of the most important skills for
+                      managers, regardless of tenure.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide">
+                <div class="content-item">
+                  <img
+                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+                    alt=""
+                    class="top-image"
+                  />
+                  <div class="text-content">
+                    <p>
+                      Listening is one of the most important skills for
+                      managers, regardless of tenure.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li class="splide__slide">
+                <div class="content-item">
+                  <img
+                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+                    alt=""
+                    class="top-image"
+                  />
+                  <div class="text-content" aria-label>
+                    <p>
+                      Listening is one of the most important skills for
+                      managers, regardless of tenure.
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div id="slideNum"></div>
+          </div>
+
+          <!-- Add the progress bar element -->
+          <div class="my-carousel-progress">
+            <div class="my-carousel-progress-bar"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="fourth-page hidden">
+        <div class="top-image"></div>
+        <div class="header-text">
+          <h3>UNLOCK PREMIUM CONTENT</h3>
+        </div>
+        <div class="body-content">
+          <p>
+            Unlock the full Ken Blanchar library <br />
+
+            Discover new titles <br />
+
+            Receive access to exclusive resources
+          </p>
+        </div>
+        <div class="plan-header">
+          <h3>START WITH 3-MONTH FREE TRIAL</h3>
+        </div>
+        <div class="plans-container">
+          <div class="plan-card">
+            <h2 class="title">$12.99/Month</h2>
+            <p class="subtitle">Get greater access & unsubscribe at any time</p>
+          </div>
+          <div class="plan-card">
+            <h2 class="title">$129/Year</h2>
+			<p class="discount">Save $25.98</p>
+            <p class="subtitle">Get greater access & unsubscribe at any time</p>
+          </div>
+        </div>
+      </div>
+
+	  <div class="secondPage">
+		<img src="../resources/whiteBackground.png" alt="background">
+		<h2>CHAPTER 1</h2>
+		<p>Listen to Learn</p>
+		<div class="startChapter-btn-container">
+			<a class="mdc-button mdc-button--raised info-btn-AppTheme" id="startChapter">
+				<span class="mdc-button__label barText-AppTheme">Start chapter</span>
+			</a>
+		</div>
+	  </div>
+    </div>
+  </body>
 </html>

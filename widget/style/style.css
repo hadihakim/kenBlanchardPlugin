@@ -50,7 +50,9 @@ html, body {
 }
 
 .recommendedSections .recommendedContainer .mdc-card .duration .schedule-icon,
-#seeAllContainer .column .mdc-card-footer .duration .schedule-icon {
+#seeAllContainer .column .mdc-card-footer .duration .schedule-icon,
+.horizontal .main .mdc-card .mdc-card-footer .duration .schedule-icon,
+.horizontal .explore .mdc-card .mdc-card-footer .duration .schedule-icon {
 	margin-right: 0.35rem;
 	color: #0297a0;
 	font-size: 18px !important;
