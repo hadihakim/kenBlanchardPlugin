@@ -30,7 +30,7 @@
 	display: none;
 }
 
-li{
+/* li{
 	background-color: red;
     flex-direction: row-reverse !important;
 }
@@ -42,7 +42,7 @@ div#bottomDrawerContainer .bottom-drawer-backdrop .bottom-drawer-holder .bottom-
 
 .action-list li .checkbox {
 	margin-right: 16px !important;
-}
+} */
 
 #drawerButton{
 	background-color: #0297a0 !important;
