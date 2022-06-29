@@ -201,6 +201,18 @@ const utilities = () => {
 	const scrollTop = () => {
 		mainContainer.scrollTo({ top: 0, behavior: "smooth" });
 	};
+
+	const splideInit = () => {
+		var splide = new Splide(".splide");
+		var bar = splide.root.querySelector(".my-carousel-progress-bar");
+		// Update the bar width:
+		splide.on("mounted move", function () {
+			var end = splide.Components.Controller.getEnd() + 1;
+			bar.style.width = String((100 * (splide.index + 1)) / end) + "%";
+			document.getElementById("slideNum").innerText=splide.index + 1+"/"+end
+		});
+		splide.mount();
+	}
 	return {
 		cropImage,
 		timeConvert,
@@ -211,7 +223,8 @@ const utilities = () => {
 		scrollNextPage,
 		hasSearch,
 		setFilteredTopic,
-		scrollTop
+		scrollTop,
+		splideInit
 	};
 };
 
