@@ -95,7 +95,6 @@ exploreBtn.addEventListener("click", () => {
 });
 
 function openDetails(id) {
-	console.log(id);
 	pageDetails.innerHTML = ""
 	  detailsRender(pageDetails, id);
 	mainPage.classList.add("hidden");

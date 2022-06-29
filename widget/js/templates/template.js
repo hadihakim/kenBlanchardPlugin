@@ -40,8 +40,9 @@ const templates = () => {
     container.appendChild(firstClone);
     setAppTheme();
   };
-  const detailsRender = (container, data) => {
-    // let data = fakeData.data.assets_info.filter(({ id }) => id === topicId);
+
+  const detailsRender = (container, id) => {
+    let data = fakeData.data.assets_info[id];
     const template = document.getElementById("detailsPageTemplate");
     const firstClone = template.content.cloneNode(true);
     let title = firstClone.querySelectorAll(".details-title");
@@ -143,17 +144,27 @@ const templates = () => {
     let sectionData =
       apiData.data.sections.find(({ id }) => id == config.activeSeeAll) || {};
     let assetsInfo = [];
-let ids=[]
+    let ids = [];
     let assets = sectionData.assets || [];
     assets.forEach((assetId) => {
-      assetsInfo.push(apiData.data.assets_info[assetId]);
-ids.push(assetId);
+      let assetData = apiData.data.assets_info[assetId];
+      assetData.id = assetId;
+      console.log(assetId, "id");
+      //   assetsInfo.push({data: apiData.data.assets_info[assetId] , id: assetId});
+      assetsInfo.push(assetData);
+
+      console.log(apiData.data.assets_info[assetId]);
+      ids.push(assetId);
     });
     // sort
     assetsInfo = sort(assetsInfo, config.sortType);
 
-    let lastIndex = config.lastIndex;
-    for (lastIndex; lastIndex < lastIndex + config.pageSize; lastIndex++) {
+    // let lastIndex = config.lastIndex;
+    for (
+      let lastIndex = config.lastIndex;
+      lastIndex < lastIndex + config.pageSize;
+      lastIndex++
+    ) {
       if (
         config.renderedCard == config.pageSize * config.page ||
         lastIndex >= assetsInfo.length
@@ -190,17 +201,16 @@ ids.push(assetId);
             "full_width",
             "4:3"
           )}')`;
-		  console.log( assetsInfo[lastIndex].meta.title,lastIndex);
-		  title[0].addEventListener("click", () => {
-			console.log(lastIndex);
-						openDetails(assetsInfo[lastIndex])
-					  });
+          let id = assetsInfo[lastIndex].id;
           title[0].innerText = assetsInfo[lastIndex].meta.title;
           if (durationState) {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 								<span class="schedule-text">
 							${timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
           }
+		  title[0].addEventListener("click", () => {
+            openDetails(id);
+          });
           container.appendChild(nodesClone);
         }
       }
