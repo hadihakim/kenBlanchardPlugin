@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="./style/trendingTemplate.css" />
 	<link rel="stylesheet" href="./style/seeAll.css" />
 	<link rel="stylesheet" href="./style/userSection.css" />
+	<link rel="stylesheet" href="./style/detailsPage.css" />
+
 	<link rel="stylesheet" href="../../../styles/material-icons.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<!-- Include material design css and js -->
@@ -59,7 +61,7 @@
 		<!-- end user section -->
 
 		<!-- search bar -->
-		<div class="mdc-layout-grid__cell--span-12">
+		<div id="searchBar" class="mdc-layout-grid__cell--span-12">
 			<div class="searchItem mdc-card">
 				<div class="search-container">
 					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
@@ -90,7 +92,7 @@
 			<section id="exploreContainer"></section>
 		</div>
 		<div id="seeAllContainer" class="hidden slide-in"></div>
-		<div id="pageDetails" class="hidden pageDetails slide-in"> Hello</div>
+		<div id="pageDetails" class="hidden pageDetails slide-in"></div>
 		<!-- end section -->
 	</div>
 	<!-- user list of cards -->
@@ -117,7 +119,7 @@
 		</div>
 	</template>
 	<template id="seeAllTemplate">
-		<div class="mdc-card">
+		<div class="mdc-card" >
 			<div class="column">
 				<div class="image"></div>
 			</div>
@@ -127,7 +129,7 @@
 					<div class="description"></div>
 				</div>
 				<div class="mdc-card-footer">
-					<div class="duration"></div>
+					<div class="duration "></div>
 				</div>
 			</div>
 		</div>
@@ -137,17 +139,45 @@
 			<span class="trending-span" id="trending-span"></span>
 		</div>
 	</template>
-	<template id="detailsPageTemplate" class="detailsPageTemplate">
+
+	<template id="detailsPageTemplate" class="detailsPageTemplate ">
 		<div class="details-card" id="detailes-card">
-			<img id="details-img" src="" />
-			<p id="details-title" class="details-title"></p>
-			<p id="details-describtion-title" class="details-describtion-title"></p>
-			<p id="details-describtion-text" class="details-describtion-text"></p>
-			<div id="chapters-card" class="chapters-card">
-				<p id="chapter-title" class="chapter-title"></p>
-				<p id="chapter-subTitle" class="chapter-subTitle"></p>
-				<label class="material-icons icon" id="sortIcon">sort</label>
+			<div id="details-img" class="details-img"></div>
+			<p id="details-title" class="details-title headerText-AppTheme"></p>
+
+				<div class="mdc-card-footer ">
+					<div class="duration duration-details"></div>
+				</div>
+			<div id="description-container" class="description-container">
+				<p id="description-title" class="description-title headerText-AppTheme"> Description</p>
+				<p id="description-text" class="description-text bodyText-AppTheme">When one of your team members is at the Disillusioned
+					learner stage on a goal, they have some knowledge and skills but are not yet competent. They can
+					easily get stuck, become discouraged, and even feel ready to quit. Their commitment is low.</p>
 			</div>
+			<div id="learn-container" class="learn-container">
+				<p id="learn-title" class="learn-title headerText-AppTheme">what you'll learn</p>
+				<ol id="learn-list" class="learn-list bodyText-AppTheme">
+					<li id="learn-list-item" class="learn-list-item">Someone to listen to their concerns</li>
+					<li id="learn-list-item2" class="learn-list-item">Someone to listen to their concerns</li>
+					<li id="learn-list-item3" class="learn-list-item">Someone to listen to their concerns</li>
+					<li id="learn-list-item4" class="learn-list-item">Someone to listen to their concerns</li>
+				</ol>
+			</div>
+			<div id="leson-container" class="leson-container">
+				<p id="leson-title" class="leson-title headerText-AppTheme">Lessons</p>
+				<ol id="leson-list" class="leson-list bodyText-AppTheme">
+					<li id="leson-list-item" class="leson-list-item">Introduction to the Course Focus </li>
+					<li id="leson-list-item2" class="leson-list-item">Introduction to the Course Focus </li>
+					<li id="leson-list-item3" class="leson-list-item">Introduction to the Course Focus </li>
+					<li id="leson-list-item4" class="leson-list-item">Introduction to the Course Focus </li>
+				</ol>
+			</div>
+			<div class="details-btn-container">
+				<a class="mdc-button mdc-button--raised details-btn info-btn-AppTheme" id="exploreButton">
+					<span class="mdc-button__label  barText-AppTheme">Start Course</span>
+				</a>
+			</div>
+
 		</div>
 	</template>
 	<!-- end template -->

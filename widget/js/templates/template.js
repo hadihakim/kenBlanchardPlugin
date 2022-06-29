@@ -4,14 +4,17 @@ const templates = () => {
     container,
     durationState,
     assets_info,
-    topicTitle
+    topicTitle,
+    id
   ) => {
+    console.log(assets_info, "recommendedTemplate");
     const recommendedTemplate = document.getElementById("recommendedTemplate");
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
     let title = nodesClone.querySelectorAll(".title");
     let duration = nodesClone.querySelectorAll(".duration");
+    let card = nodesClone.querySelectorAll(".mdc-card");
     image[0].style.backgroundImage = `url('${cropImage(
       assets_info.meta.image
     )}')`;
@@ -22,21 +25,29 @@ const templates = () => {
 					<span class="schedule-text">
 						${timeConvert(assets_info.meta.duration)}</span>`;
     }
+    card[0].addEventListener("click", () => {
+      openDetails(id);
+    });
     container.appendChild(nodesClone);
     setAppTheme();
   };
 
-  const forYouRender = (container, assets_info) => {
+  const forYouRender = (container, assets_info, id) => {
     const template = document.getElementById("forYouTemplate");
 
     const firstClone = template.content.cloneNode(true);
     let title = firstClone.querySelectorAll(".card-Text-Header");
     let note = firstClone.querySelectorAll(".card-Text-Note");
     let image = firstClone.getElementById("card_body");
+    let card = firstClone.querySelectorAll(".mdc-card");
     title[0].innerHTML = assets_info.meta.title;
     note[0].innerHTML = assets_info.meta.description;
     image.style.backgroundImage = `linear-gradient(0deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
 			url('${cropImage(assets_info.meta.image)}')`;
+
+    card[0].addEventListener("click", () => {
+      openDetails(id);
+    });
     container.appendChild(firstClone);
     setAppTheme();
   };
@@ -45,10 +56,22 @@ const templates = () => {
     let data = fakeData.data.assets_info[id];
     const template = document.getElementById("detailsPageTemplate");
     const firstClone = template.content.cloneNode(true);
+    let image = firstClone.querySelectorAll(".details-img");
     let title = firstClone.querySelectorAll(".details-title");
-    console.log("data====>", data);
+    let duration = firstClone.querySelectorAll(".duration-details");
+    image[0].style.backgroundImage = `url('${cropImage(
+      data.meta.image,
+      "full_width",
+      "4:3"
+    )}')`;
     title[0].innerHTML = data.meta.title;
+    if (data.meta.duration) {
+      duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" style="font-size: 16px !important;"> schedule </span>
+							<span class="schedule-text bodyText-AppTheme">
+						${timeConvert(data.meta.duration)}</span>`;
+    }
     container.appendChild(firstClone);
+    setAppTheme();
   };
 
   const filterAndPrintData = (apiData, element, type) => {
@@ -101,6 +124,7 @@ const templates = () => {
               topicTitle,
               meta: assets_info.meta,
               layout: element.layout,
+              id: el,
             });
             foundInSearch++;
           } else {
@@ -122,10 +146,11 @@ const templates = () => {
               element.container,
               element.durationState,
               element.assets_info,
-              element.topicTitle
+              element.topicTitle,
+              element.id
             );
           } else {
-            forYouRender(element.container, element.assets_info);
+            forYouRender(element.container, element.assets_info, element.id);
           }
         });
       }
@@ -195,6 +220,7 @@ const templates = () => {
           let title = nodesClone.querySelectorAll(".title");
           let duration = nodesClone.querySelectorAll(".duration");
           let description = nodesClone.querySelectorAll(".description");
+          let card = nodesClone.querySelectorAll(".mdc-card");
           description[0].innerText = assetsInfo[lastIndex].meta.description;
           image[0].style.backgroundImage = `url('${cropImage(
             assetsInfo[lastIndex].meta.image,
@@ -208,7 +234,7 @@ const templates = () => {
 								<span class="schedule-text">
 							${timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
           }
-		  title[0].addEventListener("click", () => {
+          card[0].addEventListener("click", () => {
             openDetails(id);
           });
           container.appendChild(nodesClone);

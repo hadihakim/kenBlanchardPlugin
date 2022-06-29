@@ -115,14 +115,16 @@ const utilities = () => {
 					pluginBreadcrumbsOnly: true,
 				},
 				(err, result) => {
+console.log(result, "result: ");
 					switch (result[result.length - 1].label) {
-						case "Personal Home Page":
+						case "Home from Explore":
 							mainPage.classList.remove("hidden");
 							subPage.classList.add("hidden");
 							userContainer.classList.remove("hidden");
 							sortIcon.classList.add("hidden");
+							pageDetails.classList.add("hidden");
 							break;
-						case "Personal Home Page from See All":
+						case "Home from See All":
 							mainPage.classList.remove("hidden");
 							seeAllContainer.classList.add("hidden");
 							config.renderedCard = 0;
@@ -132,8 +134,9 @@ const utilities = () => {
 							userContainer.classList.remove("hidden");
 							sortIcon.classList.add("hidden");
 							mainContainer.removeEventListener('scroll', scrollNextPage);
+							pageDetails.classList.add("hidden");
 							break;
-						case "Explore page":
+						case "Explore from See All":
 							subPage.classList.remove("hidden");
 							seeAllContainer.classList.add("hidden");
 							config.renderedCard = 0;
@@ -141,14 +144,16 @@ const utilities = () => {
 							config.lastIndex = 0;
 							config.isSeeAllScreen = false;
 							mainContainer.removeEventListener('scroll', scrollNextPage);
+							pageDetails.classList.add("hidden");
 							break;
-							case "Details Page":
+							case "See All from Details":
+								searchBar.classList.remove("hidden");
 								mainPage.classList.add("hidden");
 								userContainer.classList.add("hidden");
-								sortIcon.classList.remove("hidden");
 								subPage.classList.add("hidden");
 								seeAllContainer.classList.remove("hidden");
 								pageDetails.classList.add("hidden");
+
 
 								break;
 
