@@ -142,6 +142,16 @@ const utilities = () => {
 							config.isSeeAllScreen = false;
 							mainContainer.removeEventListener('scroll', scrollNextPage);
 							break;
+							case "Details Page":
+								mainPage.classList.add("hidden");
+								userContainer.classList.add("hidden");
+								sortIcon.classList.remove("hidden");
+								subPage.classList.add("hidden");
+								seeAllContainer.classList.remove("hidden");
+								pageDetails.classList.add("hidden");
+
+								break;
+
 						default:
 							break;
 					}
