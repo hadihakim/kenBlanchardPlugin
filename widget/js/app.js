@@ -62,7 +62,7 @@ const cardRender = (sectionId, data, type) => {
 			sectionInnerHTML = `
 				<div class="container-header">
 					<p class="title headerText-AppTheme">${type == 'explore' ? 'All' : 'Recommended'} ${element.title}</p>
-					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id}')">See All</span>
+					<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id}')">${Strings.SEE_ALL_TEXT}</span>
 				</div>
 					<div id="${`${element.id}-container-${type}`}" class="main">
 				</div>
@@ -131,10 +131,10 @@ const getUser = (data) => {
 const init = () => {
 	getUser(config.userConfig);
 	getAppTheme();
+	setFilteredTopic(fakeData);
 	cardRender("sectionsContainer", fakeData.data.sections, "main");
 	cardRender("exploreContainer", fakeData.data.sections, "explore");
 	trendingRender(fakeData, "trendingContainer");
-	setFilteredTopic(fakeData);
 	initBack();
 	setAppTheme();
 };

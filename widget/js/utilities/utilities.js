@@ -19,7 +19,6 @@ const utilities = () => {
   const getAppTheme = () => {
     buildfire.appearance.getAppTheme((err, appTheme) => {
       if (err) return console.error(err);
-      console.log(appTheme);
       config.appTheme = appTheme;
     });
   };

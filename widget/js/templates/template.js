@@ -65,40 +65,41 @@ const templates = () => {
 			}
 			let topicTitle;
 			let assets_info = apiData.data.assets_info[el];
-
-			assets_info.meta.topics.forEach((topic) => {
-				if (cardsNumber === config.cardsLimit) {
-					return;
-				}
-				let data = apiData.data.topics.find(({ id }) => id === topic);
+			for (let i = 0; i < assets_info.meta.topics.length; i++) {
+				let data = apiData.data.topics.find(({ id }) => id === assets_info.meta.topics[i]);
 				topicTitle = data.title;
 				if (
 					config.filterArr.includes(topicTitle) ||
 					config.filterArr.length == 0
 				) {
 					topicConfig = true;
-					cardsNumber += 1;
+					break;
 				} else {
 					topicConfig = false;
 				}
-				if (topicConfig) {
-					isEmpty = false;
-					if (hasSearch(assets_info)) {
-						renderArray.push({
-							container,
-							durationState: assets_info.meta.duration,
-							assets_info,
-							topicTitle,
-							meta: assets_info.meta,
-							layout: element.layout
-						});
-						foundInSearch++;
-					} else {
-						foundInSearch--;
-					}
+			};
+
+			if (topicConfig) {
+				if (cardsNumber === config.cardsLimit) {
 					return;
 				}
-			});
+				isEmpty = false;
+				cardsNumber += 1;
+				if (hasSearch(assets_info)) {
+					renderArray.push({
+						container,
+						durationState: assets_info.meta.duration,
+						assets_info,
+						topicTitle,
+						meta: assets_info.meta,
+						layout: element.layout
+					});
+					foundInSearch++;
+				} else {
+					foundInSearch--;
+				}
+				return;
+			}
 		});
 		if (sectionsContainer) {
 			if (isEmpty || foundInSearch < 0) {
@@ -173,6 +174,9 @@ const templates = () => {
 						"4:3"
 					)}')`;
 					title[0].innerText = assetsInfo[lastIndex].meta.title;
+					title[0].addEventListener("click", ()=>{
+						console.log(assetsInfo[lastIndex].meta.title);
+					})
 					if (durationState) {
 						duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 								<span class="schedule-text">
@@ -192,7 +196,7 @@ const templates = () => {
 		const container = document.getElementById(containerId);
 		container.innerHTML = "";
 		const trendingTemplate = document.getElementById("trendingTemplate");
-
+		console.log(' config.isTrending -->', config.isTrending);
 		config.isTrending.forEach((trendingTopic) => {
 			const nodesClone = trendingTemplate.content.cloneNode(true);
 			let title = nodesClone.getElementById("trending-span");
