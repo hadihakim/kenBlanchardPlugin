@@ -5,10 +5,10 @@ let mySearchingPeriod;
 function filterDrawer() {
 	buildfire.components.drawer.open(
 		{
-			content: "Topics",
+			content: Strings.FILTER_TITLE,
 			multiSelection: true,
 			allowSelectAll: true,
-			multiSelectionActionButton: { text: "Apply" },
+			multiSelectionActionButton: { text: Strings.APPLY_FILTER },
 			enableFilter: true,
 			isHTML: true,
 			triggerCallbackOnUIDismiss: false,
@@ -19,30 +19,28 @@ function filterDrawer() {
 		},
 		(err, result) => {
 			if (err) return console.error(err);
-			config.filterArr = [];
-			result.forEach((topic) => {
-				config.filterArr.push(topic.text);
-			});
-
-			fakeData.data.sections.forEach((element) => {
-				filterAndPrintData(fakeData, element, 'main');
-			})
-
-			fakeData.data.sections.forEach((element) => {
-				filterAndPrintData(fakeData, element, 'explore');
-			})
-
-			config.renderedCard = 0;
-			if(!seeAllContainer.classList.contains("hidden")){
-				seeAllCardsRender(
-					fakeData,
-					document.getElementById("seeAllContainer"),
-					true,
-					() => { }
-				);
+			if(result){
+				config.filterArr = [];
+				result.forEach((topic) => {
+					config.filterArr.push(topic.text);
+				});
+				fakeData.data.sections.forEach((element) => {
+					filterAndPrintData(fakeData, element, 'main');
+				})
+				fakeData.data.sections.forEach((element) => {
+					filterAndPrintData(fakeData, element, 'explore');
+				})
+				config.renderedCard = 0;
+				if(!seeAllContainer.classList.contains("hidden")){
+					seeAllCardsRender(
+						fakeData,
+						document.getElementById("seeAllContainer"),
+						true,
+						() => { }
+					);
+				}
+				trendingRender(fakeData, "trendingContainer");
 			}
-
-			trendingRender(fakeData, "trendingContainer");
 		}
 	);
 }
@@ -50,11 +48,11 @@ function filterDrawer() {
 function sortDrawer() {
 	buildfire.components.drawer.open(
 		{
-			content: "Sorting",
+			content: Strings.SORT_TITLE,
 			multiSelection: false,
 			allowSelectAll: false,
 			enableFilter: true,
-			multiSelectionActionButton: { text: "Apply" },
+			multiSelectionActionButton: { text: Strings.APPLY_SORT },
 			isHTML: true,
 			triggerCallbackOnUIDismiss: true,
 			autoUseImageCdn: true,
@@ -66,26 +64,28 @@ function sortDrawer() {
 		},
 		(err, result) => {
 			if (err) return console.error(err);
-			buildfire.components.drawer.closeDrawer();
-			config.sortType = result.text;
+			if(result){
+				buildfire.components.drawer.closeDrawer();
+				config.sortType = result.text;
 
 
-			fakeData.data.sections.forEach((element) => {
-				filterAndPrintData(fakeData, element, 'main');
-			})
+				fakeData.data.sections.forEach((element) => {
+					filterAndPrintData(fakeData, element, 'main');
+				})
 
-			fakeData.data.sections.forEach((element) => {
-				filterAndPrintData(fakeData, element, 'explore');
-			})
+				fakeData.data.sections.forEach((element) => {
+					filterAndPrintData(fakeData, element, 'explore');
+				})
 
-			config.renderedCard = 0;
-			if(!seeAllContainer.classList.contains("hidden")){
-				seeAllCardsRender(
-					fakeData,
-					document.getElementById("seeAllContainer"),
-					true,
-					() => { }
-				);
+				config.renderedCard = 0;
+				if(!seeAllContainer.classList.contains("hidden")){
+					seeAllCardsRender(
+						fakeData,
+						document.getElementById("seeAllContainer"),
+						true,
+						() => { }
+					);
+				}
 			}
 		}
 	);

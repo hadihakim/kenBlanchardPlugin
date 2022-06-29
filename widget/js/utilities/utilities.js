@@ -16,75 +16,74 @@ const utilities = () => {
 		return rHours + "h " + rMinutes + "min";
 	};
 
-  const getAppTheme = () => {
-    buildfire.appearance.getAppTheme((err, appTheme) => {
-      if (err) return console.error(err);
-      console.log(appTheme);
-      config.appTheme = appTheme;
-    });
-  };
+	const getAppTheme = () => {
+		buildfire.appearance.getAppTheme((err, appTheme) => {
+			if (err) return console.error(err);
+			config.appTheme = appTheme;
+		});
+	};
 
-  const setThemeHandler = (arr, type, color) => {
-    for (let i = 0; i < arr.length; i++) {
-      switch (type) {
-        case "color":
-          arr[i].style.color = color;
-          break;
-        case "back":
-          arr[i].style.backgroundColor = color;
-          break;
-        case "borderColor":
-          arr[i].style.borderColor = color;
-          break;
-        default:
-          break;
-      }
-    }
-  };
+	const setThemeHandler = (arr, type, color) => {
+		for (let i = 0; i < arr.length; i++) {
+			switch (type) {
+				case "color":
+					arr[i].style.color = color;
+					break;
+				case "back":
+					arr[i].style.backgroundColor = color;
+					break;
+				case "borderColor":
+					arr[i].style.borderColor = color;
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
-  const setAppTheme = () => {
-    let colorCollections = [
-      {
-        elements: document.getElementsByClassName("icon"),
-        colorType: "color",
-        colorDegree: config.appTheme.colors.icons,
-      },
-      {
-        elements: document.getElementsByClassName("headerText-AppTheme"),
-        colorType: "color",
-        colorDegree: config.appTheme.colors.headerText,
-      },
-      {
-        elements: document.getElementsByClassName("barText-AppTheme"),
-        colorType: "color",
-        colorDegree: config.appTheme.colors.titleBarTextAndIcons,
-      },
-      {
-        elements: document.getElementsByClassName("bodyText-AppTheme"),
-        colorType: "color",
-        colorDegree: config.appTheme.colors.bodyText,
-      },
-      {
-        elements: document.getElementsByClassName("userContainer"),
-        colorType: "back",
-        colorDegree: config.appTheme.colors.primaryTheme,
-      },
-      {
-        elements: document.getElementsByClassName("user-image-border"),
-        colorType: "borderColor",
-        colorDegree: config.appTheme.colors.infoTheme,
-      },
-      {
-        elements: document.getElementsByClassName("info-btn-AppTheme"),
-        colorType: "back",
-        colorDegree: config.appTheme.colors.infoTheme,
-      },
-      {
-        elements: document.getElementsByClassName("info-link-AppTheme"),
-        colorType: "color",
-        colorDegree: config.appTheme.colors.infoTheme,
-      },
-    ];
+	const setAppTheme = () => {
+		let colorCollections = [
+			{
+				elements: document.getElementsByClassName("icon"),
+				colorType: "color",
+				colorDegree: config.appTheme.colors.icons,
+			},
+			{
+				elements: document.getElementsByClassName("headerText-AppTheme"),
+				colorType: "color",
+				colorDegree: config.appTheme.colors.headerText,
+			},
+			{
+				elements: document.getElementsByClassName("barText-AppTheme"),
+				colorType: "color",
+				colorDegree: config.appTheme.colors.titleBarTextAndIcons,
+			},
+			{
+				elements: document.getElementsByClassName("bodyText-AppTheme"),
+				colorType: "color",
+				colorDegree: config.appTheme.colors.bodyText,
+			},
+			{
+				elements: document.getElementsByClassName("userContainer"),
+				colorType: "back",
+				colorDegree: config.appTheme.colors.primaryTheme,
+			},
+			{
+				elements: document.getElementsByClassName("user-image-border"),
+				colorType: "borderColor",
+				colorDegree: config.appTheme.colors.infoTheme,
+			},
+			{
+				elements: document.getElementsByClassName("info-btn-AppTheme"),
+				colorType: "back",
+				colorDegree: config.appTheme.colors.infoTheme,
+			},
+			{
+				elements: document.getElementsByClassName("info-link-AppTheme"),
+				colorType: "color",
+				colorDegree: config.appTheme.colors.infoTheme,
+			},
+		];
 
 		colorCollections.forEach((element) => {
 			setThemeHandler(element.elements, element.colorType, element.colorDegree);
@@ -109,21 +108,25 @@ const utilities = () => {
 	}
 
 	const initBack = () => {
+		let timer;
 		buildfire.navigation.onBackButtonClick = () => {
 			buildfire.history.get(
 				{
 					pluginBreadcrumbsOnly: true,
 				},
 				(err, result) => {
+					console.log(result, "result: ");
 					switch (result[result.length - 1].label) {
-						case "Personal Home Page":
+						case "Home from Explore":
 							mainPage.classList.remove("hidden");
 							subPage.classList.add("hidden");
 							userContainer.classList.remove("hidden");
 							sortIcon.classList.add("hidden");
+							pageDetails.classList.add("hidden");
 							break;
-						case "Personal Home Page from See All":
+						case "Home from See All":
 							mainPage.classList.remove("hidden");
+							searchBar.classList.remove("hidden");
 							seeAllContainer.classList.add("hidden");
 							config.renderedCard = 0;
 							config.page = 1;
@@ -132,8 +135,9 @@ const utilities = () => {
 							userContainer.classList.remove("hidden");
 							sortIcon.classList.add("hidden");
 							mainContainer.removeEventListener('scroll', scrollNextPage);
+							pageDetails.classList.add("hidden");
 							break;
-						case "Explore page":
+						case "Explore from See All":
 							subPage.classList.remove("hidden");
 							seeAllContainer.classList.add("hidden");
 							config.renderedCard = 0;
@@ -141,24 +145,38 @@ const utilities = () => {
 							config.lastIndex = 0;
 							config.isSeeAllScreen = false;
 							mainContainer.removeEventListener('scroll', scrollNextPage);
+							pageDetails.classList.add("hidden");
 							break;
-							case "Details Page":
-								mainPage.classList.add("hidden");
-								userContainer.classList.add("hidden");
-								sortIcon.classList.remove("hidden");
-								subPage.classList.add("hidden");
-								seeAllContainer.classList.remove("hidden");
-								pageDetails.classList.add("hidden");
-
-								break;
-
+						case "See All from Details":
+							searchBar.classList.remove("hidden");
+							mainPage.classList.add("hidden");
+							userContainer.classList.add("hidden");
+							subPage.classList.add("hidden");
+							seeAllContainer.classList.remove("hidden");
+							pageDetails.classList.add("hidden");
+							break;
+						case "Explore from Details":
+							subPage.classList.remove("hidden");
+							seeAllContainer.classList.add("hidden");
+							config.renderedCard = 0;
+							config.page = 1;
+							config.lastIndex = 0;
+							config.isSeeAllScreen = false;
+							mainContainer.removeEventListener('scroll', scrollNextPage);
+							pageDetails.classList.add("hidden");
+							searchBar.classList.remove("hidden");
+							break;
 						default:
 							break;
 					}
 				}
 			);
 			scrollTop();
-			buildfire.history.pop();
+			clearTimeout(timer);
+			// to ask charabel -->
+			timer= setTimeout(()=>{
+				buildfire.history.pop();
+			},50)
 		};
 	};
 
