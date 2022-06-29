@@ -1,0 +1,18 @@
+#chapterPages-container .secondPage {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.secondPage > img {
+    margin: 2.75rem 0;
+    width: 95%;
+    height: 40%;
+}
+
+.secondPage > .startChapter-btn-container {
+    position: absolute;
+    bottom: 4rem;
+}
