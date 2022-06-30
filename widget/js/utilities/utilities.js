@@ -27,6 +27,7 @@ const utilities = () => {
 		for (let i = 0; i < arr.length; i++) {
 			switch (type) {
 				case "color":
+					arr[i].setAttribute( 'style', `fill: ${color} !important` );
 					arr[i].style.color = color;
 					break;
 				case "back":
@@ -44,7 +45,7 @@ const utilities = () => {
 	const setAppTheme = () => {
 		let colorCollections = [
 			{
-				elements: document.getElementsByClassName("icon"),
+				elements: [...document.getElementsByClassName("icon"),...document.getElementsByClassName("arrow-color")],
 				colorType: "color",
 				colorDegree: config.appTheme.colors.icons,
 			},
@@ -115,72 +116,40 @@ const utilities = () => {
 					pluginBreadcrumbsOnly: true,
 				},
 				(err, result) => {
-					switch (result[result.length - 1].label) {
-						case "Home from Explore":
-							mainPage.classList.remove("hidden");
-							subPage.classList.add("hidden");
-							userContainer.classList.remove("hidden");
-							sortIcon.classList.add("hidden");
-							pageDetails.classList.add("hidden");
-							break;
-						case "Home from See All":
-							mainPage.classList.remove("hidden");
-							searchBar.classList.remove("hidden");
-							seeAllContainer.classList.add("hidden");
-							config.renderedCard = 0;
-							config.page = 1;
-							config.lastIndex = 0;
-							config.isSeeAllScreen = false;
-							userContainer.classList.remove("hidden");
-							sortIcon.classList.add("hidden");
-							mainContainer.removeEventListener('scroll', scrollNextPage);
-							pageDetails.classList.add("hidden");
-							break;
-						case "Explore from See All":
-							subPage.classList.remove("hidden");
-							seeAllContainer.classList.add("hidden");
-							config.renderedCard = 0;
-							config.page = 1;
-							config.lastIndex = 0;
-							config.isSeeAllScreen = false;
-							mainContainer.removeEventListener('scroll', scrollNextPage);
-							pageDetails.classList.add("hidden");
-							break;
-						case "See All from Details":
-							searchBar.classList.remove("hidden");
-							mainPage.classList.add("hidden");
-							userContainer.classList.add("hidden");
-							subPage.classList.add("hidden");
-							seeAllContainer.classList.remove("hidden");
-							pageDetails.classList.add("hidden");
-							break;
-						case "Explore from Details":
-							subPage.classList.remove("hidden");
-							seeAllContainer.classList.add("hidden");
-							config.renderedCard = 0;
-							config.page = 1;
-							config.lastIndex = 0;
-							config.isSeeAllScreen = false;
-							mainContainer.removeEventListener('scroll', scrollNextPage);
-							pageDetails.classList.add("hidden");
-							searchBar.classList.remove("hidden");
-							break;
-						case "page detail from chapter":
-							let id=result[result.length-1].options.id;
-							let container=document.getElementById("pageDetails");
-							detailsRender(container,id);
-							break;
-						default:
-							break;
+					if(err) return console.log(err);
+					if (result.length) {
+						switch (result[result.length - 1].label) {
+							case "Home from Explore":
+								openMain();
+								break;
+							case "Home from See All":
+								openMain();
+								break;
+							case "Explore from See All":
+								openExplore();
+								break;
+							case "Explore from Details":
+								openExplore();
+								break;
+							case "See All from Details":
+								openSeeAll();
+								break;
+							case "page detail from chapter":
+								let id = result[result.length - 1].options.id;
+								openPageDetails(id);
+								break;
+							default:
+								break;
+						}
 					}
 				}
 			);
 			scrollTop();
 			clearTimeout(timer);
 			// to ask charabel -->
-			timer= setTimeout(()=>{
+			timer = setTimeout(() => {
 				buildfire.history.pop();
-			},50)
+			}, 50)
 		};
 	};
 
@@ -197,7 +166,6 @@ const utilities = () => {
 		}
 		return data;
 	};
-
 
 	const hasSearch = (data) => {
 		return config.search == "" ||
@@ -221,7 +189,7 @@ const utilities = () => {
 	}
 
 	const scrollTop = () => {
-		mainContainer.scrollTo({ top: 0, behavior: "smooth" });
+		mainContainer.scrollTo({ top: 0});
 	};
 
 	const splideInit = () => {
@@ -231,10 +199,11 @@ const utilities = () => {
 		splide.on("mounted move", function () {
 			var end = splide.Components.Controller.getEnd() + 1;
 			bar.style.width = String((100 * (splide.index + 1)) / end) + "%";
-			document.getElementById("slideNum").innerText=splide.index + 1+"/"+end
+			document.getElementById("slideNum").innerText = splide.index + 1 + "/" + end
 		});
 		splide.mount();
 	}
+
 	return {
 		cropImage,
 		timeConvert,
