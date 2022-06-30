@@ -1,220 +1,186 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="buildfire" content="enableMDTheme" />
-    <meta name="buildfire" content="disableBootstrap" />
 
-    <link rel="stylesheet" href="./style/style.css" />
-    <link rel="stylesheet" href="./style/forYouTemplate.css" />
-    <link rel="stylesheet" href="./style/recommendedTemplate.css" />
-    <link rel="stylesheet" href="./style/trendingTemplate.css" />
-    <link rel="stylesheet" href="./style/seeAll.css" />
-    <link rel="stylesheet" href="./style/detailsPage.css" />
-    <link rel="stylesheet" href="./style/userSection.css" />
-    <link rel="stylesheet" href="./style/summaryTemplate.css" />
-    <link rel="stylesheet" href="./style/splide-default.min.css" />
-    <link rel="stylesheet" href="../../../styles/material-icons.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <!-- Include material design css and js -->
-    <link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
-    <link rel="stylesheet" href="../../../../styles/helper.css" />
-    <!-- Include material design css and js -->
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="buildfire" content="enableMDTheme" />
+  <meta name="buildfire" content="disableBootstrap" />
 
-    <link
-      href="../../../styles/materialDesign/material-components-web@4.0.0.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style/searchBar.css" />
+  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="stylesheet" href="./style/forYouTemplate.css" />
+  <link rel="stylesheet" href="./style/recommendedTemplate.css" />
+  <link rel="stylesheet" href="./style/trendingTemplate.css" />
+  <link rel="stylesheet" href="./style/seeAll.css" />
+  <link rel="stylesheet" href="./style/detailsPage.css" />
+  <link rel="stylesheet" href="./style/userSection.css" />
+  <link rel="stylesheet" href="./style/summaryTemplate.css" />
+  <link rel="stylesheet" href="./style/splide-default.min.css" />
+  <link rel="stylesheet" href="../../../styles/material-icons.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- Include material design css and js -->
+  <link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
+  <link rel="stylesheet" href="../../../../styles/helper.css" />
+  <!-- Include material design css and js -->
 
-    <!-- js -->
-    <script src="../../../scripts/buildfire.js"></script>
-    <script
-      src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js"
-      type="text/javascript"
-    ></script>
-    <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
+  <link href="../../../styles/materialDesign/material-components-web@4.0.0.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./style/searchBar.css" />
 
-	<!-- js -->
-	<script src="../../../scripts/buildfire.js"></script>
-	<script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
-	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
+  <!-- js -->
+  <script src="../../../scripts/buildfire.js"></script>
+  <script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
+  <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
 
-	<!-- Bundle:scripts -->
-	<script src="./js/utilities/splide.min.js"></script>
-	<script src="./js/utilities/strings.js"></script>
+  <!-- js -->
+  <script src="../../../scripts/buildfire.js"></script>
+  <script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
+  <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
+
+  <!-- Bundle:scripts -->
+  <script src="./js/utilities/splide.min.js"></script>
+  <script src="./js/utilities/strings.js"></script>
   <script src="./js/helper/pageHandler.js"></script>
-	<script src="./js/helper/ui.js"></script>
-	<script src="./js/helper/searchBar.js" defer></script>
-	<script src="./js/helper/uiConfig.js"></script>
-	<script src="./js/utilities/fakeData.js"></script>
-	<script src="./js/utilities/summaryData.js"></script>
-	<script src="./js/utilities/utilities.js"></script>
-	<script src="./js/templates/template.js"></script>
-	<script src="./js/app.js" defer></script>
-	<!-- endbundle:scripts -->
-	<!--
+  <script src="./js/helper/ui.js"></script>
+  <script src="./js/helper/searchBar.js" defer></script>
+  <script src="./js/helper/uiConfig.js"></script>
+  <script src="./js/utilities/fakeData.js"></script>
+  <script src="./js/utilities/summaryData.js"></script>
+  <script src="./js/utilities/utilities.js"></script>
+  <script src="./js/templates/template.js"></script>
+  <script src="./js/app.js" defer></script>
+  <!-- endbundle:scripts -->
+  <!--
 
    <script src="../../../../scripts/angular/angular.min.js"></script>
    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
    -->
-  </head>
+</head>
 
-  <body id="mainBody">
-    <!-- user section -->
-    <div class="slide-in " id="mainContainer">
-      <div class="user-container userContainer" id="userContainer">
-        <div class="user-image-container">
-          <img class="main-image user-image-border" id="userProfilePicture" />
-          <img class="achievement-image" id="userAchievementIcon" />
-        </div>
-        <div class="text-container">
-          <h2 class="user-name barText-AppTheme" id="userName"></h2>
-          <span
-            class="growth-user-profile barText-AppTheme"
-            id="growthProfile"
-          ></span>
-        </div>
+<body id="mainBody">
+  <!-- user section -->
+  <div class="slide-in " id="mainContainer">
+    <div class="user-container userContainer" id="userContainer">
+      <div class="user-image-container">
+        <img class="main-image user-image-border" id="userProfilePicture" />
+        <img class="achievement-image" id="userAchievementIcon" />
       </div>
-      <!-- end user section -->
-
-      <!-- search bar -->
-      <div class="mdc-layout-grid__cell--span-12" id="searchBar">
-        <div class="searchItem mdc-card">
-          <div class="search-container">
-            <label for="searchInput" class="material-icons icon" id="searchIcon"
-              >search</label
-            >
-            <input
-              class="bodyTextTheme"
-              id="search-input"
-              type="text"
-              name="search"
-              id="searchInput"
-              placeholder="Search"
-              autocomplete="off"
-            />
-            <label class="material-icons icon hidden" id="sortIcon">sort</label>
-            <label id="filterIcon" class="material-icons icon" id="filterIcon"
-              >filter_alt</label
-            >
-          </div>
-        </div>
+      <div class="text-container">
+        <h2 class="user-name barText-AppTheme" id="userName"></h2>
+        <span class="growth-user-profile barText-AppTheme" id="growthProfile"></span>
       </div>
-      <!-- end search bar -->
-
-      <!-- user list of cards -->
-      <div class="mainPage slide-in" id="mainPage">
-        <!-- section -->
-        <section id="sectionsContainer"></section>
-        <div class="exploreAll-btn-container">
-          <a
-            class="mdc-button mdc-button--raised info-btn-AppTheme"
-            id="exploreButton"
-          >
-            <span class="mdc-button__label barText-AppTheme">Explore All</span>
-          </a>
-        </div>
-      </div>
-      <div class="subPage hidden slide-in" id="subPage">
-        <section class="trendingSection" id="trendingSection">
-          <h3 class="trending-title headerText-AppTheme">Trending</h3>
-          <div class="trendingContainer" id="trendingContainer"></div>
-        </section>
-        <section id="exploreContainer"></section>
-      </div>
-      <div id="seeAllContainer" class="hidden slide-in"></div>
-      <div id="pageDetails" class="hidden pageDetails slide-in"></div>
-      <!-- end section -->
     </div>
+    <!-- end user section -->
+
+    <!-- search bar -->
+    <div class="mdc-layout-grid__cell--span-12" id="searchBar">
+      <div class="searchItem mdc-card">
+        <div class="search-container">
+          <label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
+          <input class="bodyTextTheme" id="search-input" type="text" name="search" id="searchInput" placeholder="Search"
+            autocomplete="off" />
+          <label class="material-icons icon hidden" id="sortIcon">sort</label>
+          <label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
+        </div>
+      </div>
+    </div>
+    <!-- end search bar -->
+
     <!-- user list of cards -->
+    <div class="mainPage slide-in" id="mainPage">
+      <!-- section -->
+      <section id="sectionsContainer"></section>
+      <div class="exploreAll-btn-container">
+        <a class="mdc-button mdc-button--raised info-btn-AppTheme" id="exploreButton">
+          <span class="mdc-button__label barText-AppTheme">Explore All</span>
+        </a>
+      </div>
+    </div>
+    <div class="subPage hidden slide-in" id="subPage">
+      <section class="trendingSection" id="trendingSection">
+        <h3 class="trending-title headerText-AppTheme">Trending</h3>
+        <div class="trendingContainer" id="trendingContainer"></div>
+      </section>
+      <section id="exploreContainer"></section>
+    </div>
+    <div id="seeAllContainer" class="hidden slide-in"></div>
+    <div id="pageDetails" class="hidden pageDetails slide-in"></div>
+    <!-- end section -->
+  </div>
+  <!-- user list of cards -->
 
-	<!-- template -->
-	<template id="forYouTemplate" class="forYouTemplate">
-		<div class="border-radius-four mdc-card" id="card_body">
-			<div class="card-Text" id="card-Text">
-				<p id="card-Text-Header" class="card-Text-Header barText-AppTheme"></p>
-				<p id="card-Text-Note " class="card-Text-Note barText-AppTheme"></p>
-			</div>
-		</div>
-	</template>
-	<template id="recommendedTemplate">
-		<div class="mdc-card cards-container">
-			<div class="image"></div>
-			<div class="mdc-card-body">
-				<div class="category bodyText-AppTheme"></div>
-				<div class="title headerText-AppTheme"></div>
-			</div>
-			<div class="mdc-card-footer">
-				<div class="duration"></div>
-			</div>
-		</div>
-	</template>
-	<template id="seeAllTemplate">
-		<div class="mdc-card" >
-			<div class="column">
-				<div class="image"></div>
-			</div>
-			<div class="column">
-				<div class="mdc-card-body">
-					<div class="title headerText-AppTheme"></div>
-					<div class="description"></div>
-				</div>
-				<div class="mdc-card-footer">
-					<div class="duration "></div>
-				</div>
-			</div>
-		</div>
-	</template>
-	<template id="trendingTemplate" class="trendingTemplate">
-		<div class="trending-card" id="trending-card">
-			<span class="trending-span" id="trending-span"></span>
-		</div>
-	</template>
+  <!-- template -->
+  <template id="forYouTemplate" class="forYouTemplate">
+    <div class="border-radius-four mdc-card" id="card_body">
+      <div class="card-Text" id="card-Text">
+        <p id="card-Text-Header" class="card-Text-Header barText-AppTheme"></p>
+        <p id="card-Text-Note " class="card-Text-Note barText-AppTheme"></p>
+      </div>
+    </div>
+  </template>
+  <template id="recommendedTemplate">
+    <div class="mdc-card cards-container">
+      <div class="image"></div>
+      <div class="mdc-card-body">
+        <div class="category bodyText-AppTheme"></div>
+        <div class="title headerText-AppTheme"></div>
+      </div>
+      <div class="mdc-card-footer">
+        <div class="duration"></div>
+      </div>
+    </div>
+  </template>
+  <template id="seeAllTemplate">
+    <div class="mdc-card">
+      <div class="column">
+        <div class="image"></div>
+      </div>
+      <div class="column">
+        <div class="mdc-card-body">
+          <div class="title headerText-AppTheme"></div>
+          <div class="description"></div>
+        </div>
+        <div class="mdc-card-footer">
+          <div class="duration "></div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <template id="trendingTemplate" class="trendingTemplate">
+    <div class="trending-card" id="trending-card">
+      <span class="trending-span" id="trending-span"></span>
+    </div>
+  </template>
+  <template id="detailsPageTemplate" class="detailsPageTemplate ">
+    <div class="details-card" id="detailes-card">
+      <div id="details-img" class="details-img"></div>
+      <p id="details-title" class="details-title headerText-AppTheme"></p>
 
-	<template id="detailsPageTemplate" class="detailsPageTemplate ">
-		<div class="details-card" id="detailes-card">
-			<div id="details-img" class="details-img"></div>
-			<p id="details-title" class="details-title headerText-AppTheme"></p>
+      <div class="mdc-card-footer ">
+        <div class="duration duration-details"></div>
+      </div>
+      <div id="description-container" class="description-container">
+        <p id="description-title" class="description-title headerText-AppTheme"></p>
+        <p id="description-text" class="description-text bodyText-AppTheme"></p>
+      </div>
+      <div id="learn-container" class="learn-container">
+        <p id="learn-title" class="learn-title headerText-AppTheme"></p>
+        <ol id="learn-list" class="learn-list bodyText-AppTheme"></ol>
+      </div>
+      <div id="lesson-container" class="lesson-container">
+        <p id="lesson-title" class="lesson-title headerText-AppTheme"></p>
+        <ol id="lesson-list" class="lesson-list bodyText-AppTheme">
+        </ol>
+      </div>
+      <div class="details-btn-container">
+        <a class="mdc-button mdc-button--raised details-btn info-btn-AppTheme" id="exploreButton">
+          <span class="mdc-button__label barText-AppTheme startCourse"></span>
+        </a>
+      </div>
 
-				<div class="mdc-card-footer ">
-					<div class="duration duration-details"></div>
-				</div>
-			<div id="description-container" class="description-container">
-				<p id="description-title" class="description-title headerText-AppTheme"> Description</p>
-				<p id="description-text" class="description-text bodyText-AppTheme">When one of your team members is at the Disillusioned
-					learner stage on a goal, they have some knowledge and skills but are not yet competent. They can
-					easily get stuck, become discouraged, and even feel ready to quit. Their commitment is low.</p>
-			</div>
-			<div id="learn-container" class="learn-container">
-				<p id="learn-title" class="learn-title headerText-AppTheme">what you'll learn</p>
-				<ol id="learn-list" class="learn-list bodyText-AppTheme">
-					<li id="learn-list-item" class="learn-list-item">Someone to listen to their concerns</li>
-					<li id="learn-list-item2" class="learn-list-item">Someone to listen to their concerns</li>
-					<li id="learn-list-item3" class="learn-list-item">Someone to listen to their concerns</li>
-					<li id="learn-list-item4" class="learn-list-item">Someone to listen to their concerns</li>
-				</ol>
-			</div>
-			<div id="leson-container" class="leson-container">
-				<p id="leson-title" class="leson-title headerText-AppTheme">Lessons</p>
-				<ol id="leson-list" class="leson-list bodyText-AppTheme">
-					<li id="leson-list-item" class="leson-list-item">Introduction to the Course Focus </li>
-					<li id="leson-list-item2" class="leson-list-item">Introduction to the Course Focus </li>
-					<li id="leson-list-item3" class="leson-list-item">Introduction to the Course Focus </li>
-					<li id="leson-list-item4" class="leson-list-item">Introduction to the Course Focus </li>
-				</ol>
-			</div>
-			<div class="details-btn-container">
-				<a class="mdc-button mdc-button--raised details-btn info-btn-AppTheme" id="exploreButton">
-					<span class="mdc-button__label barText-AppTheme startCourse">Start Course</span>
-				</a>
-			</div>
+    </div>
+  </template>
 
-		</div>
-	</template>
-
-    <!--graphical Summaries  -->
+  <!--graphical Summaries  -->
   <template id="graphicalSummariesFirstPage">
     <div class="first-page slide-in">
       <div class="top-image"></div>
@@ -226,14 +192,14 @@
       </div>
       <div class="chapters-container">
         <ul class="chapters-list">
-          
+
         </ul>
       </div>
     </div>
   </template>
 
   <template id="graphicalSummariesSecondPage">
-	  <div class="secondPage slide-in">
+    <div class="secondPage slide-in">
       <img class="top-image" alt="background">
       <h2 class="title"></h2>
       <p class="subtitle"></p>
@@ -242,7 +208,7 @@
           <span class="mdc-button__label barText-AppTheme">Start chapter</span>
         </a>
       </div>
-      </div>
+    </div>
   </template>
 
   <template id="graphicalSummariesThirdPage">
@@ -286,12 +252,13 @@
         </div>
         <div class="plan-card">
           <h2 class="title">$129/Year</h2>
-    <p class="discount">Save $25.98</p>
+          <p class="discount">Save $25.98</p>
           <p class="subtitle">Get greater access & unsubscribe at any time</p>
         </div>
       </div>
     </div>
   </template>
-	<!-- end template -->
-  </body>
+  <!-- end template -->
+</body>
+
 </html>
