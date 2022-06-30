@@ -43,10 +43,12 @@
 	<!-- Bundle:scripts -->
 	<script src="./js/utilities/splide.min.js"></script>
 	<script src="./js/utilities/strings.js"></script>
+  <script src="./js/helper/pageHandler.js"></script>
 	<script src="./js/helper/ui.js"></script>
 	<script src="./js/helper/searchBar.js" defer></script>
 	<script src="./js/helper/uiConfig.js"></script>
 	<script src="./js/utilities/fakeData.js"></script>
+	<script src="./js/utilities/summaryData.js"></script>
 	<script src="./js/utilities/utilities.js"></script>
 	<script src="./js/templates/template.js"></script>
 	<script src="./js/app.js" defer></script>
@@ -211,179 +213,85 @@
 
 		</div>
 	</template>
-	<!-- end template -->
 
-    <div class="graphicalSummaries-container hidden">
-      <div class="first-page hidden">
-        <div class="top-image"></div>
-        <div class="body-content">
-          <h3 class="title">Coaching Skills: The Missing Link for Leaders</h3>
-          <span class="subtitle">Description</span>
-          <p class="description">
-            For years, coaching has been regarded as a useful strategy for
-            individual and organizational development. In their 2006 research
-            paper, “Keen to Help? Managers’ Implicit Person Theories and Their
-            Subsequent Employee Coaching,” Heslin, Vandewalle, and Latham noted
-            that manager coaching can facilitate employee development and
-            performance.
-          </p>
-        </div>
-        <div class="chapters-container">
-          <ul class="chapters-list">
-            <li class="chapter-item">
-              <h6 class="chapter-title">Chapter 1</h6>
-              <div class="sub-chapter-item">
-                <span class="chapter-subtitle">Listen to Learn</span>
-                <label for="searchInput" class="material-icons icon"
-                  >lock</label
-                >
-              </div>
-              <div class="bar"></div>
-            </li>
-            <li class="chapter-item">
-              <h6 class="chapter-title">Chapter 1</h6>
-              <div class="sub-chapter-item">
-                <span class="chapter-subtitle">Listen to Learn</span>
-                <label for="searchInput" class="material-icons icon"
-                  >lock</label
-                >
-              </div>
-              <div class="bar"></div>
-            </li>
-          </ul>
-        </div>
+    <!--graphical Summaries  -->
+  <template id="graphicalSummariesFirstPage">
+    <div class="first-page slide-in">
+      <div class="top-image"></div>
+      <div class="body-content">
+        <h3 class="title"></h3>
+        <span class="subtitle">Description</span>
+        <p class="description">
+        </p>
       </div>
-
-      <div class="third-page hidden">
-        <section class="splide hidden" aria-label="...">
-          <div class="splide__track">
-            <ul class="splide__list">
-              <li class="splide__slide">
-                <div class="content-item">
-                  <img
-                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
-                    alt=""
-                    class="top-image"
-                  />
-                  <div class="text-content">
-                    <p>
-                      Listening is one of the most important skills for
-                      managers, regardless of tenure.
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="splide__slide">
-                <div class="content-item">
-                  <!-- <img
-                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
-                    alt=""
-                    class="top-image"
-                  /> -->
-                  <div class="text-content">
-                    <p>
-                      Listening is one of the most important skills for
-                      managers, regardless of tenure.
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="splide__slide">
-                <div class="content-item">
-                  <img
-                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
-                    alt=""
-                    class="top-image"
-                  />
-                  <div class="text-content">
-                    <p>
-                      Listening is one of the most important skills for
-                      managers, regardless of tenure.
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="splide__slide">
-                <div class="content-item">
-                  <img
-                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
-                    alt=""
-                    class="top-image"
-                  />
-                  <div class="text-content">
-                    <p>
-                      Listening is one of the most important skills for
-                      managers, regardless of tenure.
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="splide__slide">
-                <div class="content-item">
-                  <img
-                    src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
-                    alt=""
-                    class="top-image"
-                  />
-                  <div class="text-content" aria-label>
-                    <p>
-                      Listening is one of the most important skills for
-                      managers, regardless of tenure.
-                    </p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-            <div id="slideNum"></div>
-          </div>
-
-          <!-- Add the progress bar element -->
-          <div class="my-carousel-progress">
-            <div class="my-carousel-progress-bar"></div>
-          </div>
-        </section>
+      <div class="chapters-container">
+        <ul class="chapters-list">
+          
+        </ul>
       </div>
-
-      <div class="fourth-page hidden">
-        <div class="top-image"></div>
-        <div class="header-text">
-          <h3>UNLOCK PREMIUM CONTENT</h3>
-        </div>
-        <div class="body-content">
-          <p>
-            Unlock the full Ken Blanchar library <br />
-
-            Discover new titles <br />
-
-            Receive access to exclusive resources
-          </p>
-        </div>
-        <div class="plan-header">
-          <h3>START WITH 3-MONTH FREE TRIAL</h3>
-        </div>
-        <div class="plans-container">
-          <div class="plan-card">
-            <h2 class="title">$12.99/Month</h2>
-            <p class="subtitle">Get greater access & unsubscribe at any time</p>
-          </div>
-          <div class="plan-card">
-            <h2 class="title">$129/Year</h2>
-			<p class="discount">Save $25.98</p>
-            <p class="subtitle">Get greater access & unsubscribe at any time</p>
-          </div>
-        </div>
-      </div>
-
-	  <div class="secondPage">
-		<img src="../resources/whiteBackground.png" alt="background">
-		<h2>CHAPTER 1</h2>
-		<p>Listen to Learn</p>
-		<div class="startChapter-btn-container">
-			<a class="mdc-button mdc-button--raised info-btn-AppTheme" id="startChapter">
-				<span class="mdc-button__label barText-AppTheme">Start chapter</span>
-			</a>
-		</div>
-	  </div>
     </div>
+  </template>
+
+  <template id="graphicalSummariesSecondPage">
+	  <div class="secondPage slide-in">
+      <img class="top-image" alt="background">
+      <h2 class="title"></h2>
+      <p class="subtitle"></p>
+      <div class="startChapter-btn-container">
+        <a class="mdc-button mdc-button--raised info-btn-AppTheme" id="startChapter">
+          <span class="mdc-button__label barText-AppTheme">Start chapter</span>
+        </a>
+      </div>
+      </div>
+  </template>
+
+  <template id="graphicalSummariesThirdPage">
+    <div class="third-page slide-in">
+      <section class="splide" aria-label="...">
+        <div class="splide__track">
+          <ul class="splide__list">
+          </ul>
+          <div id="slideNum"></div>
+        </div>
+
+        <!-- Add the progress bar element -->
+        <div class="my-carousel-progress">
+          <div class="my-carousel-progress-bar"></div>
+        </div>
+      </section>
+    </div>
+  </template>
+  <template id="graphicalSummariesFourthPage">
+    <div class="fourth-page slide-in">
+      <div class="top-image"></div>
+      <div class="header-text">
+        <h3>UNLOCK PREMIUM CONTENT</h3>
+      </div>
+      <div class="body-content">
+        <p>
+          Unlock the full Ken Blanchar library <br />
+
+          Discover new titles <br />
+
+          Receive access to exclusive resources
+        </p>
+      </div>
+      <div class="plan-header">
+        <h3>START WITH 3-MONTH FREE TRIAL</h3>
+      </div>
+      <div class="plans-container">
+        <div class="plan-card">
+          <h2 class="title">$12.99/Month</h2>
+          <p class="subtitle">Get greater access & unsubscribe at any time</p>
+        </div>
+        <div class="plan-card">
+          <h2 class="title">$129/Year</h2>
+    <p class="discount">Save $25.98</p>
+          <p class="subtitle">Get greater access & unsubscribe at any time</p>
+        </div>
+      </div>
+    </div>
+  </template>
+	<!-- end template -->
   </body>
 </html>

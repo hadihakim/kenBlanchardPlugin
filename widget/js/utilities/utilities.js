@@ -115,7 +115,6 @@ const utilities = () => {
 					pluginBreadcrumbsOnly: true,
 				},
 				(err, result) => {
-					console.log(result, "result: ");
 					switch (result[result.length - 1].label) {
 						case "Home from Explore":
 							mainPage.classList.remove("hidden");
@@ -165,6 +164,11 @@ const utilities = () => {
 							mainContainer.removeEventListener('scroll', scrollNextPage);
 							pageDetails.classList.add("hidden");
 							searchBar.classList.remove("hidden");
+							break;
+						case "page detail from chapter":
+							let id=result[result.length-1].options.id;
+							let container=document.getElementById("pageDetails");
+							detailsRender(container,id);
 							break;
 						default:
 							break;

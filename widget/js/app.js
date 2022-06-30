@@ -154,7 +154,6 @@ const init = () => {
 	cardRender("exploreContainer", fakeData.data.sections, "explore");
 	trendingRender(fakeData, "trendingContainer");
 	initBack();
-	splideInit();
 	setAppTheme();
 };
 

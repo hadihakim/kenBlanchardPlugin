@@ -67,7 +67,7 @@ const fakeData={
         "id": "e5bf59f3-507a-4703-af2a-bc4ba56cc2",
         "title": "Graphical",
         "layout": "horizontal",
-        "assets": ["62b3439f864d49037aac9b26","62b3439f864d49037aac9b25"],
+        "assets": ["62b3439f864d49037aac9b90","62b3439f864d49037aac9b90"],
         "isExplore": true,
         "isActive": true,
         "createdOn": "2022-06-22T16:34:34.479Z",
@@ -120,7 +120,19 @@ const fakeData={
           "duration": 0,
           "createdOn": "2022-06-24T16:30:22.260Z"
         }
+      },
+      "62b3439f864d49037aac9b90":{
+        "type": "summary",
+        "meta": {
+          "title": "Rose",
+          "description": "short description for this asset bblasdsa dasd sad",
+          "image": "https://th.bing.com/th/id/R.6e02493f35178458c092d5546a72ca06?rik=rDt%2bq%2bNkpy4RkA&pid=ImgRaw&r=0",
+          "topics": ["c4aa1da7-8c81-487c-9632-3c7e4552272a", "1730aa73-e201-4c90-ac5f-4103603f4305"],
+          "duration": 0,
+          "createdOn": "2022-06-24T16:30:22.260Z"
+        }
       }
+      
     },
     "topics": [
       {
