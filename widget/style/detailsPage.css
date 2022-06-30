@@ -41,14 +41,14 @@
 
 .description-container,
 .learn-container,
-.leson-container {
+.lesson-container {
 	padding: 16px;
 	padding-top: 0;
 
 }
 
 .description-title,
-.leson-title,
+.lesson-title,
 .learn-title {
 	width: 343px;
 	height: 20px;
@@ -81,7 +81,7 @@
 }
 
 
-.leson-list {
+.lesson-list {
 	width: 343px;
 	height: 100px;
 	list-style-type: decimal;
@@ -89,7 +89,7 @@
 }
 
 .learn-list-item,
-.leson-list-item {
+.lesson-list-item {
 
 	font-family: 'Roboto';
 	font-style: normal;
