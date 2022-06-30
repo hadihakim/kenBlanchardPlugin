@@ -21,7 +21,7 @@ const pageHandler = () => {
                   ? '<label for="searchInput" class="material-icons icon">lock</label>'
                   : ""
               }
-             
+
             </div>
             <div class="bar"></div>
             `;
@@ -34,7 +34,8 @@ const pageHandler = () => {
     });
 
     container.appendChild(nodesClone);
-  };
+		setAppTheme();
+	};
 
   const graphicalSummariesSecondPage = (data, container) => {
     container.innerHTML = "";
@@ -51,6 +52,8 @@ const pageHandler = () => {
     title[0].innerText = data.title;
     subtitle[0].innerText = data.subTitle;
     container.appendChild(nodesClone);
+	setAppTheme();
+
   };
 
   const graphicalSummariesThirdPage = (data, container) => {
@@ -80,14 +83,16 @@ const pageHandler = () => {
     });
     container.appendChild(nodesClone);
     splideInit();
-  };
+		setAppTheme();
+	};
 
   const graphicalSummariesFourthPage = () => {
     container.innerHTML = "";
     const template = document.getElementById("graphicalSummariesFourthPage");
     const nodesClone = template.content.cloneNode(true);
     container.appendChild(nodesClone);
-  };
+		setAppTheme();
+	};
 
   return {
     graphicalSummariesFirstPage,
