@@ -1,4 +1,6 @@
 const { timeConvert, cropImage, sort } = utilities();
+// page handler
+const {graphicalSummariesFirstPage}=pageHandler();
 const templates = () => {
 	const printRecommended = (
 		container,
@@ -7,7 +9,6 @@ const templates = () => {
 		topicTitle,
 		id
 	) => {
-		console.log(assets_info, "recommendedTemplate");
 		const recommendedTemplate = document.getElementById("recommendedTemplate");
 		const nodesClone = recommendedTemplate.content.cloneNode(true);
 		let image = nodesClone.querySelectorAll(".image");
@@ -54,28 +55,36 @@ const templates = () => {
 
 	const detailsRender = (container, id) => {
 		let data = fakeData.data.assets_info[id];
-		const template = document.getElementById("detailsPageTemplate");
-		const firstClone = template.content.cloneNode(true);
-		let image = firstClone.querySelectorAll(".details-img");
-		let title = firstClone.querySelectorAll(".details-title");
-		let duration = firstClone.querySelectorAll(".duration-details");
-		let startCourse = firstClone.querySelectorAll(".startCourse");
-
-		// give the button inner text -->
-		startCourse[0].innerHTML = Strings.START_COURSE;
-
-		image[0].style.backgroundImage = `url('${cropImage(
-			data.meta.image,
-			"full_width",
-			"4:3"
-		)}')`;
-		title[0].innerHTML = data.meta.title;
-		if (data.meta.duration) {
-			duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" style="font-size: 16px !important;"> schedule </span>
-							<span class="schedule-text bodyText-AppTheme">
-						${timeConvert(data.meta.duration)}</span>`;
+		data.id=id;
+		if(data.type==="summary"){
+			data=summaryData;
+			data.id=id;
+			graphicalSummaries(data)
+		}else{
+			const template = document.getElementById("detailsPageTemplate");
+			const firstClone = template.content.cloneNode(true);
+			let image = firstClone.querySelectorAll(".details-img");
+			let title = firstClone.querySelectorAll(".details-title");
+			let duration = firstClone.querySelectorAll(".duration-details");
+			let startCourse = firstClone.querySelectorAll(".startCourse");
+	
+			// give the button inner text -->
+			startCourse[0].innerHTML = Strings.START_COURSE;
+	
+			image[0].style.backgroundImage = `url('${cropImage(
+				data.meta.image,
+				"full_width",
+				"4:3"
+			)}')`;
+			title[0].innerHTML = data.meta.title;
+			if (data.meta.duration) {
+				duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" style="font-size: 16px !important;"> schedule </span>
+								<span class="schedule-text bodyText-AppTheme">
+							${timeConvert(data.meta.duration)}</span>`;
+			}
+			container.appendChild(firstClone);
 		}
-		container.appendChild(firstClone);
+		
 		setAppTheme();
 	};
 
@@ -185,11 +194,9 @@ const templates = () => {
 		assets.forEach((assetId) => {
 			let assetData = apiData.data.assets_info[assetId];
 			assetData.id = assetId;
-			console.log(assetId, "id");
 			//   assetsInfo.push({data: apiData.data.assets_info[assetId] , id: assetId});
 			assetsInfo.push(assetData);
 
-			console.log(apiData.data.assets_info[assetId]);
 			ids.push(assetId);
 		});
 		// sort
@@ -290,6 +297,12 @@ const templates = () => {
 		});
 		setAppTheme();
 	};
+
+	const graphicalSummaries=(data)=>{
+		let pageDetails=document.getElementById("pageDetails");
+		pageDetails.innerHTML = "";
+		graphicalSummariesFirstPage(data,pageDetails)
+	}
 
 	return {
 		filterAndPrintData,
