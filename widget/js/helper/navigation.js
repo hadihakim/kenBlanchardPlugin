@@ -41,7 +41,7 @@ function navigation() {
 			seeAllContainer,
 			true,
 			() => { }
-		);}, 2000);
+		);}, 1000);
 		// seeAllCardsRender(
 		// 	fakeData,
 		// 	seeAllContainer,
@@ -74,7 +74,6 @@ function navigation() {
 					  `;
 					skeleton = "recommanded";
 				} else {
-					/*WORKING HERE */
 					sectionInnerHTML = `
 					<p class="sectionTitle headerText-AppTheme">${element.title}</p>
 						<div id="${`${element.id}-container-${type}`}" class="main"></div>
@@ -95,7 +94,7 @@ function navigation() {
 				else if (skeleton === "recommanded") {
 					horizontal_Skeleton(container);
 				}
-				const myTimeout = setTimeout(()=>{filterAndPrintData(fakeData, element, type)}, 2000);
+				const myTimeout = setTimeout(()=>{filterAndPrintData(fakeData, element, type)}, 1000);
 				//filterAndPrintData(fakeData, element, type);
 			}
 		});

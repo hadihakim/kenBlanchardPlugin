@@ -1,5 +1,7 @@
 const skeleton = () => {
     const horizontal1_Skeleton = (container) => {
+        scrollTop();
+        container.innerHTML = '';
         const nodesClone = horizontal1_SkeletonTemplate.content.cloneNode(true);
 					let card = nodesClone.querySelectorAll(".horizontal-1--skeleton");
 					for (let i = 0; i < 3; i++) {
@@ -13,6 +15,8 @@ const skeleton = () => {
     }
 
     const horizontal_Skeleton = (container) => {
+        scrollTop();
+        container.innerHTML = '';
         const nodesClone = horizontalSkeletonTemplate.content.cloneNode(true);
 					let card = nodesClone.querySelectorAll(".horizontal--skeleton");
 					for (let i = 0; i < 4; i++) {
@@ -29,6 +33,8 @@ const skeleton = () => {
     }
 
     const verticalSeeAll_Skeleton = (container) => {
+        scrollTop();
+        container.innerHTML = '';
         const nodesClone = verticalSeeAll_SkeletonTemplate.content.cloneNode(true);
 					let card = nodesClone.querySelectorAll(".verticalSeeAll--skeleton");
 					for (let i = 0; i < 6; i++) {
