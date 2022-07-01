@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin: 1rem 1rem 1.5rem 1rem;
+    margin: 1rem 1rem 0rem 1rem;
 }
 
 .horizontal-1--card {
@@ -48,7 +48,7 @@
 }
 
 .horizontal--skeleton {
-    margin: 1rem;
+    margin: 0 1rem;
 }
 
 .horizontal--skeleton .horizontal--card {

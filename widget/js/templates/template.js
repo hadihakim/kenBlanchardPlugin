@@ -34,6 +34,7 @@ const templates = () => {
 	};
 
 	const forYouRender = (container, assets_info, id) => {
+		/*WORKING HERE*/
 		const template = document.getElementById("forYouTemplate");
 
 		const firstClone = template.content.cloneNode(true);
@@ -186,6 +187,7 @@ const templates = () => {
 					sectionsContainer.classList.remove("hidden");
 					renderArray = sort(renderArray, config.sortType);
 					renderArray.forEach((element) => {
+						/*WORKING HERE */
 						if (element.layout !== "horizontal-1") {
 							printRecommended(
 								element.container,
@@ -286,9 +288,7 @@ const templates = () => {
 						openDetails(id);
 					});
 					container.appendChild(nodesClone);
-				} else {
-					console.log("----- +++");
-				}
+				} 
 			}
 		}
 		setAppTheme();
