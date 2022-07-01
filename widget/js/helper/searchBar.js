@@ -1,6 +1,7 @@
 "use strict";
 
 let mySearchingPeriod;
+const {horizontal1_Skeleton, horizontal_Skeleton, verticalSeeAll_Skeleton} = skeleton();
 
 function filterDrawer() {
 	buildfire.components.drawer.open(
@@ -32,12 +33,19 @@ function filterDrawer() {
 				})
 				config.renderedCard = 0;
 				if(!seeAllContainer.classList.contains("hidden")){
-					seeAllCardsRender(
+					verticalSeeAll_Skeleton(seeAllContainer);
+					const myTimeout = setTimeout(()=>{seeAllCardsRender(
 						fakeData,
-						document.getElementById("seeAllContainer"),
+						seeAllContainer,
 						true,
-						() => { }
-					);
+						() => {}
+					);}, 1000);
+					// seeAllCardsRender(
+					// 	fakeData,
+					// 	document.getElementById("seeAllContainer"),
+					// 	true,
+					// 	() => { }
+					// );
 				}
 				trendingRender(fakeData, "trendingContainer");
 			}
@@ -79,12 +87,19 @@ function sortDrawer() {
 
 				config.renderedCard = 0;
 				if(!seeAllContainer.classList.contains("hidden")){
-					seeAllCardsRender(
+					verticalSeeAll_Skeleton(seeAllContainer);
+					const myTimeout = setTimeout(()=>{seeAllCardsRender(
 						fakeData,
-						document.getElementById("seeAllContainer"),
+						seeAllContainer,
 						true,
-						() => { }
-					);
+						() => {}
+					);}, 1000);
+					// seeAllCardsRender(
+					// 	fakeData,
+					// 	document.getElementById("seeAllContainer"),
+					// 	true,
+					// 	() => { }
+					// );
 				}
 			}
 		}
@@ -96,7 +111,6 @@ function search() {
 	mySearchingPeriod = setTimeout(() => {
 		config.search = input.value;
 
-
 		fakeData.data.sections.forEach((element) => {
 			filterAndPrintData(fakeData, element, 'main');
 		})
@@ -107,12 +121,19 @@ function search() {
 
 		config.renderedCard = 0;
 		if(!seeAllContainer.classList.contains("hidden")){
-			seeAllCardsRender(
+			verticalSeeAll_Skeleton(seeAllContainer);
+			const myTimeout = setTimeout(()=>{seeAllCardsRender(
 				fakeData,
-				document.getElementById("seeAllContainer"),
+				seeAllContainer,
 				true,
-				() => { }
-			);
+				() => {}
+			);}, 1000);
+			// seeAllCardsRender(
+			// 	fakeData,
+			// 	seeAllContainer,
+			// 	true,
+			// 	() => { }
+			// );
 		}
 	}, 300);
 }
