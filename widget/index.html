@@ -39,6 +39,7 @@
 	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
 
 	<!-- Bundle:scripts -->
+	<script src="./js/helper/skeleton.js"></script>
 	<script src="./js/helper/navigation.js"></script>
 	<script src="./js/utilities/splide.min.js"></script>
 	<script src="./js/utilities/strings.js"></script>
@@ -61,103 +62,8 @@
 </head>
 
 <body id="mainBody">
-	<div class="skeleton-container">
-		<div class="horizontal-1--skeleton hidden">
-			<div class="horizontal-1--card">
-				<div class="firstCard skeleton"></div>
-			</div>
-			<div class="horizontal-1--card">
-				<div class="firstCard skeleton"></div>
-			</div>
-		</div>
-		<div class="horizontal--skeleton hidden">
-			<div class="horizontal--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondDiv skeleton"></div>
-				<div class="thirdDiv skeleton"></div>
-				<div class="fourthDiv skeleton"></div>
-			</div>
-			<div class="horizontal--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondDiv skeleton"></div>
-				<div class="thirdDiv skeleton"></div>
-				<div class="fourthDiv skeleton"></div>
-			</div>
-			<div class="horizontal--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondDiv skeleton"></div>
-				<div class="thirdDiv skeleton"></div>
-				<div class="fourthDiv skeleton"></div>
-			</div>
-		</div>
-		<div class="verticalSeeAll--skeleton">
-			<div class="verticalSeeAll--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondPart">
-					<div class="secondDiv skeleton"></div>
-					<div class="thirdDiv skeleton"></div>
-					<div class="fourthDiv skeleton"></div>
-					<div class="fifthDiv skeleton"></div>
-				</div>
-			</div>
-			<div class="verticalSeeAll--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondPart">
-					<div class="secondDiv skeleton"></div>
-					<div class="thirdDiv skeleton"></div>
-					<div class="fourthDiv skeleton"></div>
-					<div class="fifthDiv skeleton"></div>
-				</div>
-			</div>
-			<div class="verticalSeeAll--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondPart">
-					<div class="secondDiv skeleton"></div>
-					<div class="thirdDiv skeleton"></div>
-					<div class="fourthDiv skeleton"></div>
-					<div class="fifthDiv skeleton"></div>
-				</div>
-			</div>
-			<div class="verticalSeeAll--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondPart">
-					<div class="secondDiv skeleton"></div>
-					<div class="thirdDiv skeleton"></div>
-					<div class="fourthDiv skeleton"></div>
-					<div class="fifthDiv skeleton"></div>
-				</div>
-			</div>
-			<div class="verticalSeeAll--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondPart">
-					<div class="secondDiv skeleton"></div>
-					<div class="thirdDiv skeleton"></div>
-					<div class="fourthDiv skeleton"></div>
-					<div class="fifthDiv skeleton"></div>
-				</div>
-			</div>
-			<div class="verticalSeeAll--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondPart">
-					<div class="secondDiv skeleton"></div>
-					<div class="thirdDiv skeleton"></div>
-					<div class="fourthDiv skeleton"></div>
-					<div class="fifthDiv skeleton"></div>
-				</div>
-			</div>
-			<div class="verticalSeeAll--card">
-				<div class="firstDiv skeleton"></div>
-				<div class="secondPart">
-					<div class="secondDiv skeleton"></div>
-					<div class="thirdDiv skeleton"></div>
-					<div class="fourthDiv skeleton"></div>
-					<div class="fifthDiv skeleton"></div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- user section -->
-	<div class="slide-in hidden" id="mainContainer">
+	<div class="slide-in" id="mainContainer">
 		<div class="user-container userContainer" id="userContainer">
 			<div class="user-image-container">
 				<img class="main-image user-image-border" id="userProfilePicture" />
@@ -364,6 +270,20 @@
 	</template>
 
 	<!--Skeleton Templates-->
+	<template id="horizontal1_SkeletonTemplate">
+		<div class="horizontal-1--skeleton">
+		</div>
+	</template>
+
+	<template id="horizontalSkeletonTemplate">
+		<div class="horizontal--skeleton">
+		</div>
+	</template>
+
+	<template id="verticalSeeAll_SkeletonTemplate">
+		<div class="verticalSeeAll--skeleton">
+		</div>
+	</template>
 	<!--End Skeleton Templates-->
 	<!-- end template -->
 </body>

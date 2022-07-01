@@ -1,5 +1,5 @@
 function navigation() {
-
+	const {horizontal1_Skeleton, horizontal_Skeleton, verticalSeeAll_Skeleton} = skeleton();
 	const getUser = (data) => {
 		let userName = document.getElementById("userName");
 		let userProfilePicture = document.getElementById("userProfilePicture");
@@ -22,22 +22,32 @@ function navigation() {
 		}
 	};
 	const seeAllBtnAction = (id) => {
+		let seeAllContainer = document.getElementById("seeAllContainer");
 		mainContainer.addEventListener("scroll", scrollNextPage);
 
 		scrollTop();
-		document.getElementById("seeAllContainer").innerHTML = "";
+		seeAllContainer.innerHTML = "";
 		config.activeSeeAll = id;
 		if (!mainPage.classList.contains("hidden")) {
 			buildfire.history.push("Home from See All");
 		} else if (!explorePage.classList.contains("hidden")) {
 			buildfire.history.push("Explore from See All");
 		}
-		seeAllCardsRender(
+
+		verticalSeeAll_Skeleton(seeAllContainer);
+
+		const myTimeout = setTimeout(()=>{seeAllCardsRender(
 			fakeData,
-			document.getElementById("seeAllContainer"),
+			seeAllContainer,
 			true,
 			() => { }
-		);
+		);}, 2000);
+		// seeAllCardsRender(
+		// 	fakeData,
+		// 	seeAllContainer,
+		// 	true,
+		// 	() => { }
+		// );
 		openSeeAll();
 		config.isSeeAllScreen = true;
 	};
@@ -45,6 +55,7 @@ function navigation() {
 		const sectionsContainer = document.getElementById(sectionId);
 
 		data.forEach((element) => {
+			let skeleton = '';
 			if (
 				(type == "explore" && element.isExplore && element.isActive) ||
 				(element.isActive && type !== "explore")
@@ -61,11 +72,14 @@ function navigation() {
 						<div id="${`${element.id}-container-${type}`}" class="main">
 					</div>
 					  `;
+					skeleton = "recommanded";
 				} else {
+					/*WORKING HERE */
 					sectionInnerHTML = `
 					<p class="sectionTitle headerText-AppTheme">${element.title}</p>
 						<div id="${`${element.id}-container-${type}`}" class="main"></div>
 					`;
+					skeleton = "justForYou"
 				}
 				ui.createElement(
 					"section",
@@ -74,7 +88,15 @@ function navigation() {
 					[element.layout],
 					`${element.id}-${type}`
 				);
-				filterAndPrintData(fakeData, element, type);
+				const container = document.getElementById(`${element.id}-container-${type}`);
+				if (skeleton === "justForYou") {
+					horizontal1_Skeleton(container);
+				}
+				else if (skeleton === "recommanded") {
+					horizontal_Skeleton(container);
+				}
+				const myTimeout = setTimeout(()=>{filterAndPrintData(fakeData, element, type)}, 2000);
+				//filterAndPrintData(fakeData, element, type);
 			}
 		});
 
