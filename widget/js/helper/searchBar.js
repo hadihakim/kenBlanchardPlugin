@@ -4,6 +4,9 @@ let mySearchingPeriod;
 const {horizontal1_Skeleton, horizontal_Skeleton, verticalSeeAll_Skeleton} = skeleton();
 
 function filterDrawer() {
+	config.renderedCard = 0;
+		config.page = 1;
+		config.lastIndex = 0;
 	buildfire.components.drawer.open(
 		{
 			content: Strings.FILTER_TITLE,
@@ -54,6 +57,9 @@ function filterDrawer() {
 }
 
 function sortDrawer() {
+	config.renderedCard = 0;
+		config.page = 1;
+		config.lastIndex = 0;
 	buildfire.components.drawer.open(
 		{
 			content: Strings.SORT_TITLE,
@@ -107,6 +113,9 @@ function sortDrawer() {
 }
 
 function search() {
+	config.renderedCard = 0;
+		config.page = 1;
+		config.lastIndex = 0;
 	clearTimeout(mySearchingPeriod);
 	mySearchingPeriod = setTimeout(() => {
 		config.search = input.value;
