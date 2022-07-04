@@ -35,6 +35,9 @@ const config = {
   lastIndex: 0,
   renderedCard: 0,
   search: "",
+  //////////////////////
+  searchFrom:"from-main",
+  /////////////////////
   isTrending:[],
   filterTopics:[]
 };

@@ -93,10 +93,18 @@ const utilities = () => {
 
 	const _fetchNextList = () => {
 		// if (config.fetchingNextPage) return;
-		config.fetchingNextPage = true;
+	
+	///////////////////////////////////////////
+	config.fetchingNextPage = true;
+	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
+		console.log("hello");
+		searchCardsRender(fakeData, seeAllContainer, () => {config.fetchingNextPage = false; })
+	} else if (config.searchFrom == "from-see-all") {
 		seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
 			config.fetchingNextPage = false;
 		});
+	}
+	///////////////////////////////////////////////
 	}
 
 	const scrollNextPage = () => {
@@ -111,6 +119,10 @@ const utilities = () => {
 	const initBack = () => {
 		let timer;
 		buildfire.navigation.onBackButtonClick = () => {
+			//////////////////////////////////////////////
+			let input = document.getElementById("search-input");
+			input.value="";
+			/////////////////////////////////////////////
 			buildfire.history.get(
 				{
 					pluginBreadcrumbsOnly: true,
@@ -138,6 +150,14 @@ const utilities = () => {
 								let id = result[result.length - 1].options.id;
 								openPageDetails(id);
 								break;
+							///////////////////////////////////////////
+							case "main/explore from search":
+								if(config.searchFrom == "from-main")
+									openMain();
+								if(config.searchFrom == "from-explore")
+									openExplore();
+								break;
+							/////////////////////////////////////////////////////
 							default:
 								break;
 						}
