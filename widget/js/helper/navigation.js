@@ -64,7 +64,7 @@ function navigation() {
 				if (element.layout != "horizontal-1") {
 					sectionInnerHTML = `
 					<div class="container-header">
-						<p class="title headerText-AppTheme">${type == "explore" ? "All" : "Recommended"
+						<p class="title headerText-AppTheme">${type == "explore" ? "All":type==="userActivityPage"?"My":"Recommended"
 						} ${element.title}</p>
 						<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id
 						}')">${Strings.SEE_ALL_TEXT}</span>
@@ -118,6 +118,8 @@ function navigation() {
 	}
 
 	const openMain = () => {
+		mainContainer.classList.remove("hidden");
+		document.getElementById("userProfile").classList.add("hidden");
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
@@ -186,7 +188,6 @@ function navigation() {
 		emptySearch.classList.add("hidden");
 
 		pageDetails.classList.remove("hidden");
-
 		detailsRender(pageDetails, id);
 		setAppTheme();
 	}
@@ -197,13 +198,20 @@ function navigation() {
 		sortIcon.classList.remove("hidden");
 		seeAllContainer.classList.remove("hidden");
 
-		mainPage.classList.add("hidden");
+		
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		setAppTheme();
 	}
 
-	return { openMain, openExplore, openPageDetails, openSeeAll, initMain, openEmptySearch, seeAllBtnAction }
+	const openUserProfile = () => {
+		userProfile("userProfile",fakeData.data.sections);
+		mainContainer.classList.add("hidden");
+		document.getElementById("userProfile").classList.remove("hidden");
+		buildfire.history.push("Home from user profile");
+		setAppTheme();
+	}
+	return { openMain, openExplore, openPageDetails, openSeeAll, initMain, openEmptySearch, seeAllBtnAction,cardRender,openUserProfile }
 
 }
