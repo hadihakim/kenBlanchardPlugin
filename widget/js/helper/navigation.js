@@ -25,7 +25,9 @@ function navigation() {
 		console.log("----->", type);
 		let seeAllContainer = document.getElementById("seeAllContainer");
 		mainContainer.addEventListener("scroll", scrollNextPage);
-
+///////////////////////////
+config.searchFrom="from-see-all";
+////////////////////////////
 		scrollTop();
 		seeAllContainer.innerHTML = "";
 		config.activeSeeAll = id;
@@ -142,7 +144,9 @@ function navigation() {
 
 		sortIcon.classList.add("hidden");
 		mainContainer.removeEventListener('scroll', scrollNextPage);
-
+//////////////////////////////
+config.searchFrom="from-main";
+////////////////////////////
 		setAppTheme();
 	}
 
@@ -151,7 +155,9 @@ function navigation() {
 		config.page = 1;
 		config.lastIndex = 0;
 		config.isSeeAllScreen = false;
-
+//////////////////////////////
+config.searchFrom="from-explore";
+////////////////////////////
 		mainPage.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
 		userContainer.classList.add("hidden");
@@ -179,12 +185,32 @@ function navigation() {
 		setAppTheme();
 	}
 
+const openSearch = () => {
+	mainContainer.addEventListener("scroll", scrollNextPage);
+	scrollTop();
+	    seeAllContainer.classList.remove("hidden");
+		searchBar.classList.remove("hidden");
+		sortIcon.classList.remove("hidden");
+		mainPage.classList.add("hidden");
+		userContainer.classList.add("hidden");
+		explorePage.classList.add("hidden");
+		pageDetails.classList.add("hidden");
+		emptySearch.classList.add("hidden");
+		// verticalSeeAll_Skeleton(seeAllContainer);
+		// 	const myTimeout = setTimeout(() => {
+		// 		searchCardsRender(fakeData, seeAllContainer, () => { })
+		// 	}, 1000);
+		
+		buildfire.history.push("main/explore from search");
+	setAppTheme();
+}
+
+
 	const openPageDetails = (id) => {
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
 		config.isSeeAllScreen = false;
-
 		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
@@ -218,6 +244,6 @@ function navigation() {
 		buildfire.history.push("Home from user profile");
 		setAppTheme();
 	}
-	return { openMain, openExplore, openPageDetails, openSeeAll, initMain, openEmptySearch, seeAllBtnAction, cardRender, openUserProfile }
+	return { openMain, openExplore, openPageDetails, openSeeAll, initMain, openEmptySearch, seeAllBtnAction, cardRender,openSearch, openUserProfile }
 
 }

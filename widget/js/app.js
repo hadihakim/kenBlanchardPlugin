@@ -11,24 +11,13 @@ const {
   splideInit,
 } = utilities();
 // detailsRender
-const {
-  filterAndPrintData,
-  seeAllCardsRender,
-  trendingRender,
-  detailsRender,
-  userProfile,
-} = templates();
 
-const {
-  openMain,
-  openExplore,
-  openPageDetails,
-  openSeeAll,
-  initMain,
-  openEmptySearch,
-  seeAllBtnAction,
-  openUserProfile,
-} = navigation();
+const { filterAndPrintData, seeAllCardsRender, trendingRender, detailsRender , searchCardsRender,  userProfile} =
+	templates();
+
+const { openMain, openExplore, openPageDetails, openSeeAll, initMain, openEmptySearch, seeAllBtnAction, openSearch, openUserProfile } = navigation();
+
+
 // control variables
 let currentPage = 1;
 const limit = 10;

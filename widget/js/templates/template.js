@@ -84,7 +84,7 @@ const templates = () => {
       )}')`;
       title[0].innerHTML = data.meta.title;
       if (data.meta.duration) {
-        duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" style="font-size: 16px !important;"> schedule </span>
+        duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" style="font-size: 1rem !important;"> schedule </span>
 							<span class="schedule-text bodyText-AppTheme">
 						${timeConvert(data.meta.duration)}</span>`;
       }
@@ -297,6 +297,91 @@ const templates = () => {
     setAppTheme();
   };
 
+  const searchCardsRender = (apiData, container, callback) => {
+	if (config.renderedCard === 0) {
+		config.page = 1;
+		config.lastIndex = 0;
+		document.getElementById("seeAllContainer").innerHTML = "";
+	}
+	let assetsInfo = [];
+	const seeAllTemplate = document.getElementById("seeAllTemplate");
+	apiData.data.sections.forEach((element) => {
+		element. assets.forEach((assetId) => {
+				let assetData = apiData.data.assets_info[assetId];
+				assetData.id = assetId;
+				assetsInfo.push(assetData);
+			});
+	})
+	assetsInfo = sort(assetsInfo, config.sortType);
+	console.log("assetsInfo: " , assetsInfo.length, "assetsInfo: " , assetsInfo);
+	if(config.lastIndex >= assetsInfo.length){
+		return;
+	}
+	for (
+		let lastIndex = config.lastIndex;
+		lastIndex < lastIndex + config.pageSize;
+		lastIndex++
+	) {
+		console.log(config.renderedCard, config.pageSize, assetsInfo.length, lastIndex  );
+		if (
+			config.renderedCard == config.pageSize *config.page ||
+			lastIndex >= assetsInfo.length
+		) {
+			config.lastIndex = lastIndex;
+			callback();
+			config.page++;
+			console.log("first log", config.lastIndex , " ", config.page);
+			if (config.renderedCard == 0) {
+				openEmptySearch();
+			} else {
+				openSearch();
+			}
+		return
+		} else {
+			console.log("test", config.page,"  ", config.lastIndex);
+
+			let topicIdArray = assetsInfo[lastIndex].meta.topics;
+			let printCard = false;
+			topicIdArray.forEach((topicId) => {
+				let data = apiData.data.topics.find(({ id }) => id === topicId);
+				if (
+					(config.filterArr.includes(data.title) ||
+						config.filterArr.length === 0) &&
+					hasSearch(assetsInfo[lastIndex])
+				) {
+					printCard = true;
+				}
+			});
+			if (printCard) {
+				config.renderedCard++;
+				const nodesClone = seeAllTemplate.content.cloneNode(true);
+				let image = nodesClone.querySelectorAll(".image");
+				let title = nodesClone.querySelectorAll(".title");
+				let duration = nodesClone.querySelectorAll(".duration");
+				let description = nodesClone.querySelectorAll(".description");
+				let card = nodesClone.querySelectorAll(".mdc-card");
+				description[0].innerText = assetsInfo[lastIndex].meta.description;
+				image[0].style.backgroundImage = `url('${cropImage(
+					assetsInfo[lastIndex].meta.image,
+					"full_width",
+					"4:3"
+				)}')`;
+				let id = assetsInfo[lastIndex].id;
+				title[0].innerText = assetsInfo[lastIndex].meta.title;
+				if (assetsInfo[lastIndex].meta.duration > 0) {
+					duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+							<span class="schedule-text">
+						${timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
+				}
+				card[0].addEventListener("click", () => {
+					openDetails(id);
+				});
+				container.appendChild(nodesClone);
+			}
+		}
+	}
+	setAppTheme();
+};
   const trendingRender = (containerId) => {
     const container = document.getElementById(containerId);
     if (container) {
@@ -326,9 +411,22 @@ const templates = () => {
             config.filterArr.push(trendingTopic);
           }
 
-          fakeData.data.sections.forEach((element) => {
-            filterAndPrintData(fakeData, element, "explore");
-          });
+        //   fakeData.data.sections.forEach((element) => {
+        //     filterAndPrintData(fakeData, element, "explore");
+        //   });
+		fakeData.data.sections.forEach((element) => {
+			if (element.isExplore) {
+				const container = document.getElementById(`${element.id}-container-explore`);
+				if (element.layout == "horizontal-1") {
+					horizontal1_Skeleton(container);
+				}
+				else {
+					horizontal_Skeleton(container);
+				}
+			}
+			const myTimeout = setTimeout(() => { filterAndPrintData(fakeData, element, 'explore') }, 1000);
+
+		})
         });
       });
       setAppTheme();
@@ -410,5 +508,6 @@ const templates = () => {
     trendingRender,
     detailsRender,
     userProfile,
+	searchCardsRender
   };
 };

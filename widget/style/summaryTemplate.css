@@ -1,9 +1,8 @@
-.pageDetails .first-page {
-}
+
 .pageDetails .first-page .top-image {
   background-size: cover;
   width: 100%;
-  height: 211px;
+  height: 13.188rem;
 }
 .pageDetails .first-page .body-content {
   margin: 1rem;
@@ -11,24 +10,24 @@
 .pageDetails .first-page .body-content .title {
   font-style: normal;
   font-weight: bold;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
+  font-size:1rem;
+  line-height:1.25rem;
+  letter-spacing:0.031rem;
   margin-bottom: 1.5rem;
 }
 .pageDetails .first-page .body-content .subtitle {
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
+  font-size:0.875rem;
+  line-height:1.25rem;
 }
 .pageDetails .first-page .body-content .description {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.15px;
+  font-size:0.875rem;
+  line-height:1.25rem;
+  letter-spacing:0.009rem;
   margin-top: 1rem;
   color: #5f5f5f;
 }
@@ -36,9 +35,9 @@
   list-style: none;
 }
 .pageDetails .first-page .chapters-list .chapter-item {
-  width: 343px;
-  height: 68px;
-  border-radius: 4px;
+  width:21.438rem;
+  height:4.25rem;
+  border-radius:0.25rem;
   margin: 2rem 1rem 0rem;
   padding-right: 1rem;
 }
@@ -48,9 +47,9 @@
   .chapter-item
   .chapter-title {
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 4px;
+  font-weight: 500;
+  font-size:0.75rem;
+  line-height:0.25rem;
   color: #5f5f5f;
 }
 
@@ -72,15 +71,15 @@
   .chapter-subtitle {
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
+  font-size:0.875rem;
+  line-height:1.25rem;
 }
 .pageDetails .first-page .chapters-list .chapter-item .bar {
   width: 100%;
-  height: 4px;
+  height:0.25rem;
   background: #fecd83;
   opacity: 0.2;
-  border-radius: 2px;
+  border-radius:0.125rem;
   margin-top: 0.625rem;
 }
 
@@ -97,8 +96,8 @@
 }
 .pageDetails .third-page .content-item .top-image {
   width: 100%;
-  height: 188px;
-  border-radius: 4px !important;
+  height: 11.75rem;
+  border-radius:0.25rem !important;
 }
 .pageDetails .third-page .content-item .text-content {
   display: flex;
@@ -110,8 +109,8 @@
 .pageDetails .third-page .content-item .text-content p {
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
+  font-size:1.125rem;
+  line-height:1.75rem;
 }
 .pageDetails .third-page #slideNum {
   position: absolute;
@@ -121,8 +120,8 @@
 .splide {
   width: 95%;
   min-width: 95%;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.25);
-  border-radius: 4px !important;
+  box-shadow: 0rem 0.125rem 0.75rem rgba(0, 0, 0, 0.25);
+  border-radius:0.25rem !important;
 }
 .splide__pagination {
   display: none !important;
@@ -132,17 +131,17 @@
   width: 95%;
   position: absolute;
   bottom: 0.5rem;
-  height: 4px;
+  height:0.25rem;
   margin: 0.5rem;
 }
 .my-carousel-progress-bar {
   background: #fecd83;
-  height: 4px;
+  height:0.25rem;
   transition: width 400ms ease;
 }
 .splide__slide {
-  height: 200px;
-  border-radius: 4px !important;
+  height:12.5rem;
+  border-radius:0.25rem !important;
 }
 .splide__arrow {
   background: none !important;
@@ -152,13 +151,11 @@
 }
 
 /* fourth page */
-.pageDetails .fourth-page {
-}
 .pageDetails .fourth-page .top-image {
   background-image: url("https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop");
   background-size: cover;
   width: 100%;
-  height: 211px;
+  height: 13.188rem;
 }
 .pageDetails .fourth-page .header-text {
   width: 100%;
@@ -168,9 +165,9 @@
 .pageDetails .fourth-page .header-text h3 {
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
+  font-size:1rem;
+  line-height:1.25rem;
+  letter-spacing:0.031rem;
 }
 .pageDetails .fourth-page .body-content {
   margin: 1rem;
@@ -178,8 +175,8 @@
 .pageDetails .fourth-page .body-content p {
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 40px;
+  font-size:1rem;
+  line-height: 2.5rem;
   color: #5f5f5f;
 }
 .pageDetails .fourth-page .plan-header {
@@ -190,9 +187,9 @@
 .pageDetails .fourth-page .plan-header h3 {
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
+  font-size:1rem;
+  line-height:1.25rem;
+  letter-spacing:0.031rem;
 }
 .pageDetails .fourth-page .plans-container {
   display: flex;
@@ -202,18 +199,18 @@
   margin-bottom: 6.0625rem;
 }
 .pageDetails .fourth-page .plans-container .plan-card {
-  width: 171px;
-  height: 158px;
-  padding: 24px 16px;
+  width: 10.688rem;
+  height: 9.875rem;
+  padding: 1.5rem 1rem;
   background: #ececec;
   text-align: center;
 }
 .pageDetails .fourth-page .plans-container .plan-card .title {
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
+  font-size:1rem;
+  line-height:1.25rem;
+  letter-spacing:0.031rem;
   margin-bottom: 1.5rem;
 }
 .pageDetails
@@ -223,9 +220,9 @@
   .subtitle {
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: 0.5px;
+  font-size:0.75rem;
+  line-height:0.875rem;
+  letter-spacing:0.031rem;
   color: #5f5f5f;
 }
 .pageDetails
@@ -235,9 +232,9 @@
   .discount {
   font-style: normal;
   font-weight: 700;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: 0.5px;
+  font-size:0.75rem;
+  line-height:0.875rem;
+  letter-spacing:0.031rem;
   color: #5f5f5f;
   margin-bottom: 1.5rem;
 }
