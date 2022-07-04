@@ -138,6 +138,10 @@ const utilities = () => {
 								let id = result[result.length - 1].options.id;
 								openPageDetails(id);
 								break;
+							case "Home from user profile":
+								console.log("yes");
+								openMain();
+								break;
 							default:
 								break;
 						}

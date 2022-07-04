@@ -29,7 +29,9 @@ class MyList {
         averageProgress: 'myAverageProgress',
         percentageContainer: 'percentageContainer',
         template: 'myList_Template',
-        averageLable:'averageLable'
+        averageLable:'averageLable',
+        userProfileContainer:'userProfile',
+        userProfileTemplate:'userProfileTemplate'
     }
 
     static loadData = (options) => {
@@ -114,6 +116,20 @@ class MyList {
     }
 
     static init = () => {
+        // should be organized
+        let userProfileContainer = document.getElementById(this.pointers.userProfileContainer);
 
+        const myContainer = document.getElementById(this.pointers.userProfileTemplate);
+        const nodesClone = myContainer.content.cloneNode(true);
+        userProfileContainer.innerHTML = '';
+        
+        
+        nodesClone.getElementById('profileMainPage').classList.add('hidden');
+        nodesClone.getElementById(this.pointers.pagePointer).classList.remove('hidden');
+
+        userProfileContainer.appendChild(nodesClone);
+        
+        this.loadCharts();
+        this.loadList();
     }
 }
