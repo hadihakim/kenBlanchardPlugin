@@ -1,0 +1,91 @@
+.myList_PageContainer {}
+
+.myList_PageContainer .chartContainer {
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 25%);
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 0.75rem;
+}
+
+.myList_PageContainer .chartContainer .bar #myChart {
+    width: 175px !important;
+    height: 120px !important;
+}
+
+.myList_PageContainer .chartContainer .progress {
+    position: relative;
+}
+
+.myList_PageContainer .chartContainer .progress #myAverageProgress {
+    width: 125px !important;
+    height: 79px !important;
+}
+
+.myList_PageContainer .chartContainer .progress #averageLable {
+    font-style: normal;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    text-align: center;
+    color: #5F5F5F;
+}
+
+.myList_PageContainer .chartContainer .progress #percentageContainer {
+   position: absolute;
+   top: 27%;
+   left: 42%;
+   font-size: 0.7rem;
+}
+
+.myList_PageContainer #myCardsContainer {}
+
+
+.myCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 0px;
+    gap: 8px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    margin: 0.5rem 1rem;
+}
+
+.myCard #image {
+    width: 7rem;
+    height: 45px;
+    border-radius: 4px;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.myCard .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 3rem;
+    width: -webkit-fill-available;
+}
+
+.myCard .title #title_text {
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: #101010;
+}
+
+.myCard .title #subTitle_text {
+    font-size: 0.9rem;
+    line-height: 1.25;
+    letter-spacing: 0.15px;
+    color: #5F5F5F;
+}
+
+.myCard .action {
+    width: 1.5rem;
+    height: 1.5rem;
+
+}

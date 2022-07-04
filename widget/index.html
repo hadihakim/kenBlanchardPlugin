@@ -6,7 +6,9 @@
 	<meta name="buildfire" content="enableMDTheme" />
 	<meta name="buildfire" content="disableBootstrap" />
 
+	<link rel="stylesheet" href="../../../styles/components/listView.css" />
 	<link rel="stylesheet" href="./style/style.css" />
+	<link rel="stylesheet" href="./style/myList.css" />
 	<link rel="stylesheet" href="./style/forYouTemplate.css" />
 	<link rel="stylesheet" href="./style/recommendedTemplate.css" />
 	<link rel="stylesheet" href="./style/trendingTemplate.css" />
@@ -14,6 +16,7 @@
 	<link rel="stylesheet" href="./style/detailsPage.css" />
 	<link rel="stylesheet" href="./style/userSection.css" />
 	<link rel="stylesheet" href="./style/summaryTemplate.css" />
+	<link rel="stylesheet" href="./style/userProfile.css" />
 	<link rel="stylesheet" href="./style/splide-default.min.css" />
 	<link rel="stylesheet" href="../../../styles/material-icons.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -30,8 +33,11 @@
 
 	<!-- js -->
 	<script src="../../../scripts/buildfire.js"></script>
+	<script src="../../../scripts/buildfire/components/listView/listView.js"></script>
 	<script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
 	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 	<!-- js -->
 	<script src="../../../scripts/buildfire.js"></script>
@@ -51,6 +57,7 @@
 	<script src="./js/utilities/summaryData.js"></script>
 	<script src="./js/utilities/utilities.js"></script>
 	<script src="./js/templates/template.js"></script>
+	<script src="./js/templates/myList.js"></script>
 	<script src="./js/app.js" defer></script>
 	<!-- endbundle:scripts -->
 	<!--
@@ -62,6 +69,7 @@
 </head>
 
 <body id="mainBody">
+
 	<!-- user section -->
 	<div class="slide-in" id="mainContainer">
 		<div class="user-container userContainer" id="userContainer">
@@ -100,6 +108,7 @@
 				</a>
 			</div>
 		</div>
+
 		<div class="explorePage hidden slide-in" id="explorePage">
 			<section class="trendingSection" id="trendingSection">
 				<h3 class="trending-title headerText-AppTheme">Trending</h3>
@@ -107,18 +116,68 @@
 			</section>
 			<section id="exploreContainer"></section>
 		</div>
+
 		<div id="seeAllContainer" class="hidden slide-in"></div>
+
 		<div id="emptySearch" class="hidden">
 			<img src="./media/empty_page.svg" alt="Empty Search" />
 			<p id="emptyTitle">Nothing Found</p>
 			<p id="emptyDescription">Refine your search...</p>
 		</div>
+
 		<div id="pageDetails" class="hidden pageDetails slide-in"></div>
+
+		<!-- -------------------- -->
 		<!-- end section -->
 	</div>
-	<!-- user list of cards -->
 
+	<!-- user profile-->
+	<div id="userProfile" class="user-profile-container hidden slide-in">
+	</div>
+	<!-- end user profile -->
+	<!-- my list -- will be organized -->
+	<div id="myList_PageContainer" class="myList_PageContainer">
+		<div class="chartContainer">
+			<div class="bar">
+				<canvas id="myChart"></canvas>
+			</div>
+			<div class="progress">
+				<canvas id="myAverageProgress">71 %</canvas>
+				<p id="percentageContainer"></p>
+				<p id="averageLable"></p>
+			</div>
+		</div>
+
+		<div id="listViewContainer"></div>
+	</div>
 	<!-- template -->
+	<template id="userProfileTemplate" class="user-profile-template"">
+		<div class="user-top-container userContainer">
+			<div class="user-profile-image-container">
+				<img class="user-profile-image user-image-border" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU" alt="">
+				<img class="achievement-image" src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png"/>
+			</div>
+			<div class="user-info-container">
+				<h2 class="user-name barText-AppTheme">Michel Scott</h2>
+				<p class="growth-profile-user-small barText-AppTheme">Committed</p>
+			</div>
+		</div>
+		<div class="user-body-container">
+			<div class="mdc-tab-bar userContainer" role="tablist">
+				<div class="mdc-tab-scroller">
+				  <div class="mdc-tab-scroller__scroll-area">
+					<div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer">
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  <div id="contentContainer">
+				<div class="tabContent"></div>
+				<div class="tabContent hidden"></div>
+				<div class="tabContent hidden"></div>
+			  </div>
+		</div>
+	</template>
 	<template id="forYouTemplate" class="forYouTemplate">
 		<div class="border-radius-four mdc-card" id="card_body">
 			<div class="card-Text" id="card-Text">
@@ -282,6 +341,21 @@
 
 	<template id="verticalSeeAll_SkeletonTemplate">
 		<div class="verticalSeeAll--skeleton">
+		</div>
+	</template>
+
+	<template id="myList_Template">
+		<div class="myCard">
+			<div id="image"></div>
+			<div class="title">
+				<div id="title_text"></div>
+				<div id="subTitle_text"></div>
+			</div>
+			<div id="action">
+				<span class="material-icons icon">
+					chevron_right
+				</span>
+			</div>
 		</div>
 	</template>
 	<!--End Skeleton Templates-->
