@@ -98,9 +98,9 @@ const utilities = () => {
 	config.fetchingNextPage = true;
 	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
 		console.log("hello");
-		searchCardsRender(fakeData, seeAllContainer, () => {config.fetchingNextPage = false; })
+		Search.searchCardsRender(seeAllContainer, () => {config.fetchingNextPage = false; })
 	} else if (config.searchFrom == "from-see-all") {
-		seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
+		SeeAll.seeAllCardsRender(fakeData, seeAllContainer, true, () => {
 			config.fetchingNextPage = false;
 		});
 	}
@@ -177,40 +177,9 @@ const utilities = () => {
 		};
 	};
 
-	const sort = (data, type) => {
-		if (type === "Most Recent") {
-			data.sort((a, b) => {
-				if (a.meta.createdOn < b.meta.createdOn) {
-					return -1;
-				}
-				if (a.meta.createdOn > b.meta.createdOn) {
-					return 1;
-				}
-			});
-		}
-		return data;
-	};
 
-	const hasSearch = (data) => {
-		return config.search == "" ||
-			data.meta.title
-				.toLowerCase()
-				.search(config.search.toLowerCase()) >= 0 ||
-			data.meta.description
-				.toLowerCase()
-				.search(config.search.toLowerCase()) >= 0
-	}
 
-	const setFilteredTopic = (apiData) => {
-		apiData.data.topics.forEach((topic) => {
-			if (topic.isActive) {
-				config.filterTopics.push(topic.title);
-			}
-			if (topic.isTrending) {
-				config.isTrending.push(topic.title);
-			}
-		})
-	}
+
 
 	const scrollTop = () => {
 		mainContainer.scrollTo({ top: 0});
@@ -234,10 +203,7 @@ const utilities = () => {
 		getAppTheme,
 		setAppTheme,
 		initBack,
-		sort,
 		scrollNextPage,
-		hasSearch,
-		setFilteredTopic,
 		scrollTop,
 		splideInit
 	};

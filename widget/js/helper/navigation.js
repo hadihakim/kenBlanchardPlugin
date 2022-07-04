@@ -1,26 +1,6 @@
 function navigation() {
 	const { horizontal1_Skeleton, horizontal_Skeleton, verticalSeeAll_Skeleton } = skeleton();
-	const getUser = (data) => {
-		let userName = document.getElementById("userName");
-		let userProfilePicture = document.getElementById("userProfilePicture");
-		let userAchievementIcon = document.getElementById("userAchievementIcon");
-		let growthProfile = document.getElementById("growthProfile");
-		if (data.isLoggedIn) {
-			let userAchievements = data.badges.filter((el) => el.active === true);
-			userName.innerText = data.firstName + " " + data.lastName;
-			growthProfile.innerText = data.growthProfile;
-			userProfilePicture.src = data.profilePicture;
-			userProfilePicture.alt = data.firstName;
-			userAchievementIcon.src = userAchievements[0].achievementIcon;
-			userAchievementIcon.alt = userAchievements[0].achievementTitle;
-			config.filterArr = data.recommendedTags;
-		} else {
-			userProfilePicture.src = "../../../../styles/media/avatar-placeholder.png";
-			userName.innerText = "Anonymous";
-			growthProfile.innerText = "Profile Growth";
-			userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
-		}
-	};
+
 	const seeAllBtnAction = (id, type) => {
 		console.log("----->", type);
 		let seeAllContainer = document.getElementById("seeAllContainer");
@@ -59,71 +39,8 @@ config.searchFrom="from-see-all";
 		openSeeAll();
 		config.isSeeAllScreen = true;
 	};
-	const cardRender = (sectionId, data, type) => {
-		const sectionsContainer = document.getElementById(sectionId);
 
-		data.forEach((element) => {
-			let skeleton = '';
-			if (
-				(type == "explore" && element.isExplore && element.isActive) ||
-				(element.isActive && type !== "explore")
-			) {
-				let sectionInnerHTML;
-				if (element.layout != "horizontal-1") {
-					sectionInnerHTML = `
-					<div class="container-header">
-						<p class="title headerText-AppTheme">${type == "explore" ? "All" : type === "userActivityPage" ? "My" : "Recommended"
-						} ${element.title}</p>
-						<span class="seeAll-btn info-link-AppTheme" onclick="seeAllBtnAction('${element.id
-						}', '${type}')">${Strings.SEE_ALL_TEXT}</span>
-					</div>
-						<div id="${`${element.id}-container-${type}`}" class="main">
-					</div>
-					  `;
-					skeleton = "recommanded";
-				} else {
-					sectionInnerHTML = `
-					<p class="sectionTitle headerText-AppTheme">${element.title}</p>
-						<div id="${`${element.id}-container-${type}`}" class="main"></div>
-					`;
-					skeleton = "justForYou"
-				}
-				ui.createElement(
-					"section",
-					sectionsContainer,
-					sectionInnerHTML,
-					[element.layout],
-					`${element.id}-${type}`
-				);
-				const container = document.getElementById(`${element.id}-container-${type}`);
-				if (skeleton === "justForYou") {
-					horizontal1_Skeleton(container);
-				}
-				else if (skeleton === "recommanded") {
-					horizontal_Skeleton(container);
-				}
-				const myTimeout = setTimeout(() => { filterAndPrintData(fakeData, element, type) }, 1000);
-				//filterAndPrintData(fakeData, element, type);
-			}
-		});
 
-	};
-
-	const initMain = () => {
-		getUser(config.userConfig);
-		setFilteredTopic(fakeData);
-		cardRender("exploreContainer", fakeData.data.sections, "explore");
-		cardRender("sectionsContainer", fakeData.data.sections, "main");
-		trendingRender("trendingContainer");
-
-		const exploreBtn = document.getElementById("exploreButton");
-		exploreBtn.innerHTML = Strings.EXPLORE_BTN;
-		exploreBtn.addEventListener("click", () => {
-			buildfire.history.push("Home from Explore");
-			scrollTop();
-			openExplore();
-		});
-	}
 
 	const openMain = () => {
 		mainContainer.classList.remove("hidden");
@@ -244,6 +161,6 @@ const openSearch = () => {
 		buildfire.history.push("Home from user profile");
 		setAppTheme();
 	}
-	return { openMain, openExplore, openPageDetails, openSeeAll, initMain, openEmptySearch, seeAllBtnAction, cardRender,openSearch, openUserProfile }
+	return { openMain, openExplore, openPageDetails, openSeeAll, openEmptySearch, seeAllBtnAction,openSearch, openUserProfile }
 
 }

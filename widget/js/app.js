@@ -5,18 +5,26 @@ const {
   setAppTheme,
   initBack,
   scrollNextPage,
-  hasSearch,
-  setFilteredTopic,
   scrollTop,
   splideInit,
 } = utilities();
 // detailsRender
 
-const { filterAndPrintData, seeAllCardsRender, trendingRender, detailsRender , searchCardsRender,  userProfile} =
-	templates();
+const {
+  detailsRender,
+  userProfile,
+} = templates();
 
-const { openMain, openExplore, openPageDetails, openSeeAll, initMain, openEmptySearch, seeAllBtnAction, openSearch, openUserProfile } = navigation();
-
+const {
+  openMain,
+  openExplore,
+  openPageDetails,
+  openSeeAll,
+  openEmptySearch,
+  seeAllBtnAction,
+  openSearch,
+  openUserProfile,
+} = navigation();
 
 // control variables
 let currentPage = 1;
@@ -42,10 +50,15 @@ document.getElementById("userProfilePicture").addEventListener("click", () => {
 });
 const init = () => {
   getAppTheme();
-  initMain();
+  UserProfile.init();
+  Explore.setPageData({data:fakeData,userData:config.userConfig});
+  Explore.init("main");
+  Explore.init("explore");
+  Search.setData(fakeData);
+  Search.init();
   initBack();
   MyList.loadCharts();
-	MyList.loadList();
+  MyList.loadList();
   setAppTheme();
 };
 
