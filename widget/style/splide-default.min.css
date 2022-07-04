@@ -54,36 +54,36 @@
   list-style-type: none !important;
   margin: 0;
   position: relative;
-  height: 527px;
+  height:32.938rem;
 }
 .splide__slide img {
   vertical-align: bottom;
 }
 .splide__spinner {
   animation: splide-loading 1s linear infinite;
-  border: 2px solid #999;
+  border: 0.125rem solid #999;
   border-left-color: transparent;
   border-radius: 50%;
   bottom: 0;
   contain: strict;
   display: inline-block;
-  height: 20px;
+  height: 1.25rem;
   left: 0;
   margin: auto;
   position: absolute;
   right: 0;
   top: 0;
-  width: 20px;
+  width: 1.25rem;
 }
 .splide__sr {
   clip: rect(0 0 0 0);
   border: 0;
-  height: 1px;
-  margin: -1px;
+  height: 0.063rem;
+  margin: - 0.063rem;
   overflow: hidden;
   padding: 0;
   position: absolute;
-  width: 1px;
+  width:  0.063rem;
 }
 .splide__toggle.is-active .splide__toggle__play,
 .splide__toggle__pause {
@@ -100,10 +100,18 @@
 @keyframes splide-loading {
   0% {
     transform: rotate(0);
-  }
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+}
   to {
     transform: rotate(1turn);
-  }
+    -webkit-transform: rotate(1turn);
+    -moz-transform: rotate(1turn);
+    -ms-transform: rotate(1turn);
+    -o-transform: rotate(1turn);
+}
 }
 .splide__track--draggable {
   -webkit-touch-callout: none;
@@ -147,11 +155,15 @@
   opacity: 0.7;
   padding: 0;
   position: absolute;
-  /* top: 50%; */
-  bottom: 1rem;
+  /*top: 50%;
+  */bottom: 1rem;
   transform: translateY(-50%);
   width: 2em;
   z-index: 1;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
 }
 .splide__arrow svg {
   fill: #000;
@@ -165,21 +177,25 @@
   opacity: 0.3;
 }
 .splide__arrow:focus-visible {
-  outline: 3px solid #0bf;
-  outline-offset: 3px;
+  outline: 0.1 solid #0bf;
+  outline-offset: 0.1;
 }
 .splide__arrow--prev {
   left: 1em;
 }
 .splide__arrow--prev svg {
   transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
 }
 .splide__arrow--next {
   right: 1em;
 }
 .splide.is-focus-in .splide__arrow:focus {
-  outline: 3px solid #0bf;
-  outline-offset: 3px;
+  outline: 0.1 solid #0bf;
+  outline-offset: 0.1;
 }
 .splide__pagination {
   bottom: 0.5em;
@@ -194,13 +210,13 @@
   border: 0;
   border-radius: 50%;
   display: inline-block;
-  height: 8px;
-  margin: 3px;
+  height: 0.5rem;
+  margin: 0.1;
   opacity: 0.7;
   padding: 0;
   position: relative;
   transition: transform 0.2s linear;
-  width: 8px;
+  width:0.5rem;
 }
 .splide__pagination__page.is-active {
   background: #fff;
@@ -212,16 +228,16 @@
   opacity: 0.9;
 }
 .splide__pagination__page:focus-visible {
-  outline: 3px solid #0bf;
-  outline-offset: 3px;
+  outline: 0.1 solid #0bf;
+  outline-offset: 0.1;
 }
 .splide.is-focus-in .splide__pagination__page:focus {
-  outline: 3px solid #0bf;
-  outline-offset: 3px;
+  outline: 0.1 solid #0bf;
+  outline-offset: 0.1;
 }
 .splide__progress__bar {
   background: #ccc;
-  height: 3px;
+  height: 0.1;
 }
 .splide__slide {
   -webkit-tap-highlight-color: transparent;
@@ -229,26 +245,26 @@
 .splide__slide:focus {
   outline: 0;
 }
-@supports (outline-offset: -3px) {
+@supports (outline-offset: -0.1) {
   .splide__slide:focus-visible {
-    outline: 3px solid #0bf;
-    outline-offset: -3px;
+    outline: 0.1 solid #0bf;
+    outline-offset: -0.1;
   }
 }
 @media screen and (-ms-high-contrast: none) {
   .splide__slide:focus-visible {
-    border: 3px solid #0bf;
+    border: 0.1 solid #0bf;
   }
 }
-@supports (outline-offset: -3px) {
+@supports (outline-offset: -0.1) {
   .splide.is-focus-in .splide__slide:focus {
-    outline: 3px solid #0bf;
-    outline-offset: -3px;
+    outline: 0.1 solid #0bf;
+    outline-offset: -0.1;
   }
 }
 @media screen and (-ms-high-contrast: none) {
   .splide.is-focus-in .splide__slide:focus {
-    border: 3px solid #0bf;
+    border: 0.1 solid #0bf;
   }
   .splide.is-focus-in .splide__track > .splide__list > .splide__slide:focus {
     border-color: #0bf;
@@ -258,19 +274,19 @@
   cursor: pointer;
 }
 .splide__toggle:focus-visible {
-  outline: 3px solid #0bf;
-  outline-offset: 3px;
+  outline: 0.1 solid #0bf;
+  outline-offset: 0.1;
 }
 .splide.is-focus-in .splide__toggle:focus {
-  outline: 3px solid #0bf;
-  outline-offset: 3px;
+  outline: 0.1 solid #0bf;
+  outline-offset: 0.1;
 }
 .splide__track--nav > .splide__list > .splide__slide {
-  border: 3px solid transparent;
+  border: 0.1 solid transparent;
   cursor: pointer;
 }
 .splide__track--nav > .splide__list > .splide__slide.is-active {
-  border: 3px solid #000;
+  border: 0.1 solid #000;
 }
 .splide__arrows--rtl .splide__arrow--prev {
   left: auto;
