@@ -55,6 +55,8 @@ const init = () => {
   getAppTheme();
   initMain();
   initBack();
+  MyList.loadCharts();
+	MyList.loadList();
   setAppTheme();
 };
 
