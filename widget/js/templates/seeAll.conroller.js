@@ -53,9 +53,9 @@ class SeeAll {
         callback();
         config.page++;
         if (config.renderedCard == 0) {
-          openEmptySearch();
+          Navigation.openEmptySearch();
         } else {
-          openSeeAll();
+          Navigation.openSeeAll();
         }
         return;
       } else {
@@ -81,7 +81,7 @@ class SeeAll {
           let description = nodesClone.querySelectorAll(".description");
           let card = nodesClone.querySelectorAll(".mdc-card");
           description[0].innerText = assetsInfo[lastIndex].meta.description;
-          image[0].style.backgroundImage = `url('${cropImage(
+          image[0].style.backgroundImage = `url('${Utilities.cropImage(
             assetsInfo[lastIndex].meta.image,
             "full_width",
             "4:3"
@@ -91,26 +91,33 @@ class SeeAll {
           if (durationState && assetsInfo[lastIndex].meta.duration > 0) {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
                                     <span class="schedule-text">
-                                ${timeConvert(
+                                ${Utilities.timeConvert(
                                   assetsInfo[lastIndex].meta.duration
                                 )}</span>`;
           }
           card[0].addEventListener("click", () => {
-            openDetails(id);
+            PageDetails.openDetails(id);
           });
           container.appendChild(nodesClone);
         }
       }
     }
-    setAppTheme();
+    Utilities.setAppTheme();
   };
 
   static init() {
-    this.seeAllCardsRender(
-      this.state.apiData,
-      this.pointers.seeAllContainer,
-      this.state.duration,
-      () => {}
-    );
+
+    Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
+
+
+    const myTimeout = setTimeout(() => {
+      this.seeAllCardsRender(
+        this.state.apiData,
+        this.pointers.seeAllContainer,
+        this.state.duration,
+        () => {}
+      );
+    }, 1000);
+    
   }
 }

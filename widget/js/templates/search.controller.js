@@ -92,9 +92,9 @@ class Search {
         config.page++;
         console.log("first log", config.lastIndex, " ", config.page);
         if (config.renderedCard == 0) {
-          openEmptySearch();
+          Navigation.openEmptySearch();
         } else {
-          openSearch();
+          Navigation.openSearch();
         }
         return;
       } else {
@@ -121,7 +121,7 @@ class Search {
           let description = nodesClone.querySelectorAll(".description");
           let card = nodesClone.querySelectorAll(".mdc-card");
           description[0].innerText = assetsInfo[lastIndex].meta.description;
-          image[0].style.backgroundImage = `url('${cropImage(
+          image[0].style.backgroundImage = `url('${Utilities.cropImage(
             assetsInfo[lastIndex].meta.image,
             "full_width",
             "4:3"
@@ -131,16 +131,16 @@ class Search {
           if (assetsInfo[lastIndex].meta.duration > 0) {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 							<span class="schedule-text">
-						${timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
+						${Utilities.timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
           }
           card[0].addEventListener("click", () => {
-            openDetails(id);
+            PageDetails.openDetails(id);
           });
           container.appendChild(nodesClone);
         }
       }
     }
-    setAppTheme();
+    Utilities.setAppTheme();
   };
 
   static trendingRender = () => {
@@ -182,9 +182,9 @@ class Search {
                 `${element.id}-container-explore`
               );
               if (element.layout == "horizontal-1") {
-                horizontal1_Skeleton(container);
+                Skeleton.horizontal1_Skeleton(container);
               } else {
-                horizontal_Skeleton(container);
+                Skeleton.horizontal_Skeleton(container);
               }
             }
             const myTimeout = setTimeout(() => {
@@ -193,7 +193,7 @@ class Search {
           });
         });
       });
-      setAppTheme();
+      Utilities.setAppTheme();
     }
   };
   static filterDrawer = () => {
@@ -230,9 +230,9 @@ class Search {
               `${element.id}-container-main`
             );
             if (element.layout == "horizontal-1") {
-              horizontal1_Skeleton(container);
+              Skeleton.horizontal1_Skeleton(container);
             } else {
-              horizontal_Skeleton(container);
+              Skeleton.horizontal_Skeleton(container);
             }
             const myTimeout = setTimeout(() => {
               Explore.filterAndPrintData(this.state.data, element, "main");
@@ -245,9 +245,9 @@ class Search {
                 `${element.id}-container-explore`
               );
               if (element.layout == "horizontal-1") {
-                horizontal1_Skeleton(container);
+                Skeleton.horizontal1_Skeleton(container);
               } else {
-                horizontal_Skeleton(container);
+                Skeleton.horizontal_Skeleton(container);
               }
             }
             const myTimeout = setTimeout(() => {
@@ -264,19 +264,14 @@ class Search {
               config.searchFrom == "from-explore" ||
               config.searchFrom == "from-main"
             ) {
-              verticalSeeAll_Skeleton(seeAllContainer);
+              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
                 this.searchCardsRender(seeAllContainer, () => {});
               }, 1000);
             } else if (config.searchFrom == "from-see-all") {
-              verticalSeeAll_Skeleton(seeAllContainer);
+              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
-                SeeAll.seeAllCardsRender(
-                  this.state.data,
-                  seeAllContainer,
-                  true,
-                  () => {}
-                );
+                SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
               }, 1000);
             }
           }
@@ -316,9 +311,9 @@ class Search {
               `${element.id}-container-main`
             );
             if (element.layout == "horizontal-1") {
-              horizontal1_Skeleton(container);
+              Skeleton.horizontal1_Skeleton(container);
             } else {
-              horizontal_Skeleton(container);
+              Skeleton.horizontal_Skeleton(container);
             }
             const myTimeout = setTimeout(() => {
               Explore.filterAndPrintData(this.state.data, element, "main");
@@ -331,9 +326,9 @@ class Search {
                 `${element.id}-container-explore`
               );
               if (element.layout == "horizontal-1") {
-                horizontal1_Skeleton(container);
+                Skeleton.horizontal1_Skeleton(container);
               } else {
-                horizontal_Skeleton(container);
+                Skeleton.horizontal_Skeleton(container);
               }
             }
             const myTimeout = setTimeout(() => {
@@ -346,12 +341,12 @@ class Search {
               config.searchFrom == "from-explore" ||
               config.searchFrom == "from-main"
             ) {
-              verticalSeeAll_Skeleton(seeAllContainer);
+              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
                 this.searchCardsRender(seeAllContainer, () => {});
               }, 1000);
             } else if (config.searchFrom == "from-see-all") {
-              verticalSeeAll_Skeleton(seeAllContainer);
+              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
                 SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
               }, 1000);
@@ -374,15 +369,21 @@ class Search {
         config.searchFrom == "from-explore" ||
         config.searchFrom == "from-main"
       ) {
-        openSearch();
-        verticalSeeAll_Skeleton(seeAllContainer);
+        Navigation.openSearch();
+        Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
         const myTimeout = setTimeout(() => {
           this.searchCardsRender(seeAllContainer, () => {});
         }, 1000);
       } else if (config.searchFrom == "from-see-all") {
-        verticalSeeAll_Skeleton(seeAllContainer);
+        Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
         const myTimeout = setTimeout(() => {
-          this.seeAllCardsRender(seeAllContainer, true, () => {});
+          SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
+          // this.seeAllCardsRender(
+          //   this.state.apiData,
+          //   this.pointers.seeAllContainer,
+          //   this.state.duration,
+          //   () => {}
+          // );
         }, 1000);
       }
     }, 300);

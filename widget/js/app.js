@@ -1,61 +1,19 @@
 "use strict";
-
-const {
-  getAppTheme,
-  setAppTheme,
-  initBack,
-  scrollNextPage,
-  scrollTop,
-  splideInit,
-  timeConvert,
-   cropImage,
-    sort 
-} = utilities();
-// detailsRender
-
-
-const {
-  openMain,
-  openExplore,
-  openPageDetails,
-  openSeeAll,
-  openEmptySearch,
-  seeAllBtnAction,
-  openSearch,
-  openUserProfile,
-} = navigation();
-
-function openDetails(id) {
-  if (!mainPage.classList.contains("hidden")) {
-    buildfire.history.push("Home from See All");
-  } else if (!seeAllContainer.classList.contains("hidden")) {
-    buildfire.history.push("See All from Details");
-  } else if (!explorePage.classList.contains("hidden")) {
-    buildfire.history.push("Explore from Details");
-  }
-  pageDetails.innerHTML = "";
-  openPageDetails(id);
-  PageDetails.setState(id);
-  PageDetails.init();
-  scrollTop();
-  //   buildfire.history.push("See All from Details");
-}
-
 document.getElementById("userProfilePicture").addEventListener("click", () => {
-  openUserProfile();
+  Navigation.openUserProfile();
 });
 const init = () => {
-  getAppTheme();
+  Utilities.getAppTheme();
   UserProfile.init();
   Explore.setPageData({data:fakeData,userData:config.userConfig});
   Explore.init("main");
   Explore.init("explore");
   Search.setData(fakeData);
   Search.init();
-  initBack();
+  Utilities.initBack();
   MyList.loadCharts();
   MyList.loadList();
-  setAppTheme();
+  Utilities.setAppTheme();
 };
 
 init();
