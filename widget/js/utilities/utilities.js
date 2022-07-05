@@ -93,10 +93,18 @@ const utilities = () => {
 
 	const _fetchNextList = () => {
 		// if (config.fetchingNextPage) return;
-		config.fetchingNextPage = true;
-		seeAllCardsRender(fakeData, document.getElementById("seeAllContainer"), true, () => {
+	
+
+	config.fetchingNextPage = true;
+	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
+		console.log("hello");
+		Search.searchCardsRender(seeAllContainer, () => {config.fetchingNextPage = false; })
+	} else if (config.searchFrom == "from-see-all") {
+		SeeAll.seeAllCardsRender(fakeData, seeAllContainer, true, () => {
 			config.fetchingNextPage = false;
 		});
+	}
+
 	}
 
 	const scrollNextPage = () => {
@@ -111,6 +119,10 @@ const utilities = () => {
 	const initBack = () => {
 		let timer;
 		buildfire.navigation.onBackButtonClick = () => {
+			
+			let input = document.getElementById("search-input");
+			input.value="";
+		
 			buildfire.history.get(
 				{
 					pluginBreadcrumbsOnly: true,
@@ -137,7 +149,17 @@ const utilities = () => {
 							case "page detail from chapter":
 								let id = result[result.length - 1].options.id;
 								openPageDetails(id);
+								PageDetails.setState(id);
+  								PageDetails.init();
 								break;
+							
+							case "main/explore from search":
+								if(config.searchFrom == "from-main")
+									openMain();
+								if(config.searchFrom == "from-explore")
+									openExplore();
+								break;
+						
 							case "Home from user profile":
 								console.log("yes");
 								openMain();
@@ -157,40 +179,9 @@ const utilities = () => {
 		};
 	};
 
-	const sort = (data, type) => {
-		if (type === "Most Recent") {
-			data.sort((a, b) => {
-				if (a.meta.createdOn < b.meta.createdOn) {
-					return -1;
-				}
-				if (a.meta.createdOn > b.meta.createdOn) {
-					return 1;
-				}
-			});
-		}
-		return data;
-	};
 
-	const hasSearch = (data) => {
-		return config.search == "" ||
-			data.meta.title
-				.toLowerCase()
-				.search(config.search.toLowerCase()) >= 0 ||
-			data.meta.description
-				.toLowerCase()
-				.search(config.search.toLowerCase()) >= 0
-	}
 
-	const setFilteredTopic = (apiData) => {
-		apiData.data.topics.forEach((topic) => {
-			if (topic.isActive) {
-				config.filterTopics.push(topic.title);
-			}
-			if (topic.isTrending) {
-				config.isTrending.push(topic.title);
-			}
-		})
-	}
+
 
 	const scrollTop = () => {
 		mainContainer.scrollTo({ top: 0});
@@ -214,10 +205,7 @@ const utilities = () => {
 		getAppTheme,
 		setAppTheme,
 		initBack,
-		sort,
 		scrollNextPage,
-		hasSearch,
-		setFilteredTopic,
 		scrollTop,
 		splideInit
 	};

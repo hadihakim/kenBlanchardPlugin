@@ -49,7 +49,6 @@
 	<script src="./js/helper/navigation.js"></script>
 	<script src="./js/utilities/splide.min.js"></script>
 	<script src="./js/utilities/strings.js"></script>
-	<script src="./js/helper/pageHandler.js"></script>
 	<script src="./js/helper/ui.js"></script>
 	<script src="./js/helper/searchBar.js" defer></script>
 	<script src="./js/helper/uiConfig.js"></script>
@@ -58,6 +57,11 @@
 	<script src="./js/utilities/utilities.js"></script>
 	<script src="./js/templates/template.js"></script>
 	<script src="./js/templates/myList.js"></script>
+	<script src="./js/templates/explore.controller.js"></script>
+	<script src="./js/templates/seeAll.conroller.js"></script>
+	<script src="./js/templates/pageDetails.controller.js"></script>
+	<script src="./js/templates/userProfile.controller.js"></script>
+	<script src="./js/templates/search.controller.js"></script>
 	<script src="./js/app.js" defer></script>
 	<!-- endbundle:scripts -->
 	<!--
@@ -89,7 +93,7 @@
 			<div class="searchItem mdc-card">
 				<div class="search-container">
 					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
-					<input class="bodyTextTheme" id="search-input" type="text" name="search" id="searchInput"
+					<input class="bodyTextTheme" id="search-input" type="text" name="search"
 						placeholder="Search" autocomplete="off" />
 					<label class="material-icons icon hidden" id="sortIcon">sort</label>
 					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
@@ -151,7 +155,7 @@
 		<div id="listViewContainer"></div>
 	</div>
 	<!-- template -->
-	<template id="userProfileTemplate" class="user-profile-template"">
+	<template id="userProfileTemplate" class="user-profile-template">
 		<div class="user-top-container userContainer">
 			<div class="user-profile-image-container">
 				<img class="user-profile-image user-image-border" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU" alt="">

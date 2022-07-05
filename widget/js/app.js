@@ -5,34 +5,25 @@ const {
   setAppTheme,
   initBack,
   scrollNextPage,
-  hasSearch,
-  setFilteredTopic,
   scrollTop,
   splideInit,
+  timeConvert,
+   cropImage,
+    sort 
 } = utilities();
 // detailsRender
-const {
-  filterAndPrintData,
-  seeAllCardsRender,
-  trendingRender,
-  detailsRender,
-  userProfile,
-} = templates();
+
 
 const {
   openMain,
   openExplore,
   openPageDetails,
   openSeeAll,
-  initMain,
   openEmptySearch,
   seeAllBtnAction,
+  openSearch,
   openUserProfile,
 } = navigation();
-// control variables
-let currentPage = 1;
-const limit = 10;
-let total = 0;
 
 function openDetails(id) {
   if (!mainPage.classList.contains("hidden")) {
@@ -44,6 +35,8 @@ function openDetails(id) {
   }
   pageDetails.innerHTML = "";
   openPageDetails(id);
+  PageDetails.setState(id);
+  PageDetails.init();
   scrollTop();
   //   buildfire.history.push("See All from Details");
 }
@@ -53,10 +46,15 @@ document.getElementById("userProfilePicture").addEventListener("click", () => {
 });
 const init = () => {
   getAppTheme();
-  initMain();
+  UserProfile.init();
+  Explore.setPageData({data:fakeData,userData:config.userConfig});
+  Explore.init("main");
+  Explore.init("explore");
+  Search.setData(fakeData);
+  Search.init();
   initBack();
   MyList.loadCharts();
-	MyList.loadList();
+  MyList.loadList();
   setAppTheme();
 };
 

@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 48px 77px 0px;
+  padding: 3rem 4.813rem 0rem;
   width: 100%;
-  height: 182px;
+  height: 11.375rem;
   background: #0297a0;
   text-align: center;
   color: #fff;
@@ -14,37 +14,41 @@
   position: relative;
 }
 .user-container .user-image-container .main-image {
-  width: 64px;
-  height: 64px;
-  border: 5px solid;
+  width: 4rem;
+  height: 4rem;
+  border: 0.313rem solid;
   border-radius: 50%;
 }
 
 .user-container .user-image-container .achievement-image {
-  width: 21px;
-  height: 21px;
+  width: 1.313rem;
+  height: 1.313rem;
   position: absolute;
   bottom: 0;
   right: 0;
   border-radius: 50%;
   background: linear-gradient(330deg, #1A203B 13.59%, #672F88 86.8%);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .user-container .text-container .user-name {
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1rem;
+  line-height: 1.25rem;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing:0.094rem;
   color: #ffffff;
   margin: 0 !important;
 }
 .user-container .text-container .growth-user-profile {
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 0.75rem;
+  line-height: 1rem;
   text-align: center;
   color: #ffffff;
 }

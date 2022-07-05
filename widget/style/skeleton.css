@@ -1,5 +1,6 @@
 .skeleton {
     animation: skeleton-loading 1s linear infinite alternate;
+    -webkit-animation: skeleton-loading 1s linear infinite alternate;
 }
 
 @keyframes skeleton-loading {
@@ -56,31 +57,34 @@
 }
 
 .horizontal--skeleton .horizontal--card .firstDiv {
-    width: 138px;
-    height: 78px;
-    border-radius: 3px 3px 0px 0px;
-    margin-bottom: 8px;
+    width: 8.625rem;
+    height: 4.875rem;
+    border-radius: 0.188rem  0.188rem 0rem 0rem;
+    margin-bottom:0.5rem;
+    -webkit-border-radius: 0.188rem  0.188rem 0rem 0rem;
+    -moz-border-radius: 0.188rem  0.188rem 0rem 0rem;
+    -ms-border-radius: 0.188rem  0.188rem 0rem 0rem;
+    -o-border-radius: 0.188rem  0.188rem 0rem 0rem;
 }
 
 .horizontal--skeleton .horizontal--card .secondDiv {
-    width: 48px;
-    height: 12px;
-    margin-bottom: 8px;
-    border-radius: 40px;
+    width:3rem;
+    height: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius:2.5rem;
 }
 
 .horizontal--skeleton .thirdDiv {
-    width: 130px;
-    height: 14px;
-    margin-bottom: 32px;
-    border-radius: 40px;
-
+    width: 8.125rem;
+    height: 0.875rem;
+    margin-bottom: 2rem;
+    border-radius: 2.5rem;
 }
 
 .horizontal--skeleton .fourthDiv {
-    width: 38px;
-    height: 12px;
-    border-radius: 40px;
+    width: 2.375rem;
+    height: 0.75rem;
+    border-radius: 2.5rem;
 }
 
 /*End Horizontal skeleton*/
@@ -109,38 +113,57 @@
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .firstDiv {
-    width: 127px;
-    height: 72px;
-    border-radius: 4px;
+    width: 7.938rem;
+    height: 4.5rem;
+    border-radius: 0.25rem;
     margin-right: 0.5rem;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    -o-border-radius: 0.25rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .secondDiv {
-    width: 208px;
-    height: 13px;
-    margin-bottom: 8px;
-    border-radius: 40px;
+    width: 13rem;
+    height:0.813rem;
+    margin-bottom:0.5rem;
+    border-radius: 2.5rem;
+    -webkit-border-radius: 2.5rem;
+    -moz-border-radius: 2.5rem;
+    -ms-border-radius: 2.5rem;
+    -o-border-radius: 2.5rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .thirdDiv {
-    width: 170px;
-    height: 12px;
-    border-radius: 40px;
-    margin-bottom: 4px;
-
+    width:10.625rem;
+    height:0.813rem;
+    border-radius:2.5rem;
+    margin-bottom: 0.25rem;
+    -webkit-border-radius:2.5rem;
+    -moz-border-radius:2.5rem;
+    -ms-border-radius:2.5rem;
+    -o-border-radius:2.5rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .fourthDiv {
-    width: 98px;
-    height: 12px;
-    border-radius: 40px;
-    margin-bottom: 8px;
+    width: 6.125rem;
+    height:0.813rem;
+    border-radius:2.5rem;
+    margin-bottom: 0.5rem;
+    -webkit-border-radius:2.5rem;
+    -moz-border-radius:2.5rem;
+    -ms-border-radius:2.5rem;
+    -o-border-radius:2.5rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .fifthDiv {
-    width: 38px;
-    height: 12px;
-    border-radius: 40px;
+    width:2.375rem;
+    height:0.813rem;
+    border-radius:2.5rem;
+    -webkit-border-radius:2.5rem;
+    -moz-border-radius:2.5rem;
+    -ms-border-radius:2.5rem;
+    -o-border-radius:2.5rem;
 }
 
 /*End Vertical seeAll Skeleton*/
