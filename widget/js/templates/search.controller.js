@@ -255,7 +255,6 @@ class Search {
             }, 1000);
           });
 
-          config.renderedCard = 0;
           let seeAllContainer = document.getElementById(
             this.pointers.seeAllContainer
           );
@@ -284,7 +283,6 @@ class Search {
     config.renderedCard = 0;
     config.page = 1;
     config.lastIndex = 0;
-    config.renderedCard = 0;
     buildfire.components.drawer.open(
       {
         content: Strings.SORT_TITLE,
@@ -358,18 +356,22 @@ class Search {
   };
 
   static search = () => {
-    config.renderedCard = 0;
     config.page = 1;
     config.lastIndex = 0;
     config.renderedCard = 0;
-    clearTimeout(mySearchingPeriod);
-    mySearchingPeriod = setTimeout(() => {
+      setTimeout(() => {
+      let input = document.getElementById(this.pointers.searchInput);
       config.search = input.value;
+
       if (
         config.searchFrom == "from-explore" ||
         config.searchFrom == "from-main"
       ) {
-        Navigation.openSearch();
+        if(Navigation.state.searchOpened){
+           Navigation.openSearch();
+           Navigation.setData(false);
+        }
+        
         Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
         const myTimeout = setTimeout(() => {
           this.searchCardsRender(seeAllContainer, () => {});
@@ -378,15 +380,10 @@ class Search {
         Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
         const myTimeout = setTimeout(() => {
           SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
-          // this.seeAllCardsRender(
-          //   this.state.apiData,
-          //   this.pointers.seeAllContainer,
-          //   this.state.duration,
-          //   () => {}
-          // );
         }, 1000);
       }
     }, 300);
+    
   };
 
   static init = () => {
