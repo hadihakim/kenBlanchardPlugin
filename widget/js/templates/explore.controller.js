@@ -28,7 +28,7 @@ class Explore {
     );
     return data[0];
   };
-  static seeAllButton = (id) => {
+  static seeAllButton = (id, type) => {
     let data = this.getDataById(id);
     let seeAllState = {
       title: "see all",
@@ -39,8 +39,7 @@ class Explore {
       duration: true,
     };
     SeeAll.setData(seeAllState);
-    Navigation.openSeeAll();
-    config.searchFrom = "from-see-all"
+    Navigation.openSeeAll(type);
     SeeAll.init();
   };
 
@@ -248,7 +247,7 @@ class Explore {
         let seeAllBtn = document.getElementById(`${element.id}_${type}`);
         if (seeAllBtn) {
           seeAllBtn.addEventListener("click", () => {
-            this.seeAllButton(element.id);
+            this.seeAllButton(element.id,type);
           });
         }
       }
