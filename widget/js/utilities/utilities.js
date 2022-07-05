@@ -1,5 +1,5 @@
-const utilities = () => {
-	const cropImage = (image, size = "full_width", aspect = "16:9") => {
+class Utilities {
+	static cropImage = (image, size = "full_width", aspect = "16:9") => {
 		let cropedImage = buildfire.imageLib.cropImage(image, {
 			size: size,
 			aspect: aspect,
@@ -7,7 +7,7 @@ const utilities = () => {
 		return cropedImage;
 	};
 
-	const timeConvert = (n) => {
+	static timeConvert = (n) => {
 		let num = n;
 		let hours = num / 60;
 		let rHours = Math.floor(hours);
@@ -16,14 +16,14 @@ const utilities = () => {
 		return rHours + "h " + rMinutes + "min";
 	};
 
-	const getAppTheme = () => {
+	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
 			config.appTheme = appTheme;
 		});
 	};
 
-	const setThemeHandler = (arr, type, color) => {
+	static setThemeHandler = (arr, type, color) => {
 		for (let i = 0; i < arr.length; i++) {
 			switch (type) {
 				case "color":
@@ -42,7 +42,7 @@ const utilities = () => {
 		}
 	};
 
-	const setAppTheme = () => {
+	static setAppTheme = () => {
 		let colorCollections = [
 			{
 				elements: [...document.getElementsByClassName("icon"),...document.getElementsByClassName("arrow-color")],
@@ -87,17 +87,13 @@ const utilities = () => {
 		];
 
 		colorCollections.forEach((element) => {
-			setThemeHandler(element.elements, element.colorType, element.colorDegree);
+			this.setThemeHandler(element.elements, element.colorType, element.colorDegree);
 		});
 	};
 
-	const _fetchNextList = () => {
-		// if (config.fetchingNextPage) return;
-	
-
+	static _fetchNextList = () => {
 	config.fetchingNextPage = true;
 	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
-		console.log("hello");
 		Search.searchCardsRender(seeAllContainer, () => {config.fetchingNextPage = false; })
 	} else if (config.searchFrom == "from-see-all") {
 		SeeAll.seeAllCardsRender(fakeData, seeAllContainer, true, () => {
@@ -107,16 +103,16 @@ const utilities = () => {
 
 	}
 
-	const scrollNextPage = () => {
+	static scrollNextPage = () => {
 		if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
-			if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
-				_fetchNextList();
+			if ((((mainContainer.Utilities.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
+				this._fetchNextList();
 				// loadData(currentPage, limit);
 			}
 		}
 	}
 
-	const initBack = () => {
+	static initBack = () => {
 		let timer;
 		buildfire.navigation.onBackButtonClick = () => {
 			
@@ -132,37 +128,37 @@ const utilities = () => {
 					if (result.length) {
 						switch (result[result.length - 1].label) {
 							case "Home from Explore":
-								openMain();
+								Navigation.openMain();
 								break;
 							case "Home from See All":
-								openMain();
+								Navigation.openMain();
 								break;
 							case "Explore from See All":
-								openExplore();
+								Navigation.openExplore();
 								break;
 							case "Explore from Details":
-								openExplore();
+								Navigation.openExplore();
 								break;
 							case "See All from Details":
-								openSeeAll();
+								Navigation.openSeeAll();
 								break;
 							case "page detail from chapter":
 								let id = result[result.length - 1].options.id;
-								openPageDetails(id);
+								Navigation.openPageDetails(id);
 								PageDetails.setState(id);
   								PageDetails.init();
 								break;
 							
 							case "main/explore from search":
 								if(config.searchFrom == "from-main")
-									openMain();
+									Navigation.openMain();
 								if(config.searchFrom == "from-explore")
-									openExplore();
+									Navigation.openExplore();
 								break;
 						
 							case "Home from user profile":
 								console.log("yes");
-								openMain();
+								Navigation.openMain();
 								break;
 							default:
 								break;
@@ -170,7 +166,7 @@ const utilities = () => {
 					}
 				}
 			);
-			scrollTop();
+			Utilities.scrollTop();
 			clearTimeout(timer);
 			// to ask charabel -->
 			timer = setTimeout(() => {
@@ -179,15 +175,11 @@ const utilities = () => {
 		};
 	};
 
-
-
-
-
-	const scrollTop = () => {
+	static scrollTop = () => {
 		mainContainer.scrollTo({ top: 0});
 	};
 
-	const splideInit = () => {
+	static splideInit = () => {
 		var splide = new Splide(".splide");
 		var bar = splide.root.querySelector(".my-carousel-progress-bar");
 		// Update the bar width:
@@ -198,16 +190,5 @@ const utilities = () => {
 		});
 		splide.mount();
 	}
-
-	return {
-		cropImage,
-		timeConvert,
-		getAppTheme,
-		setAppTheme,
-		initBack,
-		scrollNextPage,
-		scrollTop,
-		splideInit
-	};
 };
 

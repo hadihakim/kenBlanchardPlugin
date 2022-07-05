@@ -39,7 +39,7 @@ class Explore {
       duration: true,
     };
     SeeAll.setData(seeAllState);
-    openSeeAll();
+    Navigation.openSeeAll();
     config.searchFrom = "from-see-all"
     SeeAll.init();
   };
@@ -150,13 +150,13 @@ class Explore {
     title[0].innerHTML = assets_info.meta.title;
     note[0].innerHTML = assets_info.meta.description;
     image.style.backgroundImage = `linear-gradient(0deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)),
-			url('${cropImage(assets_info.meta.image)}')`;
+			url('${Utilities.cropImage(assets_info.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      openDetails(id);
+      PageDetails.openDetails(id);
     });
     container.appendChild(firstClone);
-    setAppTheme();
+    Utilities.setAppTheme();
   };
 
   static printRecommended = (
@@ -175,7 +175,7 @@ class Explore {
     let title = nodesClone.querySelectorAll(".title");
     let duration = nodesClone.querySelectorAll(".duration");
     let card = nodesClone.querySelectorAll(".mdc-card");
-    image[0].style.backgroundImage = `url('${cropImage(
+    image[0].style.backgroundImage = `url('${Utilities.cropImage(
       assets_info.meta.image
     )}')`;
     category[0].innerText = topicTitle;
@@ -183,13 +183,13 @@ class Explore {
     if (durationState) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 					<span class="schedule-text">
-						${timeConvert(assets_info.meta.duration)}</span>`;
+						${Utilities.timeConvert(assets_info.meta.duration)}</span>`;
     }
     card[0].addEventListener("click", () => {
-      openDetails(id);
+      PageDetails.openDetails(id);
     });
     container.appendChild(nodesClone);
-    setAppTheme();
+    Utilities.setAppTheme();
   };
 
   static cardRender = (sectionId, type) => {
@@ -238,9 +238,9 @@ class Explore {
           `${element.id}-container-${type}`
         );
         if (skeleton === "justForYou") {
-          horizontal1_Skeleton(container);
+          Skeleton.horizontal1_Skeleton(container);
         } else if (skeleton === "recommanded") {
-          horizontal_Skeleton(container);
+          Skeleton.horizontal_Skeleton(container);
         }
         const myTimeout = setTimeout(() => {
           this.filterAndPrintData(this.state.data, element, type);
@@ -262,8 +262,8 @@ class Explore {
       exploreBtn.innerHTML = Strings.EXPLORE_BTN;
       exploreBtn.addEventListener("click", () => {
         buildfire.history.push("Home from Explore");
-        scrollTop();
-        openExplore();
+        Utilities.scrollTop();
+        Navigation.openExplore();
       });
     } else {
       this.cardRender(this.pointers.exploreContainer, type);
