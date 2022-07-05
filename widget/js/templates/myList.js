@@ -53,6 +53,7 @@ class MyList {
                     data: yValues,
                     borderWidth: 0,
                     radius: 4,
+                    barThickness:40,
                 }]
             },
             options:{

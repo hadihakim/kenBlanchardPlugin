@@ -91,8 +91,8 @@
 			<div class="searchItem mdc-card">
 				<div class="search-container">
 					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
-					<input class="bodyTextTheme" id="search-input" type="text" name="search"
-						placeholder="Search" autocomplete="off" />
+					<input class="bodyTextTheme" id="search-input" type="text" name="search" placeholder="Search"
+						autocomplete="off" />
 					<label class="material-icons icon hidden" id="sortIcon">sort</label>
 					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
 				</div>
@@ -144,8 +144,10 @@
 				<canvas id="myChart"></canvas>
 			</div>
 			<div class="progress">
-				<canvas id="myAverageProgress">71 %</canvas>
-				<p id="percentageContainer"></p>
+				<div class="relative-percentageContainer">
+					<canvas id="myAverageProgress">71 %</canvas>
+					<p id="percentageContainer"></p>
+				</div>
 				<p id="averageLable"></p>
 			</div>
 		</div>
@@ -156,8 +158,11 @@
 	<template id="userProfileTemplate" class="user-profile-template">
 		<div class="user-top-container userContainer">
 			<div class="user-profile-image-container">
-				<img class="user-profile-image user-image-border" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU" alt="">
-				<img class="achievement-image" src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png"/>
+				<img class="user-profile-image user-image-border"
+					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU"
+					alt="">
+				<img class="achievement-image"
+					src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" />
 			</div>
 			<div class="user-info-container">
 				<h2 class="user-name barText-AppTheme">Michel Scott</h2>
@@ -167,17 +172,17 @@
 		<div class="user-body-container">
 			<div class="mdc-tab-bar userContainer" role="tablist">
 				<div class="mdc-tab-scroller">
-				  <div class="mdc-tab-scroller__scroll-area">
-					<div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer">
+					<div class="mdc-tab-scroller__scroll-area">
+						<div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer">
+						</div>
 					</div>
-				  </div>
 				</div>
-			  </div>
-			  <div id="contentContainer">
+			</div>
+			<div id="contentContainer">
 				<div class="tabContent"></div>
 				<div class="tabContent hidden"></div>
 				<div class="tabContent hidden"></div>
-			  </div>
+			</div>
 		</div>
 	</template>
 	<template id="forYouTemplate" class="forYouTemplate">
