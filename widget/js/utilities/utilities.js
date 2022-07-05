@@ -149,6 +149,8 @@ const utilities = () => {
 							case "page detail from chapter":
 								let id = result[result.length - 1].options.id;
 								openPageDetails(id);
+								PageDetails.setState(id);
+  								PageDetails.init();
 								break;
 							
 							case "main/explore from search":

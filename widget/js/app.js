@@ -11,8 +11,7 @@ const {
 // detailsRender
 
 const {
-  detailsRender,
-  userProfile,
+  userProfile
 } = templates();
 
 const {
@@ -26,11 +25,6 @@ const {
   openUserProfile,
 } = navigation();
 
-// control variables
-let currentPage = 1;
-const limit = 10;
-let total = 0;
-
 function openDetails(id) {
   if (!mainPage.classList.contains("hidden")) {
     buildfire.history.push("Home from See All");
@@ -41,6 +35,8 @@ function openDetails(id) {
   }
   pageDetails.innerHTML = "";
   openPageDetails(id);
+  PageDetails.setState(id);
+  PageDetails.init();
   scrollTop();
   //   buildfire.history.push("See All from Details");
 }

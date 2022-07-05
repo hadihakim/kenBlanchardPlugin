@@ -135,9 +135,7 @@ const openSearch = () => {
 		searchBar.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		emptySearch.classList.add("hidden");
-
 		pageDetails.classList.remove("hidden");
-		detailsRender(pageDetails, id);
 		setAppTheme();
 	}
 
