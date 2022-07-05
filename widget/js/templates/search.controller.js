@@ -362,8 +362,8 @@ class Search {
     config.page = 1;
     config.lastIndex = 0;
     config.renderedCard = 0;
-    clearTimeout(mySearchingPeriod);
-    mySearchingPeriod = setTimeout(() => {
+      setTimeout(() => {
+      let input = document.getElementById(this.pointers.searchInput);
       config.search = input.value;
       if (
         config.searchFrom == "from-explore" ||
@@ -387,6 +387,7 @@ class Search {
         }, 1000);
       }
     }, 300);
+    
   };
 
   static init = () => {
