@@ -153,7 +153,7 @@ const openSearch = () => {
 	}
 
 	const openUserProfile = () => {
-		userProfile("userProfile", fakeData.data.sections);
+		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
 		document.getElementById("userProfile").classList.remove("hidden");
 		buildfire.history.push("Home from user profile");

@@ -117,34 +117,53 @@
     height: 4.5rem;
     border-radius: 0.25rem;
     margin-right: 0.5rem;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    -o-border-radius: 0.25rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .secondDiv {
     width: 13rem;
-    height: 0.813;
+    height:0.813rem;
     margin-bottom:0.5rem;
     border-radius: 2.5rem;
+    -webkit-border-radius: 2.5rem;
+    -moz-border-radius: 2.5rem;
+    -ms-border-radius: 2.5rem;
+    -o-border-radius: 2.5rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .thirdDiv {
     width:10.625rem;
-    height: 0.5rem;
+    height:0.813rem;
     border-radius:2.5rem;
     margin-bottom: 0.25rem;
+    -webkit-border-radius:2.5rem;
+    -moz-border-radius:2.5rem;
+    -ms-border-radius:2.5rem;
+    -o-border-radius:2.5rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .fourthDiv {
-    width: 6.125;
-    height:0.75rem;
+    width: 6.125rem;
+    height:0.813rem;
     border-radius:2.5rem;
     margin-bottom: 0.5rem;
-
+    -webkit-border-radius:2.5rem;
+    -moz-border-radius:2.5rem;
+    -ms-border-radius:2.5rem;
+    -o-border-radius:2.5rem;
 }
 
 .verticalSeeAll--skeleton .verticalSeeAll--card .secondPart .fifthDiv {
     width:2.375rem;
-    height:0.75rem;
+    height:0.813rem;
     border-radius:2.5rem;
+    -webkit-border-radius:2.5rem;
+    -moz-border-radius:2.5rem;
+    -ms-border-radius:2.5rem;
+    -o-border-radius:2.5rem;
 }
 
 /*End Vertical seeAll Skeleton*/
