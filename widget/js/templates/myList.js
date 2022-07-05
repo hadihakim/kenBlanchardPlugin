@@ -29,9 +29,9 @@ class MyList {
         averageProgress: 'myAverageProgress',
         percentageContainer: 'percentageContainer',
         template: 'myList_Template',
-        averageLable:'averageLable',
-        userProfileContainer:'userProfile',
-        userProfileTemplate:'userProfileTemplate'
+        averageLable: 'averageLable',
+        userProfileContainer: 'userProfile',
+        userProfileTemplate: 'userProfileTemplate'
     }
 
     static loadData = (options) => {
@@ -40,11 +40,11 @@ class MyList {
 
     static loadCharts = () => {
         // Bar chart
-        var xValues = ["Italy", "France", "Spain"];
-        var yValues = [5, 11, 3, 0];
+        var xValues = [["Just", "Started"], ["In", "Progress"], "Completed"];
+        var yValues = [5, 11, 3];
         var barColors = ["#E4572E", "#57CC99", "#FFBA08"];
 
-        new Chart(this.pointers.barChart, {
+        let barChart = new Chart(this.pointers.barChart, {
             type: "bar",
             data: {
                 labels: xValues,
@@ -52,14 +52,23 @@ class MyList {
                     backgroundColor: barColors,
                     data: yValues,
                     borderWidth: 0,
-                    borderRadius: 4,
+                    radius: 4,
                 }]
             },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: false,
-                    text: "World Wine Production 2018"
+            options:{
+                borderRadius:4,
+                plugins:{
+                    legend:{
+                        display:false
+                    }
+                },
+                scales:{
+                    y:{
+                        beginAtZero:true,
+                        ticks:{
+                            stepSize:1
+                        }
+                    },
                 }
             }
         });
@@ -73,6 +82,7 @@ class MyList {
                     label: 'Dataset 1',
                     data: [percent / 100, 1 - percent / 100],
                     backgroundColor: ["#0297A0", "#0000"],
+                    borderWidth:4
                 }
             ]
         };
@@ -80,15 +90,15 @@ class MyList {
         new Chart(this.pointers.averageProgress, {
             type: 'doughnut',
             data: data,
-            options: {
-                responsive: true,
-                legend: { display: false },
-                title: {
-                    display: false,
-                    text: 'Average Progress'
+            options:{
+                plugins:{
+                    legend:{
+                        display:false
+                    }
                 }
-            },
+            }
         });
+        Chart.defaults.font.size = 10;
 
         document.getElementById(this.pointers.percentageContainer).innerHTML = `${percent}%`;
         document.getElementById(this.pointers.averageLable).innerHTML = 'Average Progress';
@@ -106,7 +116,7 @@ class MyList {
             let subTitleContainer = nodesClone.querySelector("#subTitle_text");
             let actionBtn = nodesClone.querySelector("#action");
 
-            imageContainer.setAttribute( 'style', `background-image: url('${card.image}')` );
+            imageContainer.setAttribute('style', `background-image: url('${card.image}')`);
             titleContainer.innerHTML = card.title;
             subTitleContainer.innerHTML = card.subTitle;
 
@@ -122,13 +132,13 @@ class MyList {
         const myContainer = document.getElementById(this.pointers.userProfileTemplate);
         const nodesClone = myContainer.content.cloneNode(true);
         userProfileContainer.innerHTML = '';
-        
-        
+
+
         nodesClone.getElementById('profileMainPage').classList.add('hidden');
         nodesClone.getElementById(this.pointers.pagePointer).classList.remove('hidden');
 
         userProfileContainer.appendChild(nodesClone);
-        
+
         this.loadCharts();
         this.loadList();
     }
