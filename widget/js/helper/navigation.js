@@ -51,7 +51,8 @@ config.searchFrom="from-explore";
 		seeAllContainer.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
-
+		mainContainer.classList.remove("hidden");
+		userProfileContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
@@ -110,7 +111,7 @@ static openSearch = () => {
 	static openUserProfile = () => {
 		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
-		document.getElementById("userProfile").classList.remove("hidden");
+		document.getElementById("userProfileContainer").classList.remove("hidden");
 		buildfire.history.push("Home from user profile");
 		Utilities.setAppTheme();
 	}
