@@ -20,6 +20,22 @@ class PageDetails {
         this.state.data = fakeData.data.assets_info[id];
     }
 
+    static openDetails(id) {
+        if (!mainPage.classList.contains("hidden")) {
+          buildfire.history.push("Home from See All");
+        } else if (!seeAllContainer.classList.contains("hidden")) {
+          buildfire.history.push("See All from Details");
+        } else if (!explorePage.classList.contains("hidden")) {
+          buildfire.history.push("Explore from Details");
+        }
+        pageDetails.innerHTML = "";
+        Navigation.openPageDetails(id);
+        PageDetails.setState(id);
+        PageDetails.init();
+        Utilities.scrollTop();
+        //   buildfire.history.push("See All from Details");
+      }
+
     static graphicalSummariesFirstPage = () => {
         let container = document.getElementById(this.pointers.pageDetails);
         const template = document.getElementById(this.pointers.graphicalSummariesFirstPage);
@@ -28,7 +44,7 @@ class PageDetails {
         let title = nodesClone.querySelectorAll(".title");
         let description = nodesClone.querySelectorAll(".description");
         let chaptersList = nodesClone.querySelectorAll(".chapters-list");
-        topImage[0].style.backgroundImage = `url('${cropImage(this.state.data.image)}')`;
+        topImage[0].style.backgroundImage = `url('${Utilities.cropImage(this.state.data.image)}')`;
         title[0].innerText = this.state.data.title;
         description[0].innerText = this.state.data.description;
         this.state.data.chapters.forEach((chapter) => {
@@ -57,7 +73,7 @@ class PageDetails {
         });
     
         container.appendChild(nodesClone);
-            setAppTheme();
+            Utilities.setAppTheme();
         };
     
       static graphicalSummariesSecondPage = () => {
@@ -72,11 +88,11 @@ class PageDetails {
         startChapter.addEventListener("click", () => {
           this.graphicalSummariesThirdPage();
         });
-        topImage[0].src = cropImage(this.state.chapterData.image);
+        topImage[0].src = Utilities.cropImage(this.state.chapterData.image);
         title[0].innerText = this.state.chapterData.title;
         subtitle[0].innerText = this.state.chapterData.subTitle;
         container.appendChild(nodesClone);
-        setAppTheme();
+        Utilities.setAppTheme();
       };
     
       static graphicalSummariesThirdPage = () => {
@@ -91,7 +107,7 @@ class PageDetails {
           let innerHTML = `
                 <div class="content-item">
                     <img
-                      src="${cropImage(page.pageImage)}"
+                      src="${Utilities.cropImage(page.pageImage)}"
                       alt=""
                       class="top-image"
                     />
@@ -106,8 +122,8 @@ class PageDetails {
           splideList[0].appendChild(li);
         });
         container.appendChild(nodesClone);
-        splideInit();
-            setAppTheme();
+        Utilities.splideInit();
+            Utilities.setAppTheme();
         };
     
       static graphicalSummariesFourthPage = () => {
@@ -116,7 +132,7 @@ class PageDetails {
         const template = document.getElementById(this.pointers.graphicalSummariesFourthPage);
         const nodesClone = template.content.cloneNode(true);
         container.appendChild(nodesClone);
-            setAppTheme();
+            Utilities.setAppTheme();
         };
 
     static detailsRender = () => {
@@ -140,7 +156,7 @@ class PageDetails {
           // give the button inner text -->
           startCourse[0].innerHTML = Strings.START_COURSE;
     
-          image[0].style.backgroundImage = `url('${cropImage(
+          image[0].style.backgroundImage = `url('${Utilities.cropImage(
             this.state.data.meta.image,
             "full_width",
             "4:3"
@@ -149,7 +165,7 @@ class PageDetails {
           if (this.state.data.meta.duration) {
             duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" style="font-size: 1rem !important;"> schedule </span>
                                 <span class="schedule-text bodyText-AppTheme">
-                            ${timeConvert(this.state.data.meta.duration)}</span>`;
+                            ${Utilities.timeConvert(this.state.data.meta.duration)}</span>`;
           }
           descriptionTitle[0].innerHTML = "Description";
           descriptionText[0].innerHTML =
@@ -177,7 +193,7 @@ class PageDetails {
           container.appendChild(firstClone);
         }
     
-        setAppTheme();
+        Utilities.setAppTheme();
       };
     
       static graphicalSummaries = () => {
