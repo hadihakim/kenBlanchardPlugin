@@ -94,9 +94,10 @@ class Utilities {
 	static _fetchNextList = () => {
 	config.fetchingNextPage = true;
 	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
+		console.log("test");
 		Search.searchCardsRender(seeAllContainer, () => {config.fetchingNextPage = false; })
 	} else if (config.searchFrom == "from-see-all") {
-		SeeAll.seeAllCardsRender(fakeData, seeAllContainer, true, () => {
+		SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
 			config.fetchingNextPage = false;
 		});
 	}
@@ -105,7 +106,8 @@ class Utilities {
 
 	static scrollNextPage = () => {
 		if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
-			if ((((mainContainer.Utilities.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
+			console.log("before scrollNextPage");
+			if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
 				this._fetchNextList();
 				// loadData(currentPage, limit);
 			}
@@ -148,17 +150,20 @@ class Utilities {
 								PageDetails.setState(id);
   								PageDetails.init();
 								break;
-							
 							case "main/explore from search":
-								if(config.searchFrom == "from-main")
+								if(config.searchFrom == "from-main"){
 									Navigation.openMain();
-								if(config.searchFrom == "from-explore")
+								}else if(config.searchFrom == "from-explore"){
 									Navigation.openExplore();
+								}
+								Navigation.setData(true);
 								break;
 						
 							case "Home from user profile":
-								console.log("yes");
 								Navigation.openMain();
+								break;
+							case "user profile from list":
+								Navigation.openUserProfile();
 								break;
 							default:
 								break;

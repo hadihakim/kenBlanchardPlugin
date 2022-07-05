@@ -28,7 +28,7 @@ class Explore {
     );
     return data[0];
   };
-  static seeAllButton = (id) => {
+  static seeAllButton = (id, type) => {
     let data = this.getDataById(id);
     let seeAllState = {
       title: "see all",
@@ -39,8 +39,7 @@ class Explore {
       duration: true,
     };
     SeeAll.setData(seeAllState);
-    Navigation.openSeeAll();
-    config.searchFrom = "from-see-all"
+    Navigation.openSeeAll(type);
     SeeAll.init();
   };
 
@@ -196,11 +195,12 @@ class Explore {
     const sectionsContainer = document.getElementById(sectionId);
 
     this.state.data.data.sections.forEach((element) => {
-      let skeleton = "";
+      let skeleton = "recommanded";
       if (
         (type == "explore" && element.isExplore && element.isActive) ||
         (element.isActive && type !== "explore")
       ) {
+        if(type !== "userActivityPage" || element.layout !== "horizontal-1") {
         let sectionInnerHTML;
         if (element.layout != "horizontal-1") {
           sectionInnerHTML = `
@@ -220,12 +220,14 @@ class Explore {
 					</div>
 					  `;
           skeleton = "recommanded";
-        } else {
+        } else{
+          if(type !=="userActivityPage"){
+            skeleton = "justForYou";
+          }
           sectionInnerHTML = `
 					<p class="sectionTitle headerText-AppTheme">${element.title}</p>
 						<div id="${`${element.id}-container-${type}`}" class="main"></div>
 					`;
-          skeleton = "justForYou";
         }
         ui.createElement(
           "section",
@@ -247,12 +249,18 @@ class Explore {
         }, 1000);
         let seeAllBtn = document.getElementById(`${element.id}_${type}`);
         if (seeAllBtn) {
-          seeAllBtn.addEventListener("click", () => {
-            this.seeAllButton(element.id);
-          });
+            seeAllBtn.addEventListener("click", () => {
+              if (type==="userActivityPage") {
+                Navigation.openUserList();
+              }else{
+                this.seeAllButton(element.id,type);
+              }
+            });
+          
         }
       }
-    });
+    }
+  });
   };
 
   static init = (type) => {

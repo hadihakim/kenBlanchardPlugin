@@ -134,28 +134,31 @@
 	</div>
 
 	<!-- user profile-->
-	<div id="userProfile" class="user-profile-container hidden slide-in">
-	</div>
-	<!-- end user profile -->
-	<!-- my list -- will be organized -->
-	<div id="myList_PageContainer" class="myList_PageContainer">
-		<div class="chartContainer">
-			<div class="bar">
-				<canvas id="myChart"></canvas>
-			</div>
-			<div class="progress">
-				<div class="relative-percentageContainer">
-					<canvas id="myAverageProgress">71 %</canvas>
-					<p id="percentageContainer"></p>
-				</div>
-				<p id="averageLable"></p>
-			</div>
+	<div id="userProfileContainer" class="hidden">
+		<div id="userProfile" class="user-profile-container slide-in">
 		</div>
+		<!-- end user profile -->
+		<!-- my list -- will be organized -->
+		<div id="myList_PageContainer" class="myList_PageContainer slide-in hidden">
+			<div class="chartContainer">
+				<div class="bar">
+					<canvas id="myChart"></canvas>
+				</div>
+				<div class="progress">
+					<div class="relative-percentageContainer">
+						<canvas id="myAverageProgress">71 %</canvas>
+						<p id="percentageContainer"></p>
+					</div>
+					<p id="averageLable"></p>
+				</div>
+			</div>
 
-		<div id="listViewContainer"></div>
+			<div id="listViewContainer"></div>
+		</div>
 	</div>
 	<!-- template -->
 	<template id="userProfileTemplate" class="user-profile-template">
+
 		<div class="user-top-container userContainer">
 			<div class="user-profile-image-container">
 				<img class="user-profile-image user-image-border"
