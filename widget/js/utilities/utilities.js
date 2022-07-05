@@ -162,6 +162,9 @@ class Utilities {
 							case "Home from user profile":
 								Navigation.openMain();
 								break;
+							case "user profile from list":
+								Navigation.openUserProfile();
+								break;
 							default:
 								break;
 						}

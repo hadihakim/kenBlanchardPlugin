@@ -1,7 +1,7 @@
 const config = {
   userConfig: {
     firstName: "Michel",
-    lastName: "Scoot",
+    lastName: "Scott",
     email: "michel@gmail.com",
     growthProfile:"Newcomer",
     profilePicture:
