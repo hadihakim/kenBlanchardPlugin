@@ -82,7 +82,7 @@ class MyList {
                 {
                     label: 'Dataset 1',
                     data: [percent / 100, 1 - percent / 100],
-                    backgroundColor: ["#0297A0", "#0000"],
+                    backgroundColor: ["#0297A0", "#fff"],
                     borderWidth:4
                 }
             ]

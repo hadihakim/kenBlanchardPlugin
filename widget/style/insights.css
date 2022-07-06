@@ -10,17 +10,39 @@
     align-items: center;
     width: calc(100% - 2rem);
     margin: 1rem;
-    height: 88px;
+    height: 5.5rem;
     background: #FECD83;
     border-radius: 4px;
     padding: 1rem;
 
 }
 
-.assesmentsBar .assesmentsChart {
-    width: 10px !important;
-    height: 20px;
+#assesmentsBar {
+    position: relative;
+    width: 3.125rem;
+    height: 3.125rem;
     margin-right: 1.1rem;
+}
+
+#assesmentPercentage {
+    position: absolute;
+    top: 32%;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #5F5F5F;
+}
+
+#assesmentsBar .assesmentsChart {
+    width: 100% !important;
+    height: 100% !important;
+
 }
 
 .assesmentsDetails .assesmentsNumber {
@@ -62,7 +84,7 @@
     margin-bottom: 1rem;
 }
 
-.assesmentSection .assesmentList{
+.assesmentSection .assesmentList {
     width: 100%;
     height: auto;
     margin-bottom: 2rem;

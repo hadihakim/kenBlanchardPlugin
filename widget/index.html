@@ -81,8 +81,7 @@
 <body id="mainBody">
 
 	<!-- user section -->
-
-	<div class="slide-in  " id="mainContainer">
+	<div class="slide-in" id="mainContainer">
 		<div class="user-container userContainer" id="userContainer">
 			<div class="user-image-container">
 				<img class="main-image user-image-border" id="userProfilePicture" />
@@ -165,163 +164,26 @@
 		</div>
 	</div>
 
+	<div id="ChartContainer">
+		<!-- <canvas id="assesmentProgress" class="assesmentsChart"></canvas> -->
+	</div>
 
 	<!-- User Insights-->
-	<div id="userInsightsContainer" class="userInsightsContainer hidden">
-		<div id="assesmentsTakenContainer" class="assesmentsTakenContainer">
-			<div class="assesmentsBar">
-				<canvas id="myAverageProgress" class="assesmentsChart"></canvas>
+	<template id="userProfileInsights">
+		<div id="userInsightsContainer" class="userInsightsContainer">
+			<div id="assesmentsTakenContainer" class="assesmentsTakenContainer">
+				<div id="assesmentsBar" class="assesmentsBar">
+					<p class="assesmentPercentage" id="assesmentPercentage"></p>
+				</div>
+				<div class="assesmentsDetails">
+					<p class="assesmentsNumber">12</p>
+					<p class="assesmentsTitle">Assesments Taken</p>
+				</div>
 			</div>
-			<div class="assesmentsDetails">
-				<p class="assesmentsNumber">12</p>
-				<p class="assesmentsTitle">Assesments Taken</p>
-			</div>
-		</div>
-		<div id="allAssesmentsContainer" class="allAssesmentsContainer">
-			<div class="assesmentSection">
-				<p class="assesmentHeader">Self Management</p>
-				<ul class="assesmentList">
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="assesmentSection">
-				<p class="assesmentHeader">Self Management</p>
-				<ul class="assesmentList">
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-					<li class="assesmentElement">
-						<div class="assesmentDetails">
-							<p class="assesmentDetailsTitle">Confidence</p>
-							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
-						</div>
-						<div id="assesmentAction" class="assesmentAction">
-							<span class="material-icons icon">
-								chevron_right
-							</span>
-						</div>
-					</li>
-				</ul>
+			<div id="allAssesmentsContainer" class="allAssesmentsContainer">
 			</div>
 		</div>
-	</div>
+	</template>
 	<!-- End User Insights-->
 
 	<!-- template -->
@@ -358,21 +220,21 @@
 	</template>
 	<template id="userBadgesTemplate" class="user-badges-template">
 		<div class="user-badges-container">
-		<div class="badges-achieved">
-			<h2 class="ba-title">
-				Badges Achieved
-			</h2>
-			<div class="ba-container" id="badgesAchievedContainer">
+			<div class="badges-achieved">
+				<h2 class="ba-title">
+					Badges Achieved
+				</h2>
+				<div class="ba-container" id="badgesAchievedContainer">
+				</div>
+			</div>
+			<div class="badges-achieved">
+				<h2 class="ba-title">
+					Badges To Achieve
+				</h2>
+				<div class="ba-container ba-disabled" id="badgesToAchievedContainer">
+				</div>
 			</div>
 		</div>
-		<div class="badges-achieved">
-			<h2 class="ba-title">
-				Badges To Achieve
-			</h2>
-			<div class="ba-container ba-disabled" id="badgesToAchievedContainer">
-			</div>
-		</div>
-	</div>
 	</template>
 	<template id="forYouTemplate" class="forYouTemplate">
 		<div class="border-radius-four mdc-card" id="card_body">
@@ -385,6 +247,7 @@
 	<template id="recommendedTemplate">
 		<div class="mdc-card cards-container">
 			<div class="image"></div>
+			<div class="progressBar"></div>
 			<div class="mdc-card-body">
 				<div class="category bodyText-AppTheme"></div>
 				<div class="title headerText-AppTheme"></div>
