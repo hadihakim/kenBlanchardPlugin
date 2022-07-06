@@ -166,7 +166,7 @@ class PageDetails {
           )}')`;
           title[0].innerHTML = this.state.data.meta.title;
           if (this.state.data.meta.duration) {
-            duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" style="font-size: 1rem !important;"> schedule </span>
+            duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" id= "scheduleIcon2"> schedule </span>
                                 <span class="schedule-text bodyText-AppTheme">
                             ${Utilities.timeConvert(this.state.data.meta.duration)}</span>`;
           }
