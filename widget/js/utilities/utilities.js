@@ -1,4 +1,8 @@
 class Utilities {
+	static state = {
+		appTheme:{},
+	}
+
 	static cropImage = (image, size = "full_width", aspect = "16:9") => {
 		let cropedImage = buildfire.imageLib.cropImage(image, {
 			size: size,
@@ -19,7 +23,7 @@ class Utilities {
 	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
-			config.appTheme = appTheme;
+			this.state.appTheme = appTheme;
 			console.log(appTheme);
 		});
 	};
@@ -48,47 +52,47 @@ class Utilities {
 			{
 				elements: [...document.getElementsByClassName("icon"), ...document.getElementsByClassName("arrow-color")],
 				colorType: "color",
-				colorDegree: config.appTheme.colors.icons,
+				colorDegree: this.state.appTheme.colors.icons,
 			},
 			{
 				elements: document.getElementsByClassName("headerText-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.headerText,
+				colorDegree: this.state.appTheme.colors.headerText,
 			},
 			{
 				elements: document.getElementsByClassName("barText-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.titleBarTextAndIcons,
+				colorDegree: this.state.appTheme.colors.titleBarTextAndIcons,
 			},
 			{
 				elements: document.getElementsByClassName("bodyText-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.bodyText,
+				colorDegree: this.state.appTheme.colors.bodyText,
 			},
 			{
 				elements: document.getElementsByClassName("userContainer"),
 				colorType: "back",
-				colorDegree: config.appTheme.colors.primaryTheme,
+				colorDegree: this.state.appTheme.colors.primaryTheme,
 			},
 			{
 				elements: document.getElementsByClassName("user-image-border"),
 				colorType: "borderColor",
-				colorDegree: config.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.infoTheme,
 			},
 			{
 				elements: document.getElementsByClassName("info-btn-AppTheme"),
 				colorType: "back",
-				colorDegree: config.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.infoTheme,
 			},
 			{
 				elements: document.getElementsByClassName("info-link-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.infoTheme,
 			},
 			{
 				elements: document.getElementsByClassName("infoTheme"),
 				colorType: "back",
-				colorDegree: config.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.infoTheme,
 			}
 		];
 

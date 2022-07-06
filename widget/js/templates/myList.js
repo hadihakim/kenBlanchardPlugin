@@ -4,7 +4,7 @@ class MyList {
     static listState = {
         title: "My List",
         data: [{
-            id:'card 1',
+            id: 'card 1',
             title: "Another article",
             subTitle: '3 Taken On  •  15 In Total',
             description: "sfdfsdfsdf sdf sdf",
@@ -14,7 +14,7 @@ class MyList {
             createdOn: "2022-06-22T16:30:22.260Z"
         },
         {
-            id:'card 2',
+            id: 'card 2',
             title: "Another article",
             subTitle: '3 Taken On  •  15 In Total',
             description: "sfdfsdfsdf sdf sdf",
@@ -55,23 +55,35 @@ class MyList {
                     data: yValues,
                     borderWidth: 0,
                     radius: 4,
-                    barThickness:40,
+                    barThickness: 40,
                 }]
             },
-            options:{
-                borderRadius:4,
-                plugins:{
-                    legend:{
-                        display:false
-                    }
+            options: {
+                borderRadius: 4,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+
                 },
-                scales:{
-                    y:{
-                        beginAtZero:true,
-                        ticks:{
-                            stepSize:1
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                        },
+                        ticks: {
+                            font: {
+                                size: 10,
+                            }
                         }
                     },
+                    
                 }
             }
         });
@@ -84,8 +96,8 @@ class MyList {
                 {
                     label: 'Dataset 1',
                     data: [percent / 100, 1 - percent / 100],
-                    backgroundColor: ["#0297A0", "#0000"],
-                    borderWidth:4
+                    backgroundColor: [Utilities.state.appTheme.colors.primaryTheme, "#0000"],
+                    borderWidth: 4
                 }
             ]
         };
@@ -93,15 +105,14 @@ class MyList {
         new Chart(this.pointers.averageProgress, {
             type: 'doughnut',
             data: data,
-            options:{
-                plugins:{
-                    legend:{
-                        display:false
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
             }
         });
-        Chart.defaults.font.size = 10;
 
         document.getElementById(this.pointers.percentageContainer).innerHTML = `${percent}%`;
         document.getElementById(this.pointers.averageLable).innerHTML = 'Average Progress';
@@ -125,7 +136,7 @@ class MyList {
 
             listContainer.appendChild(nodesClone);
 
-            actionBtn.addEventListener('click', ()=>{
+            actionBtn.addEventListener('click', () => {
                 TeamEffectivenessList.init(card.id);
                 Navigation.openTeamEffectivenessList(card.id);
             })
