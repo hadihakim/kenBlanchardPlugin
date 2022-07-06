@@ -35,7 +35,10 @@ class PageDetails {
         Utilities.scrollTop();
         //   buildfire.history.push("See All from Details");
       }
-
+    static openCourseDetails(data){
+      Navigation.openCourseDetails(this.state.id);
+      CourseDetails.init(data);
+    }
     static graphicalSummariesFirstPage = () => {
         let container = document.getElementById(this.pointers.pageDetails);
         const template = document.getElementById(this.pointers.graphicalSummariesFirstPage);
@@ -155,7 +158,7 @@ class PageDetails {
           let lessonItem = firstClone.querySelectorAll(".learn-list");
           // give the button inner text -->
           startCourse[0].innerHTML = Strings.START_COURSE;
-    
+          startCourse[0].addEventListener("click",()=>{ this.openCourseDetails(this.state.data)});
           image[0].style.backgroundImage = `url('${Utilities.cropImage(
             this.state.data.meta.image,
             "full_width",
@@ -205,6 +208,7 @@ class PageDetails {
 
 
       static init() {
+        pageDetails.innerHTML="";
         this.detailsRender()
       }
 }

@@ -96,7 +96,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openPageDetails = (id) => {
+	static openPageDetails = () => {
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
@@ -111,7 +111,24 @@ class Navigation {
 		pageDetails.classList.remove("hidden");
 		Utilities.setAppTheme();
 	}
-
+static openCourseDetails = (id)=>{
+	buildfire.history.push("Details from CourseDetails",{id:id});
+	config.renderedCard = 0;
+		config.page = 1;
+		config.lastIndex = 0;
+		pageDetails.innerHTML="";
+		config.isSeeAllScreen = false;
+		Utilities.scrollTop();
+		mainPage.classList.add("hidden");
+		userContainer.classList.add("hidden");
+		explorePage.classList.add("hidden");
+		seeAllContainer.classList.add("hidden");
+		searchBar.classList.add("hidden");
+		sortIcon.classList.add("hidden");
+		emptySearch.classList.add("hidden");
+		pageDetails.classList.remove("hidden");
+		Utilities.setAppTheme();
+}
 	static openEmptySearch = () => {
 		emptySearch.classList.remove("hidden");
 		searchBar.classList.remove("hidden");

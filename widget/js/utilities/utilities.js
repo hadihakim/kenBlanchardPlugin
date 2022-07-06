@@ -154,6 +154,12 @@ class Utilities {
 								PageDetails.setState(id);
   								PageDetails.init();
 								break;
+							case "Details from CourseDetails":
+								let id2 = result[result.length - 1].options.id;
+								Navigation.openPageDetails();
+								PageDetails.setState(id2);
+  								PageDetails.init();
+								break;
 							case "main/explore from search":
 								if(config.searchFrom == "from-main"){
 									Navigation.openMain();
@@ -169,6 +175,7 @@ class Utilities {
 							case "user profile from list":
 								Navigation.openUserProfile();
 								break;
+							
 							default:
 								break;
 						}
