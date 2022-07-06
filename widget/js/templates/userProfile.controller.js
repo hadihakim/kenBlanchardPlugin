@@ -79,11 +79,6 @@ class UserProfile {
     }]
   };
 
-  static setData = (data) => {
-    this.state.userData = data;
-    this.state.data = fakeData;
-  };
-
   static pointers = {
     userName: "userName",
     userProfilePicture: "userProfilePicture",
@@ -95,6 +90,11 @@ class UserProfile {
 	userBadgesTemplate:"userBadgesTemplate",
   userProfileInsights: "userProfileInsights",
   assesmentProgress: "assesmentProgress"
+  };
+
+  static setData = (data) => {
+    this.state.userData = data;
+    this.state.data = fakeData;
   };
 
   static getUser = () => {
@@ -126,7 +126,6 @@ class UserProfile {
       userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
     }
   };
-
 
   static userProfile = () => {
     const container = document.getElementById(this.pointers.userProfile);
@@ -226,7 +225,7 @@ class UserProfile {
 			  showCancelButton: false,
 			  actionButtons: [
 				{
-				  text: `<span style="color:${config.appTheme.colors.icons}">OK</span>`,
+				  text: `<span style="color:${Utilities.state.appTheme.colors.icons}">OK</span>`,
 				  action: () => {
 				  },
 				},
