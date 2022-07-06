@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="./style/userSection.css" />
 	<link rel="stylesheet" href="./style/summaryTemplate.css" />
 	<link rel="stylesheet" href="./style/userProfile.css" />
+	<link rel="stylesheet" href="./style/courseDetails.css" />
+
 	<link rel="stylesheet" href="./style/splide-default.min.css" />
 	<link rel="stylesheet" href="../../../styles/material-icons.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -64,6 +66,8 @@
 	<script src="./js/templates/pageDetails.controller.js"></script>
 	<script src="./js/templates/userProfile.controller.js"></script>
 	<script src="./js/templates/search.controller.js"></script>
+	<script src="./js/templates/courseDetails.controller.js"></script>
+
 	<script src="./js/app.js" defer></script>
 	<!-- endbundle:scripts -->
 	<!--
@@ -77,7 +81,8 @@
 <body id="mainBody">
 
 	<!-- user section -->
-	<div class="slide-in " id="mainContainer">
+
+	<div class="slide-in  " id="mainContainer">
 		<div class="user-container userContainer" id="userContainer">
 			<div class="user-image-container">
 				<img class="main-image user-image-border" id="userProfilePicture" />
@@ -132,7 +137,6 @@
 		</div>
 
 		<div id="pageDetails" class="hidden pageDetails slide-in"></div>
-
 		<!-- -------------------- -->
 		<!-- end section -->
 	</div>
@@ -440,7 +444,17 @@
 
 		</div>
 	</template>
+	<template id="courseDetailsTemplate" class="courseDetailsTemplate">
+		<div id="course-img" class="course-img"></div>
+		<p id="course-title" class="course-title headerText-AppTheme"></p>
+		<div class="mdc-card-footer ">
+			<div class="duration duration-details"></div>
+		</div>
+	 <div id="course-lessons-list" class="course-lessons-list">
 
+		</div> 
+	
+	</template>
 	<!--graphical Summaries  -->
 	<template id="graphicalSummariesFirstPage">
 		<div class="first-page slide-in">
