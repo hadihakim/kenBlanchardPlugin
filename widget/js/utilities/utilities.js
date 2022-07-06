@@ -20,6 +20,7 @@ class Utilities {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
 			config.appTheme = appTheme;
+			console.log(appTheme);
 		});
 	};
 
@@ -27,7 +28,7 @@ class Utilities {
 		for (let i = 0; i < arr.length; i++) {
 			switch (type) {
 				case "color":
-					arr[i].setAttribute( 'style', `fill: ${color} !important` );
+					arr[i].setAttribute('style', `fill: ${color} !important`);
 					arr[i].style.color = color;
 					break;
 				case "back":
@@ -45,7 +46,7 @@ class Utilities {
 	static setAppTheme = () => {
 		let colorCollections = [
 			{
-				elements: [...document.getElementsByClassName("icon"),...document.getElementsByClassName("arrow-color")],
+				elements: [...document.getElementsByClassName("icon"), ...document.getElementsByClassName("arrow-color")],
 				colorType: "color",
 				colorDegree: config.appTheme.colors.icons,
 			},
@@ -84,6 +85,11 @@ class Utilities {
 				colorType: "color",
 				colorDegree: config.appTheme.colors.infoTheme,
 			},
+			{
+				elements: document.getElementsByClassName("infoTheme"),
+				colorType: "back",
+				colorDegree: config.appTheme.colors.infoTheme,
+			}
 		];
 
 		colorCollections.forEach((element) => {
@@ -92,15 +98,15 @@ class Utilities {
 	};
 
 	static _fetchNextList = () => {
-	config.fetchingNextPage = true;
-	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
-		console.log("test");
-		Search.searchCardsRender(seeAllContainer, () => {config.fetchingNextPage = false; })
-	} else if (config.searchFrom == "from-see-all") {
-		SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
-			config.fetchingNextPage = false;
-		});
-	}
+		config.fetchingNextPage = true;
+		if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
+			console.log("test");
+			Search.searchCardsRender(seeAllContainer, () => { config.fetchingNextPage = false; })
+		} else if (config.searchFrom == "from-see-all") {
+			SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
+				config.fetchingNextPage = false;
+			});
+		}
 
 	}
 
@@ -117,16 +123,16 @@ class Utilities {
 	static initBack = () => {
 		let timer;
 		buildfire.navigation.onBackButtonClick = () => {
-			
+
 			let input = document.getElementById("search-input");
-			input.value="";
-		
+			input.value = "";
+
 			buildfire.history.get(
 				{
 					pluginBreadcrumbsOnly: true,
 				},
 				(err, result) => {
-					if(err) return console.log(err);
+					if (err) return console.log(err);
 					if (result.length) {
 						switch (result[result.length - 1].label) {
 							case "Home from Explore":
@@ -142,9 +148,9 @@ class Utilities {
 								Navigation.openExplore();
 								break;
 							case "See All from Details":
-								if(config.searchFrom == "from-main" ||config.searchFrom == "from-explore" ){
+								if (config.searchFrom == "from-main" || config.searchFrom == "from-explore") {
 									Navigation.openSearch();
-								}else if(config.searchFrom == "from-see-all"){
+								} else if (config.searchFrom == "from-see-all") {
 									Navigation.openSeeAll();
 								}
 								break;
@@ -152,22 +158,25 @@ class Utilities {
 								let id = result[result.length - 1].options.id;
 								Navigation.openPageDetails(id);
 								PageDetails.setState(id);
-  								PageDetails.init();
+								PageDetails.init();
 								break;
 							case "main/explore from search":
-								if(config.searchFrom == "from-main"){
+								if (config.searchFrom == "from-main") {
 									Navigation.openMain();
-								}else if(config.searchFrom == "from-explore"){
+								} else if (config.searchFrom == "from-explore") {
 									Navigation.openExplore();
 								}
 								Navigation.setData(true);
 								break;
-						
+
 							case "Home from user profile":
 								Navigation.openMain();
 								break;
 							case "user profile from list":
 								Navigation.openUserProfile();
+								break;
+							case "user List from temEffectiveness list":
+								Navigation.openUserList();
 								break;
 							default:
 								break;
@@ -185,7 +194,7 @@ class Utilities {
 	};
 
 	static scrollTop = () => {
-		mainContainer.scrollTo({ top: 0});
+		mainContainer.scrollTo({ top: 0 });
 	};
 
 	static splideInit = () => {

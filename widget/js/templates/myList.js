@@ -4,6 +4,7 @@ class MyList {
     static listState = {
         title: "My List",
         data: [{
+            id:'card 1',
             title: "Another article",
             subTitle: '3 Taken On  •  15 In Total',
             description: "sfdfsdfsdf sdf sdf",
@@ -13,6 +14,7 @@ class MyList {
             createdOn: "2022-06-22T16:30:22.260Z"
         },
         {
+            id:'card 2',
             title: "Another article",
             subTitle: '3 Taken On  •  15 In Total',
             description: "sfdfsdfsdf sdf sdf",
@@ -122,6 +124,11 @@ class MyList {
             subTitleContainer.innerHTML = card.subTitle;
 
             listContainer.appendChild(nodesClone);
+
+            actionBtn.addEventListener('click', ()=>{
+                TeamEffectivenessList.init(card.id);
+                Navigation.openTeamEffectivenessList(card.id);
+            })
         })
 
     }

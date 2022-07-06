@@ -58,6 +58,7 @@
 	<script src="./js/utilities/fakeData.js"></script>
 	<script src="./js/utilities/summaryData.js"></script>
 	<script src="./js/utilities/utilities.js"></script>
+	<script src="./js/templates/teamEffectivenessList.js"></script>
 	<script src="./js/templates/myList.js"></script>
 	<script src="./js/templates/explore.controller.js"></script>
 	<script src="./js/templates/seeAll.conroller.js"></script>
@@ -155,9 +156,17 @@
 					</div>
 					<p id="averageLable"></p>
 				</div>
+				<div class="handleAchived-Container">
+					<input class="icon" id="includeAchived-option" type="checkbox" />
+					<label for="includeAchived-option"> Include Archived </label>
+				</div>
 			</div>
 
 			<div id="listViewContainer"></div>
+		</div>
+		<div class="slide-in hidden" id="teamEffectiveness_PageContainer">
+			<div id="teamEffectiveness_tabHandler" class="userContainer"></div>
+			<div id="teamEffectiveness_ListContainer"></div>
 		</div>
 	</div>
 
@@ -528,6 +537,23 @@
 			<div id="action">
 				<span class="material-icons icon">
 					chevron_right
+				</span>
+			</div>
+		</div>
+	</template>
+
+	<template id="teamEffectiveness_Template">
+		<div class="teamEffectiveness_Card">
+			<div id="image"></div>
+			<div class="title">
+				<div id="title_text"></div>
+				<div id="bar">
+					<div class="infoTheme" id="filled"></div>
+				</div>
+			</div>
+			<div id="action">
+				<span class="material-icons icon">
+					more_horiz
 				</span>
 			</div>
 		</div>
