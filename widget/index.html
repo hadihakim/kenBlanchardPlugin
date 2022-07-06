@@ -77,7 +77,7 @@
 <body id="mainBody">
 
 	<!-- user section -->
-	<div class="slide-in hidden" id="mainContainer">
+	<div class="slide-in " id="mainContainer">
 		<div class="user-container userContainer" id="userContainer">
 			<div class="user-image-container">
 				<img class="main-image user-image-border" id="userProfilePicture" />
@@ -149,8 +149,10 @@
 					<canvas id="myChart"></canvas>
 				</div>
 				<div class="progress">
-					<canvas id="myAverageProgress">71 %</canvas>
-					<p id="percentageContainer"></p>
+					<div class="relative-percentageContainer">
+						<canvas id="myAverageProgress">71 %</canvas>
+						<p id="percentageContainer"></p>
+					</div>
 					<p id="averageLable"></p>
 				</div>
 			</div>
@@ -161,7 +163,7 @@
 
 
 	<!-- User Insights-->
-	<div id="userInsightsContainer" class="userInsightsContainer">
+	<div id="userInsightsContainer" class="userInsightsContainer hidden">
 		<div id="assesmentsTakenContainer" class="assesmentsTakenContainer">
 			<div class="assesmentsBar">
 				<canvas id="myAverageProgress" class="assesmentsChart"></canvas>

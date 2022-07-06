@@ -12,17 +12,23 @@
 }
 
 .myList_PageContainer .chartContainer .bar #myChart {
-    width: 220px !important;
-    height: 120px !important;
+    width: 100% !important;
+    height: auto !important;
 }
-
+.myList_PageContainer .chartContainer .bar {
+    width: 70%;
+}
 .myList_PageContainer .chartContainer .progress {
+    width: 30%;
+}
+.myList_PageContainer .chartContainer .progress .relative-percentageContainer {
     position: relative;
+    width: 100%;
 }
 
-.myList_PageContainer .chartContainer .progress #myAverageProgress {
-    width: 80px !important;
-    height: 80px !important;
+.myList_PageContainer .chartContainer .progress .relative-percentageContainer #myAverageProgress {
+    width: 80% !important;
+    height: auto !important;
     margin: auto;
 }
 
@@ -37,8 +43,9 @@
 
 .myList_PageContainer .chartContainer .progress #percentageContainer {
     position: absolute;
-    top: 25%;
-    left: 35%;
+    top: 40%;
+    width: 100%;
+    text-align: center;
     font-size: 1rem;
 }
 
