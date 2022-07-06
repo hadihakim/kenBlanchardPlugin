@@ -124,6 +124,7 @@ class Navigation {
 	}
 
 	static openUserProfile = () => {
+		document.getElementById("ChartContainer").innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
 		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
