@@ -3,6 +3,29 @@ class UserProfile {
     userData: config.userConfig,
     data: {},
     userProfileTabs: ["activity", "insights", "badges"],
+	// it should come from user api 
+	userBadgesAchieved:[
+		{
+			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+			label:"Learner"
+		},
+		{
+			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+			label:"Committed"
+		},
+		{
+			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+			label:"Newbie"
+		},
+	],
+
+	// it should come from public app api 
+	badgesToAchieved:[
+		{
+			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+			label:"Newbie"
+		}
+	  ]
   };
 
   static setData = (data) => {
@@ -18,6 +41,7 @@ class UserProfile {
     userProfile: "userProfile",
     userProfileTemplate: "userProfileTemplate",
     userProfileTabsContainer: "userProfileTabsContainer",
+	userBadgesTemplate:"userBadgesTemplate"
   };
 
   static getUser = () => {
@@ -106,17 +130,45 @@ class UserProfile {
     userActivityPage.setAttribute("id", "userActivityPage");
     contentDivs[0].appendChild(userActivityPage);
     contentDivs[1].innerHTML = "content 2";
-    contentDivs[2].innerHTML = "content 3";
+    contentDivs[2].appendChild(this.badgesUi());
+
     // Explore.setData();
     Explore.cardRender("userActivityPage", "userActivityPage");
 
-    // just for demo purposes
-    // setTimeout(() => {
-    //   document
-    //     .getElementById("528e722c-2527-4dfd-cc3f-2c8bbb256904-userActivityPage")
-    //     .classList.add("hidden");
-    // }, 1000);
   };
+
+  static badgesUi=()=>{
+	let userBadgesTemplate=document.getElementById(this.pointers.userBadgesTemplate)
+	const nodesClone = userBadgesTemplate.content.cloneNode(true);
+	let badgesAchievedContainer = nodesClone.getElementById("badgesAchievedContainer");
+
+
+	this.state.userBadgesAchieved.forEach((badge)=>{
+		let badgeElement= document.createElement("div");
+		badgeElement.classList.add("badge");
+		let badgeElementContent=`
+			<img src=${badge.image} alt="${badge.label}"/>
+			<label>${badge.label}</label>
+		`
+		badgeElement.innerHTML=badgeElementContent;
+		badgesAchievedContainer.appendChild(badgeElement);
+	});
+	
+	// badges not achieved yet
+	let badgesToAchievedContainer = nodesClone.getElementById("badgesToAchievedContainer");
+	this.state.badgesToAchieved.forEach((badge)=>{
+		let badgeElement= document.createElement("div");
+		badgeElement.classList.add("badge");
+		let badgeElementContent=`
+			<img src=${badge.image} alt="${badge.label}"/>
+			<label>${badge.label}</label>
+		`
+		badgeElement.innerHTML=badgeElementContent;
+		badgesToAchievedContainer.appendChild(badgeElement);
+	});
+
+	return nodesClone;
+  }
 
   static init = () => {
     this.getUser();
