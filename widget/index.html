@@ -6,6 +6,10 @@
 	<meta name="buildfire" content="enableMDTheme" />
 	<meta name="buildfire" content="disableBootstrap" />
 
+	<!--User Insight css-->
+	<link rel="stylesheet" href="./style/insights.css">
+	<!--End Insight css-->
+
 	<link rel="stylesheet" href="../../../styles/components/listView.css" />
 	<link rel="stylesheet" href="./style/style.css" />
 	<link rel="stylesheet" href="./style/myList.css" />
@@ -73,7 +77,7 @@
 <body id="mainBody">
 
 	<!-- user section -->
-	<div class="slide-in" id="mainContainer">
+	<div class="slide-in hidden" id="mainContainer">
 		<div class="user-container userContainer" id="userContainer">
 			<div class="user-image-container">
 				<img class="main-image user-image-border" id="userProfilePicture" />
@@ -91,8 +95,8 @@
 			<div class="searchItem mdc-card">
 				<div class="search-container">
 					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
-					<input class="bodyTextTheme" id="search-input" type="text" name="search"
-						placeholder="Search" autocomplete="off" />
+					<input class="bodyTextTheme" id="search-input" type="text" name="search" placeholder="Search"
+						autocomplete="off" />
 					<label class="material-icons icon hidden" id="sortIcon">sort</label>
 					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
 				</div>
@@ -154,13 +158,176 @@
 			<div id="listViewContainer"></div>
 		</div>
 	</div>
+
+
+	<!-- User Insights-->
+	<div id="userInsightsContainer" class="userInsightsContainer">
+		<div id="assesmentsTakenContainer" class="assesmentsTakenContainer">
+			<div class="assesmentsBar">
+				<canvas id="myAverageProgress" class="assesmentsChart"></canvas>
+			</div>
+			<div class="assesmentsDetails">
+				<p class="assesmentsNumber">12</p>
+				<p class="assesmentsTitle">Assesments Taken</p>
+			</div>
+		</div>
+		<div id="allAssesmentsContainer" class="allAssesmentsContainer">
+			<div class="assesmentSection">
+				<p class="assesmentHeader">Self Management</p>
+				<ul class="assesmentList">
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="assesmentSection">
+				<p class="assesmentHeader">Self Management</p>
+				<ul class="assesmentList">
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+					<li class="assesmentElement">
+						<div class="assesmentDetails">
+							<p class="assesmentDetailsTitle">Confidence</p>
+							<p class="assesmentDetailsSubtitle">Take the Assessment</p>
+						</div>
+						<div id="assesmentAction" class="assesmentAction">
+							<span class="material-icons icon">
+								chevron_right
+							</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- End User Insights-->
+
 	<!-- template -->
 	<template id="userProfileTemplate" class="user-profile-template">
 
 		<div class="user-top-container userContainer">
 			<div class="user-profile-image-container">
-				<img class="user-profile-image user-image-border" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU" alt="">
-				<img class="achievement-image" src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png"/>
+				<img class="user-profile-image user-image-border"
+					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWHkQVsb4b-CS96W5FbUgyBLTrtpBNE-DSHg&usqp=CAU"
+					alt="">
+				<img class="achievement-image"
+					src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" />
 			</div>
 			<div class="user-info-container">
 				<h2 class="user-name barText-AppTheme">Michel Scott</h2>
@@ -170,17 +337,17 @@
 		<div class="user-body-container">
 			<div class="mdc-tab-bar userContainer" role="tablist">
 				<div class="mdc-tab-scroller">
-				  <div class="mdc-tab-scroller__scroll-area">
-					<div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer">
+					<div class="mdc-tab-scroller__scroll-area">
+						<div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer">
+						</div>
 					</div>
-				  </div>
 				</div>
-			  </div>
-			  <div id="contentContainer">
+			</div>
+			<div id="contentContainer">
 				<div class="tabContent"></div>
 				<div class="tabContent hidden"></div>
 				<div class="tabContent hidden"></div>
-			  </div>
+			</div>
 		</div>
 	</template>
 	<template id="forYouTemplate" class="forYouTemplate">
