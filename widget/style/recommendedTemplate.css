@@ -48,6 +48,17 @@
   height: 4.875rem;
   background-size: cover;
 }
+/* for demo */
+.horizontal .main .mdc-card .progressBar .card-progressBar {
+  width: 100%;
+  height: 5px;
+  background-color: #0298a050;
+}
+.horizontal .main .mdc-card .progressBar .card-progressBar .percentageDiv{
+  /* background-color: #0297a0; */
+  height: 5px;
+}
+/* End for demo */
 
 .horizontal .main .mdc-card .mdc-card-body {
   margin-top: 0.016rem;
