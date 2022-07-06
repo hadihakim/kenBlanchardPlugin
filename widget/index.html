@@ -60,6 +60,7 @@
 	<script src="./js/utilities/fakeData.js"></script>
 	<script src="./js/utilities/summaryData.js"></script>
 	<script src="./js/utilities/utilities.js"></script>
+	<script src="./js/templates/teamEffectivenessList.js"></script>
 	<script src="./js/templates/myList.js"></script>
 	<script src="./js/templates/explore.controller.js"></script>
 	<script src="./js/templates/seeAll.conroller.js"></script>
@@ -113,7 +114,7 @@
 			<!-- section -->
 			<section id="sectionsContainer"></section>
 			<div class="exploreAll-btn-container">
-				<a class="mdc-button mdc-button--raised info-btn-AppTheme" id="exploreButton">
+				<a class="mdc-button mdc-button--raised primaryBtn-AppTheme" id="exploreButton">
 					<span class="mdc-button__label barText-AppTheme">Explore All</span>
 				</a>
 			</div>
@@ -158,9 +159,17 @@
 					</div>
 					<p id="averageLable"></p>
 				</div>
+				<div class="handleAchived-Container">
+					<input class="icon" id="includeAchived-option" type="checkbox" />
+					<label for="includeAchived-option"> Include Archived </label>
+				</div>
 			</div>
 
 			<div id="listViewContainer"></div>
+		</div>
+		<div class="slide-in hidden" id="teamEffectiveness_PageContainer">
+			<div id="teamEffectiveness_tabHandler" class="userContainer"></div>
+			<div id="teamEffectiveness_ListContainer"></div>
 		</div>
 	</div>
 
@@ -300,7 +309,7 @@
 				</ol>
 			</div>
 			<div class="details-btn-container">
-				<a class="mdc-button mdc-button--raised details-btn info-btn-AppTheme" id="exploreButton">
+				<a class="mdc-button mdc-button--raised details-btn primaryBtn-AppTheme">
 					<span class="mdc-button__label barText-AppTheme startCourse"></span>
 				</a>
 			</div>
@@ -342,7 +351,7 @@
 			<h2 class="title"></h2>
 			<p class="subtitle"></p>
 			<div class="startChapter-btn-container">
-				<a class="mdc-button mdc-button--raised info-btn-AppTheme" id="startChapter">
+				<a class="mdc-button mdc-button--raised primaryBtn-AppTheme" id="startChapter">
 					<span class="mdc-button__label barText-AppTheme">Start chapter</span>
 				</a>
 			</div>
@@ -423,6 +432,23 @@
 			<div id="action">
 				<span class="material-icons icon">
 					chevron_right
+				</span>
+			</div>
+		</div>
+	</template>
+
+	<template id="teamEffectiveness_Template">
+		<div class="teamEffectiveness_Card">
+			<div id="image"></div>
+			<div class="title">
+				<div id="title_text"></div>
+				<div class="holderPercentage" id="bar">
+					<div class="infoTheme" id="filled"></div>
+				</div>
+			</div>
+			<div id="action">
+				<span class="material-icons icon">
+					more_horiz
 				</span>
 			</div>
 		</div>

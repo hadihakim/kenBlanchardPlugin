@@ -154,11 +154,25 @@ static openCourseDetails = (id)=>{
 	static openUserList=()=>{
 		mainContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
+		teamEffectiveness_PageContainer.classList.add("hidden");
 
 		buildfire.history.push("user profile from list");
 
 		myList_PageContainer.classList.remove("hidden");
 		document.getElementById("userProfileContainer").classList.remove("hidden");
 
+		Utilities.setAppTheme();
+	}
+
+	static openTeamEffectivenessList=()=>{
+		mainContainer.classList.add("hidden");
+		userProfile.classList.add("hidden");
+		myList_PageContainer.classList.add("hidden");
+		
+		buildfire.history.push("user List from temEffectiveness list");
+		
+		teamEffectiveness_PageContainer.classList.remove("hidden");
+		document.getElementById("userProfileContainer").classList.remove("hidden");
+		Utilities.setAppTheme();
 	}
 }

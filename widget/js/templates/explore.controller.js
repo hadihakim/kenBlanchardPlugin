@@ -178,9 +178,10 @@ class Explore {
       let progressBar=nodesClone.querySelectorAll(".progressBar");
       let div=document.createElement("div");
       div.classList.add("card-progressBar");
+      div.classList.add("holderPercentage");
       let percentageDiv=document.createElement("div");
       percentageDiv.style.width=`${Math.floor(Math.random() * 101)}%`;
-      percentageDiv.classList.add("percentageDiv","userContainer")
+      percentageDiv.classList.add("percentageDiv","infoTheme")
       div.appendChild(percentageDiv);
       progressBar[0].appendChild(div);
     }
@@ -226,7 +227,7 @@ class Explore {
                 ? "My"
                 : "Recommended"
             } ${element.title}</p>
-						<span class="seeAll-btn info-link-AppTheme" id="${element.id}_${type}">${
+						<span class="seeAll-btn defaultlink-AppTheme" id="${element.id}_${type}">${
             Strings.SEE_ALL_TEXT
           }</span>
 					</div>
