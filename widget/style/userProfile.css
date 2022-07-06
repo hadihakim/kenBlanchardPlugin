@@ -92,11 +92,11 @@
   position: relative;
   width: 100%;
   overflow-y: scroll;
+  padding: 1rem;
 }
 .user-badges-container .badges-achieved {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
 }
 .user-badges-container .ba-title {
   font-style: normal;
@@ -111,7 +111,7 @@
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: space-between;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 .user-badges-container .ba-container .badge {
   display: flex;
@@ -129,7 +129,7 @@
 .user-badges-container .ba-container .badge label {
   font-style: normal;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1.25rem;
   letter-spacing: 0.03125rem;
 }
