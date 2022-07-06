@@ -18,6 +18,7 @@ class Navigation {
 		searchBar.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
 
+		courseDetailsContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
@@ -41,6 +42,7 @@ class Navigation {
 		userContainer.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		emptySearch.classList.add("hidden");
+		courseDetailsContainer.classList.add("hidden");
 
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
@@ -64,6 +66,8 @@ class Navigation {
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
+
+		courseDetailsContainer.classList.add("hidden");
 		userProfileContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
@@ -85,6 +89,8 @@ class Navigation {
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		emptySearch.classList.add("hidden");
+		courseDetailsContainer.classList.add("hidden");
+
 		// Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
 		// 	static myTimeout = setTimeout(() => {
 		// 		searchCardsRender(fakeData, seeAllContainer, () => { })
@@ -108,7 +114,10 @@ class Navigation {
 		searchBar.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		emptySearch.classList.add("hidden");
+		courseDetailsContainer.classList.add("hidden");
+
 		pageDetails.classList.remove("hidden");
+		
 		Utilities.setAppTheme();
 	}
 static openCourseDetails = (id)=>{
@@ -126,7 +135,8 @@ static openCourseDetails = (id)=>{
 		searchBar.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		emptySearch.classList.add("hidden");
-		pageDetails.classList.remove("hidden");
+		pageDetails.classList.add("hidden");
+		courseDetailsContainer.classList.remove("hidden");
 		Utilities.setAppTheme();
 }
 	static openEmptySearch = () => {
@@ -137,6 +147,8 @@ static openCourseDetails = (id)=>{
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
+		courseDetailsContainer.classList.add("hidden");
+
 		Utilities.setAppTheme();
 	}
 
