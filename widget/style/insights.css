@@ -1,0 +1,115 @@
+#userInsightsContainer {
+    height: 100vh;
+    width: 100vw;
+}
+
+#assesmentsTakenContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    height: 88px;
+    background: #FECD83;
+    border-radius: 4px;
+    padding: 1rem;
+
+}
+
+.assesmentsBar .assesmentsChart {
+    width: 10px !important;
+    height: 20px;
+    margin-right: 1.1rem;
+}
+
+.assesmentsDetails .assesmentsNumber {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.5px;
+    color: #101010;
+}
+
+.assesmentsDetails .assesmentsTitle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.15px;
+    color: #5F5F5F;
+}
+
+#allAssesmentsContainer {
+    margin: 1rem 1rem 0 1rem;
+    height: auto;
+    width: calc(100% - 2rem);
+}
+
+.assesmentSection {
+    height: auto;
+    width: 100%;
+}
+
+.assesmentSection .assesmentHeader {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.5px;
+    color: #101010;
+    margin-bottom: 1rem;
+}
+
+.assesmentSection .assesmentList{
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+}
+
+.assesmentSection .assesmentList .assesmentElement {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 8px 8px 0px;
+    gap: 8px;
+    width: 100%;
+    height: 60px;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.assesmentSection .assesmentList .assesmentElement .assesmentDetails {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.assesmentSection .assesmentList .assesmentElement .assesmentDetails .assesmentDetailsTitle {
+    margin-bottom: .25rem;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    color: #101010;
+}
+
+.assesmentSection .assesmentList .assesmentElement .assesmentDetails .assesmentDetailsSubtitle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.15px;
+    color: #5F5F5F;
+}
+
+#assesmentAction {
+    right: 1rem;
+    position: absolute;
+    width: auto;
+    height: auto;
+}
