@@ -83,5 +83,56 @@
   .mdc-tab-indicator__content--underline {
   border-color: #fff;
   border-width: 0.125rem;
-  transition:0.3s;
+  transition: 0.3s;
+}
+
+/* badges tab */
+
+.user-badges-container {
+  position: relative;
+  width: 100%;
+  overflow-y: scroll;
+  padding: 1rem;
+}
+.user-badges-container .badges-achieved {
+  display: flex;
+  flex-direction: column;
+}
+.user-badges-container .ba-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.03125rem;
+}
+.user-badges-container .ba-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.user-badges-container .ba-container .badge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.user-badges-container .ba-container .badge img {
+  height: 4rem;
+  width: 4rem;
+  background: linear-gradient(330deg, #013325 13.59%, #01644f 86.8%);
+  border-radius: 50%;
+}
+.user-badges-container .ba-container .badge label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.03125rem;
+}
+.ba-disabled {
+  filter: grayscale(100%) brightness(100%) opacity(50%);
 }

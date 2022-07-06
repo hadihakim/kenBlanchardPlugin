@@ -165,11 +165,26 @@ class Explore {
     topicTitle,
     id
   ) => {
+    // for demo
+    let n=container.id.split("-");
+
     const recommendedTemplate = document.getElementById(
       this.pointers.recommendedTemplate
     );
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
+    // for demo
+    if (n[n.length-1]==="userActivityPage") {
+      let progressBar=nodesClone.querySelectorAll(".progressBar");
+      let div=document.createElement("div");
+      div.classList.add("card-progressBar");
+      div.classList.add("holderPercentage");
+      let percentageDiv=document.createElement("div");
+      percentageDiv.style.width=`${Math.floor(Math.random() * 101)}%`;
+      percentageDiv.classList.add("percentageDiv","infoTheme")
+      div.appendChild(percentageDiv);
+      progressBar[0].appendChild(div);
+    }
     let category = nodesClone.querySelectorAll(".category");
     let title = nodesClone.querySelectorAll(".title");
     let duration = nodesClone.querySelectorAll(".duration");
@@ -212,7 +227,7 @@ class Explore {
                 ? "My"
                 : "Recommended"
             } ${element.title}</p>
-						<span class="seeAll-btn info-link-AppTheme" id="${element.id}_${type}">${
+						<span class="seeAll-btn defaultlink-AppTheme" id="${element.id}_${type}">${
             Strings.SEE_ALL_TEXT
           }</span>
 					</div>

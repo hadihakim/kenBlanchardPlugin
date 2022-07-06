@@ -28,18 +28,55 @@ class Utilities {
 		});
 	};
 
+	static LightenDarkenColor=(col, amt)=> {
+
+		// col => color 
+		// amt => the amount of chnging the color
+		// if you passed positive number the color will be lighter
+		// if you passed nigative number the color will be darken
+
+		let usePound = false;
+		if (col[0] == "#") {
+			col = col.slice(1);
+			usePound = true;
+		}
+	 
+		let num = parseInt(col,16);
+	 
+		let r = (num >> 16) + amt;
+		if (r > 255) r = 255;
+		else if  (r < 0) r = 0;
+	 
+		let b = ((num >> 8) & 0x00FF) + amt;
+		if (b > 255) b = 255;
+		else if  (b < 0) b = 0;
+	 
+		let g = (num & 0x0000FF) + amt;
+		if (g > 255) g = 255;
+		else if (g < 0) g = 0;
+	 
+		return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+	  
+	}
+
 	static setThemeHandler = (arr, type, color) => {
 		for (let i = 0; i < arr.length; i++) {
+			let newColor;
 			switch (type) {
 				case "color":
-					arr[i].setAttribute('style', `fill: ${color} !important`);
-					arr[i].style.color = color;
+					arr[i].setAttribute( 'style', `fill: ${color} !important` );
+					arr[i].setAttribute( 'style', `color: ${color} !important` );
 					break;
 				case "back":
 					arr[i].style.backgroundColor = color;
 					break;
 				case "borderColor":
-					arr[i].style.borderColor = color;
+					newColor = this.LightenDarkenColor(color, 20)
+					arr[i].setAttribute( 'style', `border-color: ${newColor} !important` );
+					break;
+				case "backPercentage":
+					newColor = this.LightenDarkenColor(color, 55)
+					arr[i].setAttribute( 'style', `background-color: ${newColor} !important` );
 					break;
 				default:
 					break;
@@ -53,6 +90,16 @@ class Utilities {
 				elements: [...document.getElementsByClassName("icon"), ...document.getElementsByClassName("arrow-color")],
 				colorType: "color",
 				colorDegree: this.state.appTheme.colors.icons,
+			},
+			{
+				elements: document.getElementsByClassName("primaryBtn-AppTheme"),
+				colorType: "back",
+				colorDegree: this.state.appTheme.colors.defaultTheme,
+			},
+			{
+				elements: document.getElementsByClassName("defaultlink-AppTheme"),
+				colorType: "color",
+				colorDegree: this.state.appTheme.colors.defaultTheme,
 			},
 			{
 				elements: document.getElementsByClassName("headerText-AppTheme"),
@@ -77,7 +124,7 @@ class Utilities {
 			{
 				elements: document.getElementsByClassName("user-image-border"),
 				colorType: "borderColor",
-				colorDegree: this.state.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.primaryTheme,
 			},
 			{
 				elements: document.getElementsByClassName("info-btn-AppTheme"),
@@ -92,6 +139,11 @@ class Utilities {
 			{
 				elements: document.getElementsByClassName("infoTheme"),
 				colorType: "back",
+				colorDegree: this.state.appTheme.colors.infoTheme,
+			},
+			{
+				elements: document.getElementsByClassName("holderPercentage"),
+				colorType: "backPercentage",
 				colorDegree: this.state.appTheme.colors.infoTheme,
 			}
 		];
@@ -164,6 +216,12 @@ class Utilities {
 								PageDetails.setState(id);
 								PageDetails.init();
 								break;
+							case "Details from CourseDetails":
+								let id2 = result[result.length - 1].options.id;
+								Navigation.openPageDetails();
+								PageDetails.setState(id2);
+  								PageDetails.init();
+								break;
 							case "main/explore from search":
 								if (config.searchFrom == "from-main") {
 									Navigation.openMain();
@@ -212,5 +270,18 @@ class Utilities {
 		});
 		splide.mount();
 	}
+
+	static showDialog = (options) => {
+		buildfire.dialog.show(
+			options,
+			(err, actionButton) => {
+			  if (err) console.error(err);
+		  
+			  if (actionButton && actionButton.text == "Cancel") {
+				console.log("Cancel clicked");
+			  }
+			}
+		  );
+	};
 };
 
