@@ -165,11 +165,25 @@ class Explore {
     topicTitle,
     id
   ) => {
+    // for demo
+    let n=container.id.split("-");
+
     const recommendedTemplate = document.getElementById(
       this.pointers.recommendedTemplate
     );
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
+    // for demo
+    if (n[n.length-1]==="userActivityPage") {
+      let progressBar=nodesClone.querySelectorAll(".progressBar");
+      let div=document.createElement("div");
+      div.classList.add("card-progressBar");
+      let percentageDiv=document.createElement("div");
+      percentageDiv.style.width=`${Math.floor(Math.random() * 101)}%`;
+      percentageDiv.classList.add("percentageDiv","userContainer")
+      div.appendChild(percentageDiv);
+      progressBar[0].appendChild(div);
+    }
     let category = nodesClone.querySelectorAll(".category");
     let title = nodesClone.querySelectorAll(".title");
     let duration = nodesClone.querySelectorAll(".duration");
