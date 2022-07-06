@@ -142,7 +142,11 @@ class Utilities {
 								Navigation.openExplore();
 								break;
 							case "See All from Details":
-								Navigation.openSeeAll();
+								if(config.searchFrom == "from-main" ||config.searchFrom == "from-explore" ){
+									Navigation.openSearch();
+								}else if(config.searchFrom == "from-see-all"){
+									Navigation.openSeeAll();
+								}
 								break;
 							case "page detail from chapter":
 								let id = result[result.length - 1].options.id;
