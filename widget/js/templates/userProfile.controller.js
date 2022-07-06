@@ -23,7 +23,18 @@ class UserProfile {
 	badgesToAchieved:[
 		{
 			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
-			label:"Newbie"
+			label:"Newbie",
+      message:"Complete 3 courses or 25 content pieces and collect this badge!"
+		},
+		{
+			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+			label:"Ambassador",
+      message:"Complete 3 courses or 25 content pieces and collect this badge!"
+		},
+		{
+			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+			label:"Ambassador",
+      message:"Complete 3 courses or 25 content pieces and collect this badge!"
 		}
 	  ]
   };
@@ -165,6 +176,21 @@ class UserProfile {
 		`
 		badgeElement.innerHTML=badgeElementContent;
 		badgesToAchievedContainer.appendChild(badgeElement);
+    badgeElement.addEventListener("click", ()=>{
+      Utilities.showDialog({
+			  title: badge.label,
+			  message:badge.message,
+			  isMessageHTML: true,
+			  showCancelButton: false,
+			  actionButtons: [
+				{
+				  text: `<span style="color:${config.appTheme.colors.icons}">OK</span>`,
+				  action: () => {
+				  },
+				},
+			  ],
+			})
+    });
 	});
 
 	return nodesClone;
