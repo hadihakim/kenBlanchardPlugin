@@ -28,7 +28,7 @@ class Utilities {
 			switch (type) {
 				case "color":
 					arr[i].setAttribute( 'style', `fill: ${color} !important` );
-					arr[i].style.color = color;
+					arr[i].setAttribute( 'style', `color: ${color} !important` );
 					break;
 				case "back":
 					arr[i].style.backgroundColor = color;
@@ -199,5 +199,18 @@ class Utilities {
 		});
 		splide.mount();
 	}
+
+	static showDialog = (options) => {
+		buildfire.dialog.show(
+			options,
+			(err, actionButton) => {
+			  if (err) console.error(err);
+		  
+			  if (actionButton && actionButton.text == "Cancel") {
+				console.log("Cancel clicked");
+			  }
+			}
+		  );
+	};
 };
 
