@@ -2,7 +2,7 @@ class CourseDetails {
 
     static state = {
         data: {},
-
+        
     }
     static pointers = {
         courseDetailsContainer: "courseDetailsContainer",
