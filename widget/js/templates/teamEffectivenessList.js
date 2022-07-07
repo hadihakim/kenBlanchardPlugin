@@ -3,29 +3,33 @@ class TeamEffectivenessList {
     static state = {
         data: [
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Another article",
+                description: "sfdfsdfsdf sdf sdf",
+                image: "https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88",
                 totaltasks: 15,
                 taken: 10,
                 id: "62b3439f864d49037aac9b27"
             },
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Article with keytakeaways",
+                description: "short description for this asset with key takeaways bblasdsa dasd sad",
+                image: "https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop",
                 totaltasks: 15,
                 taken: 7,
                 id: "62b3439f864d49037aac9b26"
             },
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Article two",
+                description: "short description for this asset bblasdsa dasd sad",
+                image: "https://www.thespruce.com/thmb/tClzdZVdo_baMV7YA_9HjggPk9k=/4169x2778/filters:fill(auto,1)/the-difference-between-trees-and-shrubs-3269804-hero-a4000090f0714f59a8ec6201ad250d90.jpg",
                 totaltasks: 15,
                 taken: 2,
                 id: "62b3439f864d49037aac9b25"
             },
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Rose",
+                description: "short description for this asset bblasdsa dasd sad",
+                image: "https://th.bing.com/th/id/R.6e02493f35178458c092d5546a72ca06?rik=rDt%2bq%2bNkpy4RkA&pid=ImgRaw&r=0",
                 totaltasks: 15,
                 taken: 13,
                 id: "62b3439f864d49037aac9b60"
@@ -33,29 +37,33 @@ class TeamEffectivenessList {
         ],
         archivedData: [
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Another article",
+                description: "sfdfsdfsdf sdf sdf",
+                image: "https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88",
                 totaltasks: 15,
                 taken: 10,
                 id: "62b3439f864d49037aac9b27"
             },
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Article with keytakeaways",
+                description: "short description for this asset with key takeaways bblasdsa dasd sad",
+                image: "https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop",
                 totaltasks: 15,
                 taken: 7,
                 id: "62b3439f864d49037aac9b26"
             },
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Article two",
+                description: "short description for this asset bblasdsa dasd sad",
+                image: "https://www.thespruce.com/thmb/tClzdZVdo_baMV7YA_9HjggPk9k=/4169x2778/filters:fill(auto,1)/the-difference-between-trees-and-shrubs-3269804-hero-a4000090f0714f59a8ec6201ad250d90.jpg",
                 totaltasks: 15,
                 taken: 2,
                 id: "62b3439f864d49037aac9b25"
             },
             {
-                image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
-                title: 'Becoming a Mentor',
+                title: "Rose",
+                description: "short description for this asset bblasdsa dasd sad",
+                image: "https://th.bing.com/th/id/R.6e02493f35178458c092d5546a72ca06?rik=rDt%2bq%2bNkpy4RkA&pid=ImgRaw&r=0",
                 totaltasks: 15,
                 taken: 13,
                 id: "62b3439f864d49037aac9b60"
@@ -124,7 +132,7 @@ class TeamEffectivenessList {
 
     static resetItem = (id) => {
         let newActiveData = this.state.data.filter(item => {
-            if (item.id === id){
+            if (item.id === id) {
                 item.taken = 0;
             }
             return item
@@ -153,7 +161,7 @@ class TeamEffectivenessList {
                             this.moveToArchive(id);
                             break;
                         case "Reset Course":
-                        this.resetItem(id);
+                            this.resetItem(id);
                             break;
                         case "Remove Course":
                             this.deleteItem(id)
