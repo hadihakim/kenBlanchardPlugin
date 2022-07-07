@@ -115,8 +115,13 @@ class Navigation {
 		sortIcon.classList.add("hidden");
 		emptySearch.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
+		userProfile.classList.add("hidden");
+		myList_PageContainer.classList.add("hidden");
+		teamEffectiveness_PageContainer.classList.add("hidden");
+		userProfileContainer.classList.add("hidden");
 
 		pageDetails.classList.remove("hidden");
+		mainContainer.classList.remove("hidden");
 
 		Utilities.setAppTheme();
 	}

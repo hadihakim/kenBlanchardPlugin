@@ -70,7 +70,10 @@ class MyList {
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 1
+                            stepSize: 1,
+                            font: {
+                                size: 10,
+                            }
                         },
                     },
                     x: {
