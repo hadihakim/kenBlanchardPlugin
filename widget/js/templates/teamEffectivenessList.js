@@ -14,21 +14,21 @@ class TeamEffectivenessList {
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
                 taken: 7,
-                id: "62b3439f864d49037aac9b27"
+                id: "62b3439f864d49037aac9b26"
             },
             {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
                 taken: 2,
-                id: "62b3439f864d49037aac9b27"
+                id: "62b3439f864d49037aac9b25"
             },
             {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
                 taken: 13,
-                id: "62b3439f864d49037aac9b27"
+                id: "62b3439f864d49037aac9b60"
             }
         ],
         archivedData: [
@@ -44,21 +44,21 @@ class TeamEffectivenessList {
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
                 taken: 7,
-                id: "62b3439f864d49037aac9b27"
+                id: "62b3439f864d49037aac9b26"
             },
             {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
                 taken: 2,
-                id: "62b3439f864d49037aac9b27"
+                id: "62b3439f864d49037aac9b25"
             },
             {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
                 taken: 13,
-                id: "62b3439f864d49037aac9b27"
+                id: "62b3439f864d49037aac9b60"
             }
         ],
         ArchivedDrawerOptions: ["Move to Active", "Remove Course"],
@@ -78,7 +78,51 @@ class TeamEffectivenessList {
         this.state = options;
     }
 
-    static confirmMessage = (title, message) => {
+    static deleteItem = (id) => {
+        switch (this.state.selectedNav) {
+            case 'tab-0':
+                let newActiveState = this.state.data.filter(item => {
+                    if (item.id != id)
+                        return item
+                })
+                this.state.data = newActiveState;
+                break;
+            case 'tab-1':
+                let newArchivedState = this.state.archivedData.filter(item => {
+                    if (item.id != id)
+                        return item
+                })
+                this.state.archivedData = newArchivedState;
+                break;
+            default:
+                break;
+        }
+        this.init();
+    }
+
+    static moveToArchive = (id) => {
+        let newActiveData = this.state.data.filter(item => {
+            if (item.id != id)
+                return item
+            else
+                this.state.archivedData.push(item)
+        })
+        this.state.data = newActiveData;
+        this.init();
+    }
+
+    static moveToActive = (id) => {
+        let newArchivedData = this.state.archivedData.filter(item => {
+            if (item.id != id)
+                return item
+            else
+                this.state.data.push(item)
+        })
+        this.state.archivedData = newArchivedData;
+        this.init();
+    }
+
+    static confirmMessage = (id, title, message) => {
         buildfire.dialog.confirm(
             {
                 title: title,
@@ -86,9 +130,27 @@ class TeamEffectivenessList {
             },
             (err, isConfirmed) => {
                 if (err) console.error(err);
-                    console.log(err);
                 if (isConfirmed) {
-                    return true
+                    switch (title) {
+                        case "Move to Active":
+                            this.moveToActive(id);
+                            break;
+                        case "Remove Course":
+                            this.deleteItem(id);
+                            break;
+                        case "Archive Course":
+                            this.moveToArchive(id);
+                            break;
+                        case "Reset Course":
+
+                            break;
+                        case "Remove Course":
+                            this.deleteItem(id)
+                            break;
+
+                        default:
+                            break;
+                    }
                 } else {
                     return false
                 }
@@ -96,13 +158,8 @@ class TeamEffectivenessList {
         );
     }
 
-    static openDrawer = (page) => {
-        let options = [];
-        if (page == this.state.tabs[0]) {
-            options = this.state.ActiveDrawerOptions;
-        } else if (page == this.state.tabs[1]) {
-            options = this.state.ArchivedDrawerOptions;
-        }
+    static openDrawer = (id, options) => {
+
         buildfire.components.drawer.open(
             {
                 multiSelection: false,
@@ -121,7 +178,7 @@ class TeamEffectivenessList {
                 if (result) {
                     console.log(result);
                     buildfire.components.drawer.closeDrawer();
-                    let confirmed = this.confirmMessage(result.text, 'Are you sure you want to remove this course? This will permanently delete the course from your list!')
+                    this.confirmMessage(id, result.text, 'Are you sure you want to remove this course? This will permanently delete the course from your list!')
                 }
             });
     }
@@ -193,7 +250,7 @@ class TeamEffectivenessList {
                 Navigation.openCourseDetails(activeCard.id)
             })
             actionBtn.addEventListener('click', () => {
-                this.openDrawer(this.state.tabs[0]);
+                this.openDrawer(activeCard.id, this.state.ActiveDrawerOptions);
             })
         })
     }
@@ -215,13 +272,14 @@ class TeamEffectivenessList {
             document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer).appendChild(nodesClone);
 
             actionBtn.addEventListener('click', () => {
-                this.openDrawer(this.state.tabs[1]);
+                this.openDrawer(archivedCard.id, this.state.ArchivedDrawerOptions);
             })
         })
     }
 
-    static init = (id) => {
+    static init = () => {
         document.getElementById(this.pointers.teamEffectiveness_ListContainer).innerHTML = '';
+        document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer).innerHTML = '';
 
         // we will use the id to get the data from the api -->
         // calling the function
@@ -229,5 +287,7 @@ class TeamEffectivenessList {
         this.loadTabs();
         this.loadActiveList();
         this.loadArchivedList();
+
+        Utilities.setAppTheme();
     }
 }
