@@ -118,10 +118,10 @@ class CourseDetails {
             const progress = document.createElement("div");
             progress.classList.add("progressBar");
             let div=document.createElement("div");
-            div.classList.add("card-progressBar");
+            div.classList.add("courseDetails-card-progressBar", "holderPercentage");
             let percentageDiv=document.createElement("div");
             percentageDiv.style.width=`${el.progress}%`;
-            percentageDiv.classList.add("percentageDiv","progress-lesson")
+            percentageDiv.classList.add("percentageDiv","progress-lesson", "infoTheme")
             div.appendChild(percentageDiv);
             progress.appendChild(div);
 

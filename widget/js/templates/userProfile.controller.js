@@ -2,7 +2,7 @@ class UserProfile {
   static state = {
     userData: config.userConfig,
     data: {},
-    userProfileTabs: ["activity", "insights", "badges"],
+    userProfileTabs: [Strings.USER_PROFILE_TAP_1, Strings.USER_PROFILE_TAP_2, Strings.USER_PROFILE_TAP_3],
 	// it should come from user api 
 	userBadgesAchieved:[
 		{
@@ -193,14 +193,17 @@ class UserProfile {
 	let userBadgesTemplate=document.getElementById(this.pointers.userBadgesTemplate)
 	const nodesClone = userBadgesTemplate.content.cloneNode(true);
 	let badgesAchievedContainer = nodesClone.getElementById("badgesAchievedContainer");
-
+  let achievedTitle=nodesClone.querySelectorAll(".achieved-title");
+  let toAchievedTitle=nodesClone.querySelectorAll(".to-achieve-title");
+  achievedTitle[0].innerText=Strings.USER_PROFILE_BADGES_ACHIEVED_TEXT;
+  toAchievedTitle[0].innerText=Strings.USER_PROFILE_BADGES__TO_ACHIEVE_TEXT;
 
 	this.state.userBadgesAchieved.forEach((badge)=>{
 		let badgeElement= document.createElement("div");
 		badgeElement.classList.add("badge");
 		let badgeElementContent=`
 			<img src=${badge.image} alt="${badge.label}"/>
-			<label>${badge.label}</label>
+			<label class="headerText-AppTheme">${badge.label}</label>
 		`
 		badgeElement.innerHTML=badgeElementContent;
 		badgesAchievedContainer.appendChild(badgeElement);
@@ -213,7 +216,7 @@ class UserProfile {
 		badgeElement.classList.add("badge");
 		let badgeElementContent=`
 			<img src=${badge.image} alt="${badge.label}"/>
-			<label>${badge.label}</label>
+			<label class="headerText-AppTheme">${badge.label}</label>
 		`
 		badgeElement.innerHTML=badgeElementContent;
 		badgesToAchievedContainer.appendChild(badgeElement);
@@ -245,7 +248,7 @@ class UserProfile {
             {
                 label: 'Dataset 1',
                 data: [percent / 100, 1 - percent / 100],
-                backgroundColor: ["#ffff", "#fedca8"],
+                backgroundColor: ["#ffff", Utilities.LightenDarkenColor(Utilities.state.appTheme.colors.infoTheme, 16)],
                 borderWidth:0,
                 cutout: "78%"
             }
@@ -282,13 +285,13 @@ class UserProfile {
   let allAssesmentsContainer = nodesClone.querySelectorAll(".allAssesmentsContainer");
   let assesmentPercentage = nodesClone.querySelectorAll(".assesmentPercentage");
   assesmentsNumber[0].innerText = 12;
-  assesmentsTitle[0].innerText = "Assesments Taken";
+  assesmentsTitle[0].innerText = Strings.USER_PROFILE_ASSESMENTS_TEXT;
   assesmentPercentage[0].innerText = `${percent}%`;
   this.state.assesments.forEach((el)=>{
     let assesmentSection = document.createElement('div');
     let assesmentHeader = document.createElement('p');
     let assesmentList = document.createElement('ul');
-    assesmentHeader.classList.add('assesmentHeader'); 
+    assesmentHeader.classList.add('assesmentHeader', 'headerText-AppTheme'); 
     assesmentSection.classList.add('assesmentSection');
     assesmentList.classList.add('assesmentList');
     assesmentHeader.innerText= el.title;
@@ -297,8 +300,8 @@ class UserProfile {
       let assesmentElement = document.createElement('li');
       assesmentElement.classList.add('assesmentElement');
       assesmentElement.innerHTML=`<div class="assesmentDetails">
-      <p class="assesmentDetailsTitle">${arr.title}</p>
-      <p class="assesmentDetailsSubtitle">${arr.subtitle}</p>
+      <p class="assesmentDetailsTitle headerText-AppTheme">${arr.title}</p>
+      <p class="assesmentDetailsSubtitle bodyText-AppTheme">${arr.subtitle}</p>
     </div>
     <div id="assesmentAction" class="assesmentAction">
       <span class="material-icons icon">

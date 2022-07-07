@@ -115,7 +115,7 @@ class MyList {
         });
 
         document.getElementById(this.pointers.percentageContainer).innerHTML = `${percent}%`;
-        document.getElementById(this.pointers.averageLable).innerHTML = 'Average Progress';
+        document.getElementById(this.pointers.averageLable).innerHTML = Strings.USER_PROFILE_AVERAGE_CHART_TEXT;
     }
 
     static loadList = () => {

@@ -24,7 +24,7 @@ class Utilities {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
 			this.state.appTheme = appTheme;
-			console.log(appTheme);
+			console.log(appTheme, "APP THEME");
 		});
 	};
 
@@ -119,12 +119,12 @@ class Utilities {
 			{
 				elements: document.getElementsByClassName("userContainer"),
 				colorType: "back",
-				colorDegree: this.state.appTheme.colors.primaryTheme,
+				colorDegree: this.state.appTheme.colors.titleBar,
 			},
 			{
 				elements: document.getElementsByClassName("user-image-border"),
 				colorType: "borderColor",
-				colorDegree: this.state.appTheme.colors.primaryTheme,
+				colorDegree: this.state.appTheme.colors.titleBar,
 			},
 			{
 				elements: document.getElementsByClassName("info-btn-AppTheme"),
