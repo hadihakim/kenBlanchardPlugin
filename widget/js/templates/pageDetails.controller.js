@@ -45,10 +45,12 @@ class PageDetails {
         const nodesClone = template.content.cloneNode(true);
         let topImage = nodesClone.querySelectorAll(".top-image");
         let title = nodesClone.querySelectorAll(".title");
+        let subTitle = nodesClone.querySelectorAll(".subtitle");
         let description = nodesClone.querySelectorAll(".description");
         let chaptersList = nodesClone.querySelectorAll(".chapters-list");
         topImage[0].style.backgroundImage = `url('${Utilities.cropImage(this.state.data.image)}')`;
         title[0].innerText = this.state.data.title;
+        subTitle[0].innerText=Strings.GRAPHICAL_DESCRIPTION_TEXT;
         description[0].innerText = this.state.data.description;
         this.state.data.chapters.forEach((chapter) => {
           let li = document.createElement("li");
@@ -88,6 +90,8 @@ class PageDetails {
         let title = nodesClone.querySelectorAll(".title");
         let subtitle = nodesClone.querySelectorAll(".subtitle");
         let startChapter = nodesClone.getElementById("startChapter");
+        let startChapterLabel=nodesClone.querySelectorAll(".mdc-button__label");
+        startChapterLabel[0].innerText=Strings.START_CHAPTER;
         startChapter.addEventListener("click", () => {
           this.graphicalSummariesThirdPage();
         });
@@ -170,11 +174,11 @@ class PageDetails {
                                 <span class="schedule-text bodyText-AppTheme">
                             ${Utilities.timeConvert(this.state.data.meta.duration)}</span>`;
           }
-          descriptionTitle[0].innerHTML = "Description";
+          descriptionTitle[0].innerHTML = Strings.COURSE_DETAILS_DESCRIPTION;
           descriptionText[0].innerHTML =
             "When one of your team members is at the Disillusioned learner stage on a goal, they have some knowledge and skills but are not yet competent. They can easily get stuck, become discouraged, and even feel ready to quit. Their commitment is low.";
-          learnTitle[0].innerHTML = "what you'll learn";
-          lessonTitle[0].innerHTML = "Lessons";
+          learnTitle[0].innerHTML = Strings.COURSE_DETAILS_LEARN_LIST;
+          lessonTitle[0].innerHTML = Strings.COURSE_DETAILS_Lessons_LIST;
           for (let i = 0; i < 4; i++) {
             ui.createElement(
               "li",

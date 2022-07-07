@@ -294,9 +294,9 @@ class Search {
         triggerCallbackOnUIDismiss: true,
         autoUseImageCdn: true,
         listItems: [
-          { text: "Default", selected: true },
-          { text: "Most Popular", selected: false },
-          { text: "Most Recent", selected: false },
+          { text: Strings.SORT_DEFAULT_TEXT, selected: true },
+          { text: Strings.SORT_MOST_POPULAR_TEXT, selected: false },
+          { text: Strings.SORT_MOST_RECENT_TEXT, selected: false },
         ],
       },
       (err, result) => {
