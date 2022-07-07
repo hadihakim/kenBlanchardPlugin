@@ -12,7 +12,11 @@ class Navigation {
 		config.lastIndex = 0;
 		config.isSeeAllScreen = false;
 		config.searchFrom = "from-main";
-
+		buildfire.history.push(" ", {
+			showLabelInTitlebar: true,
+			from:"Personal home Page",
+		
+		  });
 		mainPage.classList.remove("hidden");
 		userContainer.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
@@ -52,14 +56,22 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openSeeAll = (type) => {
+	static openSeeAll = (type,title) => {
 
 		mainContainer.addEventListener("scroll", Utilities.scrollNextPage);
 		config.searchFrom = "from-see-all";
 		if (type == "explore") {
-			buildfire.history.push("Explore from See All");
+			buildfire.history.push(`All ${title}`, {
+				showLabelInTitlebar: true,
+				from:"Explore from See All",
+			
+			  });
 		} else if (type == "main") {
-			buildfire.history.push("Home from See All");
+				buildfire.history.push(`All ${title}`, {
+								showLabelInTitlebar: true,
+								from:"Home from See All",
+							
+							  });
 		}
 
 		seeAllContainer.classList.remove("hidden");
@@ -96,7 +108,11 @@ class Navigation {
 		// 		searchCardsRender(fakeData, seeAllContainer, () => { })
 		// 	}, 1000);
 		if (Navigation.state.searchOpened) {
-			buildfire.history.push("main/explore from search");
+			buildfire.history.push("Search" ,{
+					showLabelInTitlebar: true,
+					from:"Home from See All",
+				
+				  });
 			Navigation.setData(false);
 		}
 		Utilities.setAppTheme();
@@ -125,9 +141,14 @@ class Navigation {
 
 		Utilities.setAppTheme();
 	}
-	static openCourseDetails = (id) => {
-		buildfire.history.push("Details from CourseDetails", { id: id });
-		config.renderedCard = 0;
+static openCourseDetails = (id,title)=>{
+	buildfire.history.push(title, {
+		showLabelInTitlebar: true,
+		from:"Details from CourseDetails",
+		id:id,
+		});
+	// buildfire.history.push("Details from CourseDetails",{id:id});
+	config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
 		pageDetails.innerHTML = "";
@@ -171,29 +192,38 @@ class Navigation {
 		myList_PageContainer.classList.add("hidden");
 		userProfileContainer.classList.remove("hidden");
 		userProfile.classList.remove("hidden");
-		buildfire.history.push("Home from user profile");
+		buildfire.history.push("Growth Profile", {
+				showLabelInTitlebar: true,
+		});
 		Utilities.setAppTheme();
 	}
 
-	static openUserList = () => {
+	static openUserList=(title)=>{
 		mainContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		teamEffectiveness_PageContainer.classList.add("hidden");
 
-		buildfire.history.push("user profile from list");
-
+		buildfire.history.push(`My ${title}`, {
+			showLabelInTitlebar: true,
+			from:"user profile from list",
+		
+		  });
 		myList_PageContainer.classList.remove("hidden");
 		userProfileContainer.classList.remove("hidden");
 
 		Utilities.setAppTheme();
 	}
 
-	static openTeamEffectivenessList = () => {
+	static openTeamEffectivenessList=(title)=>{
 		mainContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
-
-		buildfire.history.push("user List from temEffectiveness list");
+		
+		buildfire.history.push(title, {
+			showLabelInTitlebar: true,
+			from:"user List from temEffectiveness list",
+		
+		  });
 
 		teamEffectiveness_PageContainer.classList.remove("hidden");
 		userProfileContainer.classList.remove("hidden");

@@ -28,7 +28,7 @@ class Explore {
     );
     return data[0];
   };
-  static seeAllButton = (id, type) => {
+  static seeAllButton = (id,title, type) => {
     let data = this.getDataById(id);
     let seeAllState = {
       title: "see all",
@@ -39,7 +39,7 @@ class Explore {
       duration: true,
     };
     SeeAll.setData(seeAllState);
-    Navigation.openSeeAll(type);
+    Navigation.openSeeAll(type,title);
     SeeAll.init();
   };
 
@@ -152,7 +152,7 @@ class Explore {
 			url('${Utilities.cropImage(assets_info.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      PageDetails.openDetails(id);
+      PageDetails.openDetails(id , assets_info.meta.title);
     });
     container.appendChild(firstClone);
     Utilities.setAppTheme();
@@ -196,11 +196,11 @@ class Explore {
     title[0].innerText = assets_info.meta.title;
     if (durationState) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-					<span class="schedule-text">
+					<span class="schedule-text bodyText-AppTheme">
 						${Utilities.timeConvert(assets_info.meta.duration)}</span>`;
     }
     card[0].addEventListener("click", () => {
-      PageDetails.openDetails(id);
+      PageDetails.openDetails(id , assets_info.meta.title);
     });
     container.appendChild(nodesClone);
     Utilities.setAppTheme();
@@ -266,9 +266,9 @@ class Explore {
         if (seeAllBtn) {
             seeAllBtn.addEventListener("click", () => {
               if (type==="userActivityPage") {
-                Navigation.openUserList();
+                Navigation.openUserList(element.title);
               }else{
-                this.seeAllButton(element.id,type);
+                this.seeAllButton(element.id,element.title,type);
               }
             });
           
@@ -284,7 +284,11 @@ class Explore {
       const exploreBtn = document.getElementById(this.pointers.exploreButton);
       exploreBtn.innerHTML = Strings.EXPLORE_BTN;
       exploreBtn.addEventListener("click", () => {
-        buildfire.history.push("Home from Explore");
+      	buildfire.history.push("Explore", {
+								showLabelInTitlebar: true,
+								from:"Home from Explore",
+							
+							  });
         Utilities.scrollTop();
         Navigation.openExplore();
       });

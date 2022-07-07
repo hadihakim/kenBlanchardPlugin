@@ -22,6 +22,7 @@ class Search {
     trendingContainer: "trendingContainer",
     trendingTemplate: "trendingTemplate",
     seeAllTemplate: "seeAllTemplate",
+    dot:"dot"
   };
 
   static hasSearch = (data) => {
@@ -130,7 +131,7 @@ class Search {
           title[0].innerText = assetsInfo[lastIndex].meta.title;
           if (assetsInfo[lastIndex].meta.duration > 0) {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-							<span class="schedule-text">
+							<span class="schedule-text bodyText-AppTheme">
 						${Utilities.timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
           }
           card[0].addEventListener("click", () => {
@@ -224,6 +225,13 @@ class Search {
           result.forEach((topic) => {
             this.state.filterArr.push(topic.text);
           });
+          
+          const dot= document.getElementById(this.pointers.dot);
+          if(this.state.filterArr.length == this.state.filterTopic.length){
+            dot.classList.add("hidden");
+          }else{
+            dot.classList.remove("hidden");
+          }
 
           this.state.data.data.sections.forEach((element) => {
             const container = document.getElementById(
@@ -294,9 +302,9 @@ class Search {
         triggerCallbackOnUIDismiss: true,
         autoUseImageCdn: true,
         listItems: [
-          { text: "Default", selected: true },
-          { text: "Most Popular", selected: false },
-          { text: "Most Recent", selected: false },
+          { text: Strings.SORT_DEFAULT_TEXT, selected: true },
+          { text: Strings.SORT_MOST_POPULAR_TEXT, selected: false },
+          { text: Strings.SORT_MOST_RECENT_TEXT, selected: false },
         ],
       },
       (err, result) => {

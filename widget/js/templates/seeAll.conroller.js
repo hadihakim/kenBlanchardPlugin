@@ -90,13 +90,13 @@ class SeeAll {
           title[0].innerText = assetsInfo[lastIndex].meta.title;
           if (durationState && assetsInfo[lastIndex].meta.duration > 0) {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-                                    <span class="schedule-text">
+                                    <span class="schedule-text bodyText-AppTheme">
                                 ${Utilities.timeConvert(
                                   assetsInfo[lastIndex].meta.duration
                                 )}</span>`;
           }
           card[0].addEventListener("click", () => {
-            PageDetails.openDetails(id);
+            PageDetails.openDetails(id ,assetsInfo[lastIndex].meta.title);
           });
           container.appendChild(nodesClone);
         }

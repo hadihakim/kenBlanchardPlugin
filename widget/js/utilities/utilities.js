@@ -24,7 +24,7 @@ class Utilities {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
 			this.state.appTheme = appTheme;
-			console.log(appTheme);
+			console.log(appTheme, "APP THEME");
 		});
 	};
 
@@ -119,12 +119,12 @@ class Utilities {
 			{
 				elements: document.getElementsByClassName("userContainer"),
 				colorType: "back",
-				colorDegree: this.state.appTheme.colors.primaryTheme,
+				colorDegree: this.state.appTheme.colors.titleBar,
 			},
 			{
 				elements: document.getElementsByClassName("user-image-border"),
 				colorType: "borderColor",
-				colorDegree: this.state.appTheme.colors.primaryTheme,
+				colorDegree: this.state.appTheme.colors.titleBar,
 			},
 			{
 				elements: document.getElementsByClassName("info-btn-AppTheme"),
@@ -191,38 +191,39 @@ class Utilities {
 					if (err) return console.log(err);
 					if (result.length) {
 						switch (result[result.length - 1].label) {
-							case "Home from Explore":
+								
+							case "Explore":
 								Navigation.openMain();
 								break;
-							case "Home from See All":
-								Navigation.openMain();
-								break;
-							case "Explore from See All":
-								Navigation.openExplore();
-								break;
-							case "Explore from Details":
-								Navigation.openExplore();
-								break;
-							case "See All from Details":
-								if (config.searchFrom == "from-main" || config.searchFrom == "from-explore") {
-									Navigation.openSearch();
-								} else if (config.searchFrom == "from-see-all") {
-									Navigation.openSeeAll();
-								}
-								break;
-							case "page detail from chapter":
-								let id = result[result.length - 1].options.id;
-								Navigation.openPageDetails(id);
-								PageDetails.setState(id);
-								PageDetails.init();
-								break;
-							case "Details from CourseDetails":
-								let id2 = result[result.length - 1].options.id;
-								Navigation.openPageDetails();
-								PageDetails.setState(id2);
-  								PageDetails.init();
-								break;
-							case "main/explore from search":
+							// case "Home from See All":
+							// 	Navigation.openMain();
+							// 	break;
+							// case "Explore from See All":
+							// 	Navigation.openExplore();
+							// 	break;
+							// case "Explore from Details":
+							// 	Navigation.openExplore();
+							// 	break;
+							// case "See All from Details":
+							// 	if (config.searchFrom == "from-main" || config.searchFrom == "from-explore") {
+							// 		Navigation.openSearch();
+							// 	} else if (config.searchFrom == "from-see-all") {
+							// 		Navigation.openSeeAll();
+							// 	}
+								// break;
+							// case "page detail from chapter":
+							// 	let id = result[result.length - 1].options.id;
+							// 	Navigation.openPageDetails(id);
+							// 	PageDetails.setState(id);
+							// 	PageDetails.init();
+							// 	break;
+							// case "Details from CourseDetails":
+							// 	let id2 = result[result.length - 1].options.id;
+							// 	Navigation.openPageDetails();
+							// 	PageDetails.setState(id2);
+  							// 	PageDetails.init();
+							// 	break;
+							case "Search":
 								if (config.searchFrom == "from-main") {
 									Navigation.openMain();
 								} else if (config.searchFrom == "from-explore") {
@@ -230,17 +231,40 @@ class Utilities {
 								}
 								Navigation.setData(true);
 								break;
-
-							case "Home from user profile":
+							case "Growth Profile":
 								Navigation.openMain();
 								break;
-							case "user profile from list":
-								Navigation.openUserProfile();
-								break;
-							case "user List from temEffectiveness list":
-								Navigation.openUserList();
-								break;
+							// case "user profile from list":
+							// 	Navigation.openUserProfile();
+							// 	break;
+
+							// case "user List from temEffectiveness list":
+							// 	Navigation.openUserList();
+							// 	break;
 							default:
+								let from=result[result.length-1].options.from;
+								if(from == "Home from See All" || from == "Home from Details"){
+									Navigation.openMain();
+								}else if (from == "Explore from See All" || from== "Explore from Details"){
+									Navigation.openExplore();
+								}else if( from == "See All from Details"){
+									if (config.searchFrom == "from-main" || config.searchFrom == "from-explore") {
+										Navigation.openSearch();
+									} else if (config.searchFrom == "from-see-all") {
+										Navigation.openSeeAll();
+									}
+								}else if(from == "page detail from chapter" || from == "Details from CourseDetails"){
+									let id = result[result.length - 1].options.id;
+									Navigation.openPageDetails(id);
+									PageDetails.setState(id);
+									PageDetails.init();
+								}else if(from == "user profile from list"){
+									Navigation.openUserProfile();
+								}else if (from == "user List from temEffectiveness list"){
+									Navigation.openUserList();
+								}else if(from =="Personal home Page"){
+									Navigation.openMain();
+								}
 								break;
 						}
 					}
