@@ -22,6 +22,7 @@ class Search {
     trendingContainer: "trendingContainer",
     trendingTemplate: "trendingTemplate",
     seeAllTemplate: "seeAllTemplate",
+    dot:"dot"
   };
 
   static hasSearch = (data) => {
@@ -224,6 +225,13 @@ class Search {
           result.forEach((topic) => {
             this.state.filterArr.push(topic.text);
           });
+          
+          const dot= document.getElementById(this.pointers.dot);
+          if(this.state.filterArr.length == this.state.filterTopic.length){
+            dot.classList.add("hidden");
+          }else{
+            dot.classList.remove("hidden");
+          }
 
           this.state.data.data.sections.forEach((element) => {
             const container = document.getElementById(

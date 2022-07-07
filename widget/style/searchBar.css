@@ -36,3 +36,13 @@
 .material-icons-outlined {
     font-family: 'Material Icons Outlined' !important;
   }
+  .dot {
+    height: 7px;
+    width: 7px;
+    border-radius: 100%;
+    background: red;
+    position: absolute;
+    right: 16px;
+    bottom: 32px;
+    border: 1px solid white;
+}
