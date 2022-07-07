@@ -1,4 +1,8 @@
 class Utilities {
+	static state = {
+		appTheme:{},
+	}
+
 	static cropImage = (image, size = "full_width", aspect = "16:9") => {
 		let cropedImage = buildfire.imageLib.cropImage(image, {
 			size: size,
@@ -19,12 +23,45 @@ class Utilities {
 	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
-			config.appTheme = appTheme;
+			this.state.appTheme = appTheme;
+			console.log(appTheme, "APP THEME");
 		});
 	};
 
+	static LightenDarkenColor=(col, amt)=> {
+
+		// col => color 
+		// amt => the amount of chnging the color
+		// if you passed positive number the color will be lighter
+		// if you passed nigative number the color will be darken
+
+		let usePound = false;
+		if (col[0] == "#") {
+			col = col.slice(1);
+			usePound = true;
+		}
+	 
+		let num = parseInt(col,16);
+	 
+		let r = (num >> 16) + amt;
+		if (r > 255) r = 255;
+		else if  (r < 0) r = 0;
+	 
+		let b = ((num >> 8) & 0x00FF) + amt;
+		if (b > 255) b = 255;
+		else if  (b < 0) b = 0;
+	 
+		let g = (num & 0x0000FF) + amt;
+		if (g > 255) g = 255;
+		else if (g < 0) g = 0;
+	 
+		return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+	  
+	}
+
 	static setThemeHandler = (arr, type, color) => {
 		for (let i = 0; i < arr.length; i++) {
+			let newColor;
 			switch (type) {
 				case "color":
 					arr[i].setAttribute( 'style', `fill: ${color} !important` );
@@ -34,7 +71,12 @@ class Utilities {
 					arr[i].style.backgroundColor = color;
 					break;
 				case "borderColor":
-					arr[i].style.borderColor = color;
+					newColor = this.LightenDarkenColor(color, 20)
+					arr[i].setAttribute( 'style', `border-color: ${newColor} !important` );
+					break;
+				case "backPercentage":
+					newColor = this.LightenDarkenColor(color, 55)
+					arr[i].setAttribute( 'style', `background-color: ${newColor} !important` );
 					break;
 				default:
 					break;
@@ -45,45 +87,65 @@ class Utilities {
 	static setAppTheme = () => {
 		let colorCollections = [
 			{
-				elements: [...document.getElementsByClassName("icon"),...document.getElementsByClassName("arrow-color")],
+				elements: [...document.getElementsByClassName("icon"), ...document.getElementsByClassName("arrow-color")],
 				colorType: "color",
-				colorDegree: config.appTheme.colors.icons,
+				colorDegree: this.state.appTheme.colors.icons,
+			},
+			{
+				elements: document.getElementsByClassName("primaryBtn-AppTheme"),
+				colorType: "back",
+				colorDegree: this.state.appTheme.colors.defaultTheme,
+			},
+			{
+				elements: document.getElementsByClassName("defaultlink-AppTheme"),
+				colorType: "color",
+				colorDegree: this.state.appTheme.colors.defaultTheme,
 			},
 			{
 				elements: document.getElementsByClassName("headerText-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.headerText,
+				colorDegree: this.state.appTheme.colors.headerText,
 			},
 			{
 				elements: document.getElementsByClassName("barText-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.titleBarTextAndIcons,
+				colorDegree: this.state.appTheme.colors.titleBarTextAndIcons,
 			},
 			{
 				elements: document.getElementsByClassName("bodyText-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.bodyText,
+				colorDegree: this.state.appTheme.colors.bodyText,
 			},
 			{
 				elements: document.getElementsByClassName("userContainer"),
 				colorType: "back",
-				colorDegree: config.appTheme.colors.primaryTheme,
+				colorDegree: this.state.appTheme.colors.titleBar,
 			},
 			{
 				elements: document.getElementsByClassName("user-image-border"),
 				colorType: "borderColor",
-				colorDegree: config.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.titleBar,
 			},
 			{
 				elements: document.getElementsByClassName("info-btn-AppTheme"),
 				colorType: "back",
-				colorDegree: config.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.infoTheme,
 			},
 			{
 				elements: document.getElementsByClassName("info-link-AppTheme"),
 				colorType: "color",
-				colorDegree: config.appTheme.colors.infoTheme,
+				colorDegree: this.state.appTheme.colors.infoTheme,
 			},
+			{
+				elements: document.getElementsByClassName("infoTheme"),
+				colorType: "back",
+				colorDegree: this.state.appTheme.colors.infoTheme,
+			},
+			{
+				elements: document.getElementsByClassName("holderPercentage"),
+				colorType: "backPercentage",
+				colorDegree: this.state.appTheme.colors.infoTheme,
+			}
 		];
 
 		colorCollections.forEach((element) => {
@@ -92,15 +154,15 @@ class Utilities {
 	};
 
 	static _fetchNextList = () => {
-	config.fetchingNextPage = true;
-	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
-		console.log("test");
-		Search.searchCardsRender(seeAllContainer, () => {config.fetchingNextPage = false; })
-	} else if (config.searchFrom == "from-see-all") {
-		SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
-			config.fetchingNextPage = false;
-		});
-	}
+		config.fetchingNextPage = true;
+		if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
+			console.log("test");
+			Search.searchCardsRender(seeAllContainer, () => { config.fetchingNextPage = false; })
+		} else if (config.searchFrom == "from-see-all") {
+			SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
+				config.fetchingNextPage = false;
+			});
+		}
 
 	}
 
@@ -117,16 +179,16 @@ class Utilities {
 	static initBack = () => {
 		let timer;
 		buildfire.navigation.onBackButtonClick = () => {
-			
+
 			let input = document.getElementById("search-input");
-			input.value="";
-		
+			input.value = "";
+
 			buildfire.history.get(
 				{
 					pluginBreadcrumbsOnly: true,
 				},
 				(err, result) => {
-					if(err) return console.log(err);
+					if (err) return console.log(err);
 					if (result.length) {
 						switch (result[result.length - 1].label) {
 							case "Home from Explore":
@@ -142,9 +204,9 @@ class Utilities {
 								Navigation.openExplore();
 								break;
 							case "See All from Details":
-								if(config.searchFrom == "from-main" ||config.searchFrom == "from-explore" ){
+								if (config.searchFrom == "from-main" || config.searchFrom == "from-explore") {
 									Navigation.openSearch();
-								}else if(config.searchFrom == "from-see-all"){
+								} else if (config.searchFrom == "from-see-all") {
 									Navigation.openSeeAll();
 								}
 								break;
@@ -152,7 +214,7 @@ class Utilities {
 								let id = result[result.length - 1].options.id;
 								Navigation.openPageDetails(id);
 								PageDetails.setState(id);
-  								PageDetails.init();
+								PageDetails.init();
 								break;
 							case "Details from CourseDetails":
 								let id2 = result[result.length - 1].options.id;
@@ -161,21 +223,23 @@ class Utilities {
   								PageDetails.init();
 								break;
 							case "main/explore from search":
-								if(config.searchFrom == "from-main"){
+								if (config.searchFrom == "from-main") {
 									Navigation.openMain();
-								}else if(config.searchFrom == "from-explore"){
+								} else if (config.searchFrom == "from-explore") {
 									Navigation.openExplore();
 								}
 								Navigation.setData(true);
 								break;
-						
+
 							case "Home from user profile":
 								Navigation.openMain();
 								break;
 							case "user profile from list":
 								Navigation.openUserProfile();
 								break;
-							
+							case "user List from temEffectiveness list":
+								Navigation.openUserList();
+								break;
 							default:
 								break;
 						}
@@ -192,7 +256,7 @@ class Utilities {
 	};
 
 	static scrollTop = () => {
-		mainContainer.scrollTo({ top: 0});
+		mainContainer.scrollTo({ top: 0 });
 	};
 
 	static splideInit = () => {

@@ -38,3 +38,4 @@ const Strings = {
 	EMPTY_TITLE:"Nothing Found",
 	EMPTY_DESCRIPTION:"Refine your search...",
 }
+

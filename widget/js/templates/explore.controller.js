@@ -178,9 +178,10 @@ class Explore {
       let progressBar=nodesClone.querySelectorAll(".progressBar");
       let div=document.createElement("div");
       div.classList.add("card-progressBar");
+      div.classList.add("holderPercentage");
       let percentageDiv=document.createElement("div");
       percentageDiv.style.width=`${Math.floor(Math.random() * 101)}%`;
-      percentageDiv.classList.add("percentageDiv","userContainer")
+      percentageDiv.classList.add("percentageDiv","infoTheme")
       div.appendChild(percentageDiv);
       progressBar[0].appendChild(div);
     }
@@ -195,7 +196,7 @@ class Explore {
     title[0].innerText = assets_info.meta.title;
     if (durationState) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-					<span class="schedule-text">
+					<span class="schedule-text bodyText-AppTheme">
 						${Utilities.timeConvert(assets_info.meta.duration)}</span>`;
     }
     card[0].addEventListener("click", () => {
@@ -226,7 +227,7 @@ class Explore {
                 ? "My"
                 : "Recommended"
             } ${element.title}</p>
-						<span class="seeAll-btn info-link-AppTheme" id="${element.id}_${type}">${
+						<span class="seeAll-btn defaultlink-AppTheme" id="${element.id}_${type}">${
             Strings.SEE_ALL_TEXT
           }</span>
 					</div>

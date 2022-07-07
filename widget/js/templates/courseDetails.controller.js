@@ -6,7 +6,7 @@ class CourseDetails {
             {
                 "title": "introduction",
                 "subTitle": "Introduction to the course",
-                "duration": 3600,
+                "duration": 300,
                 "type": ["video"],
                 "progress":50,
                 "data": {}
@@ -14,7 +14,7 @@ class CourseDetails {
             {
                 "title": "Lesson 1",
                 "subTitle": "Focus and Listen",
-                "duration": 3000,
+                "duration": 360,
                 "type": ["video"],
                 "progress":0,
                 "data": {}
@@ -22,7 +22,7 @@ class CourseDetails {
             {
                 "title": "Lesson 2",
                 "subTitle": "Acknowledge Emotion",
-                "duration": 4000,
+                "duration": 400,
                 "type": ["article","podcast"],
                 "progress":30,
                 "data": {}
@@ -30,7 +30,7 @@ class CourseDetails {
             {
                 "title": "Lesson 3",
                 "subTitle": "Ask Them What They Need",
-                "duration": 1000,
+                "duration": 100,
                 "type": ["article"],
                 "progress":60,
                 "data": {}
@@ -55,7 +55,7 @@ class CourseDetails {
         
     }
     static pointers = {
-        pageDetails: "pageDetails",
+        courseDetailsContainer: "courseDetailsContainer",
         courseDetailsTemplate: "courseDetailsTemplate"
 
     }
@@ -65,7 +65,7 @@ class CourseDetails {
     }
 
     static courseRender() {
-        let container = document.getElementById(this.pointers.pageDetails);
+        let container = document.getElementById(this.pointers.courseDetailsContainer);
         const template = document.getElementById(this.pointers.courseDetailsTemplate);
         const firstClone = template.content.cloneNode(true);
 
@@ -114,10 +114,17 @@ class CourseDetails {
             }
             lessons[0].appendChild(icons)
 
-            const progress = document.createElement("progress");
-            progress.setAttribute("value", el.progress);
-            progress.setAttribute("max", "100");
-            progress.classList.add("progress-lesson");
+            //<div class="progressBar"></div>
+            const progress = document.createElement("div");
+            progress.classList.add("progressBar");
+            let div=document.createElement("div");
+            div.classList.add("courseDetails-card-progressBar", "holderPercentage");
+            let percentageDiv=document.createElement("div");
+            percentageDiv.style.width=`${el.progress}%`;
+            percentageDiv.classList.add("percentageDiv","progress-lesson", "infoTheme")
+            div.appendChild(percentageDiv);
+            progress.appendChild(div);
+
             lessons[0].appendChild(progress)
         })
 
