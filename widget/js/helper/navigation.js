@@ -5,7 +5,7 @@ class Navigation {
 	static setData(data) {
 		this.state.searchOpened = data;
 	}
-	
+
 	static openMain = () => {
 		config.renderedCard = 0;
 		config.page = 1;
@@ -30,7 +30,7 @@ class Navigation {
 		emptySearch.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
-		
+
 		Utilities.setAppTheme();
 	}
 
@@ -40,7 +40,7 @@ class Navigation {
 		config.lastIndex = 0;
 		config.isSeeAllScreen = false;
 		config.searchFrom = "from-explore";
-		
+
 		mainPage.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
 		userContainer.classList.add("hidden");
@@ -131,9 +131,14 @@ class Navigation {
 		sortIcon.classList.add("hidden");
 		emptySearch.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
+		userProfile.classList.add("hidden");
+		myList_PageContainer.classList.add("hidden");
+		teamEffectiveness_PageContainer.classList.add("hidden");
+		userProfileContainer.classList.add("hidden");
 
 		pageDetails.classList.remove("hidden");
-		
+		mainContainer.classList.remove("hidden");
+
 		Utilities.setAppTheme();
 	}
 static openCourseDetails = (id,title)=>{
@@ -146,7 +151,7 @@ static openCourseDetails = (id,title)=>{
 	config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
-		pageDetails.innerHTML="";
+		pageDetails.innerHTML = "";
 		config.isSeeAllScreen = false;
 		Utilities.scrollTop();
 		mainPage.classList.add("hidden");
@@ -157,9 +162,16 @@ static openCourseDetails = (id,title)=>{
 		sortIcon.classList.add("hidden");
 		emptySearch.classList.add("hidden");
 		pageDetails.classList.add("hidden");
+		userProfile.classList.add("hidden");
+		myList_PageContainer.classList.add("hidden");
+		teamEffectiveness_PageContainer.classList.add("hidden");
+		userProfileContainer.classList.add("hidden");
+
 		courseDetailsContainer.classList.remove("hidden");
+		mainContainer.classList.remove("hidden");
+
 		Utilities.setAppTheme();
-}
+	}
 	static openEmptySearch = () => {
 		emptySearch.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
@@ -174,11 +186,11 @@ static openCourseDetails = (id,title)=>{
 	}
 
 	static openUserProfile = () => {
-		document.getElementById("ChartContainer").innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
+		ChartContainer.innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
 		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
-		document.getElementById("userProfileContainer").classList.remove("hidden");
+		userProfileContainer.classList.remove("hidden");
 		userProfile.classList.remove("hidden");
 		buildfire.history.push("Growth Profile", {
 				showLabelInTitlebar: true,
@@ -197,7 +209,7 @@ static openCourseDetails = (id,title)=>{
 		
 		  });
 		myList_PageContainer.classList.remove("hidden");
-		document.getElementById("userProfileContainer").classList.remove("hidden");
+		userProfileContainer.classList.remove("hidden");
 
 		Utilities.setAppTheme();
 	}
@@ -214,7 +226,7 @@ static openCourseDetails = (id,title)=>{
 		  });
 
 		teamEffectiveness_PageContainer.classList.remove("hidden");
-		document.getElementById("userProfileContainer").classList.remove("hidden");
+		userProfileContainer.classList.remove("hidden");
 		Utilities.setAppTheme();
 	}
 }
