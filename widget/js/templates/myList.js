@@ -138,7 +138,7 @@ class MyList {
 
             actionBtn.addEventListener('click', () => {
                 TeamEffectivenessList.init(card.id);
-                Navigation.openTeamEffectivenessList(card.id);
+                Navigation.openTeamEffectivenessList(card.title);
             })
         })
 

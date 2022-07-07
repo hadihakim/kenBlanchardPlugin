@@ -20,13 +20,28 @@ class PageDetails {
         this.state.data = fakeData.data.assets_info[id];
     }
 
-    static openDetails(id) {
+    static openDetails(id, title) {
+      console.log(title," tttttttt");
         if (!mainPage.classList.contains("hidden")) {
-          buildfire.history.push("Home from See All");
+          // buildfire.history.push("Home from Details");
+          buildfire.history.push(title, {
+            showLabelInTitlebar: true,
+            from:"Home from Details",
+          
+            });
         } else if (!seeAllContainer.classList.contains("hidden")) {
-          buildfire.history.push("See All from Details");
+          // buildfire.history.push("See All from Details");
+          buildfire.history.push(title, {
+            showLabelInTitlebar: true,
+            from:"See All from Details",
+          
+            });
         } else if (!explorePage.classList.contains("hidden")) {
-          buildfire.history.push("Explore from Details");
+          buildfire.history.push(title, {
+								showLabelInTitlebar: true,
+								from:"Explore from Details",
+							
+							  });
         }
         pageDetails.innerHTML = "";
         Navigation.openPageDetails(id);
@@ -36,7 +51,7 @@ class PageDetails {
         //   buildfire.history.push("See All from Details");
       }
     static openCourseDetails(data){
-      Navigation.openCourseDetails(this.state.id);
+      Navigation.openCourseDetails(this.state.id,this.state.data.title);
       CourseDetails.init(data);
     }
     static graphicalSummariesFirstPage = () => {
@@ -71,7 +86,12 @@ class PageDetails {
           li.innerHTML = innerHTML;
           chaptersList[0].appendChild(li);
           li.addEventListener("click", () => {
-            buildfire.history.push("page detail from chapter",{id:this.state.id});
+            buildfire.history.push(chapter.subTitle, {
+              showLabelInTitlebar: true,
+              from:"page detail from chapter",
+              id:this.state.id,
+              });
+            // buildfire.history.push("page detail from chapter",{id:this.state.id});
             this.state.chapterData = chapter;
             this.graphicalSummariesSecondPage();
           });
