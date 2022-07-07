@@ -122,6 +122,17 @@ class TeamEffectivenessList {
         this.init();
     }
 
+    static resetItem = (id) => {
+        let newActiveData = this.state.data.filter(item => {
+            if (item.id === id){
+                item.taken = 0;
+            }
+            return item
+        })
+        this.state.data = newActiveData;
+        this.init();
+    }
+
     static confirmMessage = (id, title, message) => {
         buildfire.dialog.confirm(
             {
@@ -142,7 +153,7 @@ class TeamEffectivenessList {
                             this.moveToArchive(id);
                             break;
                         case "Reset Course":
-
+                        this.resetItem(id);
                             break;
                         case "Remove Course":
                             this.deleteItem(id)
