@@ -33,7 +33,6 @@
 }
 
 .course-lesson-subtitle {
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -42,12 +41,10 @@
     margin-bottom: 4px;
 }
 
-.card-progressBar{
-    background-color: #bbbbbb;
+ .courseDetails-card-progressBar{
     width: 90%;
     height: 4px;
     margin-left: 1rem;
-    opacity: 0.2;
     border-radius: 2px;
     margin-bottom: 1.5rem;
 }

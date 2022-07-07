@@ -11,7 +11,7 @@
     width: calc(100% - 2rem);
     margin: 1rem;
     height: 5.5rem;
-    background: #fecd83;
+    /* background: #fecd83; */
     border-radius: 4px;
     padding: 1rem;
 
@@ -36,7 +36,6 @@
     line-height: 20px;
     text-align: center;
     letter-spacing: 0.15px;
-    color: #5F5F5F;
 }
 
 #assesmentsBar .assesmentsChart {
@@ -51,7 +50,6 @@
     font-size: 1rem;
     line-height: 1.25rem;
     letter-spacing: 0.5px;
-    color: #101010;
 }
 
 .assesmentsDetails .assesmentsTitle {
@@ -60,7 +58,6 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     letter-spacing: 0.15px;
-    color: #5F5F5F;
 }
 
 #allAssesmentsContainer {
@@ -80,7 +77,6 @@
     font-size: 1rem;
     line-height: 1.25rem;
     letter-spacing: 0.5px;
-    color: #101010;
     margin-bottom: 1rem;
 }
 
@@ -111,13 +107,11 @@
 
 .assesmentSection .assesmentList .assesmentElement .assesmentDetails .assesmentDetailsTitle {
     margin-bottom: .25rem;
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 0.5px;
-    color: #101010;
 }
 
 .assesmentSection .assesmentList .assesmentElement .assesmentDetails .assesmentDetailsSubtitle {
@@ -126,7 +120,6 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.15px;
-    color: #5F5F5F;
 }
 
 #assesmentAction {
