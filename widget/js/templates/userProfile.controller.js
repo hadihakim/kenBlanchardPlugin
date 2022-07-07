@@ -2,7 +2,7 @@ class UserProfile {
   static state = {
     userData: config.userConfig,
     data: {},
-    userProfileTabs: ["activity", "insights", "badges"],
+    userProfileTabs: [Strings.USER_PROFILE_TAP_1, Strings.USER_PROFILE_TAP_2, Strings.USER_PROFILE_TAP_3],
 	// it should come from user api 
 	userBadgesAchieved:[
 		{
@@ -194,7 +194,10 @@ class UserProfile {
 	let userBadgesTemplate=document.getElementById(this.pointers.userBadgesTemplate)
 	const nodesClone = userBadgesTemplate.content.cloneNode(true);
 	let badgesAchievedContainer = nodesClone.getElementById("badgesAchievedContainer");
-
+  let achievedTitle=nodesClone.querySelectorAll(".achieved-title");
+  let toAchievedTitle=nodesClone.querySelectorAll(".to-achieve-title");
+  achievedTitle[0].innerText=Strings.USER_PROFILE_BADGES_ACHIEVED_TEXT;
+  toAchievedTitle[0].innerText=Strings.USER_PROFILE_BADGES__TO_ACHIEVE_TEXT;
 
 	this.state.userBadgesAchieved.forEach((badge)=>{
 		let badgeElement= document.createElement("div");
@@ -283,7 +286,7 @@ class UserProfile {
   let allAssesmentsContainer = nodesClone.querySelectorAll(".allAssesmentsContainer");
   let assesmentPercentage = nodesClone.querySelectorAll(".assesmentPercentage");
   assesmentsNumber[0].innerText = 12;
-  assesmentsTitle[0].innerText = "Assesments Taken";
+  assesmentsTitle[0].innerText = Strings.USER_PROFILE_ASSESMENTS_TEXT;
   assesmentPercentage[0].innerText = `${percent}%`;
   this.state.assesments.forEach((el)=>{
     let assesmentSection = document.createElement('div');
