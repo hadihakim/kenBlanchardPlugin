@@ -196,7 +196,7 @@ class Explore {
     title[0].innerText = assets_info.meta.title;
     if (durationState) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-					<span class="schedule-text">
+					<span class="schedule-text bodyText-AppTheme">
 						${Utilities.timeConvert(assets_info.meta.duration)}</span>`;
     }
     card[0].addEventListener("click", () => {

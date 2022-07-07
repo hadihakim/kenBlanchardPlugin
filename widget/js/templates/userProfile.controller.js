@@ -200,7 +200,7 @@ class UserProfile {
 		badgeElement.classList.add("badge");
 		let badgeElementContent=`
 			<img src=${badge.image} alt="${badge.label}"/>
-			<label>${badge.label}</label>
+			<label class="headerText-AppTheme">${badge.label}</label>
 		`
 		badgeElement.innerHTML=badgeElementContent;
 		badgesAchievedContainer.appendChild(badgeElement);
@@ -213,7 +213,7 @@ class UserProfile {
 		badgeElement.classList.add("badge");
 		let badgeElementContent=`
 			<img src=${badge.image} alt="${badge.label}"/>
-			<label>${badge.label}</label>
+			<label class="headerText-AppTheme">${badge.label}</label>
 		`
 		badgeElement.innerHTML=badgeElementContent;
 		badgesToAchievedContainer.appendChild(badgeElement);
