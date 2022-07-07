@@ -128,18 +128,19 @@ class MyList {
             const myCard = document.getElementById(this.pointers.template);
             const nodesClone = myCard.content.cloneNode(true);
 
+            
             let imageContainer = nodesClone.querySelector("#image");
             let titleContainer = nodesClone.querySelector("#title_text");
             let subTitleContainer = nodesClone.querySelector("#subTitle_text");
-            let actionBtn = nodesClone.querySelector("#action");
-
+            let actionBtn = nodesClone.querySelectorAll(".myCard");
+            
             imageContainer.setAttribute('style', `background-image: url('${card.image}')`);
             titleContainer.innerHTML = card.title;
             subTitleContainer.innerHTML = card.subTitle;
 
             listContainer.appendChild(nodesClone);
 
-            actionBtn.addEventListener('click', () => {
+            actionBtn[0].addEventListener('click', () => {
                 TeamEffectivenessList.init(card.id);
                 Navigation.openTeamEffectivenessList(card.id);
             })
