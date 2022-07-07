@@ -185,3 +185,54 @@ const fakeData={
   },
   "tag": "settings"
 }
+
+const coursesData={
+  "data":{
+    "courses":{
+      "62b3439f864d49037aac9b25":{
+        "type":"course",
+        "title":"Four Ways to Help My People in a Crisis",
+        "image":"https://www.zilliondesigns.com/blog/wp-content/uploads/Pattern-Logos.jpg",
+        "lessons":[
+          {
+            "id":"introduction1",
+            "title":"introduction",
+            "subtitle":"Introduction to the Course",
+            "assets":["assets1"]
+          },
+          {
+            "id":"lesson1",
+            "title":"Lesson 1",
+            "subtitle":"Focus and Listen",
+            "assets":["assets1",]
+          },
+          {
+            "id":"lesson2",
+            "title":"Lesson 2",
+            "subtitle":"Acknowledge Emotion",
+            "assets":["assets2"]
+          }
+          ,
+          {
+            "id":"lesson3",
+            "title":"Lesson 3",
+            "subtitle":"Ask Them What They Need",
+            "assets":["assets1","assets2"]
+          }
+        ]
+      },
+    },
+    "assets_info":{
+      "assets1":{
+          "type":"audio",
+          "title":"Tell Your Truth",
+          "duration":30
+      },
+      "assets2":{
+          "type":"article",
+          "title":"Building My Capable Team Members' Confidence",
+          "duration":5
+      }
+    }
+  }
+}

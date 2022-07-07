@@ -48,7 +48,7 @@ class PageDetails {
     }
   static openCourseDetails(data){
     Navigation.openCourseDetails(this.state.id,this.state.data.title);
-    CourseDetails.init(data);
+    CourseDetails.init(this.state.id);
   }
   static graphicalSummariesFirstPage = () => {
       let container = document.getElementById(this.pointers.pageDetails);
