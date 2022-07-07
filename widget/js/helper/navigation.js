@@ -5,7 +5,7 @@ class Navigation {
 	static setData(data) {
 		this.state.searchOpened = data;
 	}
-	
+
 	static openMain = () => {
 		config.renderedCard = 0;
 		config.page = 1;
@@ -26,7 +26,7 @@ class Navigation {
 		emptySearch.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
-		
+
 		Utilities.setAppTheme();
 	}
 
@@ -36,7 +36,7 @@ class Navigation {
 		config.lastIndex = 0;
 		config.isSeeAllScreen = false;
 		config.searchFrom = "from-explore";
-		
+
 		mainPage.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
 		userContainer.classList.add("hidden");
@@ -117,15 +117,15 @@ class Navigation {
 		courseDetailsContainer.classList.add("hidden");
 
 		pageDetails.classList.remove("hidden");
-		
+
 		Utilities.setAppTheme();
 	}
-static openCourseDetails = (id)=>{
-	buildfire.history.push("Details from CourseDetails",{id:id});
-	config.renderedCard = 0;
+	static openCourseDetails = (id) => {
+		buildfire.history.push("Details from CourseDetails", { id: id });
+		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
-		pageDetails.innerHTML="";
+		pageDetails.innerHTML = "";
 		config.isSeeAllScreen = false;
 		Utilities.scrollTop();
 		mainPage.classList.add("hidden");
@@ -136,9 +136,16 @@ static openCourseDetails = (id)=>{
 		sortIcon.classList.add("hidden");
 		emptySearch.classList.add("hidden");
 		pageDetails.classList.add("hidden");
+		userProfile.classList.add("hidden");
+		myList_PageContainer.classList.add("hidden");
+		teamEffectiveness_PageContainer.classList.add("hidden");
+		userProfileContainer.classList.add("hidden");
+
 		courseDetailsContainer.classList.remove("hidden");
+		mainContainer.classList.remove("hidden");
+
 		Utilities.setAppTheme();
-}
+	}
 	static openEmptySearch = () => {
 		emptySearch.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
@@ -153,17 +160,17 @@ static openCourseDetails = (id)=>{
 	}
 
 	static openUserProfile = () => {
-		document.getElementById("ChartContainer").innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
+		ChartContainer.innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
 		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
-		document.getElementById("userProfileContainer").classList.remove("hidden");
+		userProfileContainer.classList.remove("hidden");
 		userProfile.classList.remove("hidden");
 		buildfire.history.push("Home from user profile");
 		Utilities.setAppTheme();
 	}
 
-	static openUserList=()=>{
+	static openUserList = () => {
 		mainContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		teamEffectiveness_PageContainer.classList.add("hidden");
@@ -171,20 +178,20 @@ static openCourseDetails = (id)=>{
 		buildfire.history.push("user profile from list");
 
 		myList_PageContainer.classList.remove("hidden");
-		document.getElementById("userProfileContainer").classList.remove("hidden");
+		userProfileContainer.classList.remove("hidden");
 
 		Utilities.setAppTheme();
 	}
 
-	static openTeamEffectivenessList=()=>{
+	static openTeamEffectivenessList = () => {
 		mainContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
-		
+
 		buildfire.history.push("user List from temEffectiveness list");
-		
+
 		teamEffectiveness_PageContainer.classList.remove("hidden");
-		document.getElementById("userProfileContainer").classList.remove("hidden");
+		userProfileContainer.classList.remove("hidden");
 		Utilities.setAppTheme();
 	}
 }

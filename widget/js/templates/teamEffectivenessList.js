@@ -6,25 +6,29 @@ class TeamEffectivenessList {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
-                taken: 10
+                taken: 10,
+                id:"62b3439f864d49037aac9b27"
             },
             {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
-                taken: 7
+                taken: 7,
+                id:"62b3439f864d49037aac9b27"
             },
             {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
-                taken: 2
+                taken: 2,
+                id:"62b3439f864d49037aac9b27"
             },
             {
                 image: 'https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88',
                 title: 'Becoming a Mentor',
                 totaltasks: 15,
-                taken: 13
+                taken: 13,
+                id:"62b3439f864d49037aac9b27"
             }
         ],
         tabs: ['active', 'archived']
@@ -71,7 +75,6 @@ class TeamEffectivenessList {
             let filledData = nodesClone.querySelector("#filled");
             let actionBtn = nodesClone.querySelector("#action");
 
-
             let percentFilled = (activeCard.taken / activeCard.totaltasks) * 100;
             imageContainer.setAttribute('style', `background-image: url('${activeCard.image}')`);
             filledData.setAttribute('style', `width: ${percentFilled}%`);
@@ -79,6 +82,11 @@ class TeamEffectivenessList {
 
             document.getElementById(this.pointers.teamEffectiveness_ListContainer).appendChild(nodesClone);
 
+            actionBtn.addEventListener('click', () => {
+                let courseData = HandleAPI.getDataByID(activeCard.id, "assets_info")
+                CourseDetails.init(courseData);
+                Navigation.openCourseDetails(activeCard.id)
+            })
         })
     }
 

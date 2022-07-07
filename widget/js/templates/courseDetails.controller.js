@@ -134,6 +134,7 @@ class CourseDetails {
     }
 
     static init = (data) => {
+        document.getElementById(this.pointers.courseDetailsContainer).innerHTML = ""
         this.setData(data);
         this.courseRender();
     }
