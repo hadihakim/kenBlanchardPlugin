@@ -144,6 +144,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 #teamEffectiveness_tabHandler .mdc-tab .mdc-tab__content .mdc-tab__text-label {
@@ -206,5 +207,11 @@
     transition: 0.3s;
 }
 
+.selectedNav{
+    border-bottom: 2px solid #fff !important;
+}
 /*  */
 
+#teamEffectivenessArchived_ListContainer .teamEffectiveness_Card{
+    opacity: 0.6 !important;
+}
