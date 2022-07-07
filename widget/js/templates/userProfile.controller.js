@@ -200,7 +200,7 @@ class UserProfile {
 		badgeElement.classList.add("badge");
 		let badgeElementContent=`
 			<img src=${badge.image} alt="${badge.label}"/>
-			<label>${badge.label}</label>
+			<label class="headerText-AppTheme">${badge.label}</label>
 		`
 		badgeElement.innerHTML=badgeElementContent;
 		badgesAchievedContainer.appendChild(badgeElement);
@@ -213,7 +213,7 @@ class UserProfile {
 		badgeElement.classList.add("badge");
 		let badgeElementContent=`
 			<img src=${badge.image} alt="${badge.label}"/>
-			<label>${badge.label}</label>
+			<label class="headerText-AppTheme">${badge.label}</label>
 		`
 		badgeElement.innerHTML=badgeElementContent;
 		badgesToAchievedContainer.appendChild(badgeElement);
@@ -245,7 +245,7 @@ class UserProfile {
             {
                 label: 'Dataset 1',
                 data: [percent / 100, 1 - percent / 100],
-                backgroundColor: ["#ffff", "#fedca8"],
+                backgroundColor: ["#ffff", Utilities.LightenDarkenColor(Utilities.state.appTheme.colors.infoTheme, 16)],
                 borderWidth:0,
                 cutout: "78%"
             }
@@ -288,7 +288,7 @@ class UserProfile {
     let assesmentSection = document.createElement('div');
     let assesmentHeader = document.createElement('p');
     let assesmentList = document.createElement('ul');
-    assesmentHeader.classList.add('assesmentHeader'); 
+    assesmentHeader.classList.add('assesmentHeader', 'headerText-AppTheme'); 
     assesmentSection.classList.add('assesmentSection');
     assesmentList.classList.add('assesmentList');
     assesmentHeader.innerText= el.title;
@@ -297,8 +297,8 @@ class UserProfile {
       let assesmentElement = document.createElement('li');
       assesmentElement.classList.add('assesmentElement');
       assesmentElement.innerHTML=`<div class="assesmentDetails">
-      <p class="assesmentDetailsTitle">${arr.title}</p>
-      <p class="assesmentDetailsSubtitle">${arr.subtitle}</p>
+      <p class="assesmentDetailsTitle headerText-AppTheme">${arr.title}</p>
+      <p class="assesmentDetailsSubtitle bodyText-AppTheme">${arr.subtitle}</p>
     </div>
     <div id="assesmentAction" class="assesmentAction">
       <span class="material-icons icon">

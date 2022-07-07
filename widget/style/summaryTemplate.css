@@ -127,7 +127,6 @@
   display: none !important;
 }
 .my-carousel-progress {
-  background: #fecd8352;
   width: 95%;
   position: absolute;
   bottom: 0.5rem;
@@ -135,7 +134,6 @@
   margin: 0.5rem;
 }
 .my-carousel-progress-bar {
-  background: #fecd83;
   height:0.25rem;
   transition: width 400ms ease;
 }
@@ -257,5 +255,9 @@
 .pageDetails .secondPage > .startChapter-btn-container {
   position: absolute;
   bottom: 4rem;
+}
+
+.pageDetails .secondPage .startChapter-btn-container #startChapter{
+  height: 2.5rem;
 }
 /*End Second Page*/

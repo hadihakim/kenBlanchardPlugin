@@ -54,9 +54,9 @@ class PageDetails {
           let li = document.createElement("li");
           li.classList.add("chapter-item");
           let innerHTML = `
-                <h6 class="chapter-title">${chapter.title}</h6>
+                <h6 class="chapter-title bodyText-AppTheme">${chapter.title}</h6>
                 <div class="sub-chapter-item">
-                  <span class="chapter-subtitle">${chapter.subTitle}</span>
+                  <span class="chapter-subtitle headerText-AppTheme">${chapter.subTitle}</span>
                   ${
                     chapter.premium
                       ? '<label for="searchInput" class="material-icons icon">lock</label>'
@@ -64,7 +64,7 @@ class PageDetails {
                   }
     
                 </div>
-                <div class="bar"></div>
+                <div class="bar holderPercentage"></div>
                 `;
           li.innerHTML = innerHTML;
           chaptersList[0].appendChild(li);
@@ -115,7 +115,7 @@ class PageDetails {
                       class="top-image"
                     />
                     <div class="text-content">
-                      <p>
+                      <p class="bodyText-AppTheme">
                         ${page.pageContent}
                       </p>
                     </div>
