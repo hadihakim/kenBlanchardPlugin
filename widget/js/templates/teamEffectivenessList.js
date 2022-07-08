@@ -261,7 +261,7 @@ class TeamEffectivenessList {
             imageContainer.addEventListener('click', () => {
                 let courseData = HandleAPI.getDataByID(activeCard.id, "assets_info")
                 CourseDetails.init(activeCard.id);
-                Navigation.openCourseDetails(activeCard.id)
+                Navigation.openCourseDetails(activeCard.id,activeCard.title,"from active-card")
             })
             titleCard[0].addEventListener('click', () => {
                 let courseData = HandleAPI.getDataByID(activeCard.id, "assets_info")

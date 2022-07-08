@@ -17,8 +17,7 @@ class PageDetails {
       this.state.data = fakeData.data.assets_info[id];
   }
   static openDetails(id, title) {
-    console.log(title," tttttttt");
-      if (!mainPage.classList.contains("hidden")) {
+   if (!mainPage.classList.contains("hidden")) {
         // buildfire.history.push("Home from Details");
         buildfire.history.push(title, {
           showLabelInTitlebar: true,
@@ -38,6 +37,12 @@ class PageDetails {
                               from:"Explore from Details",
                           
                             });
+      } else {
+        buildfire.history.push(title, {
+          showLabelInTitlebar: true,
+          from:"User list from Details",
+      
+        });
       }
       pageDetails.innerHTML = "";
       Navigation.openPageDetails(id);
