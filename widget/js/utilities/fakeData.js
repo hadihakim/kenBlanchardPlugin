@@ -204,7 +204,7 @@ const coursesData={
             "id":"lesson1",
             "title":"Lesson 1",
             "subtitle":"Focus and Listen",
-            "assets":["assets1",]
+            "assets":["assets1","assets2"]
           },
           {
             "id":"lesson2",
