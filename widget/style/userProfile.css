@@ -24,7 +24,7 @@
   .user-profile-image {
   height: 4rem;
   width: 4rem;
-  border: 5px solid;
+  border: 0.313rem solid;
   border-radius: 50%;
 }
 .user-profile-container
@@ -58,7 +58,7 @@
 }
 
 .user-profile-container .mdc-tab-bar {
-  box-shadow: 0px 0.1875rem 0.25rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0rem 0.1875rem 0.25rem rgba(0, 0, 0, 0.3);
 }
 .user-profile-container .mdc-tab {
   border-radius: 0.25rem;
@@ -69,10 +69,10 @@
 .user-profile-container .mdc-tab .mdc-tab__text-label {
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 0.875rem;
+  line-height: 1rem;
   text-align: center;
-  letter-spacing: 1.25px;
+  letter-spacing: 0.078rem;
   text-transform: uppercase;
 
   color: #fff;
@@ -84,6 +84,10 @@
   border-color: #fff;
   border-width: 0.125rem;
   transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
 
 /* badges tab */
@@ -125,6 +129,10 @@
   width: 4rem;
   background: linear-gradient(330deg, #013325 13.59%, #01644f 86.8%);
   border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 .user-badges-container .ba-container .badge label {
   font-style: normal;
@@ -135,4 +143,5 @@
 }
 .ba-disabled {
   filter: grayscale(100%) brightness(100%) opacity(50%);
+  -webkit-filter: grayscale(100%) brightness(100%) opacity(50%);
 }

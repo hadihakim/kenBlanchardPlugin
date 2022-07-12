@@ -259,10 +259,12 @@ class Utilities {
 									
 								}else if(from == "user profile from list"){
 									Navigation.openUserProfile();
-								}else if (from == "user List from temEffectiveness list"){
+								}else if (from == "user List from temEffectiveness list" || from == "User list from Details"){
 									Navigation.openUserList();
 								}else if(from =="Personal home Page"){
 									Navigation.openMain();
+								}else if (from =="active list from CourseDetails"){
+									Navigation.openTeamEffectivenessList(result[result.length-1].options.to);
 								}
 								break;
 						}
