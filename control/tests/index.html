@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../Jasmine-Project/lib/jasmine.css">
+
+    <script src="../../../../scripts/buildfire.js"></script>
+    <script src="../../Jasmine-Project/lib/jasmine.js"></script>
+    <script src="../../Jasmine-Project/lib/jasmine-html.js"></script>
+    <script src="../../Jasmine-Project/lib/boot0.js"></script>
+    <script src="../../Jasmine-Project/lib/boot1.js"></script>
+
+    <script src="../../widget/js/shared/authManager.js"></script>
+    <script src="../content/js/utils/helpers.js"></script>
+    <script src="../../widget/js/shared/utils/analytics.js"></script>
+
+    <script src="../../widget/js/data/Setting.js"></script>
+    <script src="../../widget/js/dataAccess/settings.js"></script>
+
+    <script src="../../widget/js/data/Asset.js"></script>
+    <script src="../../widget/js/dataAccess/assets.js"></script>
+
+    <script src="../../widget/js/data/Stat.js"></script>
+    <script src="../../widget/js/dataAccess/stats.js"></script>
+
+    <script src="../../widget/js/data/Profile.js"></script>
+    <script src="../../widget/js/dataAccess/profiles.js"></script>
+
+    <script src="./Spec/settings.spec.js"></script>
+    <script src="./Spec/assets.spec.js"></script>
+    <script src="./Spec/profiles.spec.js"></script>
+
+    <title>Tests</title>
+</head>
+
+<body>
+    <script>
+        authManager.enforceLogin();
+        Analytics.init();
+    </script>
+</body>
+<script>
+</script>
+
+</html>

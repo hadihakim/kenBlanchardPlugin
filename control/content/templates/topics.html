@@ -1,0 +1,54 @@
+<template>
+    <div class="clearfix">
+        <p class="info-note">Here’s where you add topics for the assets. You can use topics if your are mixing subjects in the same section.</p>
+    </div>
+
+    <div class="clearfix">
+        <p class="info-note">Enable trending for a topic you want to highlight it in the Trending section at the top of the Explore page. If no topics are set as trending, the Trending section will be hidden from the Explore page.</p>
+    </div>
+
+    <div class="actions margin-bottom-twenty">
+        <p></p>
+        <div class="actions">
+            <button class="btn btn-success btn-add" type="button" id="addTopicBtn">Add Topic</button>
+        </div></div>
+
+    <table id="tableTopicsList" class="table margin-bottom-zero"></table>
+    <div class="empty-state" id="emptyStateTopics"><h4>You haven't added anything yet</h4></div>
+
+    <template id="addEditTemplate-topic">
+        <div class="slide-in padding-bottom-thirty sub-page-body">
+    
+            <p class="info-note margin-bottom-twenty">For every topic you can tie coresponding user tag if you want to suggest specific content to your users based on their tags. Create new user tags in the <a class="link" href="#/tagManagement">User Tagging</a> section.</p>
+    
+
+            <div class="row margin-bottom-fifteen">
+                <div class="col-md-3">
+                    <label for="text1">Topic Name <span class="text-danger">*</span> </label>
+                </div>
+                <div class="col-md-9">
+                    <input id="topicName" type="text" class="form-control" maxlength="100" placeholder="Enter Name">
+                </div>
+            </div>
+            <div class="row margin-bottom-fifteen">
+                <div class="col-md-3">
+                    <label for="text2">Topic Tag</label>
+                </div>
+                <div class="col-md-9">
+                    <input id="topicTag" type="text" class="form-control" placeholder="Select User Tag">
+                </div>
+            </div>
+
+            <div class="margin-bottom-twenty image-picker aspect-1-1 thumbnail-picker thumbnail-picker-topics"></div>
+            
+        </div>
+
+        <!-- Bottom actions require adding the .sub-page class on the <body> tag for correct scrolling  -->
+        <div class="bottom-actions">
+            <button class="btn btn-default" onclick="TopicsDetails.cancel();">Cancel</button>
+            <button class="btn btn-success" id="saveTopic" onclick="TopicsDetails.save();" disabled="disabled">Save</button>
+        </div>   
+    
+      </template>
+
+</template>
