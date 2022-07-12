@@ -7,16 +7,20 @@
     "content": {
       "enabled": true
     },
-    "design":{
+    "design": {
       "enabled": false
     },
     "settings": {
       "enabled": false
-    }
+    },
+    "customTabs": [
+      {
+        "title": "Tests",
+        "url": "/tests/index.html?random=false&stopOnSpecFailure=true"
+      }
+    ]
   },
-  "widget": {
-
-  },
+  "widget": {},
   "features": [],
   "languages": ["en"]
 }
