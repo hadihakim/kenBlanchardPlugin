@@ -39,6 +39,10 @@
   margin-left: 1rem;
   margin-bottom: 0.25rem;
 }
+.course-lesson-subtitle span{
+    cursor: pointer;
+    user-select: none;
+}
 
 .courseDetails-card-progressBar {
   width: 90%;
