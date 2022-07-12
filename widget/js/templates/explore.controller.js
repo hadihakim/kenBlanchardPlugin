@@ -21,6 +21,7 @@ class Explore {
 
   static setPageData = (data) => {
     this.state = data;
+    console.log("here is the data ->", data);
   };
   static getDataById = (id) => {
     let data = this.state.data.data.sections.filter(
@@ -34,7 +35,7 @@ class Explore {
       title: "see all",
       data: data,
       apiData:this.state.data,
-      userData: config.userConfig,
+      userData: authManager.currentUser,
       pageType: "seeAll",
       duration: true,
     };
@@ -44,7 +45,8 @@ class Explore {
 
   static filterAndPrintData = (apiData, element, type) => {
     if (
-      (type == "explore" && element.isExplore && element.isActive) ||
+      // && element.isExplore
+      (type == "explore"  && element.isActive) ||
       (element.isActive && type !== "explore")
     ) {
       //   return;
@@ -151,7 +153,7 @@ class Explore {
 			url('${Utilities.cropImage(assets_info.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      PageDetails.openDetails(id , assets_info.meta.title);
+      Navigation.openPageDetails(id , assets_info.meta.title);
     });
     container.appendChild(firstClone);
     Utilities.setAppTheme();
@@ -199,7 +201,7 @@ class Explore {
 						${Utilities.timeConvert(assets_info.meta.duration)}</span>`;
     }
     card[0].addEventListener("click", () => {
-      PageDetails.openDetails(id , assets_info.meta.title);
+      Navigation.openPageDetails(id , assets_info.meta.title);
     });
     container.appendChild(nodesClone);
     Utilities.setAppTheme();
@@ -211,7 +213,8 @@ class Explore {
     this.state.data.data.sections.forEach((element) => {
       let skeleton = "recommanded";
       if (
-        (type == "explore" && element.isExplore && element.isActive) ||
+        // && element.isExplore
+        (type == "explore"  && element.isActive) ||
         (element.isActive && type !== "explore")
       ) {
         if(type !== "userActivityPage" || element.layout !== "horizontal-1") {

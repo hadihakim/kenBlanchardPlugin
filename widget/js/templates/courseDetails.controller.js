@@ -7,7 +7,8 @@ class CourseDetails {
     courseDetailsContainer: "courseDetailsContainer",
     courseDetailsTemplate: "courseDetailsTemplate",
   };
-  static setData(id) {
+  static setData = (id) => {
+    // HandleAPI.getDataByID
     this.state.data = coursesData.data.courses[id];
   }
 
@@ -179,10 +180,10 @@ class CourseDetails {
     Utilities.setAppTheme();
   };
 
-  static init = (id) => {
+  static init = async(id) => {
     document.getElementById(this.pointers.courseDetailsContainer).innerHTML =
       "";
-    this.setData(id);
+    await this.setData(id);
     this.courseRender();
   };
 }

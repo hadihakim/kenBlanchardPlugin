@@ -2,16 +2,16 @@
 document.getElementById("userProfilePicture").addEventListener("click", () => {
   Navigation.openUserProfile();
 });
-const init = () => {
-  Settings.get((err, res)=>{
-    console.log(res);
-  })
+
+
+const init = (data) => {
+  console.log("user -->",authManager.currentUser);
   Utilities.getAppTheme();
-  UserProfile.init();
-  Explore.setPageData({data:fakeData,userData:config.userConfig});
+  UserProfile.init(authManager.currentUser);
+  Explore.setPageData({ data: { data }, userData: authManager.currentUser });
   Explore.init("main");
   Explore.init("explore");
-  Search.setData(fakeData);
+  Search.setData({ data });
   Search.init();
   Utilities.initBack();
   MyList.loadCharts();
@@ -19,4 +19,17 @@ const init = () => {
   Utilities.setAppTheme();
 };
 
-init();
+
+let promise = new Promise(function (resolve, reject) {
+  authManager.enforceLogin();
+  if (!authManager.currentUser) {
+    Settings.get((err, res) => {
+      if (err) reject(err);
+      resolve(init(res));
+    })
+  }
+});
+
+// promise.then(
+//   result => console.log("ererer *->",result)
+// );
