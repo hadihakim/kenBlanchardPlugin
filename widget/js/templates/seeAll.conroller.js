@@ -54,8 +54,6 @@ class SeeAll {
         config.page++;
         if (config.renderedCard == 0) {
           Navigation.openEmptySearch();
-        } else {
-          Navigation.openSeeAll();
         }
         return;
       } else {

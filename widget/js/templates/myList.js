@@ -141,8 +141,7 @@ class MyList {
             listContainer.appendChild(nodesClone);
 
             actionBtn[0].addEventListener('click', () => {
-                TeamEffectivenessList.init(card.id);
-                Navigation.openTeamEffectivenessList(card.title);
+                Navigation.openTeamEffectivenessList(card.title, card.id);
             })
         })
 

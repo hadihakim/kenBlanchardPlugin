@@ -11,6 +11,7 @@ class CourseDetails {
     }
     static setData(id) {
         this.state.data= coursesData.data.courses[id];
+        console.log('------>',this.state, id);
     }
 
     static courseRender() {
