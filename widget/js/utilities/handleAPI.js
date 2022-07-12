@@ -1,29 +1,41 @@
 class HandleAPI {
-    
+
     static state = {
         data: fakeData,
-        assets_info:fakeData.data.assets_info,
-        sections:fakeData.data.sections,
-        topics:fakeData.data.topics,
+        assets_info: fakeData.data.assets_info,
+        sections: fakeData.data.sections,
+        topics: fakeData.data.topics,
     }
 
     static getDataByID = (id, type) => {
-        let returnedData = {};
         switch (type) {
             case "section":
-                returnedData = this.state.assets_info[id] || {};
+                return new Promise((resolve, reject) => {
+                    Assets.get(id, (err, res) => {
+                        if (err) reject(err);
+                        resolve(res);
+                    })
+                });
                 break;
             case "assets_info":
-                returnedData = this.state.assets_info[id] || {};
+                return new Promise((resolve, reject) => {
+                    Assets.get(id, (err, res) => {
+                        if (err) reject(err);
+                        resolve(res);
+                    })
+                });
                 break;
             case "topic":
-                returnedData = this.state.assets_info[id] || {};
+                return new Promise((resolve, reject) => {
+                    Assets.get(id, (err, res) => {
+                        if (err) reject(err);
+                        resolve(res);
+                    })
+                });
                 break;
             default:
                 break;
         }
-
-        return returnedData;
     }
 
 

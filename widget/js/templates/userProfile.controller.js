@@ -1,6 +1,6 @@
 class UserProfile {
   static state = {
-    userData: config.userConfig,
+    userData: null,
     data: {},
     userProfileTabs: [Strings.USER_PROFILE_TAP_1, Strings.USER_PROFILE_TAP_2, Strings.USER_PROFILE_TAP_3],
 	// it should come from user api 
@@ -94,7 +94,6 @@ class UserProfile {
 
   static setData = (data) => {
     this.state.userData = data;
-    this.state.data = fakeData;
   };
 
   static getUser = () => {
@@ -106,18 +105,18 @@ class UserProfile {
       this.pointers.userAchievementIcon
     );
     let growthProfile = document.getElementById(this.pointers.growthProfile);
-    if (this.state.userData.isLoggedIn) {
-      let userAchievements = this.state.userData.badges.filter(
-        (el) => el.active === true
-      );
+    if (this.state.userData) {
+      // let userAchievements = this.state.userData.badges.filter(
+      //   (el) => el.active === true
+      // );
       userName.innerText =
-        this.state.userData.firstName + " " + this.state.userData.lastName;
-      growthProfile.innerText = this.state.userData.growthProfile;
-      userProfilePicture.src = this.state.userData.profilePicture;
-      userProfilePicture.alt = this.state.userData.firstName;
-      userAchievementIcon.src = userAchievements[0].achievementIcon;
-      userAchievementIcon.alt = userAchievements[0].achievementTitle;
-      Search.state.filterArr = this.state.userData.recommendedTags;
+        this.state.userData.oauthProfile.name;
+      growthProfile.innerText = this.state.userData.oauthProfile.locale;
+      userProfilePicture.src = this.state.userData.oauthProfile.picture;
+      userProfilePicture.alt = this.state.userData.oauthProfile.name;
+      // userAchievementIcon.src = userAchievements[0].achievementIcon;
+      // userAchievementIcon.alt = userAchievements[0].achievementTitle;
+      Search.state.filterArr = [];
     } else {
       userProfilePicture.src =
         "../../../../styles/media/avatar-placeholder.png";
@@ -319,7 +318,8 @@ class UserProfile {
   return nodesClone;
   }
 
-  static init = () => {
+  static init = (userData) => {
+    this.setData(userData);
     this.getUser();
   };
 }

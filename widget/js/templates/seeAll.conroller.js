@@ -94,7 +94,7 @@ class SeeAll {
                                 )}</span>`;
           }
           card[0].addEventListener("click", () => {
-            PageDetails.openDetails(id ,assetsInfo[lastIndex].meta.title);
+            Navigation.openPageDetails(id ,assetsInfo[lastIndex].meta.title);
           });
           container.appendChild(nodesClone);
         }

@@ -135,7 +135,7 @@ class Search {
 						${Utilities.timeConvert(assetsInfo[lastIndex].meta.duration)}</span>`;
           }
           card[0].addEventListener("click", () => {
-            PageDetails.openDetails(id, assets_info[lastIndex].meta.title);
+            Navigation.openPageDetails(id, assetsInfo[lastIndex].meta.title);
           });
           container.appendChild(nodesClone);
         }

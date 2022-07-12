@@ -12,38 +12,13 @@ class PageDetails {
     graphicalSummariesThirdPage: "graphicalSummariesThirdPage",
     graphicalSummariesFourthPage: "graphicalSummariesFourthPage"
   }
-  static setState = (id) => {
+  static setState = async (id) => {
     this.state.id = id;
-    this.state.data = fakeData.data.assets_info[id];
+    let newRes = await HandleAPI.getDataByID(id, "assets_info")
+    this.state.data = newRes.data
+    console.log("data ->", newRes);
   }
-  static openDetails(id, title) {
-    console.log(title, " tttttttt");
-    if (!mainPage.classList.contains("hidden")) {
-      // buildfire.history.push("Home from Details");
-      buildfire.history.push(title, {
-        showLabelInTitlebar: true,
-        from: "Home from Details",
 
-      });
-    } else if (!seeAllContainer.classList.contains("hidden")) {
-      // buildfire.history.push("See All from Details");
-      buildfire.history.push(title, {
-        showLabelInTitlebar: true,
-        from: "See All from Details",
-
-      });
-    } else if (!explorePage.classList.contains("hidden")) {
-      buildfire.history.push(title, {
-        showLabelInTitlebar: true,
-        from: "Explore from Details",
-
-      });
-    }
-    Navigation.openPageDetails(id);
-
-    //   buildfire.history.push("See All from Details");
-  }
- 
   static graphicalSummariesFirstPage = () => {
     let container = document.getElementById(this.pointers.pageDetails);
     const template = document.getElementById(this.pointers.graphicalSummariesFirstPage);
@@ -53,10 +28,10 @@ class PageDetails {
     let subTitle = nodesClone.querySelectorAll(".subtitle");
     let description = nodesClone.querySelectorAll(".description");
     let chaptersList = nodesClone.querySelectorAll(".chapters-list");
-    topImage[0].style.backgroundImage = `url('${Utilities.cropImage(this.state.data.image)}')`;
-    title[0].innerText = this.state.data.title;
+    topImage[0].style.backgroundImage = `url('${Utilities.cropImage(this.state.data.meta.image)}')`;
+    title[0].innerText = this.state.data.meta.title;
     subTitle[0].innerText = Strings.GRAPHICAL_DESCRIPTION_TEXT;
-    description[0].innerText = this.state.data.description;
+    description[0].innerText = this.state.data.meta.description;
     this.state.data.chapters.forEach((chapter) => {
       let li = document.createElement("li");
       li.classList.add("chapter-item");
@@ -104,7 +79,7 @@ class PageDetails {
     startChapter.addEventListener("click", () => {
       this.graphicalSummariesThirdPage();
     });
-    topImage[0].src = Utilities.cropImage(this.state.chapterData.image);
+    topImage[0].src = Utilities.cropImage(this.state.chapterData.chapterImage);
     title[0].innerText = this.state.chapterData.title;
     subtitle[0].innerText = this.state.chapterData.subTitle;
     container.appendChild(nodesClone);
@@ -153,15 +128,14 @@ class PageDetails {
   static detailsRender = () => {
     let container = document.getElementById(this.pointers.pageDetails);
     if (this.state.data.type === "summary") {
-      this.state.data = summaryData;
       this.graphicalSummaries();
-    } else {
+    } else if (this.state.data.type === "course") {
       const template = document.getElementById(this.pointers.detailsPageTemplate);
       const firstClone = template.content.cloneNode(true);
       let image = firstClone.querySelectorAll(".details-img");
       let title = firstClone.querySelectorAll(".details-title");
       let duration = firstClone.querySelectorAll(".duration-details");
-      let startButton=firstClone.querySelectorAll(".mdc-button");
+      let startButton = firstClone.querySelectorAll(".mdc-button");
       let startCourse = firstClone.querySelectorAll(".startCourse");
       let descriptionTitle = firstClone.querySelectorAll(".description-title");
       let descriptionText = firstClone.querySelectorAll(".description-text");
@@ -208,6 +182,19 @@ class PageDetails {
       }
       container.appendChild(firstClone);
     }
+    else if (this.state.data.type === "audio") {
+      console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
+    }
+    else if (this.state.data.type === "article") {
+      console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
+    }
+    else if (this.state.data.type === "PDF") {
+      console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
+    }
+    else if (this.state.data.type === "video") {
+      console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
+    }
+
 
     Utilities.setAppTheme();
   };
@@ -217,8 +204,11 @@ class PageDetails {
     pageDetails.innerHTML = "";
     this.graphicalSummariesFirstPage();
   };
-  static init() {
+  static init = async (id) => {
     pageDetails.innerHTML = "";
+    console.log("-----");
+    await this.setState(id);
+    console.log("99+++++");
     this.detailsRender()
   }
 }
