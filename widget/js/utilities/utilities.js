@@ -256,9 +256,8 @@ class Utilities {
 								}else if(from == "page detail from chapter" || from == "Details from CourseDetails"){
 									let id = result[result.length - 1].options.id;
 									Navigation.openPageDetails(id);
-									PageDetails.setState(id);
-									PageDetails.init();
-								}else if(from == "user profile from list" || from == "User list from Details"){
+									
+								}else if(from == "user profile from list"){
 									Navigation.openUserProfile();
 								}else if (from == "user List from temEffectiveness list" || from == "User list from Details"){
 									Navigation.openUserList();

@@ -1,6 +1,7 @@
 class Navigation {
 	static state = {
 		searchOpened: true,
+		seeAllState:null
 	}
 	static setData(data) {
 		this.state.searchOpened = data;
@@ -14,9 +15,9 @@ class Navigation {
 		config.searchFrom = "from-main";
 		buildfire.history.push(" ", {
 			showLabelInTitlebar: true,
-			from:"Personal home Page",
-		
-		  });
+			from: "Personal home Page",
+
+		});
 		mainPage.classList.remove("hidden");
 		userContainer.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
@@ -56,22 +57,22 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openSeeAll = (type,title) => {
+	static openSeeAll = (type, title, state) => {
 
 		mainContainer.addEventListener("scroll", Utilities.scrollNextPage);
 		config.searchFrom = "from-see-all";
 		if (type == "explore") {
 			buildfire.history.push(`All ${title}`, {
 				showLabelInTitlebar: true,
-				from:"Explore from See All",
-			
-			  });
+				from: "Explore from See All",
+
+			});
 		} else if (type == "main") {
-				buildfire.history.push(`All ${title}`, {
-								showLabelInTitlebar: true,
-								from:"Home from See All",
-							
-							  });
+			buildfire.history.push(`All ${title}`, {
+				showLabelInTitlebar: true,
+				from: "Home from See All",
+
+			});
 		}
 
 		seeAllContainer.classList.remove("hidden");
@@ -87,7 +88,17 @@ class Navigation {
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		emptySearch.classList.add("hidden");
+
+		if(state){
+			this.state.seeAllState = state;
+		}else{
+			state = this.state.seeAllState;
+		}
+		SeeAll.setData(state);
+		SeeAll.init();
+
 		Utilities.setAppTheme();
+
 	}
 
 	static openSearch = () => {
@@ -109,17 +120,17 @@ class Navigation {
 		// 		searchCardsRender(fakeData, seeAllContainer, () => { })
 		// 	}, 1000);
 		if (Navigation.state.searchOpened) {
-			buildfire.history.push("Search" ,{
-					showLabelInTitlebar: true,
-					from:"Home from See All",
-				
-				  });
+			buildfire.history.push("Search", {
+				showLabelInTitlebar: true,
+				from: "Home from See All",
+
+			});
 			Navigation.setData(false);
 		}
 		Utilities.setAppTheme();
 	}
 
-	static openPageDetails = () => {
+	static openPageDetails = (id) => {
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
@@ -139,6 +150,10 @@ class Navigation {
 
 		pageDetails.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
+
+		PageDetails.setState(id);
+      PageDetails.init();
+      Utilities.scrollTop();
 
 		Utilities.setAppTheme();
 	}
@@ -180,6 +195,8 @@ static openCourseDetails = (id,title , from)=>{
 		courseDetailsContainer.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
 
+		CourseDetails.init(id);
+
 		Utilities.setAppTheme();
 	}
 	static openEmptySearch = () => {
@@ -207,12 +224,12 @@ static openCourseDetails = (id,title , from)=>{
 		userProfileContainer.classList.remove("hidden");
 		userProfile.classList.remove("hidden");
 		buildfire.history.push("Growth Profile", {
-				showLabelInTitlebar: true,
+			showLabelInTitlebar: true,
 		});
 		Utilities.setAppTheme();
 	}
 
-	static openUserList=(title)=>{
+	static openUserList = (title) => {
 		mainContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		explorePage.classList.add("hidden");
@@ -222,23 +239,23 @@ static openCourseDetails = (id,title , from)=>{
 
 		buildfire.history.push(`My ${title}`, {
 			showLabelInTitlebar: true,
-			from:"user profile from list",
-		
-		  });
+			from: "user profile from list",
+
+		});
 		myList_PageContainer.classList.remove("hidden");
 		userProfileContainer.classList.remove("hidden");
 
 		Utilities.setAppTheme();
 	}
 
-	static openTeamEffectivenessList=(title)=>{
+	static openTeamEffectivenessList = (title, id) => {
 		mainContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
-		
+
 		buildfire.history.push(title, {
 			showLabelInTitlebar: true,
 			from:"user List from temEffectiveness list",
@@ -248,6 +265,9 @@ static openCourseDetails = (id,title , from)=>{
 
 		teamEffectiveness_PageContainer.classList.remove("hidden");
 		userProfileContainer.classList.remove("hidden");
+
+		TeamEffectivenessList.init(id);
+
 		Utilities.setAppTheme();
 	}
 }

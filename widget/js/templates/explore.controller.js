@@ -38,9 +38,8 @@ class Explore {
       pageType: "seeAll",
       duration: true,
     };
-    SeeAll.setData(seeAllState);
-    Navigation.openSeeAll(type,title);
-    SeeAll.init();
+    
+    Navigation.openSeeAll(type,title, seeAllState);
   };
 
   static filterAndPrintData = (apiData, element, type) => {
