@@ -161,6 +161,7 @@ class PageDetails {
       let image = firstClone.querySelectorAll(".details-img");
       let title = firstClone.querySelectorAll(".details-title");
       let duration = firstClone.querySelectorAll(".duration-details");
+      let startButton=firstClone.querySelectorAll(".mdc-button");
       let startCourse = firstClone.querySelectorAll(".startCourse");
       let descriptionTitle = firstClone.querySelectorAll(".description-title");
       let descriptionText = firstClone.querySelectorAll(".description-text");
@@ -170,7 +171,7 @@ class PageDetails {
       let lessonItem = firstClone.querySelectorAll(".learn-list");
       // give the button inner text -->
       startCourse[0].innerHTML = Strings.START_COURSE;
-      startCourse[0].addEventListener("click", () => Navigation.openCourseDetails(this.state.id, this.state.data.title));
+      startButton[0].addEventListener("click", () => Navigation.openCourseDetails(this.state.id, this.state.data.title));
       image[0].style.backgroundImage = `url('${Utilities.cropImage(
         this.state.data.meta.image,
         "full_width",

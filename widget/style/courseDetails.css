@@ -1,111 +1,115 @@
 .course-img {
-    width:100%;
-    height: 13.188rem;
-    left: 0rem;
-    background-size: cover;
+  width: 100%;
+  height: 13.188rem;
+  left: 0rem;
+  background-size: cover;
 }
 
 .course-title {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.031rem;
-    margin: 1rem;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.031rem;
+  margin: 1rem;
 
-    margin-bottom: 0;
-
+  margin-bottom: 0;
 }
 
-.course-lessons-list{
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+.course-lessons-list {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 .course-lesson-title {
-    font-weight: 400;
-    font-size: 0.813rem;
-    line-height: 0.875rem;
-    margin-left: 1rem;
-margin-top: 0.75rem;
-    margin-bottom:0.25rem;
+  font-weight: 400;
+  font-size: 0.813rem;
+  line-height: 0.875rem;
+  margin-left: 1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
 .course-lesson-subtitle {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    margin-left: 1rem;
-    margin-bottom: 0.25rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-left: 1rem;
+  margin-bottom: 0.25rem;
+}
+.course-lesson-subtitle span{
+    cursor: pointer;
+    user-select: none;
 }
 
- .courseDetails-card-progressBar{
-    width: 90%;
-    height: 0.25rem;
-    margin-left: 1rem;
-    border-radius: 0.125rem;
-    margin-bottom: 0.75rem;
-    -webkit-border-radius: 0.125rem;
-    -moz-border-radius: 0.125rem;
-    -ms-border-radius: 0.125rem;
-    -o-border-radius: 0.125rem;
+.courseDetails-card-progressBar {
+  width: 90%;
+  height: 0.25rem;
+  margin-left: 1rem;
+  border-radius: 0.125rem;
+  margin-bottom: 0.75rem;
+  -webkit-border-radius: 0.125rem;
+  -moz-border-radius: 0.125rem;
+  -ms-border-radius: 0.125rem;
+  -o-border-radius: 0.125rem;
 }
 .progress-lesson {
-    width: 90%;
-    height: 0.25rem;
-    background: #FECD83;
-    border-radius: 0.125rem;
-    -webkit-border-radius: 0.125rem;
-    -moz-border-radius: 0.125rem;
-    -ms-border-radius: 0.125rem;
-    -o-border-radius: 0.125rem;
-}
-  
-.icon-course{
-    position: absolute;
-    margin-top: -2.063rem;
-    margin-left: 6.938rem;
-    width: 100%;
-    gap: 0.625rem;
-    display: flex; 
-}
-#movieIcon , #podcastIcon, #articleIcon, #scheduleIcon,  #scheduleIcon2{
-    font-size: 1.125rem !important;
-    margin-right: 0.313;
-    width: 0.625rem;
+  width: 90%;
+  height: 0.25rem;
+  background: #fecd83;
+  border-radius: 0.125rem;
+  -webkit-border-radius: 0.125rem;
+  -moz-border-radius: 0.125rem;
+  -ms-border-radius: 0.125rem;
+  -o-border-radius: 0.125rem;
 }
 
- #scheduleIcon2{
-    font-size: 1rem !important;
- }
+.icon-course {
+  position: absolute;
+  margin-top: -2.063rem;
+  margin-left: 6.938rem;
+  width: 100%;
+  gap: 0.625rem;
+  display: flex;
+}
+.icon-course .material-icons,
+.assetsIcon-course .material-icons,
+.duration-details .material-icons {
+  font-size: 1.125rem !important;
+  margin-right: 0.313rem;
+  width: 0.625rem;
+}
 
- .assetsIcon-course{
-    width: fit-content;
-    margin-left: 1rem;
- }
+#scheduleIcon2 {
+  font-size: 1rem !important;
+}
 
- .assetsTitle-course{
-    position: absolute;
-    left:1.313rem;
-    margin-top: -1.375rem;
- }
+.assetsIcon-course {
+  width: fit-content;
+  margin-left: 1rem;
+}
 
- .lesson-duration{
-    margin-left: 0.3rem;
+.assetsTitle-course {
+  position: absolute;
+  left: 1.313rem;
+  margin-top: -1.375rem;
+}
 
- }
+.lesson-duration {
+  margin-left: 0.3rem;
+}
 
- .duration-lesson-details{
-    margin-left: 2.4rem;
-    font-size: 0.75rem !important;
- }
- .assets-container{
-    padding: 0.5rem 0rem;
- }
+.duration-lesson-details {
+  margin-left: 2.4rem;
+  font-size: 0.75rem !important;
+}
+.assets-container {
+  padding: 0.5rem 0rem;
+}
 
- .arrow-up-icon{
-    position: absolute;
-    right: 22px;
- }
+.arrow-up-icon {
+  position: absolute;
+  right: 22px;
+}
