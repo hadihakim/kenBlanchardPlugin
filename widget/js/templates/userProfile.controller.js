@@ -110,10 +110,10 @@ class UserProfile {
       //   (el) => el.active === true
       // );
       userName.innerText =
-        this.state.userData.oauthProfile.name;
-      growthProfile.innerText = this.state.userData.oauthProfile.locale;
-      userProfilePicture.src = this.state.userData.oauthProfile.picture;
-      userProfilePicture.alt = this.state.userData.oauthProfile.name;
+        this.state.userData.firstName + " " + this.state.userData.lastName ;
+      growthProfile.innerText = this.state.userData.displayName;
+      userProfilePicture.src = this.state.userData.imageUrl;
+      userProfilePicture.alt = this.state.userData.firstName + " " + this.state.userData.lastName;
       // userAchievementIcon.src = userAchievements[0].achievementIcon;
       // userAchievementIcon.alt = userAchievements[0].achievementTitle;
       Search.state.filterArr = [];
@@ -133,7 +133,24 @@ class UserProfile {
       this.pointers.userProfileTemplate
     );
     const nodesClone = userProfileTemplate.content.cloneNode(true);
-
+    let userProfileImage=nodesClone.querySelectorAll(".user-profile-image");
+    let achievementImage=nodesClone.querySelectorAll(".achievement-image");
+    let userName=nodesClone.querySelectorAll(".user-name");
+    let growthProfileUserSmall=nodesClone.querySelectorAll(".growth-profile-user-small");
+    if (this.state.userData) {
+    achievementImage[0].src=this.state.userData.imageUrl;
+    userProfileImage[0].src=this.state.userData.imageUrl;
+    achievementImage[0].alt=this.state.userData.firstName + " " + this.state.userData.lastName;
+    userProfileImage[0].alt=this.state.userData.firstName + " " + this.state.userData.lastName;
+    userName[0].innerText=this.state.userData.firstName + " " + this.state.userData.lastName;
+    growthProfileUserSmall[0].innerText=this.state.userData.displayName;
+    }else{
+      userProfileImage[0].src =
+        "../../../../styles/media/avatar-placeholder.png";
+      userName[0].innerText = "Anonymous";
+      growthProfileUserSmall[0].innerText = "Profile Growth";
+      achievementImage[0].src = "../../../../styles/media/holder-1x1.png";
+    }
     let userProfileTabsContainer = nodesClone.getElementById(
       this.pointers.userProfileTabsContainer
     );
