@@ -1,6 +1,6 @@
 class Utilities {
 	static state = {
-		appTheme:{},
+		appTheme: {},
 	}
 
 	static cropImage = (image, size = "full_width", aspect = "16:9") => {
@@ -28,7 +28,7 @@ class Utilities {
 		});
 	};
 
-	static LightenDarkenColor=(col, amt)=> {
+	static LightenDarkenColor = (col, amt) => {
 
 		// col => color 
 		// amt => the amount of chnging the color
@@ -40,23 +40,23 @@ class Utilities {
 			col = col.slice(1);
 			usePound = true;
 		}
-	 
-		let num = parseInt(col,16);
-	 
+
+		let num = parseInt(col, 16);
+
 		let r = (num >> 16) + amt;
 		if (r > 255) r = 255;
-		else if  (r < 0) r = 0;
-	 
+		else if (r < 0) r = 0;
+
 		let b = ((num >> 8) & 0x00FF) + amt;
 		if (b > 255) b = 255;
-		else if  (b < 0) b = 0;
-	 
+		else if (b < 0) b = 0;
+
 		let g = (num & 0x0000FF) + amt;
 		if (g > 255) g = 255;
 		else if (g < 0) g = 0;
-	 
-		return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
-	  
+
+		return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+
 	}
 
 	static setThemeHandler = (arr, type, color) => {
@@ -64,19 +64,19 @@ class Utilities {
 			let newColor;
 			switch (type) {
 				case "color":
-					arr[i].setAttribute( 'style', `fill: ${color} !important` );
-					arr[i].setAttribute( 'style', `color: ${color} !important` );
+					arr[i].setAttribute('style', `fill: ${color} !important`);
+					arr[i].setAttribute('style', `color: ${color} !important`);
 					break;
 				case "back":
 					arr[i].style.backgroundColor = color;
 					break;
 				case "borderColor":
 					newColor = this.LightenDarkenColor(color, 20)
-					arr[i].setAttribute( 'style', `border-color: ${newColor} !important` );
+					arr[i].setAttribute('style', `border-color: ${newColor} !important`);
 					break;
 				case "backPercentage":
 					newColor = this.LightenDarkenColor(color, 55)
-					arr[i].setAttribute( 'style', `background-color: ${newColor} !important` );
+					arr[i].setAttribute('style', `background-color: ${newColor} !important`);
 					break;
 				default:
 					break;
@@ -191,7 +191,7 @@ class Utilities {
 					if (err) return console.log(err);
 					if (result.length) {
 						switch (result[result.length - 1].label) {
-								
+
 							case "Explore":
 								Navigation.openMain();
 								break;
@@ -210,7 +210,7 @@ class Utilities {
 							// 	} else if (config.searchFrom == "from-see-all") {
 							// 		Navigation.openSeeAll();
 							// 	}
-								// break;
+							// break;
 							// case "page detail from chapter":
 							// 	let id = result[result.length - 1].options.id;
 							// 	Navigation.openPageDetails(id);
@@ -221,7 +221,7 @@ class Utilities {
 							// 	let id2 = result[result.length - 1].options.id;
 							// 	Navigation.openPageDetails();
 							// 	PageDetails.setState(id2);
-  							// 	PageDetails.init();
+							// 	PageDetails.init();
 							// 	break;
 							case "Search":
 								if (config.searchFrom == "from-main") {
@@ -242,29 +242,30 @@ class Utilities {
 							// 	Navigation.openUserList();
 							// 	break;
 							default:
-								let from=result[result.length-1].options.from;
-								if(from == "Home from See All" || from == "Home from Details"){
+								let from = result[result.length - 1].options.from;
+								if (from == "Home from See All" || from == "Home from Details") {
 									Navigation.openMain();
-								}else if (from == "Explore from See All" || from== "Explore from Details"){
+								} else if (from == "Explore from See All" || from == "Explore from Details") {
 									Navigation.openExplore();
-								}else if( from == "See All from Details"){
+								} else if (from == "See All from Details") {
 									if (config.searchFrom == "from-main" || config.searchFrom == "from-explore") {
 										Navigation.openSearch();
 									} else if (config.searchFrom == "from-see-all") {
 										Navigation.openSeeAll();
 									}
-								}else if(from == "page detail from chapter" || from == "Details from CourseDetails"){
+								} else if (from == "page detail from chapter" || from == "Details from CourseDetails") {
 									let id = result[result.length - 1].options.id;
 									Navigation.openPageDetails(id);
-									
-								}else if(from == "user profile from list"){
+
+								} else if (from == "user profile from list") {
 									Navigation.openUserProfile();
-								}else if (from == "user List from temEffectiveness list" || from == "User list from Details"){
+								} else if (from == "user List from temEffectiveness list" || from == "User list from Details") {
 									Navigation.openUserList();
-								}else if(from =="Personal home Page"){
+								} else if (from == "Personal home Page") {
 									Navigation.openMain();
-								}else if (from =="active list from CourseDetails"){
-									Navigation.openTeamEffectivenessList(result[result.length-1].options.to);
+								} else if (from == "active list from CourseDetails") {
+									console.log("to -->", result[result.length - 1].options.to);
+									Navigation.openTeamEffectivenessList(result[result.length - 1].options.to);
 								}
 								break;
 						}
@@ -300,13 +301,13 @@ class Utilities {
 		buildfire.dialog.show(
 			options,
 			(err, actionButton) => {
-			  if (err) console.error(err);
-		  
-			  if (actionButton && actionButton.text == "Cancel") {
-				console.log("Cancel clicked");
-			  }
+				if (err) console.error(err);
+
+				if (actionButton && actionButton.text == "Cancel") {
+					console.log("Cancel clicked");
+				}
 			}
-		  );
+		);
 	};
 };
 

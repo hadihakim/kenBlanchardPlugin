@@ -4,8 +4,8 @@ document.getElementById("userProfilePicture").addEventListener("click", () => {
 });
 
 
-const init = (data) => {
-  console.log("user -->",authManager.currentUser);
+const init = async (data) => {
+  await getCurrentUser();
   Utilities.getAppTheme();
   UserProfile.init(authManager.currentUser);
   Explore.setPageData({ data: { data }, userData: authManager.currentUser });
@@ -14,8 +14,6 @@ const init = (data) => {
   Search.setData({ data });
   Search.init();
   Utilities.initBack();
-  MyList.loadCharts();
-  MyList.loadList();
   Utilities.setAppTheme();
 };
 
@@ -29,6 +27,16 @@ let promise = new Promise(function (resolve, reject) {
     })
   }
 });
+
+function getCurrentUser() {
+  return new Promise((resolve, reject) => {
+    Profiles.get((err, res) => {
+      if (err) reject(err)
+      console.log('current user -=>', res);
+      resolve(res)
+    })
+  });
+}
 
 // promise.then(
 //   result => console.log("ererer *->",result)
