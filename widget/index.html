@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="./style/summaryTemplate.css" />
   <link rel="stylesheet" href="./style/userProfile.css" />
   <link rel="stylesheet" href="./style/courseDetails.css" />
+  <link rel="stylesheet" href="./style/article.css" />
   <!-- components style-->
   <link rel="stylesheet" href="./style/components/audio.css" />
   <link rel="stylesheet" href="./style/splide-default.min.css" />
@@ -83,11 +84,11 @@
   <!-- components -->
   <script src="./js/components/audio.js"></script>
   <script src="./js/components/videoDetails.js"></script>
+  <script src="./js/components/artical.controller.js"></script>
   <script src="./js/app.js" defer></script>
   <!-- endbundle:scripts -->
 
   <!--
-
    <script src="../../../../scripts/angular/angular.min.js"></script>
    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
@@ -153,43 +154,16 @@
       <p id="emptyDescription">Refine your search...</p>
     </div>
 
-    <div id="pageDetails" class="hidden pageDetails slide-in"></div>
+    <div id="pageDetails" class="hidden pageDetails slide-in">
+      
+    </div>
     <div id="courseDetailsContainer" class="courseDetailsContainer hidden slide-in"></div>
 
     <!-- -------------------- -->
     <!-- end section -->
   </div>
 
-  <div class="pageVideo hidden" id="videoPageContainer">
-    <div class="videoTopContainer" id="videoTopContainer">
-      <!-- <img src="" alt="" class="videoImage"> -->
-      <span class="material-icons icon videoSpan">
-        play_circle_outline
-      </span>
-    </div>
-    <div class="titleContainer">
-      <p class="videoTitle headerText-AppTheme">Focus and Listen</p>
-      <span class="material-icons icon videoMore">
-        more_horiz
-      </span>
-    </div>
-    <div class="mdc-tab-scroller__scroll-content" id="videoTabsContainer">
-      <div class="mdc-tab-bar" role="tablist">
-        <div class="mdc-tab-scroller">
-          <div class="mdc-tab-scroller__scroll-area">
-            <div class="mdc-tab-scroller__scroll-content scrollTabs" id="videoTabs">
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="choosenContainer" id="videoChoosenContainer">
-
-
-    </div>
-
-  </div>
+  
 
   <!-- <div class="videoShortcutsContainer" id="videoShortcutsContainer">
 		<div class="shortcutVideoElement">
@@ -202,11 +176,9 @@
 				<span class="material-icons icon">
 					play_circle_filled
 					</span>
-
 					<span class="material-icons icon">
 						more_horiz
 					</span>
-
 			</div>
 		</div>
 		<div class="shortcutVideoElement">
@@ -219,11 +191,9 @@
 				<span class="material-icons icon">
 					play_circle_filled
 					</span>
-
 					<span class="material-icons icon">
 						more_horiz
 					</span>
-
 			</div>
 		</div>
 		<div class="shortcutVideoElement">
@@ -236,11 +206,9 @@
 				<span class="material-icons icon">
 					play_circle_filled
 					</span>
-
 					<span class="material-icons icon">
 						more_horiz
 					</span>
-
 			</div>
 		</div>
 		<div class="shortcutVideoElement">
@@ -253,11 +221,9 @@
 				<span class="material-icons icon">
 					play_circle_filled
 					</span>
-
 					<span class="material-icons icon">
 						more_horiz
 					</span>
-
 			</div>
 		</div>
 		<div class="shortcutVideoElement">
@@ -270,15 +236,12 @@
 				<span class="material-icons icon">
 					play_circle_filled
 					</span>
-
 					<span class="material-icons icon">
 						more_horiz
 					</span>
-
 			</div>
 		</div>
 	</div>
-
 	<div class="videoDetailsContainer" id="videoDetailsContainer">
 		<p>ddd</p>
 	</div> -->
@@ -536,7 +499,19 @@
       </div>
     </div>
   </template>
-
+	<!--Article template  -->
+	<template id="articleTemplate" >
+		<div class="articleImage" id="articleImagee">
+		</div>
+		<div class= "articleTitleContainer" id="articleTitleContainer">
+			<p id = "articleTitle" class="articleTitle headerText-AppTheme"></p>
+			<span class="material-icons icon articleIcon">more_horiz</span>
+			</div>
+		<div id="articleTabHandler" class="articleTabHandler"></div>
+			<div id="articleKeyTakeaways" class="articleKeyTakeaways slide-in headerText-AppTheme"></div>
+			<div id="articleFullArticle" class="articleFullArticle hidden slide-in headerText-AppTheme"></div>
+	</template>
+	
   <!--Skeleton Templates-->
   <template id="horizontal1_SkeletonTemplate">
     <div class="horizontal-1--skeleton"></div>
@@ -581,7 +556,7 @@
 
   <!-- audio page template-->
   <template id="audioTemplate">
-    <div class="audio-container slide-in hidden">
+    <div class="audio-container slide-in">
       <div class="g-row">
         <div class="audio-player">
           <label class="material-icons icon">play_circle</label>
@@ -589,10 +564,10 @@
       </div>
       <div class="g-row title-container">
         <h2 class="audio-title headerText-AppTheme"></h2>
-        <label class="material-icons icon">more_horiz</label>
+        <label class="material-icons icon" id="audioDrawer">more_horiz</label>
       </div>
       <div class="g-row">
-        <div class="mdc-tab-bar" role="tablist">
+        <div class="mdc-tab-bar audioTabsList" role="tablist">
           <div class="mdc-tab-scroller">
             <div class="mdc-tab-scroller__scroll-area">
               <div class="mdc-tab-scroller__scroll-content audio-tab-container">
@@ -602,6 +577,8 @@
           </div>
         </div>
         <div id="audioContent" class="audio-content">
+          <div class="audio-tab audio-details" aria-type="details">
+          </div>
           <div class="audio-tab audio-transcript" aria-type="transcript">
           </div>
           <div class="audio-tab  hidden" aria-type="shortcuts">
@@ -610,10 +587,8 @@
       </div>
     </div>
   </template>
-
-
-  <div id="audioContainer"></div>
   <!-- end template -->
 </body>
 
 </html>
+

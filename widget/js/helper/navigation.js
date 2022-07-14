@@ -35,6 +35,7 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		emptySearch.classList.add("hidden");
 		sortIcon.classList.add("hidden");
+		// document.getElementById("videoPageContainer").classList.add("hidden");
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
 
 		config.search = '';
@@ -190,6 +191,12 @@ class Navigation {
 
 		Utilities.setAppTheme();
 	}
+
+	// static openVideoPageDetails = () => {
+	// 	document.getElementById("videoPageContainer").classList.remove("hidden");
+	// 	document.getElementById("mainContainer").classList.add("hidden");
+
+	// }
 
 	static openCourseDetails = (id, title, from) => {
 
