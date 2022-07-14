@@ -147,7 +147,25 @@ class videoDetails {
             let element = document.createElement('div');
             element.classList.add("shortcutVideoElement");
             element.innerHTML = `
-            <input type="checkbox" class="shortcutVideoCheckbox">
+            <div class="mdc-checkbox mdc-checkbox--touch">
+          <input
+            type="checkbox"
+            class="mdc-checkbox__native-control"
+            id="checkbox-1"
+            name="check1"
+          />
+          <div class="mdc-checkbox__background checkbox-border-color">
+            <svg class="mdc-checkbox__checkmark checkbox-border-fill-color" viewBox="0 0 24 24">
+              <path
+                class="mdc-checkbox__checkmark-path"
+                fill="none"
+                d="M1.73,12.91 8.1,19.28 22.79,4.59"
+              />
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
+          </div>
+          <div class="mdc-checkbox__ripple"></div>
+        </div>
             <div class="shorcutElementDetails">
                 <p class="shortcutText headerText-AppTheme">${idx+1}. ${el.title}</p>
                 <p class="shortcutDuration bodyText-AppTheme">${Utilities.timeConvert(el.timeStamp, "sec")}</p>
