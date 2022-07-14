@@ -11,14 +11,46 @@ class Utilities {
 		return cropedImage;
 	};
 
-	static timeConvert = (n) => {
-		let num = n;
-		let hours = num / 60;
-		let rHours = Math.floor(hours);
-		let minutes = (hours - rHours) * 60;
-		let rMinutes = Math.round(minutes);
-		return rHours + "h " + rMinutes + "min";
+	static timeConvert = (n, type) => {
+		if (type === "min") {
+			let num = n;
+			let hours = num / 60;
+			let rHours = Math.floor(hours);
+			let minutes = (hours - rHours) * 60;
+			let rMinutes = Math.round(minutes);
+			return rHours + "h " + rMinutes + "min";
+		} else if (type === "sec") {
+			let hours = Math.floor(n / 3600);
+			n %= 3600;
+			let minutes = Math.floor(n / 60);
+			let seconds = n % 60;
+
+			// strings with leading zeros
+			minutes = String(minutes).padStart(2, "0");
+			hours = String(hours).padStart(2, "0");
+			seconds = String(seconds).padStart(2, "0");
+			return hours + ":" + minutes + ":" + seconds;
+		}
 	};
+
+	static openDrawerAudioOrVideo = (options) => {
+		buildfire.components.drawer.open(
+            {
+              multiSelection: false,
+              allowSelectAll : false,
+              multiSelectionActionButton: {text: 'Save', type: 'success'},
+              enableFilter : false,
+              isHTML: false,
+              triggerCallbackOnUIDismiss: false,   
+              autoUseImageCdn: true,
+              listItems: options
+            },
+            (err, result) => {
+              if (err) return console.error(err);
+              console.log("Selected Contacts", result);
+            }
+          );
+	}
 
 	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
@@ -68,7 +100,7 @@ class Utilities {
 					break;
 				case "back":
 					// arr[i].style.backgroundColor = color;
-					arr[i].setAttribute( 'style', `background-color: ${color} !important` );
+					arr[i].setAttribute('style', `background-color: ${color} !important`);
 					break;
 				case "borderColor":
 					newColor = this.LightenDarkenColor(color, 20)
@@ -315,10 +347,10 @@ class Utilities {
 		);
 	};
 
-	static setAttributesHandler=(el,attrs)=>{
-		for(var key in attrs) {
+	static setAttributesHandler = (el, attrs) => {
+		for (var key in attrs) {
 			el.setAttribute(key, attrs[key]);
-		  }
+		}
 	}
 };
 
