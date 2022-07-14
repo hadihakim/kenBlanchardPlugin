@@ -21,7 +21,6 @@ class Explore {
 
   static setPageData = (data) => {
     this.state = data;
-    console.log("here is the data ->", data);
   };
   static getDataById = (id) => {
     let data = this.state.data.data.sections.filter(

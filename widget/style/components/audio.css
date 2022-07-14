@@ -1,0 +1,126 @@
+.audio-container{
+    height: 100vh;
+}
+.audio-container .g-row {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.audio-container .audio-player {
+  width: 100%;
+  height: 13.1875rem;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.assetsdelivery.com/compings_v2/oliafedorovsky/oliafedorovsky1512/oliafedorovsky151200007.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.audio-container .audio-player label {
+  font-size: 4.125rem !important;
+}
+.audio-container .title-container {
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  padding: 1rem;
+  height: 4rem;
+}
+.audio-container .title-container .audio-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.03125rem;
+}
+.audio-container .title-container label {
+  font-size: 1.5rem !important;
+  user-select: none;
+  cursor: pointer;
+}
+.audio-container .mdc-tab-bar{
+    height: 3rem;
+}
+.audio-container .mdc-tab-bar button .mdc-tab__text-label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 0.875rem;
+  text-transform: uppercase;
+  color: #000000;
+}
+.audio-container .mdc-tab-indicator .mdc-tab-indicator__content--underline {
+  border-top-width: 0.25rem !important;
+}
+.audio-container .audio-content {
+    height: calc(100vh - 20.1875rem);
+    overflow: scroll;
+    padding-bottom: 1rem;
+}
+.audio-container .audio-content .audio-transcript {
+  display: flex ;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+.audio-container .audio-content .audio-transcript .transcript-item {
+  display: flex;
+  flex-direction: row;
+  gap: 0.825rem;
+  padding: 0.5rem;
+}
+.audio-container .audio-content .audio-transcript .transcript-item .time,
+.audio-container .audio-content .audio-transcript .transcript-item .title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.audio-container .audio-content .audio-shortcuts .shortcut-item {
+  display: flex;
+  flex-direction: row;
+}
+.audio-container .audio-content .audio-shortcuts .shortcut-item .right {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 0.95rem;
+  padding-right: 1rem;
+}
+.audio-container .audio-content .audio-shortcuts .shortcut-item .shortcut-checkbox {
+  width: 18px;
+  height: 18px;
+}
+.audio-container .audio-content .audio-shortcuts .shortcut-item .shortcut-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  width: 70%;
+}
+.audio-container
+  .audio-content
+  .audio-shortcuts
+  .shortcut-item
+  .shortcut-text
+  .shortcut-label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  letter-spacing: 0.03125rem;
+  word-break: break-word;
+}
+.audio-container
+  .audio-content
+  .audio-shortcuts
+  .shortcut-item
+  .shortcut-text
+  .shortcut-time {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.audio-container .audio-content .audio-shortcuts .shortcut-item label.material-icons {
+  font-size: 1.3rem !important;
+}

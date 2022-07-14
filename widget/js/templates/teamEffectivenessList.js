@@ -24,7 +24,6 @@ class TeamEffectivenessList {
         // we will use the id to get the data from the api -->
         // calling the function
         // after getting the data we will set it to the state to use it in the loading list function
-        console.log("team effectiveness options -->", options);
         this.state = {...this.state, ...options};
     }
 
@@ -137,7 +136,6 @@ class TeamEffectivenessList {
             (err, result) => {
                 if (err) return console.error(err);
                 if (result) {
-                    console.log(result);
                     buildfire.components.drawer.closeDrawer();
                     this.confirmMessage(id, result.text, 'Are you sure you want to remove this course? This will permanently delete the course from your list!')
                 }

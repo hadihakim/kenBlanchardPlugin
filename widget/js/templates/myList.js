@@ -28,8 +28,6 @@ class MyList {
 
     static setData = (options) => {
         this.listState = { ...this.listState, ...options };
-        console.log('my states --> ', this.listState);
-        console.log('my options --> ', options);
     }
 
     static loadCharts = () => {
@@ -168,8 +166,6 @@ class MyList {
     }
 
     static lazyLoad = (e) => {
-        // (t.tbody.scrollTop + t.tbody.offsetHeight) / t.tbody.scrollHeight > 0.8.
-        // console.log('e.target.scrollTop ->', e.target.scrollTop);
         if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.listState.fetchNext) {
             this.listState.fetchNext = false;
             this.loadList();

@@ -24,7 +24,6 @@ class Utilities {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
 			this.state.appTheme = appTheme;
-			console.log(appTheme, "APP THEME");
 		});
 	};
 
@@ -68,11 +67,15 @@ class Utilities {
 					arr[i].setAttribute('style', `color: ${color} !important`);
 					break;
 				case "back":
-					arr[i].style.backgroundColor = color;
+					// arr[i].style.backgroundColor = color;
+					arr[i].setAttribute( 'style', `background-color: ${color} !important` );
 					break;
 				case "borderColor":
 					newColor = this.LightenDarkenColor(color, 20)
 					arr[i].setAttribute('style', `border-color: ${newColor} !important`);
+					break;
+				case "normalBorderColor":
+					arr[i].setAttribute('style', `border-color: ${color} !important`);
 					break;
 				case "backPercentage":
 					newColor = this.LightenDarkenColor(color, 55)
@@ -127,6 +130,11 @@ class Utilities {
 				colorDegree: this.state.appTheme.colors.titleBar,
 			},
 			{
+				elements: document.getElementsByClassName("primaryTheme-border"),
+				colorType: "normalBorderColor",
+				colorDegree: this.state.appTheme.colors.primaryTheme,
+			},
+			{
 				elements: document.getElementsByClassName("info-btn-AppTheme"),
 				colorType: "back",
 				colorDegree: this.state.appTheme.colors.infoTheme,
@@ -156,7 +164,6 @@ class Utilities {
 	static _fetchNextList = () => {
 		config.fetchingNextPage = true;
 		if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
-			console.log("test");
 			Search.searchCardsRender(seeAllContainer, () => { config.fetchingNextPage = false; })
 		} else if (config.searchFrom == "from-see-all") {
 			SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
@@ -168,7 +175,6 @@ class Utilities {
 
 	static scrollNextPage = () => {
 		if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
-			console.log("before scrollNextPage");
 			if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
 				this._fetchNextList();
 				// loadData(currentPage, limit);
@@ -264,7 +270,6 @@ class Utilities {
 								} else if (from == "Personal home Page") {
 									Navigation.openMain();
 								} else if (from == "active list from CourseDetails") {
-									console.log("to -->", result[result.length - 1].options.to);
 									Navigation.openTeamEffectivenessList(result[result.length - 1].options.to);
 								}
 								break;
@@ -309,5 +314,11 @@ class Utilities {
 			}
 		);
 	};
+
+	static setAttributesHandler=(el,attrs)=>{
+		for(var key in attrs) {
+			el.setAttribute(key, attrs[key]);
+		  }
+	}
 };
 

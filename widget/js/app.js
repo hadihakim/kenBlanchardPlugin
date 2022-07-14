@@ -32,12 +32,7 @@ function getCurrentUser() {
   return new Promise((resolve, reject) => {
     Profiles.get((err, res) => {
       if (err) reject(err)
-      console.log('current user -=>', res);
       resolve(res)
     })
   });
 }
-
-// promise.then(
-//   result => console.log("ererer *->",result)
-// );
