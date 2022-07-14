@@ -120,8 +120,8 @@ class UserProfile {
     } else {
       userProfilePicture.src =
         "../../../../styles/media/avatar-placeholder.png";
-      userName.innerText = "Anonymous";
-      growthProfile.innerText = "Profile Growth";
+      userName.innerText = "My Name";
+      growthProfile.innerText = "Profile Page";
       userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
     }
   };

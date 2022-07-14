@@ -131,7 +131,7 @@
     <div class="mainPage slide-in" id="mainPage">
       <!-- section -->
       <section id="sectionsContainer"></section>
-      <div class="exploreAll-btn-container">
+      <div class="exploreAll-btn-container" id="exploreBtnContainer">
         <a class="mdc-button mdc-button--raised primaryBtn-AppTheme" id="exploreButton">
           <span class="mdc-button__label barText-AppTheme">Explore All</span>
         </a>
@@ -556,7 +556,7 @@
 
   <!-- audio page template-->
   <template id="audioTemplate">
-    <div class="audio-container slide-in hidden">
+    <div class="audio-container slide-in">
       <div class="g-row">
         <div class="audio-player">
           <label class="material-icons icon">play_circle</label>
@@ -564,10 +564,10 @@
       </div>
       <div class="g-row title-container">
         <h2 class="audio-title headerText-AppTheme"></h2>
-        <label class="material-icons icon">more_horiz</label>
+        <label class="material-icons icon" id="audioDrawer">more_horiz</label>
       </div>
       <div class="g-row">
-        <div class="mdc-tab-bar" role="tablist">
+        <div class="mdc-tab-bar audioTabsList" role="tablist">
           <div class="mdc-tab-scroller">
             <div class="mdc-tab-scroller__scroll-area">
               <div class="mdc-tab-scroller__scroll-content audio-tab-container">
@@ -577,6 +577,8 @@
           </div>
         </div>
         <div id="audioContent" class="audio-content">
+          <div class="audio-tab audio-details" aria-type="details">
+          </div>
           <div class="audio-tab audio-transcript" aria-type="transcript">
           </div>
           <div class="audio-tab  hidden" aria-type="shortcuts">
@@ -585,9 +587,6 @@
       </div>
     </div>
   </template>
-
-
-  <div id="audioContainer"></div>
   <!-- end template -->
 </body>
 

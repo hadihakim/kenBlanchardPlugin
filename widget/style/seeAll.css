@@ -1,14 +1,38 @@
-#seeAllContainer .mdc-card {
-  margin: 1.5rem 1rem;
+.vertical{
+  overflow: auto;
+  position: relative;
+  min-width: 100%;
+  min-height: 13.438rem;
+  padding-top: 1rem;
+}
+
+.vertical .sectionTitle {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.031rem;
+  color: #101010;
+  position: sticky;
+  top: 0rem;
+  left: 1rem;
+  margin-left:1rem;
+}
+
+.vertical .main .mdc-card,#seeAllContainer .mdc-card {
+  margin: 0.5rem 1rem;
   display: flex;
   flex-direction: row;
   box-shadow: none;
 }
 
-#seeAllContainer .mdc-card .column {
+.vertical .main .mdc-card .column,#seeAllContainer .mdc-card .column {
   margin: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-#seeAllContainer .mdc-card .column .image {
+.vertical .main .mdc-card .image,#seeAllContainer .mdc-card .column .image {
   width: 7.938rem;
   background-size: cover;
   height: 5.5rem;
@@ -19,14 +43,14 @@
   -o-border-radius: 0.25rem;
 }
 
-#seeAllContainer .mdc-card .column .mdc-card-body .title {
+.vertical .main .mdc-card .column .mdc-card-body .title,#seeAllContainer .mdc-card .column .mdc-card-body .title {
   font-style: normal;
   font-weight: bold;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: #101010;
 }
-#seeAllContainer .mdc-card .column .mdc-card-body .description {
+.vertical .main .mdc-card .column .mdc-card-body .description, #seeAllContainer .mdc-card .column .mdc-card-body .description {
   font-style: normal;
   font-weight: 400;
   font-size:0.75rem;
@@ -37,10 +61,10 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
-#seeAllContainer .column .mdc-card-footer {
+.vertical .main .column .mdc-card-footer, #seeAllContainer .column .mdc-card-footer {
   padding: 0.25rem;
 }
-#seeAllContainer .column .duration {
+.vertical .main .column .duration, #seeAllContainer .column .duration {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -49,4 +73,9 @@
   line-height:1rem;
   color: #5f5f5f;
   margin-top: 0.5rem;
+}
+
+.vertical .main .column .duration .icon, #seeAllContainer .column .duration .icon{
+  margin-right: 0.35rem;
+  font-size: 1.125rem !important;
 }

@@ -1,5 +1,5 @@
-.audio-container{
-    height: 100vh;
+.audio-container {
+  height: 100vh;
 }
 .audio-container .g-row {
   display: flex;
@@ -15,6 +15,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
 }
 .audio-container .audio-player label {
   font-size: 4.125rem !important;
@@ -32,14 +34,21 @@
   line-height: 1.25rem;
   letter-spacing: 0.03125rem;
 }
-.audio-container .title-container label {
+.audio-container .title-container label,
+.audio-container .shortcutDrawer {
   font-size: 1.5rem !important;
   user-select: none;
   cursor: pointer;
 }
-.audio-container .mdc-tab-bar{
-    height: 3rem;
+.audio-container .mdc-tab-bar {
+  height: 3rem;
 }
+.audio-container .mdc-tab-scroller__scroll-area {
+  width: 100% !important;
+}
+/* .audio-container .mdc-tab-scroller__scroll-content .audio-tab-container{
+  justify-content: space-evenly;
+} */
 .audio-container .mdc-tab-bar button .mdc-tab__text-label {
   font-style: normal;
   font-weight: 600;
@@ -52,12 +61,12 @@
   border-top-width: 0.25rem !important;
 }
 .audio-container .audio-content {
-    height: calc(100vh - 20.1875rem);
-    overflow: scroll;
-    padding-bottom: 1rem;
+  height: calc(100vh - 20.1875rem);
+  overflow: scroll;
+  padding-bottom: 1rem;
 }
 .audio-container .audio-content .audio-transcript {
-  display: flex ;
+  display: flex;
   flex-direction: column !important;
   gap: 1rem !important;
 }
@@ -87,9 +96,13 @@
   margin-top: 0.95rem;
   padding-right: 1rem;
 }
-.audio-container .audio-content .audio-shortcuts .shortcut-item .shortcut-checkbox {
-  width: 18px;
-  height: 18px;
+.audio-container
+  .audio-content
+  .audio-shortcuts
+  .shortcut-item
+  .shortcut-checkbox {
+  width: 1.125rem;
+  height: 1.125rem;
 }
 .audio-container .audio-content .audio-shortcuts .shortcut-item .shortcut-text {
   display: flex;
@@ -121,6 +134,10 @@
   font-size: 0.75rem;
   line-height: 1rem;
 }
-.audio-container .audio-content .audio-shortcuts .shortcut-item label.material-icons {
+.audio-container
+  .audio-content
+  .audio-shortcuts
+  .shortcut-item
+  label.material-icons {
   font-size: 1.3rem !important;
 }

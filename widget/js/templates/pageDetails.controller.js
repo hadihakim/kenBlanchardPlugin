@@ -182,7 +182,9 @@ class PageDetails {
       container.appendChild(firstClone);
     }
     else if (this.state.data.type === "audio") {
-      console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
+      // console.log("data >>",this.state.data);
+      // console.log("id",this.state.id);
+      AudioRender.init(this.state.data);
     }
     else if (this.state.data.type === "article") {
       ArticleRender.init(this.state.id);
