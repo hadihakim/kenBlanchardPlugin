@@ -2,84 +2,93 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="buildfire" content="enableMDTheme" />
-	<meta name="buildfire" content="disableBootstrap" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="buildfire" content="enableMDTheme" />
+  <meta name="buildfire" content="disableBootstrap" />
 
-	<!--User Insight css-->
-	<link rel="stylesheet" href="./style/insights.css">
-	<!--End Insight css-->
+  <!--User Insight css-->
+  <link rel="stylesheet" href="./style/insights.css" />
+  <!--End Insight css-->
 
-	<link rel="stylesheet" href="../../../styles/components/listView.css" />
-	<link rel="stylesheet" href="./style/style.css" />
-	<link rel="stylesheet" href="./style/myList.css" />
-	<link rel="stylesheet" href="./style/forYouTemplate.css" />
-	<link rel="stylesheet" href="./style/recommendedTemplate.css" />
-	<link rel="stylesheet" href="./style/trendingTemplate.css" />
-	<link rel="stylesheet" href="./style/seeAll.css" />
-	<link rel="stylesheet" href="./style/detailsPage.css" />
-	<link rel="stylesheet" href="./style/userSection.css" />
-	<link rel="stylesheet" href="./style/summaryTemplate.css" />
-	<link rel="stylesheet" href="./style/userProfile.css" />
-	<link rel="stylesheet" href="./style/courseDetails.css" />
-	<link rel="stylesheet" href="./style/article.css" />
+  <link rel="stylesheet" href="./style/video.css" />
+  <link rel="stylesheet" href="../../../styles/components/listView.css" />
+  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="stylesheet" href="./style/myList.css" />
+  <link rel="stylesheet" href="./style/forYouTemplate.css" />
+  <link rel="stylesheet" href="./style/recommendedTemplate.css" />
+  <link rel="stylesheet" href="./style/trendingTemplate.css" />
+  <link rel="stylesheet" href="./style/seeAll.css" />
+  <link rel="stylesheet" href="./style/detailsPage.css" />
+  <link rel="stylesheet" href="./style/userSection.css" />
+  <link rel="stylesheet" href="./style/summaryTemplate.css" />
+  <link rel="stylesheet" href="./style/userProfile.css" />
+  <link rel="stylesheet" href="./style/courseDetails.css" />
+  <link rel="stylesheet" href="./style/article.css" />
+  <!-- components style-->
+  <link rel="stylesheet" href="./style/components/audio.css" />
+  <link rel="stylesheet" href="./style/splide-default.min.css" />
+  <link rel="stylesheet" href="../../../styles/material-icons.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- Include material design css and js -->
+  <link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
+  <link rel="stylesheet" href="../../../../styles/helper.css" />
+  <!-- Include material design css and js -->
 
-	<link rel="stylesheet" href="./style/splide-default.min.css" />
-	<link rel="stylesheet" href="../../../styles/material-icons.css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-	<!-- Include material design css and js -->
-	<link rel="stylesheet" href="../../../../styles/control/bf-base.css" />
-	<link rel="stylesheet" href="../../../../styles/helper.css" />
-	<!-- Include material design css and js -->
+  <link href="../../../styles/materialDesign/material-components-web@4.0.0.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./style/searchBar.css" />
 
-	<link href="../../../styles/materialDesign/material-components-web@4.0.0.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="./style/searchBar.css" />
+  <!--Skeleton css-->
+  <link rel="stylesheet" href="./style/skeleton.css" />
 
-	<!--Skeleton css-->
-	<link rel="stylesheet" href="./style/skeleton.css">
+  <!-- js -->
+  <script src="../../../scripts/buildfire.js"></script>
+  <script src="../../../scripts/buildfire/components/listView/listView.js"></script>
+  <script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
+  <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-	<!-- js -->
-	<script src="../../../scripts/buildfire.js"></script>
-	<script src="../../../scripts/buildfire/components/listView/listView.js"></script>
-	<script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
-	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- js -->
+  <script src="../../../scripts/buildfire.js"></script>
+  <script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
+  <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
 
-	<!-- js -->
-	<script src="../../../scripts/buildfire.js"></script>
-	<script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
-	<script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
+  <!-- Bundle:scripts -->
+  <script src="./js/helper/skeleton.js"></script>
+  <script src="./js/helper/navigation.js"></script>
+  <script src="./js/utilities/splide.min.js"></script>
+  <script src="./js/utilities/strings.js"></script>
+  <script src="./js/helper/ui.js"></script>
+  <script src="./js/helper/uiConfig.js"></script>
+  <script src="./js/utilities/fakeData.js"></script>
+  <script src="./js/utilities/handleAPI.js"></script>
+  <script src="./js/utilities/summaryData.js"></script>
+  <script src="./js/utilities/utilities.js"></script>
+  <script src="./js/templates/teamEffectivenessList.js"></script>
+  <script src="./js/templates/myList.js"></script>
+  <script src="./js/templates/explore.controller.js"></script>
+  <script src="./js/templates/seeAll.conroller.js"></script>
+  <script src="./js/templates/pageDetails.controller.js"></script>
+  <script src="./js/templates/userProfile.controller.js"></script>
+  <script src="./js/templates/search.controller.js"></script>
+  <script src="./js/templates/courseDetails.controller.js"></script>
+  <script src="./js/shared/authManager.js"></script>
+  <script src="./js/shared/utils/analytics.js"></script>
+  <script src="./js/data/Stat.js"></script>
+  <script src="./js/data/Profile.js"></script>
+  <script src="./js/data/Setting.js"></script>
+  <script src="./js/data/Asset.js"></script>
+  <script src="./js/dataAccess/profiles.js"></script>
+  <script src="./js/dataAccess/assets.js"></script>
+  <script src="./js/dataAccess/settings.js"></script>
+  <!-- components -->
+  <script src="./js/components/audio.js"></script>
+  <script src="./js/components/videoDetails.js"></script>
+  <script src="./js/components/artical.controller.js"></script>
+  <script src="./js/app.js" defer></script>
+  <!-- endbundle:scripts -->
 
-	<!-- Bundle:scripts -->
-	<script src="./js/helper/skeleton.js"></script>
-	<script src="./js/helper/navigation.js"></script>
-	<script src="./js/utilities/splide.min.js"></script>
-	<script src="./js/utilities/strings.js"></script>
-	<script src="./js/helper/ui.js"></script>
-	<script src="./js/helper/uiConfig.js"></script>
-	<script src="./js/utilities/fakeData.js"></script>
-	<script src="./js/utilities/handleAPI.js"></script>
-	<script src="./js/utilities/summaryData.js"></script>
-	<script src="./js/utilities/utilities.js"></script>
-	<script src="./js/templates/teamEffectivenessList.js"></script>
-	<script src="./js/templates/myList.js"></script>
-	<script src="./js/templates/explore.controller.js"></script>
-	<script src="./js/templates/seeAll.conroller.js"></script>
-	<script src="./js/templates/pageDetails.controller.js"></script>
-	<script src="./js/templates/userProfile.controller.js"></script>
-	<script src="./js/templates/search.controller.js"></script>
-	<script src="./js/templates/courseDetails.controller.js"></script>
-	<script src="./js/shared/authManager.js"></script>
-	<script src="./js/data/Setting.js"></script>
-	<script src="./js/data/Asset.js"></script>
-	<script src="./js/dataAccess/settings.js"></script>
-	<script src="./js/dataAccess/assets.js"></script>
-	<script src="./js/components/artical.controller.js"></script>
-	<script src="./js/app.js" defer></script>
-	<!-- endbundle:scripts -->
-	<!--
-
+  <!--
    <script src="../../../../scripts/angular/angular.min.js"></script>
    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
@@ -87,337 +96,436 @@
 </head>
 
 <body id="mainBody">
+  <!-- user section -->
+  <div class="slide-in" id="mainContainer">
+    <div class="user-container userContainer" id="userContainer">
+      <div class="user-image-container">
+        <img class="main-image user-image-border" id="userProfilePicture" />
+        <img class="achievement-image" id="userAchievementIcon" />
+      </div>
+      <div class="text-container">
+        <h2 class="user-name barText-AppTheme" id="userName"></h2>
+        <span class="growth-user-profile barText-AppTheme" id="growthProfile"></span>
+      </div>
+    </div>
+    <!-- end user section -->
 
-	<!-- user section -->
-	<div class="slide-in" id="mainContainer">
-		<div class="user-container userContainer" id="userContainer">
-			<div class="user-image-container">
-				<img class="main-image user-image-border" id="userProfilePicture" />
-				<img class="achievement-image" id="userAchievementIcon" />
+    <!-- search bar -->
+    <div class="mdc-layout-grid__cell--span-12" id="searchBar">
+      <div class="searchItem mdc-card">
+        <div class="search-container">
+          <label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
+          <input class="bodyTextTheme" id="search-input" type="text" name="search" placeholder="Search"
+            autocomplete="off" />
+          <label class="material-icons icon hidden" id="sortIcon">sort</label>
+          <div>
+            <label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
+            <div class="dot" id="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end search bar -->
+
+    <!-- user list of cards -->
+    <div class="mainPage slide-in" id="mainPage">
+      <!-- section -->
+      <section id="sectionsContainer"></section>
+      <div class="exploreAll-btn-container">
+        <a class="mdc-button mdc-button--raised primaryBtn-AppTheme" id="exploreButton">
+          <span class="mdc-button__label barText-AppTheme">Explore All</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="explorePage hidden slide-in" id="explorePage">
+      <section class="trendingSection" id="trendingSection">
+        <h3 class="trending-title headerText-AppTheme">Trending</h3>
+        <div class="trendingContainer" id="trendingContainer"></div>
+      </section>
+      <section id="exploreContainer"></section>
+    </div>
+
+    <div id="seeAllContainer" class="hidden slide-in"></div>
+
+    <div id="emptySearch" class="hidden">
+      <img src="./media/empty_page.svg" alt="Empty Search" />
+      <p id="emptyTitle">Nothing Found</p>
+      <p id="emptyDescription">Refine your search...</p>
+    </div>
+
+    <div id="pageDetails" class="hidden pageDetails slide-in"></div>
+    <div id="courseDetailsContainer" class="courseDetailsContainer hidden slide-in"></div>
+
+    <!-- -------------------- -->
+    <!-- end section -->
+  </div>
+
+  <div class="pageVideo hidden" id="videoPageContainer">
+    <div class="videoTopContainer" id="videoTopContainer">
+      <!-- <img src="" alt="" class="videoImage"> -->
+      <span class="material-icons icon videoSpan">
+        play_circle_outline
+      </span>
+    </div>
+    <div class="titleContainer">
+      <p class="videoTitle headerText-AppTheme">Focus and Listen</p>
+      <span class="material-icons icon videoMore">
+        more_horiz
+      </span>
+    </div>
+    <div class="mdc-tab-scroller__scroll-content" id="videoTabsContainer">
+      <div class="mdc-tab-bar" role="tablist">
+        <div class="mdc-tab-scroller">
+          <div class="mdc-tab-scroller__scroll-area">
+            <div class="mdc-tab-scroller__scroll-content scrollTabs" id="videoTabs">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="choosenContainer" id="videoChoosenContainer">
+
+
+    </div>
+
+  </div>
+
+  <!-- <div class="videoShortcutsContainer" id="videoShortcutsContainer">
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
 			</div>
-			<div class="text-container">
-				<h2 class="user-name barText-AppTheme" id="userName"></h2>
-				<span class="growth-user-profile barText-AppTheme" id="growthProfile"></span>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+					<span class="material-icons icon">
+						more_horiz
+					</span>
 			</div>
 		</div>
-		<!-- end user section -->
-
-		<!-- search bar -->
-		<div class="mdc-layout-grid__cell--span-12" id="searchBar">
-			<div class="searchItem mdc-card">
-				<div class="search-container">
-					<label for="searchInput" class="material-icons icon" id="searchIcon">search</label>
-					<input class="bodyTextTheme" id="search-input" type="text" name="search" placeholder="Search"
-						autocomplete="off" />
-					<label class="material-icons icon hidden" id="sortIcon">sort</label>
-					<div>
-					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
-					<div class="dot hidden" id="dot"></div>
-					</div>
-				</div>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+					<span class="material-icons icon">
+						more_horiz
+					</span>
 			</div>
 		</div>
-		<!-- end search bar -->
-
-		<!-- user list of cards -->
-		<div class="mainPage slide-in" id="mainPage">
-			<!-- section -->
-			<section id="sectionsContainer"></section>
-			<div class="exploreAll-btn-container">
-				<a class="mdc-button mdc-button--raised primaryBtn-AppTheme" id="exploreButton">
-					<span class="mdc-button__label barText-AppTheme">Explore All</span>
-				</a>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+					<span class="material-icons icon">
+						more_horiz
+					</span>
 			</div>
 		</div>
-
-		<div class="explorePage hidden slide-in" id="explorePage">
-			<section class="trendingSection" id="trendingSection">
-				<h3 class="trending-title headerText-AppTheme">Trending</h3>
-				<div class="trendingContainer" id="trendingContainer"></div>
-			</section>
-			<section id="exploreContainer"></section>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+					<span class="material-icons icon">
+						more_horiz
+					</span>
+			</div>
 		</div>
-
-		<div id="seeAllContainer" class="hidden slide-in"></div>
-
-		<div id="emptySearch" class="hidden">
-			<img src="./media/empty_page.svg" alt="Empty Search" />
-			<p id="emptyTitle">Nothing Found</p>
-			<p id="emptyDescription">Refine your search...</p>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+					<span class="material-icons icon">
+						more_horiz
+					</span>
+			</div>
 		</div>
-
-		<div id="pageDetails" class="hidden pageDetails slide-in"></div>
-		<div id="courseDetailsContainer" class="courseDetailsContainer hidden slide-in"></div>
-
-		<!-- -------------------- -->
-		<!-- end section -->
 	</div>
+	<div class="videoDetailsContainer" id="videoDetailsContainer">
+		<p>ddd</p>
+	</div> -->
 
-	<!-- user profile-->
-	<div id="userProfileContainer" class="hidden">
-		<div id="userProfile" class="user-profile-container slide-in">
-		</div>
-		<!-- end user profile -->
-		<!-- my list -- will be organized -->
-		<div id="myList_PageContainer" class="myList_PageContainer slide-in hidden">
-			<div class="chartContainer">
-				<div class="bar">
-					<canvas id="myChart"></canvas>
-				</div>
-				<div class="progress">
-					<div class="relative-percentageContainer">
-						<canvas id="myAverageProgress"></canvas>
-						<p class="bodyText-AppTheme" id="percentageContainer">71 %</p>
-					</div>
-					<p class="bodyText-AppTheme" id="averageLable"></p>
-				</div>
-				<div class="handleAchived-Container bodyText-AppTheme">Include Archived
-					<input class="icon" id="includeAchived-option" type="checkbox" />
-					<span class="checkmark"></span>
-				</div>
-			</div>
+  <!-- user profile-->
+  <div id="userProfileContainer" class="hidden">
+    <div id="userProfile" class="user-profile-container slide-in"></div>
+    <!-- end user profile -->
+    <!-- my list -- will be organized -->
+    <div id="myList_PageContainer" class="myList_PageContainer slide-in hidden">
+      <div class="chartContainer">
+        <div class="bar">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="progress">
+          <div class="relative-percentageContainer">
+            <canvas id="myAverageProgress"></canvas>
+            <p class="bodyText-AppTheme" id="percentageContainer">71 %</p>
+          </div>
+          <p class="bodyText-AppTheme" id="averageLable"></p>
+        </div>
+        <div class="handleAchived-Container bodyText-AppTheme">
+          Include Archived
+          <input class="icon" id="includeAchived-option" type="checkbox" />
+          <span class="checkmark"></span>
+        </div>
+      </div>
 
-			<div id="listViewContainer"></div>
-		</div>
-		<div class="slide-in hidden" id="teamEffectiveness_PageContainer">
-			<div id="teamEffectiveness_tabHandler" class="userContainer"></div>
-			<div id="teamEffectiveness_ListContainer" class="slide-in"></div>
-			<div id="teamEffectivenessArchived_ListContainer" class="hidden slide-in"></div>
-		</div>
-	</div>
+      <div id="listViewContainer"></div>
+    </div>
+    <div class="slide-in hidden" id="teamEffectiveness_PageContainer">
+      <div id="teamEffectiveness_tabHandler" class="userContainer"></div>
+      <div id="teamEffectiveness_ListContainer" class="slide-in"></div>
+      <div id="teamEffectivenessArchived_ListContainer" class="hidden slide-in"></div>
+    </div>
+  </div>
 
-	<div id="ChartContainer">
-		<!-- <canvas id="assesmentProgress" class="assesmentsChart"></canvas> -->
-	</div>
+  <div id="ChartContainer">
+    <!-- <canvas id="assesmentProgress" class="assesmentsChart"></canvas> -->
+  </div>
 
-	<!-- User Insights-->
-	<template id="userProfileInsights">
-		<div id="userInsightsContainer" class="userInsightsContainer">
-			<div id="assesmentsTakenContainer" class="assesmentsTakenContainer infoTheme">
-				<div id="assesmentsBar" class="assesmentsBar">
-					<p class="assesmentPercentage bodyText-AppTheme" id="assesmentPercentage"></p>
-				</div>
-				<div class="assesmentsDetails">
-					<p class="assesmentsNumber headerText-AppTheme">12</p>
-					<p class="assesmentsTitle bodyText-AppTheme">Assesments Taken</p>
-				</div>
-			</div>
-			<div id="allAssesmentsContainer" class="allAssesmentsContainer">
-			</div>
-		</div>
-	</template>
-	<!-- End User Insights-->
+  <!-- User Insights-->
+  <template id="userProfileInsights">
+    <div id="userInsightsContainer" class="userInsightsContainer">
+      <div id="assesmentsTakenContainer" class="assesmentsTakenContainer infoTheme">
+        <div id="assesmentsBar" class="assesmentsBar">
+          <p class="assesmentPercentage bodyText-AppTheme" id="assesmentPercentage"></p>
+        </div>
+        <div class="assesmentsDetails">
+          <p class="assesmentsNumber headerText-AppTheme">12</p>
+          <p class="assesmentsTitle bodyText-AppTheme">Assesments Taken</p>
+        </div>
+      </div>
+      <div id="allAssesmentsContainer" class="allAssesmentsContainer"></div>
+    </div>
+  </template>
+  <!-- End User Insights-->
 
-	<!-- template -->
-	<template id="userProfileTemplate" class="user-profile-template">
+  <!-- template -->
+  <template id="userProfileTemplate" class="user-profile-template">
+    <div class="user-top-container userContainer">
+      <div class="user-profile-image-container">
+        <img class="user-profile-image user-image-border" />
+        <img class="achievement-image"
+          src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" />
+      </div>
+      <div class="user-info-container">
+        <h2 class="user-name barText-AppTheme"></h2>
+        <p class="growth-profile-user-small barText-AppTheme"></p>
+      </div>
+    </div>
+    <div class="user-body-container">
+      <div class="mdc-tab-bar userContainer" role="tablist">
+        <div class="mdc-tab-scroller">
+          <div class="mdc-tab-scroller__scroll-area">
+            <div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer"></div>
+          </div>
+        </div>
+      </div>
+      <div id="contentContainer">
+        <div class="tabContent"></div>
+        <div class="tabContent hidden"></div>
+        <div class="tabContent hidden"></div>
+      </div>
+    </div>
+  </template>
+  <template id="userBadgesTemplate" class="user-badges-template">
+    <div class="user-badges-container">
+      <div class="badges-achieved">
+        <h2 class="ba-title headerText-AppTheme achieved-title">
+          Badges Achieved
+        </h2>
+        <div class="ba-container" id="badgesAchievedContainer"></div>
+      </div>
+      <div class="badges-achieved">
+        <h2 class="ba-title headerText-AppTheme to-achieve-title">
+          Badges To Achieve
+        </h2>
+        <div class="ba-container ba-disabled" id="badgesToAchievedContainer"></div>
+      </div>
+    </div>
+  </template>
+  <template id="forYouTemplate" class="forYouTemplate">
+    <div class="border-radius-four mdc-card" id="card_body">
+      <div class="card-Text" id="card-Text">
+        <p id="card-Text-Header" class="card-Text-Header barText-AppTheme"></p>
+        <p id="card-Text-Note " class="card-Text-Note barText-AppTheme"></p>
+      </div>
+    </div>
+  </template>
+  <template id="recommendedTemplate">
+    <div class="mdc-card cards-container">
+      <div class="image"></div>
+      <div class="progressBar"></div>
+      <div class="mdc-card-body">
+        <div class="category bodyText-AppTheme"></div>
+        <div class="title headerText-AppTheme"></div>
+      </div>
+      <div class="mdc-card-footer">
+        <div class="duration"></div>
+      </div>
+    </div>
+  </template>
+  <template id="seeAllTemplate">
+    <div class="mdc-card">
+      <div class="column">
+        <div class="image"></div>
+      </div>
+      <div class="column">
+        <div class="mdc-card-body">
+          <div class="title headerText-AppTheme"></div>
+          <div class="description bodyText-AppTheme"></div>
+        </div>
+        <div class="mdc-card-footer">
+          <div class="duration"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <template id="trendingTemplate" class="trendingTemplate">
+    <div class="trending-card" id="trending-card">
+      <span class="trending-span bodyText-AppTheme" id="trending-span"></span>
+    </div>
+  </template>
+  <template id="detailsPageTemplate" class="detailsPageTemplate">
+    <div class="details-card" id="detailes-card">
+      <div id="details-img" class="details-img"></div>
+      <p id="details-title" class="details-title headerText-AppTheme"></p>
 
-		<div class="user-top-container userContainer">
-			<div class="user-profile-image-container">
-				<img class="user-profile-image user-image-border">
-				<img class="achievement-image"
-					src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" />
-			</div>
-			<div class="user-info-container">
-				<h2 class="user-name barText-AppTheme"></h2>
-				<p class="growth-profile-user-small barText-AppTheme"></p>
-			</div>
-		</div>
-		<div class="user-body-container">
-			<div class="mdc-tab-bar userContainer" role="tablist">
-				<div class="mdc-tab-scroller">
-					<div class="mdc-tab-scroller__scroll-area">
-						<div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="contentContainer">
-				<div class="tabContent"></div>
-				<div class="tabContent hidden"></div>
-				<div class="tabContent hidden"></div>
-			</div>
-		</div>
-	</template>
-	<template id="userBadgesTemplate" class="user-badges-template">
-		<div class="user-badges-container">
-			<div class="badges-achieved">
-				<h2 class="ba-title headerText-AppTheme achieved-title">
-					Badges Achieved
-				</h2>
-				<div class="ba-container" id="badgesAchievedContainer">
-				</div>
-			</div>
-			<div class="badges-achieved">
-				<h2 class="ba-title headerText-AppTheme to-achieve-title">
-					Badges To Achieve
-				</h2>
-				<div class="ba-container ba-disabled" id="badgesToAchievedContainer">
-				</div>
-			</div>
-		</div>
-	</template>
-	<template id="forYouTemplate" class="forYouTemplate">
-		<div class="border-radius-four mdc-card" id="card_body">
-			<div class="card-Text" id="card-Text">
-				<p id="card-Text-Header" class="card-Text-Header barText-AppTheme"></p>
-				<p id="card-Text-Note " class="card-Text-Note barText-AppTheme"></p>
-			</div>
-		</div>
-	</template>
-	<template id="recommendedTemplate">
-		<div class="mdc-card cards-container">
-			<div class="image"></div>
-			<div class="progressBar"></div>
-			<div class="mdc-card-body">
-				<div class="category bodyText-AppTheme"></div>
-				<div class="title headerText-AppTheme"></div>
-			</div>
-			<div class="mdc-card-footer">
-				<div class="duration"></div>
-			</div>
-		</div>
-	</template>
+      <div class="mdc-card-footer">
+        <div class="duration duration-details"></div>
+      </div>
+      <div id="description-container" class="description-container">
+        <p id="description-title" class="description-title headerText-AppTheme"></p>
+        <p id="description-text" class="description-text bodyText-AppTheme"></p>
+      </div>
+      <div id="learn-container" class="learn-container">
+        <p id="learn-title" class="learn-title headerText-AppTheme"></p>
+        <ol id="learn-list" class="learn-list bodyText-AppTheme"></ol>
+      </div>
+      <div id="lesson-container" class="lesson-container">
+        <p id="lesson-title" class="lesson-title headerText-AppTheme"></p>
+        <ol id="lesson-list" class="lesson-list bodyText-AppTheme"></ol>
+      </div>
+      <div class="details-btn-container">
+        <a class="mdc-button mdc-button--raised details-btn primaryBtn-AppTheme">
+          <span class="mdc-button__label barText-AppTheme startCourse"></span>
+        </a>
+      </div>
+    </div>
+  </template>
+  <template id="courseDetailsTemplate" class="courseDetailsTemplate">
+    <div id="course-img" class="course-img"></div>
+    <p id="course-title" class="course-title headerText-AppTheme"></p>
+    <div class="mdc-card-footer">
+      <div class="duration duration-details"></div>
+    </div>
+    <div id="course-lessons-list" class="course-lessons-list"></div>
+  </template>
+  <!--graphical Summaries  -->
+  <template id="graphicalSummariesFirstPage">
+    <div class="first-page slide-in">
+      <div class="top-image"></div>
+      <div class="body-content">
+        <h3 class="title headerText-AppTheme"></h3>
+        <span class="subtitle headerText-AppTheme">Description</span>
+        <p class="description bodyText-AppTheme"></p>
+      </div>
+      <div class="chapters-container">
+        <ul class="chapters-list"></ul>
+      </div>
+    </div>
+  </template>
 
-	<template id="seeAllTemplate">
-		<div class="mdc-card">
-			<div class="column">
-				<div class="image"></div>
-			</div>
-			<div class="column">
-				<div class="mdc-card-body">
-					<div class="title headerText-AppTheme"></div>
-					<div class="description bodyText-AppTheme"></div>
-				</div>
-				<div class="mdc-card-footer">
-					<div class="duration "></div>
-				</div>
-			</div>
-		</div>
-	</template>
-	<template id="trendingTemplate" class="trendingTemplate">
-		<div class="trending-card" id="trending-card">
-			<span class="trending-span bodyText-AppTheme" id="trending-span"></span>
-		</div>
-	</template>
-	<template id="detailsPageTemplate" class="detailsPageTemplate ">
-		<div class="details-card" id="detailes-card">
-			<div id="details-img" class="details-img"></div>
-			<p id="details-title" class="details-title headerText-AppTheme"></p>
+  <template id="graphicalSummariesSecondPage">
+    <div class="secondPage slide-in">
+      <img class="top-image" alt="background" />
+      <h2 class="title headerText-AppTheme"></h2>
+      <p class="subtitle headerText-AppTheme"></p>
+      <div class="startChapter-btn-container">
+        <a class="mdc-button mdc-button--raised primaryBtn-AppTheme" id="startChapter">
+          <span class="mdc-button__label barText-AppTheme">Start chapter</span>
+        </a>
+      </div>
+    </div>
+  </template>
 
-			<div class="mdc-card-footer ">
-				<div class="duration duration-details"></div>
-			</div>
-			<div id="description-container" class="description-container">
-				<p id="description-title" class="description-title headerText-AppTheme"></p>
-				<p id="description-text" class="description-text bodyText-AppTheme"></p>
-			</div>
-			<div id="learn-container" class="learn-container">
-				<p id="learn-title" class="learn-title headerText-AppTheme"></p>
-				<ol id="learn-list" class="learn-list bodyText-AppTheme"></ol>
-			</div>
-			<div id="lesson-container" class="lesson-container">
-				<p id="lesson-title" class="lesson-title headerText-AppTheme"></p>
-				<ol id="lesson-list" class="lesson-list bodyText-AppTheme">
-				</ol>
-			</div>
-			<div class="details-btn-container">
-				<a class="mdc-button mdc-button--raised details-btn primaryBtn-AppTheme">
-					<span class="mdc-button__label barText-AppTheme startCourse"></span>
-				</a>
-			</div>
+  <template id="graphicalSummariesThirdPage">
+    <div class="third-page slide-in">
+      <section class="splide" aria-label="...">
+        <div class="splide__track">
+          <ul class="splide__list"></ul>
+          <div id="slideNum"></div>
+        </div>
 
-		</div>
-	</template>
-	<template id="courseDetailsTemplate" class="courseDetailsTemplate">
-		<div id="course-img" class="course-img"></div>
-		<p id="course-title" class="course-title headerText-AppTheme"></p>
-		<div class="mdc-card-footer ">
-			<div class="duration duration-details"></div>
-		</div>
-	 <div id="course-lessons-list" class="course-lessons-list">
+        <!-- Add the progress bar element -->
+        <div class="my-carousel-progress holderPercentage">
+          <div class="my-carousel-progress-bar infoTheme"></div>
+        </div>
+      </section>
+    </div>
+  </template>
+  <template id="graphicalSummariesFourthPage">
+    <div class="fourth-page slide-in">
+      <div class="top-image"></div>
+      <div class="header-text">
+        <h3 class="headerText-AppTheme">UNLOCK PREMIUM CONTENT</h3>
+      </div>
+      <div class="body-content">
+        <p class="bodyText-AppTheme">
+          Unlock the full Ken Blanchar library <br />
 
-		</div> 
-	
-	</template>
-	<!--graphical Summaries  -->
-	<template id="graphicalSummariesFirstPage">
-		<div class="first-page slide-in">
-			<div class="top-image"></div>
-			<div class="body-content">
-				<h3 class="title headerText-AppTheme"></h3>
-				<span class="subtitle headerText-AppTheme">Description</span>
-				<p class="description bodyText-AppTheme">
-				</p>
-			</div>
-			<div class="chapters-container">
-				<ul class="chapters-list">
+          Discover new titles <br />
 
-				</ul>
-			</div>
-		</div>
-	</template>
-
-	<template id="graphicalSummariesSecondPage">
-		<div class="secondPage slide-in">
-			<img class="top-image" alt="background">
-			<h2 class="title headerText-AppTheme"></h2>
-			<p class="subtitle headerText-AppTheme"></p>
-			<div class="startChapter-btn-container">
-				<a class="mdc-button mdc-button--raised primaryBtn-AppTheme" id="startChapter">
-					<span class="mdc-button__label barText-AppTheme">Start chapter</span>
-				</a>
-			</div>
-		</div>
-	</template>
-
-	<template id="graphicalSummariesThirdPage">
-		<div class="third-page slide-in">
-			<section class="splide" aria-label="...">
-				<div class="splide__track">
-					<ul class="splide__list">
-					</ul>
-					<div id="slideNum"></div>
-				</div>
-
-				<!-- Add the progress bar element -->
-				<div class="my-carousel-progress holderPercentage">
-					<div class="my-carousel-progress-bar infoTheme"></div>
-				</div>
-			</section>
-		</div>
-	</template>
-	<template id="graphicalSummariesFourthPage">
-		<div class="fourth-page slide-in">
-			<div class="top-image"></div>
-			<div class="header-text">
-				<h3 class="headerText-AppTheme">UNLOCK PREMIUM CONTENT</h3>
-			</div>
-			<div class="body-content">
-				<p class="bodyText-AppTheme">
-					Unlock the full Ken Blanchar library <br />
-
-					Discover new titles <br />
-
-					Receive access to exclusive resources
-				</p>
-			</div>
-			<div class="plan-header">
-				<h3 class="headerText-AppTheme">START WITH 3-MONTH FREE TRIAL</h3>
-			</div>
-			<div class="plans-container">
-				<div class="plan-card">
-					<h2 class="title headerText-AppTheme">$12.99/Month</h2>
-					<p class="subtitle bodyText-AppTheme">Get greater access & unsubscribe at any time</p>
-				</div>
-				<div class="plan-card">
-					<h2 class="title headerText-AppTheme">$129/Year</h2>
-					<p class="discount bodyText-AppTheme">Save $25.98</p>
-					<p class="subtitle bodyText-AppTheme">Get greater access & unsubscribe at any time</p>
-				</div>
-			</div>
-		</div>
-	</template>
-
+          Receive access to exclusive resources
+        </p>
+      </div>
+      <div class="plan-header">
+        <h3 class="headerText-AppTheme">START WITH 3-MONTH FREE TRIAL</h3>
+      </div>
+      <div class="plans-container">
+        <div class="plan-card">
+          <h2 class="title headerText-AppTheme">$12.99/Month</h2>
+          <p class="subtitle bodyText-AppTheme">
+            Get greater access & unsubscribe at any time
+          </p>
+        </div>
+        <div class="plan-card">
+          <h2 class="title headerText-AppTheme">$129/Year</h2>
+          <p class="discount bodyText-AppTheme">Save $25.98</p>
+          <p class="subtitle bodyText-AppTheme">
+            Get greater access & unsubscribe at any time
+          </p>
+        </div>
+      </div>
+    </div>
+  </template>
 	<!--Article template  -->
 	<template id="articleTemplate" >
 		<div class="articleImage" id="articleImagee">
@@ -430,57 +538,85 @@
 			<div id="articleKeyTakeaways" class="articleKeyTakeaways slide-in headerText-AppTheme"></div>
 			<div id="articleFullArticle" class="articleFullArticle hidden slide-in headerText-AppTheme"></div>
 	</template>
+	
+  <!--Skeleton Templates-->
+  <template id="horizontal1_SkeletonTemplate">
+    <div class="horizontal-1--skeleton"></div>
+  </template>
+
+  <template id="horizontalSkeletonTemplate">
+    <div class="horizontal--skeleton"></div>
+  </template>
+
+  <template id="verticalSeeAll_SkeletonTemplate">
+    <div class="verticalSeeAll--skeleton"></div>
+  </template>
+
+  <template id="myList_Template">
+    <div class="myCard">
+      <div id="image"></div>
+      <div class="title">
+        <div id="title_text"></div>
+        <div id="subTitle_text"></div>
+      </div>
+      <div id="action">
+        <span class="material-icons icon"> chevron_right </span>
+      </div>
+    </div>
+  </template>
+
+  <template id="teamEffectiveness_Template">
+    <div class="teamEffectiveness_Card">
+      <div id="image"></div>
+      <div class="title">
+        <div id="title_text"></div>
+        <div class="holderPercentage" id="bar">
+          <div class="infoTheme" id="filled"></div>
+        </div>
+      </div>
+      <div id="action">
+        <span class="material-icons icon"> more_horiz </span>
+      </div>
+    </div>
+  </template>
+  <!--End Skeleton Templates-->
+
+  <!-- audio page template-->
+  <template id="audioTemplate">
+    <div class="audio-container slide-in hidden">
+      <div class="g-row">
+        <div class="audio-player">
+          <label class="material-icons icon">play_circle</label>
+        </div>
+      </div>
+      <div class="g-row title-container">
+        <h2 class="audio-title headerText-AppTheme"></h2>
+        <label class="material-icons icon">more_horiz</label>
+      </div>
+      <div class="g-row">
+        <div class="mdc-tab-bar" role="tablist">
+          <div class="mdc-tab-scroller">
+            <div class="mdc-tab-scroller__scroll-area">
+              <div class="mdc-tab-scroller__scroll-content audio-tab-container">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="audioContent" class="audio-content">
+          <div class="audio-tab audio-transcript" aria-type="transcript">
+          </div>
+          <div class="audio-tab  hidden" aria-type="shortcuts">
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
 
 
-	<!--Skeleton Templates-->
-	<template id="horizontal1_SkeletonTemplate">
-		<div class="horizontal-1--skeleton">
-		</div>
-	</template>
-
-	<template id="horizontalSkeletonTemplate">
-		<div class="horizontal--skeleton">
-		</div>
-	</template>
-
-	<template id="verticalSeeAll_SkeletonTemplate">
-		<div class="verticalSeeAll--skeleton">
-		</div>
-	</template>
-
-	<template id="myList_Template">
-		<div class="myCard">
-			<div id="image"></div>
-			<div class="title">
-				<div id="title_text"></div>
-				<div id="subTitle_text"></div>
-			</div>
-			<div id="action">
-				<span class="material-icons icon">
-					chevron_right
-				</span>
-			</div>
-		</div>
-	</template>
-
-	<template id="teamEffectiveness_Template">
-		<div class="teamEffectiveness_Card">
-			<div id="image"></div>
-			<div class="title">
-				<div id="title_text"></div>
-				<div class="holderPercentage" id="bar">
-					<div class="infoTheme" id="filled"></div>
-				</div>
-			</div>
-			<div id="action">
-				<span class="material-icons icon">
-					more_horiz
-				</span>
-			</div>
-		</div>
-	</template>
-	<!--End Skeleton Templates-->
-	<!-- end template -->
+  <div id="audioContainer"></div>
+  <!-- end template -->
 </body>
 
 </html>
+

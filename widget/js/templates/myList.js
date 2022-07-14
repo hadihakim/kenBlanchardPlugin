@@ -2,30 +2,20 @@
 class MyList {
 
     static listState = {
+        progressChart: null,
+        barChart: null,
+        includeArchived: false,
+        type: 'course',
         title: "My List",
-        data: [{
-            id: 'card 1',
-            title: "Another article",
-            subTitle: '3 Taken On  •  15 In Total',
-            description: "sfdfsdfsdf sdf sdf",
-            image: "https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88",
-            topics: ["00236b7b-15a3-4e5f-a5ab-fc014ed652b3"],
-            duration: 0,
-            createdOn: "2022-06-22T16:30:22.260Z"
-        },
-        {
-            id: 'card 2',
-            title: "Another article",
-            subTitle: '3 Taken On  •  15 In Total',
-            description: "sfdfsdfsdf sdf sdf",
-            image: "https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88",
-            topics: ["00236b7b-15a3-4e5f-a5ab-fc014ed652b3"],
-            duration: 0,
-            createdOn: "2022-06-22T16:30:22.260Z"
-        }],
+        data: [],
+        page: 1,
+        pageSize: 7,
+        fetchNext: false,
     }
+
     static pointers = {
         pagePointer: 'myList_PageContainer',
+        includeArchived: 'includeAchived-option',
         listContainer: 'listViewContainer',
         barChart: 'myChart',
         averageProgress: 'myAverageProgress',
@@ -36,8 +26,8 @@ class MyList {
         userProfileTemplate: 'userProfileTemplate'
     }
 
-    static loadData = (options) => {
-        this.listState = options;
+    static setData = (options) => {
+        this.listState = { ...this.listState, ...options };
     }
 
     static loadCharts = () => {
@@ -46,7 +36,7 @@ class MyList {
         var yValues = [5, 11, 3];
         var barColors = ["#E4572E", "#57CC99", "#FFBA08"];
 
-        let barChart = new Chart(this.pointers.barChart, {
+        this.listState.barChart = new Chart(this.pointers.barChart, {
             type: "bar",
             data: {
                 labels: xValues,
@@ -86,7 +76,7 @@ class MyList {
                             }
                         }
                     },
-                    
+
                 }
             }
         });
@@ -105,7 +95,7 @@ class MyList {
             ]
         };
 
-        new Chart(this.pointers.averageProgress, {
+        this.listState.progressChart = new Chart(this.pointers.averageProgress, {
             type: 'doughnut',
             data: data,
             options: {
@@ -124,44 +114,106 @@ class MyList {
     static loadList = () => {
         let listContainer = document.getElementById(this.pointers.listContainer);
 
-        this.listState.data.forEach(card => {
-            const myCard = document.getElementById(this.pointers.template);
-            const nodesClone = myCard.content.cloneNode(true);
+        // this.listState.data.assets.forEach(async asset => {
+        //     let assetData = await HandleAPI.getDataByID(asset, 'assets_info');
+        //     assetData.data.meta.topics.forEach(async topic => {
+        //         let topicData = await HandleAPI.getDataByID(topic, 'topic');
+        //         console.log('topic data ->', topicData);
+        //     })
+        // })
 
-            
-            let imageContainer = nodesClone.querySelector("#image");
-            let titleContainer = nodesClone.querySelector("#title_text");
-            let subTitleContainer = nodesClone.querySelector("#subTitle_text");
-            let actionBtn = nodesClone.querySelectorAll(".myCard");
-            
-            imageContainer.setAttribute('style', `background-image: url('${card.image}')`);
-            titleContainer.innerHTML = card.title;
-            subTitleContainer.innerHTML = card.subTitle;
+        let firstIndex = (this.listState.page - 1) * this.listState.pageSize;
+        let lastIndex = this.listState.page * this.listState.pageSize;
+        this.listState.page += 1;
 
-            listContainer.appendChild(nodesClone);
+        if (lastIndex > this.listState.data.length)
+            lastIndex = this.listState.data.length;
 
-            actionBtn[0].addEventListener('click', () => {
-                Navigation.openTeamEffectivenessList(card.title, card.id);
-            })
-        })
+        for (let i = firstIndex; i < lastIndex; i++) {
 
+            if ((this.listState.data[i].archived && this.listState.includeArchived) || !this.listState.data[i].archived) {
+                const myCard = document.getElementById(this.pointers.template);
+                const nodesClone = myCard.content.cloneNode(true);
+
+                let imageContainer = nodesClone.querySelector("#image");
+                let titleContainer = nodesClone.querySelector("#title_text");
+                let subTitleContainer = nodesClone.querySelector("#subTitle_text");
+                let actionBtn = nodesClone.querySelectorAll(".myCard");
+
+                imageContainer.setAttribute('style', `background-image: url('${this.listState.data[i].image}')`);
+                titleContainer.innerHTML = this.listState.data[i].title;
+                subTitleContainer.innerHTML = this.listState.data[i].subTitle;
+
+                listContainer.appendChild(nodesClone);
+
+                actionBtn[0].addEventListener('click', () => {
+                    let _options = {
+                        title: this.listState.data[i].title,
+                        id: this.listState.data[i].id,
+                        activeData:activeTeamList,
+                        archiveData:archiveTeamList
+                    }
+                    Navigation.openTeamEffectivenessList(_options);
+                })
+            } else {
+                lastIndex += 1;
+                if (lastIndex > this.listState.data.length)
+                    lastIndex = this.listState.data.length;
+            }
+        }
+        this.listState.fetchNext = true;
+        Utilities.setAppTheme();
+    }
+
+    static lazyLoad = (e) => {
+        if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.listState.fetchNext) {
+            this.listState.fetchNext = false;
+            this.loadList();
+        }
+    }
+
+    static destroy = () => {
+        if (this.listState.barChart)
+            this.listState.barChart.destroy();
+        if (this.listState.progressChart)
+            this.listState.progressChart.destroy();
+
+        this.listState.page = 1;
+        this.listState.pageSize = 7;
+        this.listState.fetchNext = false;
+    }
+
+    static initArchived = (e) => {
+        this.listState.includeArchived = e.target.checked;
+        this.listState.page = 1;
+
+        document.getElementById(this.pointers.listContainer).innerHTML = "";
+        this.loadList();
+
+        Utilities.setAppTheme();
     }
 
     static init = () => {
         // should be organized
+
+        this.destroy();
+
+        document.getElementById(this.pointers.includeArchived).addEventListener('click', (e) => this.initArchived(e))
+
+        let listContainer = document.getElementById(this.pointers.listContainer);
+        listContainer.innerHTML = "";
+        listContainer.addEventListener('scroll', (e) => this.lazyLoad(e))
         let userProfileContainer = document.getElementById(this.pointers.userProfileContainer);
+        userProfileContainer.innerHTML = '';
 
         const myContainer = document.getElementById(this.pointers.userProfileTemplate);
         const nodesClone = myContainer.content.cloneNode(true);
-        userProfileContainer.innerHTML = '';
-
-
-        nodesClone.getElementById('profileMainPage').classList.add('hidden');
-        nodesClone.getElementById(this.pointers.pagePointer).classList.remove('hidden');
 
         userProfileContainer.appendChild(nodesClone);
 
-        this.loadCharts();
+        if (this.listState.type == 'course')
+            this.loadCharts();
+
         this.loadList();
     }
 }

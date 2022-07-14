@@ -51,6 +51,10 @@
     font-size: 1rem;
 }
 
+.myList_PageContainer #listViewContainer{
+    overflow-y: scroll;
+    height: 70vh;
+}
 
 .myCard {
     display: flex;
@@ -163,12 +167,18 @@
     color: white !important;
 }
 
+#teamEffectiveness_ListContainer, #teamEffectivenessArchived_ListContainer{
+    overflow-y: scroll;
+    height: 90vh;
+}
+
 .teamEffectiveness_Card {
     display: flex;
     height: 5rem;
     justify-content: space-between;
     align-items: center;
     margin: 1rem;
+    
 }
 
 .teamEffectiveness_Card #image {
