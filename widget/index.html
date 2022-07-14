@@ -583,7 +583,7 @@
 
   <!-- audio page template-->
   <template id="audioTemplate">
-    <div class="audio-container slide-in hidden">
+    <div class="audio-container slide-in">
       <div class="g-row">
         <div class="audio-player">
           <label class="material-icons icon">play_circle</label>
@@ -594,7 +594,7 @@
         <label class="material-icons icon">more_horiz</label>
       </div>
       <div class="g-row">
-        <div class="mdc-tab-bar" role="tablist">
+        <div class="mdc-tab-bar audioTabsList" role="tablist">
           <div class="mdc-tab-scroller">
             <div class="mdc-tab-scroller__scroll-area">
               <div class="mdc-tab-scroller__scroll-content audio-tab-container">
@@ -604,6 +604,8 @@
           </div>
         </div>
         <div id="audioContent" class="audio-content">
+          <div class="audio-tab audio-details" aria-type="details">
+          </div>
           <div class="audio-tab audio-transcript" aria-type="transcript">
           </div>
           <div class="audio-tab  hidden" aria-type="shortcuts">
@@ -612,9 +614,6 @@
       </div>
     </div>
   </template>
-
-
-  <div id="audioContainer"></div>
   <!-- end template -->
 </body>
 

@@ -40,6 +40,9 @@
 .audio-container .mdc-tab-bar{
     height: 3rem;
 }
+.audio-container .mdc-tab-scroller__scroll-area{
+  width: 100% !important;
+}
 .audio-container .mdc-tab-bar button .mdc-tab__text-label {
   font-style: normal;
   font-weight: 600;
