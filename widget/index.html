@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="./style/insights.css">
 	<!--End Insight css-->
 
+	<link rel="stylesheet" href="./style/video.css" />
 	<link rel="stylesheet" href="../../../styles/components/listView.css" />
 	<link rel="stylesheet" href="./style/style.css" />
 	<link rel="stylesheet" href="./style/myList.css" />
@@ -75,6 +76,8 @@
 	<script src="./js/dataAccess/settings.js"></script>
 	<script src="./js/dataAccess/assets.js"></script>
 	<script src="./js/app.js" defer></script>
+	<script src="./js/components/videoDetails.js" defer></script>
+
 	<!-- endbundle:scripts -->
 	<!--
 
@@ -85,6 +88,129 @@
 </head>
 
 <body id="mainBody">
+
+	<div class="pageVideo hidden" id="videoPageContainer">
+		<div class="videoTopContainer" id="videoTopContainer">
+			<!-- <img src="" alt="" class="videoImage"> -->
+			<span class="material-icons icon videoSpan">
+				play_circle_outline
+			</span>
+		</div>
+		<div class="titleContainer">
+			<p class="videoTitle headerText-AppTheme">Focus and Listen</p>
+			<span class="material-icons icon videoMore">
+				more_horiz
+			</span>
+		</div>
+		<div class="mdc-tab-scroller__scroll-content" id="videoTabsContainer">
+			<div class="mdc-tab-bar" role="tablist">
+				<div class="mdc-tab-scroller">
+					<div class="mdc-tab-scroller__scroll-area">
+						<div class="mdc-tab-scroller__scroll-content scrollTabs" id="videoTabs">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="choosenContainer" id="videoChoosenContainer">
+
+			
+		</div>
+
+	</div>
+
+	<!-- <div class="videoShortcutsContainer" id="videoShortcutsContainer">
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+
+					<span class="material-icons icon">
+						more_horiz
+					</span>
+
+			</div>
+		</div>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+
+					<span class="material-icons icon">
+						more_horiz
+					</span>
+
+			</div>
+		</div>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+
+					<span class="material-icons icon">
+						more_horiz
+					</span>
+
+			</div>
+		</div>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+
+					<span class="material-icons icon">
+						more_horiz
+					</span>
+
+			</div>
+		</div>
+		<div class="shortcutVideoElement">
+			<input type="checkbox" class="shortcutVideoCheckbox">
+			<div class="shorcutElementDetails">
+				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
+				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
+			</div>
+			<div class="shortcutActions">
+				<span class="material-icons icon">
+					play_circle_filled
+					</span>
+
+					<span class="material-icons icon">
+						more_horiz
+					</span>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="videoDetailsContainer" id="videoDetailsContainer">
+		<p>ddd</p>
+	</div> -->
 
 	<!-- user section -->
 	<div class="slide-in" id="mainContainer">
@@ -109,8 +235,8 @@
 						autocomplete="off" />
 					<label class="material-icons icon hidden" id="sortIcon">sort</label>
 					<div>
-					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
-					<div class="dot" id="dot"></div>
+						<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
+						<div class="dot" id="dot"></div>
 					</div>
 				</div>
 			</div>
@@ -331,10 +457,10 @@
 		<div class="mdc-card-footer ">
 			<div class="duration duration-details"></div>
 		</div>
-	 <div id="course-lessons-list" class="course-lessons-list">
+		<div id="course-lessons-list" class="course-lessons-list">
 
-		</div> 
-	
+		</div>
+
 	</template>
 	<!--graphical Summaries  -->
 	<template id="graphicalSummariesFirstPage">

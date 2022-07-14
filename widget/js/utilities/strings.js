@@ -37,5 +37,10 @@ const Strings = {
 	// Empty state
 	EMPTY_TITLE:"Nothing Found",
 	EMPTY_DESCRIPTION:"Refine your search...",
+
+	// Video Details
+	VIDEO_DETAILS_TAB: "Details",
+	VIDEO_TRANSCRIPT_TAB: "Transcript",
+	VIDEO_SHORTCUTS_TAB: "Shortcuts"
 }
 
