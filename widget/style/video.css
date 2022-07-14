@@ -1,0 +1,118 @@
+#videoPageContainer {
+    height: 100vh;
+}
+
+#videoPageContainer .videoTopContainer {
+    position: relative;
+    width: 100%;
+    height: 13.1875rem;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../.././resources/whiteBackground.png);
+    background-position: center;
+}
+
+#videoPageContainer .videoTopContainer .videoSpan {
+    position: absolute;
+    font-size: 4rem !important;
+    top: calc(9.5rem/2);
+    left: 42%;
+}
+
+#videoPageContainer .titleContainer {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+    padding: 1.125rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#videoPageContainer .titleContainer .videoTitle {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.5px;
+}
+
+#videoPageContainer .titleContainer .videoMore {
+    position: absolute;
+    right: 1rem;
+    font-size: 1.8rem !important;
+}
+
+#videoPageContainer .choosenContainer {
+    width: 100%;
+    height: calc(100vh - 20.1875rem);
+    overflow-y: scroll;
+}
+
+.videoShortcutsContainer {
+    padding: 1.1875rem 1rem 0 .6875rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.videoShortcutsContainer .shortcutVideoElement {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-bottom: 2.375rem;
+}
+
+.videoShortcutsContainer .shortcutVideoElement .shortcutActions {
+    position: absolute;
+    right: 0;
+}
+
+.shortcutVideoCheckbox {
+    width: 1.155rem;
+    height: 1.155rem;
+    margin-right: .6875rem;
+}
+
+.shortcutText {
+    font-style: normal;
+    font-weight: 500;
+    font-size: .875rem;
+    line-height: 1.125rem;
+    letter-spacing: 0.5px;
+}
+
+.shortcutDuration {
+    padding-top: .3125rem;
+    font-style: normal;
+    font-weight: 500;
+    font-size: .75rem;
+    line-height: 1rem;
+    letter-spacing: 0.5px;
+}
+
+span {
+    cursor: pointer;
+}
+
+.videoDetailsContainer {
+    margin: 1rem;
+}
+
+#videoTabsContainer {
+    height: 3rem;
+}
+
+#videoTabsContainer .mdc-tab__text-label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: .875rem;
+    line-height: .875rem;
+}
+
+/* #videoTabsContainer .mdc-tab-indicator__content--underline {
+} */
+
+
+.mdc-tab-scroller__scroll-area {
+    overflow-x: scroll !important;
+}
