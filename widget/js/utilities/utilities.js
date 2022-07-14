@@ -167,6 +167,16 @@ class Utilities {
 				colorDegree: this.state.appTheme.colors.primaryTheme,
 			},
 			{
+				elements: document.getElementsByClassName("checkbox-border-color"),
+				colorType: "borderColor",
+				colorDegree: this.state.appTheme.colors.icons,
+			},
+			{
+				elements: document.getElementsByClassName("checkbox-border-fill-color"),
+				colorType: "back",
+				colorDegree: this.state.appTheme.colors.icons,
+			},
+			{
 				elements: document.getElementsByClassName("info-btn-AppTheme"),
 				colorType: "back",
 				colorDegree: this.state.appTheme.colors.infoTheme,
