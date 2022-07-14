@@ -26,6 +26,7 @@ class Navigation {
 		userContainer.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
+		exploreButton.classList.remove("hidden");
 
 		courseDetailsContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
