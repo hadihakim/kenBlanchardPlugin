@@ -19,6 +19,30 @@ class AudioRender {
   static state = {
     data: {},
     tabs: [],
+    audioDrawerItemsList: [
+      {
+        text: "Mark Complete",
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+    ],
+    shortcutDrawerItemsList: [
+      {
+        text: "Bookmark Lesson",
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      { text: "Add Note", secondaryText: "", imageUrl: "", selected: false },
+      { text: "Share", secondaryText: "", imageUrl: "", selected: false },
+      {
+        text: "Mark Complete",
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+    ],
   };
 
   static pointers = {
@@ -27,7 +51,7 @@ class AudioRender {
   };
   static setState = (data) => {
     this.state.data = data;
-    this.state.tabs =[];
+    this.state.tabs = [];
     if (data.showDetails) {
       this.state.tabs.push("details");
     }
@@ -47,6 +71,15 @@ class AudioRender {
     let audioTitle = nodesClone.querySelectorAll(".audio-title");
     let audioTabContainer = nodesClone.querySelectorAll(".audio-tab-container");
     let tabListContainer = nodesClone.querySelectorAll(".audioTabsList");
+    let audioPlayerThumbnail = nodesClone.querySelectorAll(".audio-player");
+    let audioDrawer = nodesClone.getElementById("audioDrawer");
+    audioDrawer.addEventListener("click", () =>
+      this.drawerHandler(this.state.audioDrawerItemsList)
+    );
+    audioPlayerThumbnail[0].style.background = `
+    linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('${Utilities.cropImage(this.state.data.meta.image)}'
+    `;
     audioTitle[0].innerText = this.state.data.meta.title;
     this.state.tabs.forEach((tab, idx) => {
       let tabButton = document.createElement("button");
@@ -68,7 +101,7 @@ class AudioRender {
       </span>
       <span class="mdc-tab-indicator">
         <span
-          class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"
+          class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"
         ></span>
       </span>
       <span class="mdc-tab__ripple"></span>
@@ -92,10 +125,10 @@ class AudioRender {
       });
     });
     container.appendChild(nodesClone);
-    this.tabsListHandler(tabListContainer)
+    this.tabsListHandler(tabListContainer);
   };
 
-  static tabsListHandler=(container)=>{
+  static tabsListHandler = (container) => {
     if (this.state.tabs.length <= 1) {
       let element = document.querySelectorAll(
         `[aria-type=${this.state.tabs[0]}]`
@@ -109,7 +142,7 @@ class AudioRender {
         this.tabClickHandler(this.state.tabs[0]);
       }
     }
-  }
+  };
   static tabClickHandler = (tab) => {
     let audioTabs = document.querySelectorAll(".audio-tab");
     audioTabs.forEach((e) => {
@@ -124,7 +157,7 @@ class AudioRender {
       } else if (tab === "shortcuts") {
         element[0].innerHTML = "";
         element[0].appendChild(this.shortcutsUi(this.state.data.checkList));
-      }else if(tab === "details"){
+      } else if (tab === "details") {
         element[0].innerHTML = "";
         element[0].appendChild(this.detailsUi(this.state.data.details));
       }
@@ -132,12 +165,12 @@ class AudioRender {
     }
   };
 
-  static detailsUi=(details)=>{
+  static detailsUi = (details) => {
     let div = document.createElement("div");
     div.classList.add("audio-details");
     div.innerHTML = details;
     return div;
-  }
+  };
   static transcriptUi = (transcriptArray) => {
     let div = document.createElement("div");
     div.classList.add("audio-transcript");
@@ -175,8 +208,8 @@ class AudioRender {
             id="checkbox-1"
             name="check1"
           />
-          <div class="mdc-checkbox__background user-image-border">
-            <svg class="mdc-checkbox__checkmark userContainer" viewBox="0 0 24 24">
+          <div class="mdc-checkbox__background checkbox-border-color">
+            <svg class="mdc-checkbox__checkmark checkbox-border-fill-color" viewBox="0 0 24 24">
               <path
                 class="mdc-checkbox__checkmark-path"
                 fill="none"
@@ -192,19 +225,30 @@ class AudioRender {
             <label for="check1" class="shortcut-label headerText-AppTheme"
               >${idx + 1 + ". " + shortcut.title}</label
             >
-            <span class="shortcut-time bodyText-AppTheme">${
-              shortcut.timeStamp
-            }</span>
+            <span class="shortcut-time bodyText-AppTheme">${Utilities.timeConvert(
+              shortcut.timeStamp,
+              "sec"
+            )}</span>
           </div>
           <label class="material-icons icon">headset</label>
-          <label class="material-icons icon">more_horiz</label>
+          <label class="material-icons icon shortcutDrawer">more_horiz</label>
         </div>
           `;
-
       shortcutItem.innerHTML = shortcutItemInnerHTML;
       div.appendChild(shortcutItem);
+      let shortcutDrawerElements =
+        shortcutItem.querySelectorAll(".shortcutDrawer");
+      shortcutDrawerElements.forEach((e) => {
+        e.addEventListener("click", () => {
+          this.drawerHandler(this.state.shortcutDrawerItemsList);
+        });
+      });
     });
     return div;
+  };
+
+  static drawerHandler = (itemsList) => {
+    Utilities.openDrawerAudioOrVideo(itemsList);
   };
 
   static init = (data) => {
