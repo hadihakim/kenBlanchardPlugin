@@ -118,6 +118,10 @@ span {
     line-height: .875rem;
 }
 
+.shortcutActions .icon {
+    font-size: 1.7rem !important;
+}
+
 /* #videoTabsContainer .mdc-tab-indicator__content--underline {
 } */
 
