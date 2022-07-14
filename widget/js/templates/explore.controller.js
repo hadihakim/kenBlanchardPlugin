@@ -22,12 +22,14 @@ class Explore {
   static setPageData = (data) => {
     this.state = data;
   };
+
   static getDataById = (id) => {
     let data = this.state.data.data.sections.filter(
       (section) => section.id === id
     );
     return data[0];
   };
+
   static seeAllButton = (id, title, type) => {
     let data = this.getDataById(id);
     let seeAllState = {
@@ -60,7 +62,6 @@ class Explore {
       let assets = element.assets;
       let foundInSearch = 0;
       let renderArray = [];
-      let topicConfig = false;
       let cardsNumber = 0;
       // Filtering section to compare it with sections comming from an api Data
 
@@ -69,28 +70,14 @@ class Explore {
         if (cardsNumber === config.cardsLimit) {
           return;
         }
-        let topicTitle;
-        let assets_info = apiData.data.assets_info[el];
 
-        // assets_info.meta.topics.forEach((topic) =>
-        for (let i = 0; i < assets_info.meta.topics.length; i++) {
-          if (cardsNumber === config.cardsLimit) {
-            return;
-          }
-          let data = apiData.data.topics.find(
-            ({ id }) => id === assets_info.meta.topics[i]
-          );
-          topicTitle = data.title;
-          if (
-            Search.state.filterArr.includes(topicTitle) ||
-            Search.state.filterArr.length == 0
-          ) {
-            topicConfig = true;
-            break;
-          } else {
-            topicConfig = false;
-          }
-        }
+        let assets_info = apiData.data.assets_info[el];
+        let topicData = this.state.data.data.topics.find(
+          ({ id }) => id === assets_info.meta.topics[0]
+        );
+        let topicTitle = topicData?.title || '  ';
+
+        let topicConfig = HandleAPI.handleFilter(assets_info.meta.topics);
         if (topicConfig) {
           cardsNumber += 1;
           isEmpty = false;
@@ -118,7 +105,7 @@ class Explore {
           sectionsContainer.classList.remove("hidden");
           renderArray = Search.sort(renderArray, config.sortType);
           renderArray.forEach((element) => {
-            if (element.layout !== "horizontal-1") {
+            if (element.layout === "horizontal") {
               this.printRecommended(
                 element.container,
                 element.durationState,
@@ -126,12 +113,24 @@ class Explore {
                 element.topicTitle,
                 element.id
               );
-            } else {
+            } else if (element.layout === "horizontal-1") {
               this.forYouRender(
                 element.container,
                 element.assets_info,
                 element.id
               );
+            } else {
+              // description, image, title, id, duration, container
+              let _options = {
+                // assetsInfo[lastIndex].meta
+                description: element.meta.description,
+                image: element.meta.image,
+                title: element.meta.title,
+                id: element.id,
+                duration: element.meta.duration,
+                container: element.container,
+              }
+              this.vetricalRender(_options)
             }
           });
         }
@@ -206,6 +205,33 @@ class Explore {
     Utilities.setAppTheme();
   };
 
+  static vetricalRender = (options) => {
+    const nodesClone = seeAllTemplate.content.cloneNode(true);
+    let image = nodesClone.querySelectorAll(".image");
+    let title = nodesClone.querySelectorAll(".title");
+    let duration = nodesClone.querySelectorAll(".duration");
+    let description = nodesClone.querySelectorAll(".description");
+    let card = nodesClone.querySelectorAll(".mdc-card");
+    description[0].innerText = options.description;
+    image[0].style.backgroundImage = `url('${Utilities.cropImage(
+      options.image,
+      "full_width",
+      "4:3"
+    )}')`;
+    let id = options.id;
+    title[0].innerText = options.title;
+    if (options.duration > 0) {
+      duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+                                    <span class="schedule-text bodyText-AppTheme">
+                                ${Utilities.timeConvert(options.duration)}</span>`;
+    }
+    card[0].addEventListener("click", () => {
+      Navigation.openPageDetails(options.id, options.title);
+    });
+    options.container.appendChild(nodesClone);
+    Utilities.setAppTheme();
+  }
+
   static cardRender = (sectionId, type) => {
     const sectionsContainer = document.getElementById(sectionId);
 
@@ -218,7 +244,7 @@ class Explore {
       ) {
         if (type !== "userActivityPage" || element.layout !== "horizontal-1") {
           let sectionInnerHTML;
-          if (element.layout != "horizontal-1") {
+          if (element.layout === "horizontal") {
             sectionInnerHTML = `
 					<div class="container-header">
 						<p class="title headerText-AppTheme">${type == "explore"
@@ -234,14 +260,17 @@ class Explore {
 					</div>
 					  `;
             skeleton = "recommanded";
-          } else {
-            if (type !== "userActivityPage") {
-              skeleton = "justForYou";
-            }
+          } else if (element.layout === "horizontal-1") {
+            skeleton = "justForYou";
             sectionInnerHTML = `
 					<p class="sectionTitle headerText-AppTheme">${element.title}</p>
 						<div id="${`${element.id}-container-${type}`}" class="main"></div>
 					`;
+          } else {
+            sectionInnerHTML = `
+            <p class="sectionTitle headerText-AppTheme">${element.title}</p>
+              <div id="${`${element.id}-container-${type}`}" class="main"></div>
+            `;
           }
           ui.createElement(
             "section",
@@ -283,6 +312,7 @@ class Explore {
 
   static init = (type) => {
     if (type === "main") {
+      sectionsContainer.innerHTML = '';
       this.cardRender(this.pointers.sectionsContainer, type);
       const exploreBtn = document.getElementById(this.pointers.exploreButton);
       exploreBtn.innerHTML = Strings.EXPLORE_BTN;

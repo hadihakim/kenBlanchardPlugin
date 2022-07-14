@@ -1,5 +1,9 @@
 class Skeleton {
 
+	static state={
+		mainSkeletonSections :['section1', 'section2']
+	}
+
     static horizontal1_Skeleton = (container) => {
         Utilities.scrollTop();
         container.innerHTML = '';
@@ -53,4 +57,17 @@ class Skeleton {
 					}
 					container.appendChild(nodesClone);
     }
+
+	static initMainSkeleton = (container) => {
+		exploreButton.classList.add("hidden");
+		this.state.mainSkeletonSections.forEach((section,idx)=>{
+			let headContainer = ui.createElement('div',container, `<div class="container-header">${section}</div>`, ['horizontal'], `skeletonSection-${idx}`);
+			let skeletonContainer = ui.createElement('div',headContainer, '', [], `skeletonContainer-${idx}`);
+			if(idx==0){
+				this.horizontal1_Skeleton(skeletonContainer);
+			}else{
+				this.horizontal_Skeleton(skeletonContainer);
+			}
+		})
+	}
 }

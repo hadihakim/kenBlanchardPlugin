@@ -4,9 +4,7 @@ document.getElementById("userProfilePicture").addEventListener("click", () => {
 });
 
 
-const init = async (data) => {
-  await getCurrentUser();
-  Utilities.getAppTheme();
+const loadData = async (data) => {
   UserProfile.init(authManager.currentUser);
   Explore.setPageData({ data: { data }, userData: authManager.currentUser });
   Explore.init("main");
@@ -14,25 +12,19 @@ const init = async (data) => {
   Search.setData({ data });
   Search.init();
   Utilities.initBack();
+  Navigation.openMain();
   Utilities.setAppTheme();
 };
 
+const init = async() => {
+  Utilities.getAppTheme();
+  UserProfile.init();
+  Skeleton.initMainSkeleton(sectionsContainer);
+  Utilities.setAppTheme();
 
-let promise = new Promise(function (resolve, reject) {
-  authManager.enforceLogin();
-  if (!authManager.currentUser) {
-    Settings.get((err, res) => {
-      if (err) reject(err);
-      resolve(init(res));
-    })
-  }
-});
-
-function getCurrentUser() {
-  return new Promise((resolve, reject) => {
-    Profiles.get((err, res) => {
-      if (err) reject(err)
-      resolve(res)
-    })
-  });
+  await HandleAPI.getSettingsData();
+  await HandleAPI.getCurrentUser();
+  loadData(HandleAPI.state.data)
 }
+
+init();
