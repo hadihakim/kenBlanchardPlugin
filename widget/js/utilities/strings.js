@@ -45,6 +45,10 @@ const Strings = {
 	// audio strings
 	AUDIO_TAP_1:"details",
 	AUDIO_TAP_2:"transcript",
-	AUDIO_TAP_3:"shortcuts"
+	AUDIO_TAP_3:"shortcuts",
+
+	//article strings
+	ARTICLE_TAP_KEY_TAKEAWAYS:"KEY TAKEAWAYS",
+	ARTICLE_TAP_FULL_ARTICLE:"FULL ARTICLE",
 }
 
