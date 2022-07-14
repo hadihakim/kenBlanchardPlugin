@@ -16,11 +16,9 @@ class ArticleRender{
         articleFullArticle:"articleFullArticle",
         articleIcon:"articleIcon"
     }
-    static setState = async (id) => {
-        this.state.id = id;
-        let newRes = await HandleAPI.getDataByID(id, "assets_info")
-        this.state.data = newRes.data
-        console.log("Article data ->", newRes);
+    static setState =  (data) => {
+        this.state.data =data
+        console.log("Article data ->", data);
       }
 
     static openDrawer=()=>{
@@ -114,8 +112,8 @@ if(this.state.data.showKeyTakeaways){
 
 
 
-    static init = async (id) => {
-        await this.setState(id);
+    static init =  (data) => {
+       this.setState(data);
         this.render();
       }
 }
