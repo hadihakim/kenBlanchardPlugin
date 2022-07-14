@@ -92,7 +92,7 @@ class SeeAll {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
                                     <span class="schedule-text bodyText-AppTheme">
                                 ${Utilities.timeConvert(
-                                  assetsInfo[lastIndex].meta.duration
+                                  assetsInfo[lastIndex].meta.duration, "min"
                                 )}</span>`;
           }
           card[0].addEventListener("click", () => {

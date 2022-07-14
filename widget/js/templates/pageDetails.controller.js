@@ -26,7 +26,8 @@ class PageDetails {
       console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
     }
     else if (this.state.data.type === "video") {
-      videoDetails.initVideoDetails();
+      videoDetails.initVideoDetails(this.state.data);
+      console.log(this.state.data, "videeeeee");
     }
 
 
