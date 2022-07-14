@@ -1,79 +1,17 @@
 
 class TeamEffectivenessList {
     static state = {
-        data: [
-            {
-                title: "Another article",
-                description: "sfdfsdfsdf sdf sdf",
-                image: "https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88",
-                totaltasks: 15,
-                taken: 10,
-                id: "62b3439f864d49037aac9b27"
-            },
-            {
-                title: "Article with keytakeaways",
-                description: "short description for this asset with key takeaways bblasdsa dasd sad",
-                image: "https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop",
-                totaltasks: 15,
-                taken: 7,
-                id: "62b3439f864d49037aac9b26"
-            },
-            {
-                title: "Article two",
-                description: "short description for this asset bblasdsa dasd sad",
-                image: "https://www.thespruce.com/thmb/tClzdZVdo_baMV7YA_9HjggPk9k=/4169x2778/filters:fill(auto,1)/the-difference-between-trees-and-shrubs-3269804-hero-a4000090f0714f59a8ec6201ad250d90.jpg",
-                totaltasks: 15,
-                taken: 2,
-                id: "62b3439f864d49037aac9b25"
-            },
-            {
-                title: "Rose",
-                description: "short description for this asset bblasdsa dasd sad",
-                image: "https://th.bing.com/th/id/R.6e02493f35178458c092d5546a72ca06?rik=rDt%2bq%2bNkpy4RkA&pid=ImgRaw&r=0",
-                totaltasks: 15,
-                taken: 13,
-                id: "62b3439f864d49037aac9b60"
-            }
-        ],
-        archivedData: [
-            {
-                title: "Another article",
-                description: "sfdfsdfsdf sdf sdf",
-                image: "https://images.unsplash.com/photo-1551818176-60579e574b91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDA1fDB8MXxzZWFyY2h8MjN8fHdpZGV8ZW58MHx8fHwxNjU0Nzg0Njg3&ixlib=rb-1.2.1&q=80&w=1080&func=bound&width=88",
-                totaltasks: 15,
-                taken: 10,
-                id: "62b3439f864d49037aac9b27"
-            },
-            {
-                title: "Article with keytakeaways",
-                description: "short description for this asset with key takeaways bblasdsa dasd sad",
-                image: "https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop",
-                totaltasks: 15,
-                taken: 7,
-                id: "62b3439f864d49037aac9b26"
-            },
-            {
-                title: "Article two",
-                description: "short description for this asset bblasdsa dasd sad",
-                image: "https://www.thespruce.com/thmb/tClzdZVdo_baMV7YA_9HjggPk9k=/4169x2778/filters:fill(auto,1)/the-difference-between-trees-and-shrubs-3269804-hero-a4000090f0714f59a8ec6201ad250d90.jpg",
-                totaltasks: 15,
-                taken: 2,
-                id: "62b3439f864d49037aac9b25"
-            },
-            {
-                title: "Rose",
-                description: "short description for this asset bblasdsa dasd sad",
-                image: "https://th.bing.com/th/id/R.6e02493f35178458c092d5546a72ca06?rik=rDt%2bq%2bNkpy4RkA&pid=ImgRaw&r=0",
-                totaltasks: 15,
-                taken: 13,
-                id: "62b3439f864d49037aac9b60"
-            }
-        ],
+        data: [],
+        archivedData: [],
         ArchivedDrawerOptions: ["Move to Active", "Remove Course"],
         ActiveDrawerOptions: ["Archive Course", "Reset Course", "Remove Course"],
         tabs: ['active', 'archived'],
-        selectedNav: 'tab-0'
+        selectedNav: 'tab-0',
+        page: 1,
+        pageSize: 7,
+        fetchNext: false,
     }
+
     static pointers = {
         teamEffectiveness_PageContainer: "teamEffectiveness_PageContainer",
         teamEffectiveness_tabHandler: "teamEffectiveness_tabHandler",
@@ -83,7 +21,10 @@ class TeamEffectivenessList {
     }
 
     static setStates = (options) => {
-        this.state = options;
+        // we will use the id to get the data from the api -->
+        // calling the function
+        // after getting the data we will set it to the state to use it in the loading list function
+        this.state = {...this.state, ...options};
     }
 
     static deleteItem = (id) => {
@@ -195,7 +136,6 @@ class TeamEffectivenessList {
             (err, result) => {
                 if (err) return console.error(err);
                 if (result) {
-                    console.log(result);
                     buildfire.components.drawer.closeDrawer();
                     this.confirmMessage(id, result.text, 'Are you sure you want to remove this course? This will permanently delete the course from your list!')
                 }
@@ -226,15 +166,23 @@ class TeamEffectivenessList {
             }
 
             button.addEventListener('click', () => {
+                let activeContainer = document.getElementById(this.pointers.teamEffectiveness_ListContainer);
+                let archiveContainer = document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer);
+                activeContainer.innerHTML = '';
+                archiveContainer.innerHTML = '';
+
+                this.state.page = 1;
                 document.getElementById(this.state.selectedNav)?.classList.remove("selectedNav");
                 this.state.selectedNav = `tab-${index}`;
                 button.classList.add("selectedNav");
                 if (tab == 'active') {
                     document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer).classList.add("hidden");
                     document.getElementById(this.pointers.teamEffectiveness_ListContainer).classList.remove("hidden");
+                    this.loadActiveList();
                 } else if (tab == 'archived') {
                     document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer).classList.remove("hidden");
                     document.getElementById(this.pointers.teamEffectiveness_ListContainer).classList.add("hidden");
+                    this.loadArchivedList();
                 }
             })
             document.getElementById(this.pointers.teamEffectiveness_tabHandler).appendChild(button);
@@ -242,7 +190,17 @@ class TeamEffectivenessList {
     }
 
     static loadActiveList = () => {
-        this.state.data.forEach(activeCard => {
+
+        let firstIndex = (this.state.page - 1) * this.state.pageSize;
+        let lastIndex = this.state.page * this.state.pageSize;
+
+        if (lastIndex > this.state.data.length)
+            lastIndex = this.state.data.length;
+
+        this.state.page += 1;
+
+        // activeCard
+        for (let i = firstIndex; i < lastIndex; i++) {
             const nodesClone = document.getElementById(this.pointers.teamEffectiveness_Template).content.cloneNode(true);
 
             let titleCard = nodesClone.querySelectorAll(".title");
@@ -251,29 +209,41 @@ class TeamEffectivenessList {
             let filledData = nodesClone.querySelector("#filled");
             let actionBtn = nodesClone.querySelector("#action");
 
-            let percentFilled = (activeCard.taken / activeCard.totaltasks) * 100;
-            imageContainer.setAttribute('style', `background-image: url('${activeCard.image}')`);
+            let percentFilled = (this.state.data[i].taken / this.state.data[i].totaltasks) * 100;
+            imageContainer.setAttribute('style', `background-image: url('${this.state.data[i].image}')`);
             filledData.setAttribute('style', `width: ${percentFilled}%`);
-            titleContainer.innerHTML = activeCard.title;
+            titleContainer.innerHTML = this.state.data[i].title;
 
             document.getElementById(this.pointers.teamEffectiveness_ListContainer).appendChild(nodesClone);
 
             imageContainer.addEventListener('click', () => {
-                let courseData = HandleAPI.getDataByID(activeCard.id, "assets_info")
-                Navigation.openCourseDetails(activeCard.id)
+                let courseData = HandleAPI.getDataByID(this.state.data[i].id, "assets_info")
+                Navigation.openCourseDetails(this.state.data[i].id)
             })
             titleCard[0].addEventListener('click', () => {
-                let courseData = HandleAPI.getDataByID(activeCard.id, "assets_info")
-                Navigation.openCourseDetails(activeCard.id)
+                let courseData = HandleAPI.getDataByID(this.state.data[i].id, "assets_info")
+                Navigation.openCourseDetails(this.state.data[i].id)
             })
             actionBtn.addEventListener('click', () => {
-                this.openDrawer(activeCard.id, this.state.ActiveDrawerOptions);
+                this.openDrawer(this.state.data[i].id, this.state.ActiveDrawerOptions);
             })
-        })
+        }
+        this.state.fetchNext = true;
+        Utilities.setAppTheme();
+
     }
 
     static loadArchivedList = () => {
-        this.state.archivedData.forEach(archivedCard => {
+
+        let firstIndex = (this.state.page - 1) * this.state.pageSize;
+        let lastIndex = this.state.page * this.state.pageSize;
+
+        if (lastIndex > this.state.archivedData.length)
+            lastIndex = this.state.archivedData.length;
+
+        this.state.page += 1;
+
+        for (let i = firstIndex; i < lastIndex; i++) {
             const nodesClone = document.getElementById(this.pointers.teamEffectiveness_Template).content.cloneNode(true);
 
             let imageContainer = nodesClone.querySelector("#image");
@@ -281,29 +251,61 @@ class TeamEffectivenessList {
             let filledData = nodesClone.querySelector("#filled");
             let actionBtn = nodesClone.querySelector("#action");
 
-            let percentFilled = (archivedCard.taken / archivedCard.totaltasks) * 100;
-            imageContainer.setAttribute('style', `background-image: url('${archivedCard.image}')`);
+            let percentFilled = (this.state.archivedData[i].taken / this.state.archivedData[i].totaltasks) * 100;
+            imageContainer.setAttribute('style', `background-image: url('${this.state.archivedData[i].image}')`);
             filledData.setAttribute('style', `width: ${percentFilled}%`);
-            titleContainer.innerHTML = archivedCard.title;
+            titleContainer.innerHTML = this.state.archivedData[i].title;
 
             document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer).appendChild(nodesClone);
 
             actionBtn.addEventListener('click', () => {
-                this.openDrawer(archivedCard.id, this.state.ArchivedDrawerOptions);
+                this.openDrawer(this.state.archivedData[i].id, this.state.ArchivedDrawerOptions);
             })
-        })
+        }
+        this.state.fetchNext = true;
+        Utilities.setAppTheme();
+
+    }
+
+    static lazyLoad = (e) => {
+        if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
+            this.state.fetchNext = false;
+            switch (this.state.selectedNav) {
+                case 'tab-0':
+                    this.loadActiveList();
+                    break;
+                case 'tab-1':
+                    this.loadArchivedList();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     static init = () => {
-        document.getElementById(this.pointers.teamEffectiveness_ListContainer).innerHTML = '';
-        document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer).innerHTML = '';
+        let activeContainer = document.getElementById(this.pointers.teamEffectiveness_ListContainer);
+        let archiveContainer = document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer);
 
-        // we will use the id to get the data from the api -->
-        // calling the function
-        // after getting the data we will set it to the state to use it in the loading list function
+        activeContainer.innerHTML = '';
+        archiveContainer.innerHTML = '';
+        this.state.page = 1;
+
+        activeContainer.addEventListener('scroll', (e) => this.lazyLoad(e));
+        archiveContainer.addEventListener('scroll', (e) => this.lazyLoad(e));
+        
         this.loadTabs();
-        this.loadActiveList();
-        this.loadArchivedList();
+
+        switch (this.state.selectedNav) {
+            case 'tab-0':
+                this.loadActiveList();
+                break;
+            case 'tab-1':
+                this.loadArchivedList();
+                break;
+            default:
+                break;
+        }
 
         Utilities.setAppTheme();
     }

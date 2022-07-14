@@ -184,4 +184,4 @@ class videoDetails {
 }
 
 
-videoDetails.initVideoDetails();
+// videoDetails.initVideoDetails();

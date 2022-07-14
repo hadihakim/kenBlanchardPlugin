@@ -24,7 +24,6 @@ class Utilities {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
 			this.state.appTheme = appTheme;
-			console.log(appTheme, "APP THEME");
 		});
 	};
 
@@ -165,7 +164,6 @@ class Utilities {
 	static _fetchNextList = () => {
 		config.fetchingNextPage = true;
 		if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
-			console.log("test");
 			Search.searchCardsRender(seeAllContainer, () => { config.fetchingNextPage = false; })
 		} else if (config.searchFrom == "from-see-all") {
 			SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
@@ -177,7 +175,6 @@ class Utilities {
 
 	static scrollNextPage = () => {
 		if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
-			console.log("before scrollNextPage");
 			if ((((mainContainer.scrollTop + mainContainer.clientHeight) / mainContainer.scrollHeight) > 0.8) && !config.fetchingNextPage) {
 				this._fetchNextList();
 				// loadData(currentPage, limit);

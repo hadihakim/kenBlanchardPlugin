@@ -16,7 +16,6 @@ class PageDetails {
     this.state.id = id;
     let newRes = await HandleAPI.getDataByID(id, "assets_info")
     this.state.data = newRes.data
-    console.log("data ->", newRes);
   }
 
   static graphicalSummariesFirstPage = () => {
@@ -192,7 +191,7 @@ class PageDetails {
       console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
     }
     else if (this.state.data.type === "video") {
-      console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
+      videoDetails.initVideoDetails();
     }
 
 
@@ -206,9 +205,7 @@ class PageDetails {
   };
   static init = async (id) => {
     pageDetails.innerHTML = "";
-    console.log("-----");
     await this.setState(id);
-    console.log("99+++++");
     this.detailsRender()
   }
 }
