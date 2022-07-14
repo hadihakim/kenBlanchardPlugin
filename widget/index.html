@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="./style/summaryTemplate.css" />
 	<link rel="stylesheet" href="./style/userProfile.css" />
 	<link rel="stylesheet" href="./style/courseDetails.css" />
+	<link rel="stylesheet" href="./style/article.css" />
 
 	<link rel="stylesheet" href="./style/splide-default.min.css" />
 	<link rel="stylesheet" href="../../../styles/material-icons.css" />
@@ -74,6 +75,7 @@
 	<script src="./js/data/Asset.js"></script>
 	<script src="./js/dataAccess/settings.js"></script>
 	<script src="./js/dataAccess/assets.js"></script>
+	<script src="./js/components/artical.controller.js"></script>
 	<script src="./js/app.js" defer></script>
 	<!-- endbundle:scripts -->
 	<!--
@@ -110,7 +112,7 @@
 					<label class="material-icons icon hidden" id="sortIcon">sort</label>
 					<div>
 					<label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
-					<div class="dot" id="dot"></div>
+					<div class="dot hidden" id="dot"></div>
 					</div>
 				</div>
 			</div>
@@ -275,6 +277,7 @@
 			</div>
 		</div>
 	</template>
+
 	<template id="seeAllTemplate">
 		<div class="mdc-card">
 			<div class="column">
@@ -414,6 +417,20 @@
 			</div>
 		</div>
 	</template>
+
+	<!--Article template  -->
+	<template id="articleTemplate" >
+		<div class="articleImage" id="articleImagee">
+		</div>
+		<div class= "articleTitleContainer" id="articleTitleContainer">
+			<p id = "articleTitle" class="articleTitle headerText-AppTheme"></p>
+			<span class="material-icons icon articleIcon">more_horiz</span>
+			</div>
+		<div id="articleTabHandler" class="articleTabHandler"></div>
+			<div id="articleKeyTakeaways" class="articleKeyTakeaways slide-in headerText-AppTheme"></div>
+			<div id="articleFullArticle" class="articleFullArticle hidden slide-in headerText-AppTheme"></div>
+	</template>
+
 
 	<!--Skeleton Templates-->
 	<template id="horizontal1_SkeletonTemplate">

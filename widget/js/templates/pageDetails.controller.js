@@ -186,7 +186,7 @@ class PageDetails {
       console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
     }
     else if (this.state.data.type === "article") {
-      console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
+      ArticleRender.init(this.state.id);
     }
     else if (this.state.data.type === "PDF") {
       console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
