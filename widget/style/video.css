@@ -67,10 +67,19 @@
     right: 0;
 }
 
-.shortcutVideoCheckbox {
-    width: 1.155rem;
-    height: 1.155rem;
-    margin-right: .6875rem;
+.shortcutVideoElement .mdc-checkbox--touch {
+    padding: 0 !important;
+    margin: 0 !important;
+    padding-right: .7rem !important;
+    top: -.7rem !important
+}
+
+.shortcutVideoElement .mdc-checkbox__background {
+    left: 0 !important
+}
+
+.shortcutVideoElement .mdc-checkbox__native-control {
+    width: 1.75rem !important;
 }
 
 .shortcutText {

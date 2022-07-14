@@ -59,22 +59,13 @@ class SeeAll {
         }
         return;
       } else {
+      
         let topicIdArray = assetsInfo[lastIndex].meta.topics;
-        let printCard = false;
-        topicIdArray.forEach((topicId) => {
-          let data = apiData.data.topics.find(({ id }) => id === topicId);
-          if (
-            (Search.state.filterArr.includes(data.title) ||
-              Search.state.filterArr.length === 0) &&
-            Search.hasSearch(assetsInfo[lastIndex])
-          ) {
-            printCard = true;
-          }
-        });
+        let printCard = HandleAPI.handleFilter(topicIdArray);
+
         if (printCard) {
           config.renderedCard++;
           const nodesClone = seeAllTemplate.content.cloneNode(true);
-
           let image = nodesClone.querySelectorAll(".image");
           let title = nodesClone.querySelectorAll(".title");
           let duration = nodesClone.querySelectorAll(".duration");
