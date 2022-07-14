@@ -123,7 +123,7 @@ class CourseDetails {
           assetsDetails,
           `<div class="duration duration-lesson-details">
                       <span class="schedule-text bodyText-AppTheme">
-                          ${Utilities.timeConvert(assets.duration)}
+                          ${Utilities.timeConvert(assets.duration, "min")}
                       </span>
                      </div>`,
           ["mdc-card-footer"]
@@ -148,7 +148,7 @@ class CourseDetails {
       durationForLesson.innerHTML = `<div class="duration duration-details">
              <span class="material-icons icon details-icon schedule-icon"  id="scheduleIcon"> schedule </span>
                  <span class="schedule-text bodyText-AppTheme lesson-duration">
-                        ${Utilities.timeConvert(assetsDuration)}
+                        ${Utilities.timeConvert(assetsDuration, "min")}
                   </span>
             </div>`;
       durationForLesson.appendChild(icons);
@@ -174,7 +174,7 @@ class CourseDetails {
     duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" id="scheduleIcon"> schedule </span>
                                      <span class="schedule-text bodyText-AppTheme">
                             ${Utilities.timeConvert(
-                              this.state.duration
+                              this.state.duration, "min"
                             )}</span>`;
     container.appendChild(firstClone);
     Utilities.setAppTheme();

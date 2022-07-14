@@ -197,7 +197,7 @@ class Explore {
     if (durationState) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 					<span class="schedule-text bodyText-AppTheme">
-						${Utilities.timeConvert(assets_info.meta.duration)}</span>`;
+						${Utilities.timeConvert(assets_info.meta.duration, "min")}</span>`;
     }
     card[0].addEventListener("click", () => {
       Navigation.openPageDetails(id, assets_info.meta.title);

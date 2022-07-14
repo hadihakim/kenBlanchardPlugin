@@ -154,7 +154,7 @@ class PageDetails {
       if (this.state.data.meta.duration) {
         duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" id= "scheduleIcon2"> schedule </span>
                               <span class="schedule-text bodyText-AppTheme">
-                          ${Utilities.timeConvert(this.state.data.meta.duration)}</span>`;
+                          ${Utilities.timeConvert(this.state.data.meta.duration, "min")}</span>`;
       }
       descriptionTitle[0].innerHTML = Strings.COURSE_DETAILS_DESCRIPTION;
       descriptionText[0].innerHTML =
@@ -191,7 +191,8 @@ class PageDetails {
       console.log(" ^^^^^^^^^^^^^^^^^^^^^ ");
     }
     else if (this.state.data.type === "video") {
-      videoDetails.initVideoDetails();
+      videoDetails.initVideoDetails(this.state.data);
+      console.log(this.state.data, "videeeeee");
     }
 
 
