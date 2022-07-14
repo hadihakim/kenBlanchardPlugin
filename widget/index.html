@@ -71,7 +71,7 @@
   <script src="./js/templates/pageDetails.controller.js"></script>
   <script src="./js/templates/userProfile.controller.js"></script>
   <script src="./js/templates/search.controller.js"></script>
-  <script src="./js/templates/courseDetails.controller.js"></script>
+  
   <script src="./js/shared/authManager.js"></script>
   <script src="./js/shared/utils/analytics.js"></script>
   <script src="./js/data/Stat.js"></script>
@@ -82,9 +82,13 @@
   <script src="./js/dataAccess/assets.js"></script>
   <script src="./js/dataAccess/settings.js"></script>
   <!-- components -->
-  <script src="./js/components/audio.js"></script>
-  <script src="./js/components/videoDetails.js"></script>
-  <script src="./js/components/artical.controller.js"></script>
+  <script src="./js/components/audioRender.js"></script>
+  <script src="./js/components/videoRender.js"></script>
+  <script src="./js/components/articleRender.js"></script>
+  <script src="./js/components/courseRender.js"></script>
+  <script src="./js/components/courseDetailsRender.js.js"></script>
+  <script src="./js/components/summaryRender.js"></script>
+
   <script src="./js/app.js" defer></script>
   <!-- endbundle:scripts -->
 
@@ -120,7 +124,7 @@
           <label class="material-icons icon hidden" id="sortIcon">sort</label>
           <div>
             <label id="filterIcon" class="material-icons icon" id="filterIcon">filter_alt</label>
-            <div class="dot" id="dot"></div>
+            <div class="dot hidden" id="dot"></div>
           </div>
         </div>
       </div>
@@ -511,7 +515,7 @@
 			<div id="articleKeyTakeaways" class="articleKeyTakeaways slide-in headerText-AppTheme"></div>
 			<div id="articleFullArticle" class="articleFullArticle hidden slide-in headerText-AppTheme"></div>
 	</template>
-	
+
   <!--Skeleton Templates-->
   <template id="horizontal1_SkeletonTemplate">
     <div class="horizontal-1--skeleton"></div>
