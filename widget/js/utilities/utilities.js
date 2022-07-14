@@ -68,7 +68,8 @@ class Utilities {
 					arr[i].setAttribute('style', `color: ${color} !important`);
 					break;
 				case "back":
-					arr[i].style.backgroundColor = color;
+					// arr[i].style.backgroundColor = color;
+					arr[i].setAttribute( 'style', `background-color: ${color} !important` );
 					break;
 				case "borderColor":
 					newColor = this.LightenDarkenColor(color, 20)
@@ -316,5 +317,11 @@ class Utilities {
 			}
 		);
 	};
+
+	static setAttributesHandler=(el,attrs)=>{
+		for(var key in attrs) {
+			el.setAttribute(key, attrs[key]);
+		  }
+	}
 };
 

@@ -41,6 +41,10 @@ const Strings = {
 	// Video Details
 	VIDEO_DETAILS_TAB: "Details",
 	VIDEO_TRANSCRIPT_TAB: "Transcript",
-	VIDEO_SHORTCUTS_TAB: "Shortcuts"
+	VIDEO_SHORTCUTS_TAB: "Shortcuts",
+	// audio strings
+	AUDIO_TAP_1:"details",
+	AUDIO_TAP_2:"transcript",
+	AUDIO_TAP_3:"shortcuts"
 }
 
