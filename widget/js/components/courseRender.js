@@ -40,7 +40,7 @@ class CourseRender{
         if (this.state.data.meta.duration) {
           duration[0].innerHTML = `<span class="material-icons icon details-icon schedule-icon" id= "scheduleIcon2"> schedule </span>
                                 <span class="schedule-text bodyText-AppTheme">
-                            ${Utilities.timeConvert(this.state.data.meta.duration, "min")}</span>`;
+                            ${Utilities.timeConvert(this.state.data.meta.duration, "sec")}</span>`;
         }
         descriptionTitle[0].innerHTML = Strings.COURSE_DETAILS_DESCRIPTION;
         descriptionText[0].innerHTML =

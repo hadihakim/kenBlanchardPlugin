@@ -5,6 +5,7 @@ class Skeleton {
 	}
 
     static horizontal1_Skeleton = (container) => {
+		emptySearch.classList.add("hidden");
         Utilities.scrollTop();
         container.innerHTML = '';
         const nodesClone = horizontal1_SkeletonTemplate.content.cloneNode(true);
@@ -20,6 +21,7 @@ class Skeleton {
     }
 
     static horizontal_Skeleton = (container) => {
+		emptySearch.classList.add("hidden");
         Utilities.scrollTop();
         container.innerHTML = '';
         const nodesClone = horizontalSkeletonTemplate.content.cloneNode(true);
@@ -38,11 +40,12 @@ class Skeleton {
     }
 
     static verticalSeeAll_Skeleton = (container) => {
+		emptySearch.classList.add("hidden");
         Utilities.scrollTop();
         container.innerHTML = '';
         const nodesClone = verticalSeeAll_SkeletonTemplate.content.cloneNode(true);
 					let card = nodesClone.querySelectorAll(".verticalSeeAll--skeleton");
-					for (let i = 0; i < 6; i++) {
+					for (let i = 0; i < 2; i++) {
 						let div = document.createElement("div");
 						div.classList.add("verticalSeeAll--card");
 						let innerHTML = `<div class="firstDiv skeleton"></div>

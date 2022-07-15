@@ -62,8 +62,7 @@ class SeeAll {
       
         let topicIdArray = assetsInfo[lastIndex].meta.topics;
         let printCard = HandleAPI.handleFilter(topicIdArray);
-
-        if (printCard) {
+        if (printCard && Search.hasSearch(assetsInfo[lastIndex])) {
           config.renderedCard++;
           const nodesClone = seeAllTemplate.content.cloneNode(true);
           let image = nodesClone.querySelectorAll(".image");
@@ -83,7 +82,7 @@ class SeeAll {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
                                     <span class="schedule-text bodyText-AppTheme">
                                 ${Utilities.timeConvert(
-                                  assetsInfo[lastIndex].meta.duration, "min"
+                                  assetsInfo[lastIndex].meta.duration, "sec"
                                 )}</span>`;
           }
           card[0].addEventListener("click", () => {

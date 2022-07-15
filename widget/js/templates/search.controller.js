@@ -131,7 +131,7 @@ class Search {
           if (assetsInfo[lastIndex].meta.duration > 0) {
             duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 							<span class="schedule-text bodyText-AppTheme">
-						${Utilities.timeConvert(assetsInfo[lastIndex].meta.duration, "min")}</span>`;
+						${Utilities.timeConvert(assetsInfo[lastIndex].meta.duration, "sec")}</span>`;
           }
           card[0].addEventListener("click", () => {
             Navigation.openPageDetails(id, assetsInfo[lastIndex].meta.title);
@@ -247,7 +247,9 @@ class Search {
           });
 
           this.state.data.data.sections.forEach((element) => {
-            if (element.isExplore) {
+            console.log('check element in filter', element);
+            /*Condition was element.isExplore */
+            if (element.isActive) {
               const container = document.getElementById(
                 `${element.id}-container-explore`
               );
@@ -326,7 +328,8 @@ class Search {
           });
 
           this.state.data.data.sections.forEach((element) => {
-            if (element.isExplore) {
+            /*condition was element.isExplore */
+            if (element.isActive) {
               const container = document.getElementById(
                 `${element.id}-container-explore`
               );
