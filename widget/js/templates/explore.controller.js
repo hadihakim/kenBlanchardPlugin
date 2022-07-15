@@ -223,7 +223,7 @@ class Explore {
     if (options.duration > 0) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
                                     <span class="schedule-text bodyText-AppTheme">
-                                ${Utilities.timeConvert(options.duration)}</span>`;
+                                ${Utilities.timeConvert(options.duration, "min")}</span>`;
     }
     card[0].addEventListener("click", () => {
       Navigation.openPageDetails(options.id, options.title);
@@ -236,7 +236,7 @@ class Explore {
     const sectionsContainer = document.getElementById(sectionId);
 
     this.state.data.data.sections.forEach((element) => {
-      let skeleton = "recommanded";
+      let skeleton = "vertical";
       if (
         // && element.isExplore
         (type == "explore" && element.isActive) ||
@@ -286,6 +286,8 @@ class Explore {
             Skeleton.horizontal1_Skeleton(container);
           } else if (skeleton === "recommanded") {
             Skeleton.horizontal_Skeleton(container);
+          } else if (skeleton === "vertical") {
+            Skeleton.verticalSeeAll_Skeleton(container);
           }
           const myTimeout = setTimeout(() => {
             this.filterAndPrintData(this.state.data, element, type);
