@@ -11,7 +11,7 @@ class Utilities {
 		return cropedImage;
 	};
 
-	static timeConvert = (n, type) => {
+	static timeConvert = (n, type, format) => {
 		if (type === "min") {
 			let num = n;
 			let hours = num / 60;
@@ -19,17 +19,17 @@ class Utilities {
 			let minutes = (hours - rHours) * 60;
 			let rMinutes = Math.round(minutes);
 			return rHours + "h " + rMinutes + "min";
+
 		} else if (type === "sec") {
 			let hours = Math.floor(n / 3600);
 			n %= 3600;
 			let minutes = Math.floor(n / 60);
 			let seconds = n % 60;
-
 			// strings with leading zeros
 			minutes = String(minutes).padStart(2, "0");
 			hours = String(hours).padStart(2, "0");
 			seconds = String(seconds).padStart(2, "0");
-			return hours + ":" + minutes + ":" + seconds;
+			return (format === "hh:mm:ss" ? hours + ":" + minutes + ":" + seconds:format === "hh|mm" ? hours + "h " + minutes + "min":"unkown");
 		}
 	};
 

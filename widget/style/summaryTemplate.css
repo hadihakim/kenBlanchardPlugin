@@ -1,8 +1,11 @@
 
 .pageDetails .first-page .top-image {
-  background-size: cover;
   width: 100%;
   height: 13.188rem;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 100% 100%;
 }
 .pageDetails .first-page .body-content {
   margin: 1rem;
@@ -35,11 +38,10 @@
   list-style: none;
 }
 .pageDetails .first-page .chapters-list .chapter-item {
-  width:21.438rem;
+  width: calc(100%-2rem);
   height:4.25rem;
   border-radius:0.25rem;
   margin: 2rem 1rem 0rem;
-  padding-right: 1rem;
 }
 .pageDetails
   .first-page

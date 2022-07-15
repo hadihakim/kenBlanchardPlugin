@@ -168,7 +168,7 @@ class videoDetails {
         </div>
             <div class="shorcutElementDetails">
                 <p class="shortcutText headerText-AppTheme">${idx+1}. ${el.title}</p>
-                <p class="shortcutDuration bodyText-AppTheme">${Utilities.timeConvert(el.timeStamp, "sec")}</p>
+                <p class="shortcutDuration bodyText-AppTheme">${Utilities.timeConvert(el.timeStamp, "sec", "hh:mm:ss")}</p>
             </div>
             <div class="shortcutActions">
                 <span class="material-icons icon">

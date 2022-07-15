@@ -58,7 +58,7 @@
   color: #000000;
 }
 .audio-container .mdc-tab-indicator .mdc-tab-indicator__content--underline {
-  border-top-width: 0.25rem !important;
+  border-top-width: 0.125rem !important;
 }
 .audio-container .audio-content {
   height: calc(100vh - 20.1875rem);
