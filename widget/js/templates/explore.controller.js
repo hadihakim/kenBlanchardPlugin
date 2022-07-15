@@ -196,7 +196,7 @@ class Explore {
     if (durationState) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
 					<span class="schedule-text bodyText-AppTheme">
-						${Utilities.timeConvert(assets_info.meta.duration, "min")}</span>`;
+						${Utilities.timeConvert(assets_info.meta.duration, "sec")}</span>`;
     }
     card[0].addEventListener("click", () => {
       Navigation.openPageDetails(id, assets_info.meta.title);
@@ -223,7 +223,7 @@ class Explore {
     if (options.duration > 0) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
                                     <span class="schedule-text bodyText-AppTheme">
-                                ${Utilities.timeConvert(options.duration, "min")}</span>`;
+                                ${Utilities.timeConvert(options.duration, "sec")}</span>`;
     }
     card[0].addEventListener("click", () => {
       Navigation.openPageDetails(options.id, options.title);
