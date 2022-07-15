@@ -18,7 +18,7 @@ const loadData = async (data) => {
 
 const init = async() => {
   Utilities.getAppTheme();
-  UserProfile.init();
+  // UserProfile.init();
   Skeleton.initMainSkeleton(sectionsContainer);
   Utilities.setAppTheme();
 

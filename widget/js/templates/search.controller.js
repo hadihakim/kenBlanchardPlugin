@@ -38,7 +38,6 @@ class Search {
     apiData.data.topics.forEach((topic) => {
       if (topic.isActive) {
         this.state.filterTopic.push(topic.title);
-        console.log("topics>>",topic.title);
       }
       if (topic.isTrending) {
         this.state.trendingArr.push(topic.title);

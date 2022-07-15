@@ -14,7 +14,6 @@ class summaryRender {
         graphicalSummariesFourthPage: "graphicalSummariesFourthPage"
     }
     static setData =(id,data)=>{
-        console.log("ggggggggggg",this.state.data);
         this.state.data=data;
         this.state.id=id;
     }
