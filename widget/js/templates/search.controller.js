@@ -3,8 +3,10 @@ class Search {
     data: fakeData,
     trendingArr: [],
     filterArr: [],
-    filterTopic:[],
+    filterTopic: [],
     sortType: "Default",
+    page: 1,
+    pageSize: 7
   };
 
   static setData = (data) => {
@@ -22,7 +24,7 @@ class Search {
     trendingContainer: "trendingContainer",
     trendingTemplate: "trendingTemplate",
     seeAllTemplate: "seeAllTemplate",
-    dot:"dot"
+    dot: "dot"
   };
 
   static hasSearch = (data) => {
@@ -30,7 +32,7 @@ class Search {
       config.search == "" ||
       data.meta.title.toLowerCase().search(config.search.toLowerCase()) >= 0 ||
       data.meta.description.toLowerCase().search(config.search.toLowerCase()) >=
-        0
+      0
     );
   };
 
@@ -38,7 +40,7 @@ class Search {
     apiData.data.topics.forEach((topic) => {
       if (topic.isActive) {
         this.state.filterTopic.push(topic.title);
-        console.log("topics>>",topic.title);
+        console.log("topics>>", topic.title);
       }
       if (topic.isTrending) {
         this.state.trendingArr.push(topic.title);
@@ -47,17 +49,17 @@ class Search {
   };
   static sort = (data, type) => {
     if (type === "Most Recent") {
-        data.sort((a, b) => {
-            if (a.meta.createdOn < b.meta.createdOn) {
-                return -1;
-            }
-            if (a.meta.createdOn > b.meta.createdOn) {
-                return 1;
-            }
-        });
+      data.sort((a, b) => {
+        if (a.meta.createdOn < b.meta.createdOn) {
+          return -1;
+        }
+        if (a.meta.createdOn > b.meta.createdOn) {
+          return 1;
+        }
+      });
     }
     return data;
-};
+  };
   static searchCardsRender = (container, callback) => {
     if (config.renderedCard === 0) {
       config.page = 1;
@@ -225,11 +227,11 @@ class Search {
           result.forEach((topic) => {
             this.state.filterArr.push(topic.text);
           });
-          
-          const dot= document.getElementById(this.pointers.dot);
-          if(this.state.filterArr.length == this.state.filterTopic.length){
+
+          const dot = document.getElementById(this.pointers.dot);
+          if (this.state.filterArr.length == this.state.filterTopic.length) {
             dot.classList.add("hidden");
-          }else{
+          } else {
             dot.classList.remove("hidden");
           }
 
@@ -273,12 +275,12 @@ class Search {
             ) {
               Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
-                this.searchCardsRender(seeAllContainer, () => {});
+                this.searchCardsRender(seeAllContainer, () => { });
               }, 1000);
             } else if (config.searchFrom == "from-see-all") {
               Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
-                SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
+                SeeAll.seeAllCardsRender(this.state.data, this.pointers.seeAllContainer, true, () => { });
               }, 1000);
             }
           }
@@ -349,12 +351,12 @@ class Search {
             ) {
               Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
-                this.searchCardsRender(seeAllContainer, () => {});
+                this.searchCardsRender(seeAllContainer, () => { });
               }, 1000);
             } else if (config.searchFrom == "from-see-all") {
               Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
               const myTimeout = setTimeout(() => {
-                SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
+                SeeAll.seeAllCardsRender(this.state.data, this.pointers.seeAllContainer, true, () => { });
               }, 1000);
             }
           }
@@ -367,31 +369,21 @@ class Search {
     config.page = 1;
     config.lastIndex = 0;
     config.renderedCard = 0;
-      setTimeout(() => {
-      let input = document.getElementById(this.pointers.searchInput);
-      config.search = input.value;
 
-      if (
-        config.searchFrom == "from-explore" ||
-        config.searchFrom == "from-main"
-      ) {
-        if(Navigation.state.searchOpened){
-           Navigation.openSearch();
-           Navigation.setData(false);
-        }
-        
-        Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-        const myTimeout = setTimeout(() => {
-          this.searchCardsRender(seeAllContainer, () => {});
-        }, 1000);
-      } else if (config.searchFrom == "from-see-all") {
-        Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-        const myTimeout = setTimeout(() => {
-          SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
-        }, 1000);
-      }
+    let firstIndex = (this.state.page - 1) * this.state.pageSize;
+    let lastIndex = this.state.page * this.state.pageSize;
+    if (lastIndex > this.state.data.length)
+      lastIndex = this.state.data.length
+
+    setTimeout(() => {
+      console.log("search -->", this.state.data);
+
+      Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
+      const myTimeout = setTimeout(() => {
+        // this.searchCardsRender();
+      }, 1000);
+
     }, 300);
-    
   };
 
   static init = () => {
