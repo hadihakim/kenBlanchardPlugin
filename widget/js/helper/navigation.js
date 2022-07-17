@@ -281,7 +281,7 @@ class Navigation {
 	static openUserProfile = () => {
 		this.state.activeLayOut = 'user profile';
 
-		ChartContainer.innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
+		// ChartContainer.innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
 		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");

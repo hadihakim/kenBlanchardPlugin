@@ -11,27 +11,28 @@ class Utilities {
 		return cropedImage;
 	};
 
-	static timeConvert = (n, type, format) => {
-		if (type === "min") {
-			let num = n;
-			let hours = num / 60;
-			let rHours = Math.floor(hours);
-			let minutes = (hours - rHours) * 60;
-			let rMinutes = Math.round(minutes);
-			return rHours + "h " + rMinutes + "min";
-
-		} else if (type === "sec") {
-			let hours = Math.floor(n / 3600);
-			n %= 3600;
-			let minutes = Math.floor(n / 60);
-			let seconds = n % 60;
-			// strings with leading zeros
-			minutes = String(minutes).padStart(2, "0");
-			hours = String(hours).padStart(2, "0");
-			seconds = String(seconds).padStart(2, "0");
-			return (format === "hh:mm:ss" ? hours + ":" + minutes + ":" + seconds:format === "hh|mm" ? hours + "h " + minutes + "min":"unkown");
+	static timeConvert = (n, format) => {
+		let hours = Math.floor(n / 3600);
+		n %= 3600;
+		let minutes = Math.floor(n / 60);
+		let seconds = n % 60;
+		// strings with leading zeros
+		switch (format) {
+			case "hh:mm:ss":
+				minutes = String(minutes).padStart(2, "0");
+				hours = String(hours).padStart(2, "0");
+				seconds = String(seconds).padStart(2, "0");
+				return hours + ":" + minutes + ":" + seconds
+			case "hh|mm":
+				minutes = String(minutes).padStart(1, "0");
+				hours = String(hours).padStart(1, "0");
+				return hours!=="0"?(hours + "h ") + (minutes!=="0"?minutes + "min":"")
+					:
+				(minutes!=="0"?minutes + "min":"")
+			default:
+				return "unknown"
 		}
-	};
+	  };
 
 	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {

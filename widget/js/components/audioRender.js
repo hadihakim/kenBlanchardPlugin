@@ -141,6 +141,14 @@ class AudioRender {
       } else if (this.state.tabs[0] === "details") {
         this.tabClickHandler(this.state.tabs[0]);
       }
+    }else {
+      if (this.state.tabs[0] === "transcript") {
+        this.tabClickHandler(this.state.tabs[0]);
+      } else if (this.state.tabs[0] === "shortcuts") {
+        this.tabClickHandler(this.state.tabs[0]);
+      } else if (this.state.tabs[0] === "details") {
+        this.tabClickHandler(this.state.tabs[0]);
+      }
     }
   };
   static tabClickHandler = (tab) => {
@@ -227,7 +235,6 @@ class AudioRender {
             >
             <span class="shortcut-time bodyText-AppTheme">${Utilities.timeConvert(
               shortcut.timeStamp,
-              "sec",
               "hh:mm:ss"
             )}</span>
           </div>
