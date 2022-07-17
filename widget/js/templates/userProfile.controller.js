@@ -3,44 +3,44 @@ class UserProfile {
     userData: null,
     data: {},
     userProfileTabs: [Strings.USER_PROFILE_TAP_1, Strings.USER_PROFILE_TAP_2, Strings.USER_PROFILE_TAP_3],
-	// it should come from user api 
-	userBadgesAchieved:[
-		{
-			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
-			label:"Learner"
-		},
-		{
-			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
-			label:"Committed"
-		},
-		{
-			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
-			label:"Newbie"
-		},
-	],
+    // it should come from user api 
+    userBadgesAchieved: [
+      {
+        image: "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+        label: "Learner"
+      },
+      {
+        image: "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+        label: "Committed"
+      },
+      {
+        image: "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+        label: "Newbie"
+      },
+    ],
 
-	// it should come from public app api 
-	badgesToAchieved:[
-		{
-			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
-			label:"Newbie",
-      message:"Complete 3 courses or 25 content pieces and collect this badge!"
-		},
-		{
-			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
-			label:"Ambassador",
-      message:"Complete 3 courses or 25 content pieces and collect this badge!"
-		},
-		{
-			image:"https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
-			label:"Ambassador",
-      message:"Complete 3 courses or 25 content pieces and collect this badge!"
-		}
-	  ],
+    // it should come from public app api 
+    badgesToAchieved: [
+      {
+        image: "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+        label: "Newbie",
+        message: "Complete 3 courses or 25 content pieces and collect this badge!"
+      },
+      {
+        image: "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+        label: "Ambassador",
+        message: "Complete 3 courses or 25 content pieces and collect this badge!"
+      },
+      {
+        image: "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
+        label: "Ambassador",
+        message: "Complete 3 courses or 25 content pieces and collect this badge!"
+      }
+    ],
 
     assesments: [{
       title: "Self Management",
-      assesment:[{
+      assesment: [{
         title: "Confidence",
         subtitle: "Take the Assessment"
       },
@@ -56,10 +56,10 @@ class UserProfile {
         title: "Discipline",
         subtitle: "Take the Assessment"
       }
-    ]
+      ]
     }, {
       title: "Self Knowledge",
-      assesment:[{
+      assesment: [{
         title: "Confidence",
         subtitle: "Take the Assessment"
       },
@@ -75,7 +75,7 @@ class UserProfile {
         title: "Discipline",
         subtitle: "Take the Assessment"
       }
-    ]
+      ]
     }]
   };
 
@@ -87,9 +87,9 @@ class UserProfile {
     userProfile: "userProfile",
     userProfileTemplate: "userProfileTemplate",
     userProfileTabsContainer: "userProfileTabsContainer",
-	userBadgesTemplate:"userBadgesTemplate",
-  userProfileInsights: "userProfileInsights",
-  assesmentProgress: "assesmentProgress"
+    userBadgesTemplate: "userBadgesTemplate",
+    userProfileInsights: "userProfileInsights",
+    assesmentProgress: "assesmentProgress"
   };
 
   static setData = (data) => {
@@ -97,6 +97,7 @@ class UserProfile {
   };
 
   static getUser = () => {
+    console.log("This is user Data from authManager", this.state.userData);
     let userName = document.getElementById(this.pointers.userName);
     let userProfilePicture = document.getElementById(
       this.pointers.userProfilePicture
@@ -110,17 +111,23 @@ class UserProfile {
       //   (el) => el.active === true
       // );
       userName.innerText =
-        this.state.userData.firstName + " " + this.state.userData.lastName ;
-      growthProfile.innerText = this.state.userData.displayName;
-      userProfilePicture.src = this.state.userData.imageUrl;
-      userProfilePicture.alt = this.state.userData.firstName + " " + this.state.userData.lastName;
+      this.state.userData.loginProviderType == "KAuth" ? "Anonymous" : this.state.userData.oauthProfile.name;
+
+      growthProfile.innerText =
+        this.state.userData.displayName == null ? "Anonymous" : this.state.userData.displayName;
+
+      userProfilePicture.src =
+        !this.state.userData.imageUrl ? "../../../../styles/media/avatar-placeholder.png" : this.state.userData.imageUrl;
+
+      userProfilePicture.alt =
+      this.state.userData.loginProviderType == "KAuth" ? "Anonymous" : this.state.userData.oauthProfile.name;
       // userAchievementIcon.src = userAchievements[0].achievementIcon;
       // userAchievementIcon.alt = userAchievements[0].achievementTitle;
-      Search.state.filterArr = [];
+      // Search.state.filterArr = [];
     } else {
       userProfilePicture.src =
         "../../../../styles/media/avatar-placeholder.png";
-      userName.innerText = "My Name";
+      userName.innerText = "Anonymous";
       growthProfile.innerText = "Profile Page";
       userAchievementIcon.src = "../../../../styles/media/holder-1x1.png";
     }
@@ -133,18 +140,19 @@ class UserProfile {
       this.pointers.userProfileTemplate
     );
     const nodesClone = userProfileTemplate.content.cloneNode(true);
-    let userProfileImage=nodesClone.querySelectorAll(".user-profile-image");
-    let achievementImage=nodesClone.querySelectorAll(".achievement-image");
-    let userName=nodesClone.querySelectorAll(".user-name");
-    let growthProfileUserSmall=nodesClone.querySelectorAll(".growth-profile-user-small");
+    let userProfileImage = nodesClone.querySelectorAll(".user-profile-image");
+    let achievementImage = nodesClone.querySelectorAll(".achievement-image");
+    let userName = nodesClone.querySelectorAll(".user-name");
+    let growthProfileUserSmall = nodesClone.querySelectorAll(".growth-profile-user-small");
     if (this.state.userData) {
-    achievementImage[0].src=this.state.userData.imageUrl;
-    userProfileImage[0].src=this.state.userData.imageUrl;
-    achievementImage[0].alt=this.state.userData.firstName + " " + this.state.userData.lastName;
-    userProfileImage[0].alt=this.state.userData.firstName + " " + this.state.userData.lastName;
-    userName[0].innerText=this.state.userData.firstName + " " + this.state.userData.lastName;
-    growthProfileUserSmall[0].innerText=this.state.userData.displayName;
-    }else{
+      let name = this.state.userData.loginProviderType == "KAuth" ? "Anonymous" : this.state.userData.oauthProfile.name;
+      achievementImage[0].src = !this.state.userData.imageUrl ? "../../../../styles/media/avatar-placeholder.png" : this.state.userData.imageUrl;
+      userProfileImage[0].src = !this.state.userData.imageUrl ? "../../../../styles/media/avatar-placeholder.png" : this.state.userData.imageUrl;
+      achievementImage[0].alt = name;
+      userProfileImage[0].alt = name;
+      userName[0].innerText = name;
+      growthProfileUserSmall[0].innerText = this.state.userData.displayName == null ? "Anonymous" : this.state.userData.displayName;
+    } else {
       userProfileImage[0].src =
         "../../../../styles/media/avatar-placeholder.png";
       userName[0].innerText = "Anonymous";
@@ -205,117 +213,117 @@ class UserProfile {
 
   };
 
-  static badgesUi=()=>{
-	let userBadgesTemplate=document.getElementById(this.pointers.userBadgesTemplate)
-	const nodesClone = userBadgesTemplate.content.cloneNode(true);
-	let badgesAchievedContainer = nodesClone.getElementById("badgesAchievedContainer");
-  let achievedTitle=nodesClone.querySelectorAll(".achieved-title");
-  let toAchievedTitle=nodesClone.querySelectorAll(".to-achieve-title");
-  achievedTitle[0].innerText=Strings.USER_PROFILE_BADGES_ACHIEVED_TEXT;
-  toAchievedTitle[0].innerText=Strings.USER_PROFILE_BADGES__TO_ACHIEVE_TEXT;
+  static badgesUi = () => {
+    let userBadgesTemplate = document.getElementById(this.pointers.userBadgesTemplate)
+    const nodesClone = userBadgesTemplate.content.cloneNode(true);
+    let badgesAchievedContainer = nodesClone.getElementById("badgesAchievedContainer");
+    let achievedTitle = nodesClone.querySelectorAll(".achieved-title");
+    let toAchievedTitle = nodesClone.querySelectorAll(".to-achieve-title");
+    achievedTitle[0].innerText = Strings.USER_PROFILE_BADGES_ACHIEVED_TEXT;
+    toAchievedTitle[0].innerText = Strings.USER_PROFILE_BADGES__TO_ACHIEVE_TEXT;
 
-	this.state.userBadgesAchieved.forEach((badge)=>{
-		let badgeElement= document.createElement("div");
-		badgeElement.classList.add("badge");
-		let badgeElementContent=`
+    this.state.userBadgesAchieved.forEach((badge) => {
+      let badgeElement = document.createElement("div");
+      badgeElement.classList.add("badge");
+      let badgeElementContent = `
 			<img src=${badge.image} alt="${badge.label}"/>
 			<label class="headerText-AppTheme">${badge.label}</label>
 		`
-		badgeElement.innerHTML=badgeElementContent;
-		badgesAchievedContainer.appendChild(badgeElement);
-	});
-	
-	// badges not achieved yet
-	let badgesToAchievedContainer = nodesClone.getElementById("badgesToAchievedContainer");
-	this.state.badgesToAchieved.forEach((badge)=>{
-		let badgeElement= document.createElement("div");
-		badgeElement.classList.add("badge");
-		let badgeElementContent=`
-			<img src=${badge.image} alt="${badge.label}"/>
-			<label class="headerText-AppTheme">${badge.label}</label>
-		`
-		badgeElement.innerHTML=badgeElementContent;
-		badgesToAchievedContainer.appendChild(badgeElement);
-    badgeElement.addEventListener("click", ()=>{
-      Utilities.showDialog({
-			  title: badge.label,
-			  message:badge.message,
-			  isMessageHTML: true,
-			  showCancelButton: false,
-			  actionButtons: [
-				{
-				  text: `<span style="color:${Utilities.state.appTheme.colors.icons}">OK</span>`,
-				  action: () => {
-				  },
-				},
-			  ],
-			})
+      badgeElement.innerHTML = badgeElementContent;
+      badgesAchievedContainer.appendChild(badgeElement);
     });
-	});
 
-	return nodesClone;
+    // badges not achieved yet
+    let badgesToAchievedContainer = nodesClone.getElementById("badgesToAchievedContainer");
+    this.state.badgesToAchieved.forEach((badge) => {
+      let badgeElement = document.createElement("div");
+      badgeElement.classList.add("badge");
+      let badgeElementContent = `
+			<img src=${badge.image} alt="${badge.label}"/>
+			<label class="headerText-AppTheme">${badge.label}</label>
+		`
+      badgeElement.innerHTML = badgeElementContent;
+      badgesToAchievedContainer.appendChild(badgeElement);
+      badgeElement.addEventListener("click", () => {
+        Utilities.showDialog({
+          title: badge.label,
+          message: badge.message,
+          isMessageHTML: true,
+          showCancelButton: false,
+          actionButtons: [
+            {
+              text: `<span style="color:${Utilities.state.appTheme.colors.icons}">OK</span>`,
+              action: () => {
+              },
+            },
+          ],
+        })
+      });
+    });
+
+    return nodesClone;
   }
 
   static loadCharts = (percent) => {
     // let percent = 71;
     const data = {
-        labels: ["Average Progress", ""],
-        datasets: [
-            {
-                label: 'Dataset 1',
-                data: [percent / 100, 1 - percent / 100],
-                backgroundColor: ["#ffff", Utilities.LightenDarkenColor(Utilities.state.appTheme.colors.infoTheme, 16)],
-                borderWidth:0,
-                cutout: "78%"
-            }
-        ]
+      labels: ["Average Progress", ""],
+      datasets: [
+        {
+          label: 'Dataset 1',
+          data: [percent / 100, 1 - percent / 100],
+          backgroundColor: ["#ffff", Utilities.LightenDarkenColor(Utilities.state.appTheme.colors.infoTheme, 16)],
+          borderWidth: 0,
+          cutout: "78%"
+        }
+      ]
     };
 
     new Chart(this.pointers.assesmentProgress, {
-        type: 'doughnut',
-        data: data,
-        options:{
-          
-            plugins:{
-                legend:{
-                    display:false
-                }
-            },
-            
+      type: 'doughnut',
+      data: data,
+      options: {
+
+        plugins: {
+          legend: {
+            display: false
+          }
         },
+
+      },
     });
     Chart.defaults.font.size = 3;
 
     // document.getElementById(this.pointers.percentageContainer).innerHTML = `${percent}%`;
     // document.getElementById(this.pointers.averageLable).innerHTML = 'Average Progress';
-}
+  }
 
 
-  static insightsUI=()=>{
+  static insightsUI = () => {
     let percent = 71;
-    let userProfileInsights=document.getElementById(this.pointers.userProfileInsights)
-	const nodesClone = userProfileInsights.content.cloneNode(true);
-  let assesmentsNumber = nodesClone.querySelectorAll(".assesmentsNumber");
-  let assesmentsTitle = nodesClone.querySelectorAll(".assesmentsTitle");
-  let assesmentsBar = nodesClone.querySelectorAll(".assesmentsBar");
-  let allAssesmentsContainer = nodesClone.querySelectorAll(".allAssesmentsContainer");
-  let assesmentPercentage = nodesClone.querySelectorAll(".assesmentPercentage");
-  assesmentsNumber[0].innerText = 12;
-  assesmentsTitle[0].innerText = Strings.USER_PROFILE_ASSESMENTS_TEXT;
-  assesmentPercentage[0].innerText = `${percent}%`;
-  this.state.assesments.forEach((el)=>{
-    let assesmentSection = document.createElement('div');
-    let assesmentHeader = document.createElement('p');
-    let assesmentList = document.createElement('ul');
-    assesmentHeader.classList.add('assesmentHeader', 'headerText-AppTheme'); 
-    assesmentSection.classList.add('assesmentSection');
-    assesmentList.classList.add('assesmentList');
-    assesmentHeader.innerText= el.title;
-    assesmentSection.appendChild(assesmentHeader);
-    el.assesment.forEach((arr)=>{
-      let assesmentElement = document.createElement('li');
-      assesmentElement.classList.add('assesmentElement');
-      assesmentElement.innerHTML=`<div class="assesmentDetails">
+    let userProfileInsights = document.getElementById(this.pointers.userProfileInsights)
+    const nodesClone = userProfileInsights.content.cloneNode(true);
+    let assesmentsNumber = nodesClone.querySelectorAll(".assesmentsNumber");
+    let assesmentsTitle = nodesClone.querySelectorAll(".assesmentsTitle");
+    let assesmentsBar = nodesClone.querySelectorAll(".assesmentsBar");
+    let allAssesmentsContainer = nodesClone.querySelectorAll(".allAssesmentsContainer");
+    let assesmentPercentage = nodesClone.querySelectorAll(".assesmentPercentage");
+    assesmentsNumber[0].innerText = 12;
+    assesmentsTitle[0].innerText = Strings.USER_PROFILE_ASSESMENTS_TEXT;
+    assesmentPercentage[0].innerText = `${percent}%`;
+    this.state.assesments.forEach((el) => {
+      let assesmentSection = document.createElement('div');
+      let assesmentHeader = document.createElement('p');
+      let assesmentList = document.createElement('ul');
+      assesmentHeader.classList.add('assesmentHeader', 'headerText-AppTheme');
+      assesmentSection.classList.add('assesmentSection');
+      assesmentList.classList.add('assesmentList');
+      assesmentHeader.innerText = el.title;
+      assesmentSection.appendChild(assesmentHeader);
+      el.assesment.forEach((arr) => {
+        let assesmentElement = document.createElement('li');
+        assesmentElement.classList.add('assesmentElement');
+        assesmentElement.innerHTML = `<div class="assesmentDetails">
       <p class="assesmentDetailsTitle headerText-AppTheme">${arr.title}</p>
       <p class="assesmentDetailsSubtitle bodyText-AppTheme">${arr.subtitle}</p>
     </div>
@@ -324,15 +332,15 @@ class UserProfile {
         chevron_right
       </span>
     </div>`
-    assesmentList.appendChild(assesmentElement);
-    assesmentSection.appendChild(assesmentList);
-    allAssesmentsContainer[0].appendChild(assesmentSection);
+        assesmentList.appendChild(assesmentElement);
+        assesmentSection.appendChild(assesmentList);
+        allAssesmentsContainer[0].appendChild(assesmentSection);
+      })
     })
-  })
-  this.loadCharts(percent);
-  let canvas = document.getElementById("assesmentProgress");
-  assesmentsBar[0].appendChild(canvas);
-  return nodesClone;
+    this.loadCharts(percent);
+    let canvas = document.getElementById("assesmentProgress");
+    assesmentsBar[0].appendChild(canvas);
+    return nodesClone;
   }
 
   static init = (userData) => {

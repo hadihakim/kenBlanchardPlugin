@@ -71,7 +71,7 @@
   <script src="./js/templates/pageDetails.controller.js"></script>
   <script src="./js/templates/userProfile.controller.js"></script>
   <script src="./js/templates/search.controller.js"></script>
-  <script src="./js/templates/courseDetails.controller.js"></script>
+  
   <script src="./js/shared/authManager.js"></script>
   <script src="./js/shared/utils/analytics.js"></script>
   <script src="./js/data/Stat.js"></script>
@@ -82,9 +82,13 @@
   <script src="./js/dataAccess/assets.js"></script>
   <script src="./js/dataAccess/settings.js"></script>
   <!-- components -->
-  <script src="./js/components/audio.js"></script>
-  <script src="./js/components/videoDetails.js"></script>
-  <script src="./js/components/artical.controller.js"></script>
+  <script src="./js/components/audioRender.js"></script>
+  <script src="./js/components/videoRender.js"></script>
+  <script src="./js/components/articleRender.js"></script>
+  <script src="./js/components/courseRender.js"></script>
+  <script src="./js/components/courseDetailsRender.js.js"></script>
+  <script src="./js/components/summaryRender.js"></script>
+
   <script src="./js/app.js" defer></script>
   <!-- endbundle:scripts -->
 
@@ -129,6 +133,7 @@
 
     <!-- user list of cards -->
     <div class="mainPage slide-in" id="mainPage">
+      
       <!-- section -->
       <section id="sectionsContainer"></section>
       <div class="exploreAll-btn-container" id="exploreBtnContainer">
@@ -160,94 +165,10 @@
       
     </div>
     <div id="courseDetailsContainer" class="courseDetailsContainer hidden slide-in"></div>
-
-    <!-- -------------------- -->
     <!-- end section -->
   </div>
 
   
-
-  <!-- <div class="videoShortcutsContainer" id="videoShortcutsContainer">
-		<div class="shortcutVideoElement">
-			<input type="checkbox" class="shortcutVideoCheckbox">
-			<div class="shorcutElementDetails">
-				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
-				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
-			</div>
-			<div class="shortcutActions">
-				<span class="material-icons icon">
-					play_circle_filled
-					</span>
-					<span class="material-icons icon">
-						more_horiz
-					</span>
-			</div>
-		</div>
-		<div class="shortcutVideoElement">
-			<input type="checkbox" class="shortcutVideoCheckbox">
-			<div class="shorcutElementDetails">
-				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
-				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
-			</div>
-			<div class="shortcutActions">
-				<span class="material-icons icon">
-					play_circle_filled
-					</span>
-					<span class="material-icons icon">
-						more_horiz
-					</span>
-			</div>
-		</div>
-		<div class="shortcutVideoElement">
-			<input type="checkbox" class="shortcutVideoCheckbox">
-			<div class="shorcutElementDetails">
-				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
-				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
-			</div>
-			<div class="shortcutActions">
-				<span class="material-icons icon">
-					play_circle_filled
-					</span>
-					<span class="material-icons icon">
-						more_horiz
-					</span>
-			</div>
-		</div>
-		<div class="shortcutVideoElement">
-			<input type="checkbox" class="shortcutVideoCheckbox">
-			<div class="shorcutElementDetails">
-				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
-				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
-			</div>
-			<div class="shortcutActions">
-				<span class="material-icons icon">
-					play_circle_filled
-					</span>
-					<span class="material-icons icon">
-						more_horiz
-					</span>
-			</div>
-		</div>
-		<div class="shortcutVideoElement">
-			<input type="checkbox" class="shortcutVideoCheckbox">
-			<div class="shorcutElementDetails">
-				<p class="shortcutText headerText-AppTheme">1. Why Focusing is Important</p>
-				<p class="shortcutDuration bodyText-AppTheme">00:00:00</p>
-			</div>
-			<div class="shortcutActions">
-				<span class="material-icons icon">
-					play_circle_filled
-					</span>
-					<span class="material-icons icon">
-						more_horiz
-					</span>
-			</div>
-		</div>
-	</div>
-	<div class="videoDetailsContainer" id="videoDetailsContainer">
-		<p>ddd</p>
-	</div> -->
-
   <!-- user profile-->
   <div id="userProfileContainer" class="hidden">
     <div id="userProfile" class="user-profile-container slide-in"></div>
@@ -282,10 +203,9 @@
   </div>
 
   <div id="ChartContainer">
-    <!-- <canvas id="assesmentProgress" class="assesmentsChart"></canvas> -->
   </div>
 
-  <!-- User Insights-->
+  <!-- template -->
   <template id="userProfileInsights">
     <div id="userInsightsContainer" class="userInsightsContainer">
       <div id="assesmentsTakenContainer" class="assesmentsTakenContainer infoTheme">
@@ -300,9 +220,6 @@
       <div id="allAssesmentsContainer" class="allAssesmentsContainer"></div>
     </div>
   </template>
-  <!-- End User Insights-->
-
-  <!-- template -->
   <template id="userProfileTemplate" class="user-profile-template">
     <div class="user-top-container userContainer">
       <div class="user-profile-image-container">
@@ -513,7 +430,7 @@
 			<div id="articleKeyTakeaways" class="articleKeyTakeaways slide-in headerText-AppTheme"></div>
 			<div id="articleFullArticle" class="articleFullArticle hidden slide-in headerText-AppTheme"></div>
 	</template>
-	
+
   <!--Skeleton Templates-->
   <template id="horizontal1_SkeletonTemplate">
     <div class="horizontal-1--skeleton"></div>

@@ -2,7 +2,7 @@ class ArticleRender{
     static state ={
         id:"",
         data:{},
-        tabs: ['KEY TAKEAWAYS', 'FULL ARTICLE'],
+        tabs: [],
         selectedNav: 'articleTab-0'
     }
     static pointers = {
@@ -16,23 +16,22 @@ class ArticleRender{
         articleFullArticle:"articleFullArticle",
         articleIcon:"articleIcon"
     }
-    static setState = async (id) => {
-        this.state.id = id;
-        let newRes = await HandleAPI.getDataByID(id, "assets_info")
-        this.state.data = newRes.data
-        console.log("Article data ->", newRes);
+    static setState =  (data) => {
+        this.state.data =data
+        console.log("Article data ->", data);
       }
 
     static openDrawer=()=>{
         buildfire.components.drawer.open(
   { 
     listItems: [
-      {text:'Make Complete'},
+      {text:'Mark Complete'},
     
     ]
   },
   (err, result) => {
     if (err) return console.error(err);
+      buildfire.components.drawer.closeDrawer();
     console.log("Selected Contacts", result);
   }
 );
@@ -55,7 +54,11 @@ class ArticleRender{
           title[0].innerHTML = this.state.data.meta.title;
 
 if(this.state.data.showKeyTakeaways){
-    tabHandler[0].innerHTML="";
+  tabHandler[0].innerHTML="";
+  this.state.tabs=[];
+  this.state.tabs.push(Strings.ARTICLE_TAP_KEY_TAKEAWAYS);
+  this.state.tabs.push(Strings.ARTICLE_TAP_FULL_ARTICLE);
+
     articleFullArticle[0].innerHTML="Most companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and development."
     articleKeyTakeaways[0].innerHTML="The four stages of team development—Orientation, Dissatisfaction, Integration, and Productio Facilitate productive conversations  when con ndor and curiosity alive in your organization"
     this.state.tabs.forEach((tab, index) => {
@@ -69,21 +72,21 @@ if(this.state.data.showKeyTakeaways){
                           <span class="mdc-tab__text-label  headerText-AppTheme">${tab}</span>
                         </span>
                         <span class="mdc-tab-indicator">
-                          <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                          <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"></span>
                         </span>
                         <span class="mdc-tab__ripple"></span>
                       `;
       button.innerHTML = tabButtonContent;
       button.setAttribute('id', `articleTab-${index}`)
       if (`articleTab-${index}` == this.state.selectedNav) {
-          button.classList.add("articaleSelectedNav");
+          button.classList.add("articleSelectedNav");
       }
 
       button.addEventListener('click', () => {
-          document.getElementById(this.state.selectedNav)?.classList.remove("articaleSelectedNav");
+          document.getElementById(this.state.selectedNav)?.classList.remove("articleSelectedNav");
 
           this.state.selectedNav = `articleTab-${index}`;
-          button.classList.add("articaleSelectedNav");
+          button.classList.add("articleSelectedNav");
           //     KEY TAKEAWAYS', 'FULL ARTICLE' articleKeyTakeaways  articleFullArticle
           if (tab == 'FULL ARTICLE') {
              articleKeyTakeaways[0].classList.add("hidden");
@@ -114,8 +117,8 @@ if(this.state.data.showKeyTakeaways){
 
 
 
-    static init = async (id) => {
-        await this.setState(id);
+    static init =  (data) => {
+       this.setState(data);
         this.render();
       }
 }

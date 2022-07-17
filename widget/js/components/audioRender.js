@@ -227,7 +227,8 @@ class AudioRender {
             >
             <span class="shortcut-time bodyText-AppTheme">${Utilities.timeConvert(
               shortcut.timeStamp,
-              "sec"
+              "sec",
+              "hh:mm:ss"
             )}</span>
           </div>
           <label class="material-icons icon">headset</label>
