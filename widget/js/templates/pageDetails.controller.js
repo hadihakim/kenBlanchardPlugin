@@ -9,7 +9,25 @@ class PageDetails {
     let newRes = await HandleAPI.getDataByID(id, "assets_info")
     this.state.data = newRes.data
   }
-
+  static openDrawerAudioOrVideoOrArticle = (options) => {
+		buildfire.components.drawer.open(
+            {
+              multiSelection: false,
+              allowSelectAll : false,
+              multiSelectionActionButton: {text: 'Save', type: 'success'},
+              enableFilter : false,
+              isHTML: false,
+              triggerCallbackOnUIDismiss: false,   
+              autoUseImageCdn: true,
+              listItems: options
+            },
+            (err, result) => {
+              if (err) return console.error(err);
+			  buildfire.components.drawer.closeDrawer();
+              console.log("Selected Contacts", result);
+            }
+          );
+	}
   static detailsRender = () => {
     if (this.state.data.type === "summary") {
       summaryRender.init(this.state.id,this.state.data);

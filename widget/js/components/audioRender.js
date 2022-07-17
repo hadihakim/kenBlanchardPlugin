@@ -256,7 +256,7 @@ class AudioRender {
   };
 
   static drawerHandler = (itemsList) => {
-    Utilities.openDrawerAudioOrVideo(itemsList);
+    PageDetails.openDrawerAudioOrVideoOrArticle(itemsList);
   };
 
   static init = (data) => {

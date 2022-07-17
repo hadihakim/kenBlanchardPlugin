@@ -54,6 +54,7 @@ class summaryRender {
               showLabelInTitlebar: true,
               from: "page detail from chapter",
               id: this.state.id,
+              title:chapter.subTitle,
             });
             // buildfire.history.push("page detail from chapter",{id:this.state.id});
             this.state.chapterData = chapter;
@@ -132,7 +133,6 @@ class summaryRender {
       };
 
     static init =(id,data)=>{
-        console.log("ssssssssssssss",data);
         this.setData(id,data);
         this.render();
     }

@@ -172,6 +172,15 @@ class Navigation {
 				from: "Explore from Details",
 
 			});
+		}else if(!pageDetails.classList.contains("hidden")) {
+			console.log("from chapters");
+		}else if(!contentContainer.classList.contains("hidden")){
+			
+			buildfire.history.push(title, {
+				showLabelInTitlebar: true,
+				from: "User profile from Details",
+
+			});
 		}
 
 		config.renderedCard = 0;
@@ -196,7 +205,6 @@ class Navigation {
 		mainContainer.classList.remove("hidden");
 
 		config.search = '';
-
 		PageDetails.init(id);
 		Utilities.scrollTop();
 
@@ -207,6 +215,7 @@ class Navigation {
 		this.state.activeLayOut = 'course details';
 
 		if (from == "from active-card") {
+			console.log("lllllll.................");
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
 				from: "active list from CourseDetails",
@@ -283,6 +292,7 @@ class Navigation {
 
 		userProfileContainer.classList.remove("hidden");
 		userProfile.classList.remove("hidden");
+		// userProfile.innerHTML="";
 		buildfire.history.push("Growth Profile", {
 			showLabelInTitlebar: true,
 		});

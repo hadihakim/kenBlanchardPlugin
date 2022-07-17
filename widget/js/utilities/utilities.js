@@ -34,25 +34,6 @@ class Utilities {
 		}
 	  };
 
-	static openDrawerAudioOrVideo = (options) => {
-		buildfire.components.drawer.open(
-            {
-              multiSelection: false,
-              allowSelectAll : false,
-              multiSelectionActionButton: {text: 'Save', type: 'success'},
-              enableFilter : false,
-              isHTML: false,
-              triggerCallbackOnUIDismiss: false,   
-              autoUseImageCdn: true,
-              listItems: options
-            },
-            (err, result) => {
-              if (err) return console.error(err);
-              console.log("Selected Contacts", result);
-            }
-          );
-	}
-
 	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
 			if (err) return console.error(err);
@@ -292,11 +273,12 @@ class Utilities {
 									}
 								} else if (from == "page detail from chapter" || from == "Details from CourseDetails") {
 									let id = result[result.length - 1].options.id;
-									Navigation.openPageDetails(id);
+									Navigation.openPageDetails(id,result[result.length - 1].options.title);
 
-								} else if (from == "user profile from list") {
+								} else if (from == "user profile from list" || from == "User profile from Details") {
 									Navigation.openUserProfile();
-								} else if (from == "user List from temEffectiveness list" || from == "User list from Details") {
+								} else if (from == "user List from temEffectiveness list") {
+									PageDetails.innerHtml="";
 									Navigation.openUserList();
 								} else if (from == "Personal home Page") {
 									Navigation.openMain();
