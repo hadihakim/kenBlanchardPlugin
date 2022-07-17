@@ -200,8 +200,9 @@
     </div>
   </div>
 
-  <div id="ChartContainer">
-  </div>
+  <!-- <div id="ChartContainer">
+    <canvas id="assesmentProgress" class="assesmentsChart" data-userChart></canvas>
+  </div> -->
 
   <!-- template -->
   <template id="userProfileInsights">
@@ -231,7 +232,7 @@
       </div>
     </div>
     <div class="user-body-container">
-      <div class="mdc-tab-bar userContainer" role="tablist">
+      <div class="mdc-tab-bar userContainer userTabsList" role="tablist">
         <div class="mdc-tab-scroller">
           <div class="mdc-tab-scroller__scroll-area">
             <div class="mdc-tab-scroller__scroll-content" id="userProfileTabsContainer"></div>
@@ -239,9 +240,9 @@
         </div>
       </div>
       <div id="contentContainer">
-        <div class="tabContent"></div>
-        <div class="tabContent hidden"></div>
-        <div class="tabContent hidden"></div>
+        <div class="tabContent user-tab" data-user-tab-type="activity"></div>
+        <div class="tabContent user-tab hidden" data-user-tab-type="insights"></div>
+        <div class="tabContent user-tab hidden" data-user-tab-type="badges"></div>
       </div>
     </div>
   </template>

@@ -46,6 +46,7 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Profiles.get((err, res) => {
                 if (err) reject(err)
+                console.log("Profiles.get",res);
                 resolve(res)
             })
         });

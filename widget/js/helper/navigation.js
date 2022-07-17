@@ -141,7 +141,7 @@ class Navigation {
 	}
 
 	static openPageDetails = (id, title) => {
-
+		pageDetails.innerHTML="";
 		if (!mainPage.classList.contains("hidden")) {
 			// buildfire.history.push("Home from Details");
 			buildfire.history.push(title, {
@@ -259,7 +259,7 @@ class Navigation {
 	}
 
 	static openUserProfile = () => {
-		ChartContainer.innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
+		// ChartContainer.innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
 		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");
