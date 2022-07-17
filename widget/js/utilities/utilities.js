@@ -272,7 +272,7 @@ class Utilities {
 									}
 								} else if (from == "page detail from chapter" || from == "Details from CourseDetails") {
 									let id = result[result.length - 1].options.id;
-									Navigation.openPageDetails(id);
+									Navigation.openPageDetails(id,result[result.length - 1].options.title);
 
 								} else if (from == "user profile from list" || from == "User profile from Details") {
 									Navigation.openUserProfile();

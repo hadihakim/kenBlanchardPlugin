@@ -172,6 +172,8 @@ class Navigation {
 				from: "Explore from Details",
 
 			});
+		}else if(!pageDetails.classList.contains("hidden")) {
+			console.log("from chapters");
 		}else if(!contentContainer.classList.contains("hidden")){
 			
 			buildfire.history.push(title, {
@@ -203,7 +205,6 @@ class Navigation {
 		mainContainer.classList.remove("hidden");
 
 		config.search = '';
-
 		PageDetails.init(id);
 		Utilities.scrollTop();
 
