@@ -3,13 +3,13 @@ class Search {
     data: fakeData,
     trendingArr: [],
     filterArr: [],
-    filterTopic:[],
+    filterTopic: [],
     sortType: "Default",
-  };
-
-  static setData = (data) => {
-    this.setFilteredTopic(data);
-    this.state.data = data;
+    page: 1,
+    pageSize: 6,
+    searchTime: 300,
+    renderedCards: [],
+    fetchNext: true
   };
 
   static pointers = {
@@ -22,7 +22,14 @@ class Search {
     trendingContainer: "trendingContainer",
     trendingTemplate: "trendingTemplate",
     seeAllTemplate: "seeAllTemplate",
-    dot:"dot"
+    mainContainer: "mainContainer",
+    searchContainer: "searchContainer",
+    dot: "dot",
+  };
+
+  static setData = (data) => {
+    this.setFilteredTopic(data);
+    this.state.data = data;
   };
 
   static hasSearch = (data) => {
@@ -30,7 +37,7 @@ class Search {
       config.search == "" ||
       data.meta.title.toLowerCase().search(config.search.toLowerCase()) >= 0 ||
       data.meta.description.toLowerCase().search(config.search.toLowerCase()) >=
-        0
+      0
     );
   };
 
@@ -44,103 +51,19 @@ class Search {
       }
     });
   };
-  static sort = (data, type) => {
+
+  static sort = (data, type=this.state.sortType) => {
     if (type === "Most Recent") {
-        data.sort((a, b) => {
-            if (a.meta.createdOn < b.meta.createdOn) {
-                return -1;
-            }
-            if (a.meta.createdOn > b.meta.createdOn) {
-                return 1;
-            }
-        });
+      data.sort((a, b) => {
+        if (a.meta.createdOn < b.meta.createdOn) {
+          return -1;
+        }
+        if (a.meta.createdOn > b.meta.createdOn) {
+          return 1;
+        }
+      });
     }
     return data;
-};
-  static searchCardsRender = (container, callback) => {
-    if (config.renderedCard === 0) {
-      config.page = 1;
-      config.lastIndex = 0;
-      document.getElementById(this.pointers.seeAllContainer).innerHTML = "";
-    }
-    let assetsInfo = [];
-    const seeAllTemplate = document.getElementById(
-      this.pointers.seeAllTemplate
-    );
-    this.state.data.data.sections.forEach((element) => {
-      element.assets.forEach((assetId) => {
-        let assetData = this.state.data.data.assets_info[assetId];
-        assetData.id = assetId;
-        assetsInfo.push(assetData);
-      });
-    });
-    assetsInfo = this.sort(assetsInfo, this.state.sortType);
-    if (config.lastIndex >= assetsInfo.length) {
-      return;
-    }
-    for (
-      let lastIndex = config.lastIndex;
-      lastIndex < lastIndex + config.pageSize;
-      lastIndex++
-    ) {
-      if (
-        config.renderedCard == config.pageSize * config.page ||
-        lastIndex >= assetsInfo.length
-      ) {
-        config.lastIndex = lastIndex;
-        callback();
-        config.page++;
-        console.log("first log", config.lastIndex, " ", config.page);
-        if (config.renderedCard == 0) {
-          Navigation.openEmptySearch();
-        } else {
-          Navigation.openSearch();
-        }
-        return;
-      } else {
-        let topicIdArray = assetsInfo[lastIndex].meta.topics;
-        let printCard = false;
-        topicIdArray.forEach((topicId) => {
-          let data = this.state.data.data.topics.find(
-            ({ id }) => id === topicId
-          );
-          if (
-            (this.state.filterArr.includes(data.title) ||
-              this.state.filterArr.length === 0) &&
-            this.hasSearch(assetsInfo[lastIndex])
-          ) {
-            printCard = true;
-          }
-        });
-        if (printCard) {
-          config.renderedCard++;
-          const nodesClone = seeAllTemplate.content.cloneNode(true);
-          let image = nodesClone.querySelectorAll(".image");
-          let title = nodesClone.querySelectorAll(".title");
-          let duration = nodesClone.querySelectorAll(".duration");
-          let description = nodesClone.querySelectorAll(".description");
-          let card = nodesClone.querySelectorAll(".mdc-card");
-          description[0].innerText = assetsInfo[lastIndex].meta.description;
-          image[0].style.backgroundImage = `url('${Utilities.cropImage(
-            assetsInfo[lastIndex].meta.image,
-            "full_width",
-            "4:3"
-          )}')`;
-          let id = assetsInfo[lastIndex].id;
-          title[0].innerText = assetsInfo[lastIndex].meta.title;
-          if (assetsInfo[lastIndex].meta.duration > 0) {
-            duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-							<span class="schedule-text bodyText-AppTheme">
-						${Utilities.timeConvert(assetsInfo[lastIndex].meta.duration, "sec", "hh|mm")}</span>`;
-          }
-          card[0].addEventListener("click", () => {
-            Navigation.openPageDetails(id, assetsInfo[lastIndex].meta.title);
-          });
-          container.appendChild(nodesClone);
-        }
-      }
-    }
-    Utilities.setAppTheme();
   };
 
   static trendingRender = () => {
@@ -196,6 +119,7 @@ class Search {
       Utilities.setAppTheme();
     }
   };
+
   static filterDrawer = () => {
     config.renderedCard = 0;
     config.page = 1;
@@ -224,65 +148,14 @@ class Search {
           result.forEach((topic) => {
             this.state.filterArr.push(topic.text);
           });
-          
-          const dot= document.getElementById(this.pointers.dot);
-          if(this.state.filterArr.length == this.state.filterTopic.length){
+
+          const dot = document.getElementById(this.pointers.dot);
+          if (this.state.filterArr.length == this.state.filterTopic.length) {
             dot.classList.add("hidden");
-          }else{
+          } else {
             dot.classList.remove("hidden");
           }
-
-          this.state.data.data.sections.forEach((element) => {
-            const container = document.getElementById(
-              `${element.id}-container-main`
-            );
-            if (element.layout == "horizontal-1") {
-              Skeleton.horizontal1_Skeleton(container);
-            } else {
-              Skeleton.horizontal_Skeleton(container);
-            }
-            const myTimeout = setTimeout(() => {
-              Explore.filterAndPrintData(this.state.data, element, "main");
-            }, 1000);
-          });
-
-          this.state.data.data.sections.forEach((element) => {
-            console.log('check element in filter', element);
-            /*Condition was element.isExplore */
-            if (element.isActive) {
-              const container = document.getElementById(
-                `${element.id}-container-explore`
-              );
-              if (element.layout == "horizontal-1") {
-                Skeleton.horizontal1_Skeleton(container);
-              } else {
-                Skeleton.horizontal_Skeleton(container);
-              }
-            }
-            const myTimeout = setTimeout(() => {
-              Explore.filterAndPrintData(this.state.data, element, "explore");
-            }, 1000);
-          });
-
-          let seeAllContainer = document.getElementById(
-            this.pointers.seeAllContainer
-          );
-          if (!seeAllContainer.classList.contains("hidden")) {
-            if (
-              config.searchFrom == "from-explore" ||
-              config.searchFrom == "from-main"
-            ) {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                this.searchCardsRender(seeAllContainer, () => {});
-              }, 1000);
-            } else if (config.searchFrom == "from-see-all") {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
-              }, 1000);
-            }
-          }
+          this.runSortFilterResult();
         }
       }
     );
@@ -313,88 +186,134 @@ class Search {
         if (result) {
           buildfire.components.drawer.closeDrawer();
           this.state.sortType = result.text;
-          this.state.data.data.sections.forEach((element) => {
-            const container = document.getElementById(
-              `${element.id}-container-main`
-            );
-            if (element.layout == "horizontal-1") {
-              Skeleton.horizontal1_Skeleton(container);
-            } else {
-              Skeleton.horizontal_Skeleton(container);
-            }
-            const myTimeout = setTimeout(() => {
-              Explore.filterAndPrintData(this.state.data, element, "main");
-            }, 1000);
-          });
 
-          this.state.data.data.sections.forEach((element) => {
-            /*condition was element.isExplore */
-            if (element.isActive) {
-              const container = document.getElementById(
-                `${element.id}-container-explore`
-              );
-              if (element.layout == "horizontal-1") {
-                Skeleton.horizontal1_Skeleton(container);
-              } else {
-                Skeleton.horizontal_Skeleton(container);
-              }
-            }
-            const myTimeout = setTimeout(() => {
-              Explore.filterAndPrintData(this.state.data, element, "explore");
-            }, 1000);
-          });
-
-          if (!seeAllContainer.classList.contains("hidden")) {
-            if (
-              config.searchFrom == "from-explore" ||
-              config.searchFrom == "from-main"
-            ) {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                this.searchCardsRender(seeAllContainer, () => {});
-              }, 1000);
-            } else if (config.searchFrom == "from-see-all") {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
-              }, 1000);
-            }
-          }
+          this.runSortFilterResult();
         }
       }
     );
   };
 
-  static search = () => {
-    config.page = 1;
-    config.lastIndex = 0;
-    config.renderedCard = 0;
-      setTimeout(() => {
-      let input = document.getElementById(this.pointers.searchInput);
-      config.search = input.value;
-
-      if (
-        config.searchFrom == "from-explore" ||
-        config.searchFrom == "from-main"
-      ) {
-        if(Navigation.state.searchOpened){
-           Navigation.openSearch();
-           Navigation.setData(false);
-        }
-        
-        Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-        const myTimeout = setTimeout(() => {
-          this.searchCardsRender(seeAllContainer, () => {});
-        }, 1000);
-      } else if (config.searchFrom == "from-see-all") {
-        Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-        const myTimeout = setTimeout(() => {
-          SeeAll.seeAllCardsRender(this.state.data,this.pointers.seeAllContainer, true, () => {});
-        }, 1000);
+  static runSortFilterResult = () => {
+    this.state.data.data.sections.forEach((element) => {
+      const container = document.getElementById(
+        `${element.id}-container-main`
+      );
+      if (element.layout == "horizontal-1") {
+        Skeleton.horizontal1_Skeleton(container);
+      } else {
+        Skeleton.horizontal_Skeleton(container);
       }
+      const myTimeout = setTimeout(() => {
+        Explore.filterAndPrintData(this.state.data, element, "main");
+      }, 1000);
+    });
+
+    this.state.data.data.sections.forEach((element) => {
+      if (element.isExplore) {
+        const container = document.getElementById(
+          `${element.id}-container-explore`
+        );
+        if (element.layout == "horizontal-1") {
+          Skeleton.horizontal1_Skeleton(container);
+        } else {
+          Skeleton.horizontal_Skeleton(container);
+        }
+      }
+      const myTimeout = setTimeout(() => {
+        Explore.filterAndPrintData(this.state.data, element, "explore");
+      }, 1000);
+    });
+
+    if (Navigation.state.activeLayOut === 'see all') {
+      config.renderedCard = 0;
+      SeeAll.seeAllCardsRender();
+    }
+
+    if (Navigation.state.activeLayOut === 'search') {
+      this.state.page = 1;
+      Skeleton.verticalSeeAll_Skeleton(searchContainer);
+      setTimeout(() => {
+        document.getElementById(this.pointers.searchContainer).innerHTML = '';
+        this.printSearchedCards();
+      }, 300)
+    }
+  }
+
+  static search = (e) => {
+    let searchedData = e.target.value;
+    config.search = searchedData;
+    this.state.page = 1;
+
+    Navigation.openSearch();
+    Skeleton.verticalSeeAll_Skeleton(searchContainer);
+
+    clearTimeout(this.state.searchTime);
+    this.state.searchTime = setTimeout(() => {
+
+      const myTimeout = setTimeout(() => {
+        this.state.renderedCards = [];
+        let allAssets = this.state.data.data.assets_info;
+        for (const asset in allAssets) {
+          if (this.hasSearch(allAssets[asset])) {
+            this.state.renderedCards.push(allAssets[asset])
+          }
+        }
+        document.getElementById(this.pointers.searchContainer).innerHTML = '';
+        this.printSearchedCards();
+        document.getElementById(this.pointers.searchContainer).addEventListener('scroll', (e) => this.lazyLoad(e))
+      }, 1000);
     }, 300);
-    
   };
+
+  static printSearchedCards = () => {
+    let firstIndex = (this.state.page - 1) * this.state.pageSize;
+    let lastIndex = this.state.page * this.state.pageSize;
+    if (lastIndex > this.state.renderedCards.length) {
+      lastIndex = this.state.renderedCards.length;
+    }
+
+    this.state.page += 1;
+    this.state.renderedCards = this.sort(this.state.renderedCards, this.state.sortType);
+
+    for (let i = firstIndex; i < lastIndex; i++) {
+      if (HandleAPI.handleFilter(this.state.renderedCards[i].meta.topics)) {
+        const nodesClone = document.getElementById(this.pointers.seeAllTemplate).content.cloneNode(true);
+
+        let image = nodesClone.querySelectorAll(".image");
+        let title = nodesClone.querySelectorAll(".title");
+        let duration = nodesClone.querySelectorAll(".duration");
+        let description = nodesClone.querySelectorAll(".description");
+        let card = nodesClone.querySelectorAll(".mdc-card");
+        description[0].innerText = this.state.renderedCards[i].meta.description;
+        image[0].style.backgroundImage = `url('${Utilities.cropImage(
+          this.state.renderedCards[i].meta.image,
+          "full_width",
+          "4:3"
+        )}')`;
+        let id = this.state.renderedCards[i].id;
+        title[0].innerText = this.state.renderedCards[i].meta.title;
+        if (this.state.renderedCards[i].meta.duration > 0) {
+          duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+                                  <span class="schedule-text bodyText-AppTheme">
+                              ${Utilities.timeConvert(
+            this.state.renderedCards[i].meta.duration, "min"
+          )}</span>`;
+        }
+        card[0].addEventListener("click", () => {
+          Navigation.openPageDetails(id, this.state.renderedCards[i].meta.title);
+        });
+        document.getElementById(this.pointers.searchContainer).appendChild(nodesClone);
+      }
+    }
+    this.state.fetchNext = true;
+  }
+
+  static lazyLoad = (e) => {
+    if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
+      this.state.fetchNext = false;
+      this.printSearchedCards();
+    }
+  }
 
   static init = () => {
     let filterIcon = document.getElementById(this.pointers.filterIcon);
@@ -404,7 +323,7 @@ class Search {
     sortIcon.addEventListener("click", this.sortDrawer);
 
     let input = document.getElementById(this.pointers.searchInput);
-    input.addEventListener("keyup", this.search);
+    input.addEventListener("keyup", (e) => this.search(e));
     this.trendingRender(this.state.data, "trendingContainer");
   };
 }
