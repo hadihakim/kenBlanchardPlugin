@@ -99,19 +99,8 @@ class Search {
         return;
       } else {
         let topicIdArray = assetsInfo[lastIndex].meta.topics;
-        let printCard = false;
-        topicIdArray.forEach((topicId) => {
-          let data = this.state.data.data.topics.find(
-            ({ id }) => id === topicId
-          );
-          if (
-            (this.state.filterArr.includes(data.title) ||
-              this.state.filterArr.length === 0) &&
-            this.hasSearch(assetsInfo[lastIndex])
-          ) {
-            printCard = true;
-          }
-        });
+        let printCard = HandleAPI.handleFilter(topicIdArray) && this.hasSearch(assetsInfo[lastIndex])
+       
         if (printCard) {
           config.renderedCard++;
           const nodesClone = seeAllTemplate.content.cloneNode(true);
