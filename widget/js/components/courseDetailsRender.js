@@ -9,7 +9,7 @@ class CourseDetails {
   };
   static setData = (id) => {
     // HandleAPI.getDataByID
-    this.state.data = coursesData.data.courses[id];
+    this.state.data = coursesData.data.courses["62b3439f864d49037aac9b25"];
   }
 
   static showAssetDetails = (span, allAssets) => {

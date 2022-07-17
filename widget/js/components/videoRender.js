@@ -125,7 +125,7 @@ class videoDetails {
     static openMoreOptions = () => {
         let listItems = [];
         (this.state.activeTab === "details" || this.state.activeTab === "transcript" ? listItems = [{text: 'Mark Complete', secondaryText: '', imageUrl:'', selected: false}] : listItems = [{text: 'Bookmark Lesson', secondaryText: '', imageUrl:'', selected: false}, {text: 'Add Note', secondaryText: '', imageUrl:'', selected: false}, {text: 'Share', secondaryText: '', imageUrl:'', selected: false}, {text: 'Mark Complete', secondaryText: '', imageUrl:'', selected: false}])
-          Utilities.openDrawerAudioOrVideo(listItems)
+          PageDetails.openDrawerAudioOrVideoOrArticle(listItems)
     }
 
     static renderVideoShortcuts = (el) => {

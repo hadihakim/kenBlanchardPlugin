@@ -162,6 +162,13 @@ class Navigation {
 				from: "Explore from Details",
 
 			});
+		}else if(!contentContainer.classList.contains("hidden")){
+			
+			buildfire.history.push(title, {
+				showLabelInTitlebar: true,
+				from: "User profile from Details",
+
+			});
 		}
 
 		config.renderedCard = 0;
@@ -201,6 +208,7 @@ class Navigation {
 	static openCourseDetails = (id, title, from) => {
 
 		if (from == "from active-card") {
+			console.log("lllllll.................");
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
 				from: "active list from CourseDetails",
@@ -268,6 +276,7 @@ class Navigation {
 		myList_PageContainer.classList.add("hidden");
 		userProfileContainer.classList.remove("hidden");
 		userProfile.classList.remove("hidden");
+		// userProfile.innerHTML="";
 		buildfire.history.push("Growth Profile", {
 			showLabelInTitlebar: true,
 		});

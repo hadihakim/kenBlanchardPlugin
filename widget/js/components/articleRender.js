@@ -21,21 +21,6 @@ class ArticleRender{
         console.log("Article data ->", data);
       }
 
-    static openDrawer=()=>{
-        buildfire.components.drawer.open(
-  { 
-    listItems: [
-      {text:'Mark Complete'},
-    
-    ]
-  },
-  (err, result) => {
-    if (err) return console.error(err);
-      buildfire.components.drawer.closeDrawer();
-    console.log("Selected Contacts", result);
-  }
-);
-    }
     static render=()=>{
         let container = document.getElementById(this.pointers.pageDetails);
           const template = document.getElementById(this.pointers.articleTemplate);
@@ -108,7 +93,8 @@ if(this.state.data.showKeyTakeaways){
 }
 
         icon[0].addEventListener("click", ()=>{
-            this.openDrawer();
+          let listItems = [{text: 'Mark Complete', secondaryText: '', imageUrl:'', selected: false}] ;
+          PageDetails.openDrawerAudioOrVideoOrArticle(listItems)
         });
 
           container.appendChild(firstClone);
