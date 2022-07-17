@@ -1,3 +1,12 @@
+#seeAllContainer{
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding-top: 5rem;
+  overflow: auto;
+}
+
 .vertical{
   overflow: auto;
   position: relative;
@@ -79,3 +88,4 @@
   margin-right: 0.35rem;
   font-size: 1.125rem !important;
 }
+

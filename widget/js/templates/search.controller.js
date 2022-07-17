@@ -6,12 +6,10 @@ class Search {
     filterTopic: [],
     sortType: "Default",
     page: 1,
-    pageSize: 7
-  };
-
-  static setData = (data) => {
-    this.setFilteredTopic(data);
-    this.state.data = data;
+    pageSize: 6,
+    searchTime: 300,
+    renderedCards: [],
+    fetchNext:true
   };
 
   static pointers = {
@@ -24,7 +22,13 @@ class Search {
     trendingContainer: "trendingContainer",
     trendingTemplate: "trendingTemplate",
     seeAllTemplate: "seeAllTemplate",
-    dot: "dot"
+    dot: "dot",
+    mainContainer: "mainContainer"
+  };
+
+  static setData = (data) => {
+    this.setFilteredTopic(data);
+    this.state.data = data;
   };
 
   static hasSearch = (data) => {
@@ -60,6 +64,7 @@ class Search {
     }
     return data;
   };
+
   static searchCardsRender = (container, callback) => {
     if (config.renderedCard === 0) {
       config.page = 1;
@@ -264,26 +269,6 @@ class Search {
               Explore.filterAndPrintData(this.state.data, element, "explore");
             }, 1000);
           });
-
-          let seeAllContainer = document.getElementById(
-            this.pointers.seeAllContainer
-          );
-          if (!seeAllContainer.classList.contains("hidden")) {
-            if (
-              config.searchFrom == "from-explore" ||
-              config.searchFrom == "from-main"
-            ) {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                this.searchCardsRender(seeAllContainer, () => { });
-              }, 1000);
-            } else if (config.searchFrom == "from-see-all") {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                SeeAll.seeAllCardsRender(this.state.data, this.pointers.seeAllContainer, true, () => { });
-              }, 1000);
-            }
-          }
         }
       }
     );
@@ -343,48 +328,85 @@ class Search {
               Explore.filterAndPrintData(this.state.data, element, "explore");
             }, 1000);
           });
-
-          if (!seeAllContainer.classList.contains("hidden")) {
-            if (
-              config.searchFrom == "from-explore" ||
-              config.searchFrom == "from-main"
-            ) {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                this.searchCardsRender(seeAllContainer, () => { });
-              }, 1000);
-            } else if (config.searchFrom == "from-see-all") {
-              Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-              const myTimeout = setTimeout(() => {
-                SeeAll.seeAllCardsRender(this.state.data, this.pointers.seeAllContainer, true, () => { });
-              }, 1000);
-            }
-          }
         }
       }
     );
   };
 
-  static search = () => {
-    config.page = 1;
-    config.lastIndex = 0;
-    config.renderedCard = 0;
+  static search = (e) => {
+    let searchedData = e.target.value;
+    config.search = searchedData;
+    this.state.page = 1;
+
+    document.getElementById(this.pointers.seeAllContainer).innerHTML = '';
+
+    clearTimeout(this.state.searchTime);
+    this.state.searchTime = setTimeout(() => {
+
+      // Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
+      const myTimeout = setTimeout(() => {
+        // this.searchCardsRender();
+        this.state.renderedCards = [];
+        let allAssets = this.state.data.data.assets_info;
+        for (const asset in allAssets) {
+          if (this.hasSearch(allAssets[asset])) {
+            this.state.renderedCards.push(allAssets[asset])
+          }
+        }
+        this.printSearchedCards();
+        document.getElementById(this.pointers.seeAllContainer).addEventListener('scroll', (e)=>this.fitchNext(e))
+      }, 1000);
+    }, 300);
+  };
+
+  static printSearchedCards = () => {
+    Navigation.openSearch();
 
     let firstIndex = (this.state.page - 1) * this.state.pageSize;
     let lastIndex = this.state.page * this.state.pageSize;
-    if (lastIndex > this.state.data.length)
-      lastIndex = this.state.data.length
+    if (lastIndex > this.state.renderedCards.length){
+      lastIndex = this.state.renderedCards.length;
+    }
+    
+    this.state.page += 1;
 
-    setTimeout(() => {
-      console.log("search -->", this.state.data);
+    for (let i = firstIndex; i < lastIndex; i++) {
+      const nodesClone = document.getElementById(this.pointers.seeAllTemplate).content.cloneNode(true);
 
-      Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-      const myTimeout = setTimeout(() => {
-        // this.searchCardsRender();
-      }, 1000);
+      let image = nodesClone.querySelectorAll(".image");
+      let title = nodesClone.querySelectorAll(".title");
+      let duration = nodesClone.querySelectorAll(".duration");
+      let description = nodesClone.querySelectorAll(".description");
+      let card = nodesClone.querySelectorAll(".mdc-card");
+      description[0].innerText = this.state.renderedCards[i].meta.description;
+      image[0].style.backgroundImage = `url('${Utilities.cropImage(
+        this.state.renderedCards[i].meta.image,
+        "full_width",
+        "4:3"
+      )}')`;
+      let id = this.state.renderedCards[i].id;
+      title[0].innerText = this.state.renderedCards[i].meta.title;
+      if (this.state.renderedCards[i].meta.duration > 0) {
+        duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+                                <span class="schedule-text bodyText-AppTheme">
+                            ${Utilities.timeConvert(
+          this.state.renderedCards[i].meta.duration, "min"
+        )}</span>`;
+      }
+      card[0].addEventListener("click", () => {
+        Navigation.openPageDetails(id, this.state.renderedCards[i].meta.title);
+      });
+      document.getElementById(this.pointers.seeAllContainer).appendChild(nodesClone);
+    }
+    this.state.fetchNext = true;
+  }
 
-    }, 300);
-  };
+  static fitchNext = (e) => {
+    if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
+      this.state.fetchNext = false;
+      this.printSearchedCards();
+    }
+  }
 
   static init = () => {
     let filterIcon = document.getElementById(this.pointers.filterIcon);
@@ -394,7 +416,7 @@ class Search {
     sortIcon.addEventListener("click", this.sortDrawer);
 
     let input = document.getElementById(this.pointers.searchInput);
-    input.addEventListener("keyup", this.search);
+    input.addEventListener("keyup", (e) => this.search(e));
     this.trendingRender(this.state.data, "trendingContainer");
   };
 }

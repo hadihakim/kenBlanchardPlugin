@@ -203,17 +203,16 @@ class Utilities {
 		});
 	};
 
-	static _fetchNextList = () => {
-		config.fetchingNextPage = true;
-		if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
-			Search.searchCardsRender(seeAllContainer, () => { config.fetchingNextPage = false; })
-		} else if (config.searchFrom == "from-see-all") {
-			SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
-				config.fetchingNextPage = false;
-			});
-		}
-
-	}
+	// static _fetchNextList = () => {
+	// 	config.fetchingNextPage = true;
+	// 	if (config.searchFrom == "from-explore" || config.searchFrom == "from-main") {
+	// 		Search.searchCardsRender(seeAllContainer, () => { config.fetchingNextPage = false; })
+	// 	} else if (config.searchFrom == "from-see-all") {
+	// 		SeeAll.seeAllCardsRender(fakeData, "seeAllContainer", true, () => {
+	// 			config.fetchingNextPage = false;
+	// 		});
+	// 	}
+	// }
 
 	static scrollNextPage = () => {
 		if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
