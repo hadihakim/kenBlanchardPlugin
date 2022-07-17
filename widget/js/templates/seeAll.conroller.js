@@ -3,111 +3,98 @@ class SeeAll {
     title: "see all",
     data: fakeData,
     userData: config.userConfig,
-    apiData:fakeData,
+    renderedCards: fakeData,
     pageType: "seeAll",
     duration: true,
+    printedCards: 0,
+    page: 1,
+    pageSize: 7,
+    fetchNext:true,
   };
   static pointers = {
     searchBar: "searchBar",
     searchSortIcon: "sortIcon",
     searchFilterIcon: "filterIcon",
     seeAllContainer: "seeAllContainer",
-    seeAllTemplate:"seeAllTemplate",
+    seeAllTemplate: "seeAllTemplate",
   };
 
-  static setData = (data) => {
-    this.state = data;
+  static setData = (options) => {
+    this.state = {...this.state, ...options};
   };
 
-  static seeAllCardsRender = (apiData, container, durationState, callback) => {
-    container=document.getElementById(container);
-    if (config.renderedCard === 0) {
-      config.page = 1;
-      config.lastIndex = 0;
-      container.innerHTML = "";
-    }
-    const seeAllTemplate = document.getElementById(this.pointers.seeAllTemplate);
-
+  static seeAllCardsRender = () => {
+    let seeAllContainer = document.getElementById(this.pointers.seeAllContainer);
+    let myAssets = this.state.data.assets || [];
     
-    let assetsInfo = [];
-    let assets = this.state.data.assets || [];
-    assets.forEach((assetId) => {
-      let assetData = apiData.data.assets_info[assetId];
-      assetData.id = assetId;
-      assetsInfo.push(assetData);
-    });
-    // sort
-    assetsInfo = Search.sort(assetsInfo, Search.state.sortType);
+    this.state.renderedCards = []; 
+    myAssets.forEach(asset => {
+      this.state.renderedCards.push(this.state.apiData.data.assets_info[asset]);
+    })
+    
+    this.state.page = 1;
+    seeAllContainer.innerHTML = '';
+    seeAllContainer.addEventListener('scroll', (e)=>this.lazyLoad(e));
+    this.printCards();
+  }
 
-    // let lastIndex = config.lastIndex;
-    for (
-      let lastIndex = config.lastIndex;
-      lastIndex < lastIndex + config.pageSize;
-      lastIndex++
-    ) {
-      if (
-        config.renderedCard == config.pageSize * config.page ||
-        lastIndex >= assetsInfo.length
-      ) {
-        config.lastIndex = lastIndex;
-        callback();
-        config.page++;
-        if (config.renderedCard == 0) {
-          Navigation.openEmptySearch();
-        }else{
-          emptySearch.classList.add("hidden");
+  static printCards = () => {
+
+    let firstIndex = (this.state.page - 1) * this.state.pageSize;
+    let lastIndex = this.state.page * this.state.pageSize;
+    this.state.page += 1;
+
+    if (lastIndex > this.state.renderedCards.length)
+      lastIndex = this.state.renderedCards.length;
+
+    let printArr = Search.sort(this.state.renderedCards);
+
+    for(let i =firstIndex;i<lastIndex;i++){
+      if(HandleAPI.handleFilter(printArr[i].meta.topics)){
+        const nodesClone = seeAllTemplate.content.cloneNode(true);
+        let image = nodesClone.querySelectorAll(".image");
+        let title = nodesClone.querySelectorAll(".title");
+        let duration = nodesClone.querySelectorAll(".duration");
+        let description = nodesClone.querySelectorAll(".description");
+        let card = nodesClone.querySelectorAll(".mdc-card");
+        description[0].innerText = printArr[i].meta.description;
+        image[0].style.backgroundImage = `url('${Utilities.cropImage(
+          printArr[i].meta.image,
+          "full_width",
+          "4:3"
+        )}')`;
+        let id = printArr[i].id;
+        title[0].innerText = printArr[i].meta.title;
+        if (printArr[i].meta.duration > 0) {
+          duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+                                  <span class="schedule-text bodyText-AppTheme">
+                              ${Utilities.timeConvert(
+            printArr[i].meta.duration, "min"
+          )}</span>`;
         }
-        return;
-      } else {
-      
-        let topicIdArray = assetsInfo[lastIndex].meta.topics;
-        let printCard = HandleAPI.handleFilter(topicIdArray);
-        if (printCard && Search.hasSearch(assetsInfo[lastIndex])) {
-          config.renderedCard++;
-          const nodesClone = seeAllTemplate.content.cloneNode(true);
-          let image = nodesClone.querySelectorAll(".image");
-          let title = nodesClone.querySelectorAll(".title");
-          let duration = nodesClone.querySelectorAll(".duration");
-          let description = nodesClone.querySelectorAll(".description");
-          let card = nodesClone.querySelectorAll(".mdc-card");
-          description[0].innerText = assetsInfo[lastIndex].meta.description;
-          image[0].style.backgroundImage = `url('${Utilities.cropImage(
-            assetsInfo[lastIndex].meta.image,
-            "full_width",
-            "4:3"
-          )}')`;
-          let id = assetsInfo[lastIndex].id;
-          title[0].innerText = assetsInfo[lastIndex].meta.title;
-          if (durationState && assetsInfo[lastIndex].meta.duration > 0) {
-            duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-                                    <span class="schedule-text bodyText-AppTheme">
-                                ${Utilities.timeConvert(
-                                  assetsInfo[lastIndex].meta.duration, "sec", "hh|mm"
-                                )}</span>`;
-          }
-          card[0].addEventListener("click", () => {
-            Navigation.openPageDetails(id ,assetsInfo[lastIndex].meta.title);
-          });
-          container.appendChild(nodesClone);
-        }
+        card[0].addEventListener("click", () => {
+          Navigation.openPageDetails(id, printArr[i].meta.title);
+        });
+        document.getElementById(this.pointers.seeAllContainer).appendChild(nodesClone);
       }
     }
-    Utilities.setAppTheme();
-  };
+    this.state.fetchNext = true;
+  }
+
+  static lazyLoad = (e) => {
+    if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
+      this.state.fetchNext = false;
+      this.printCards();
+    }
+  }
 
   static init() {
 
     Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
 
-
     const myTimeout = setTimeout(() => {
-      this.seeAllCardsRender(
-        this.state.apiData,
-        this.pointers.seeAllContainer,
-        this.state.duration,
-        () => {}
-      );
+      this.seeAllCardsRender();
     }, 1000);
-    
+
   }
 }

@@ -1,81 +1,102 @@
-.vertical{
-  overflow: auto;
-  position: relative;
-  min-width: 100%;
-  min-height: 13.438rem;
-  padding-top: 1rem;
-}
+    #seeAllContainer, #searchContainer {
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding-top: 5rem;
+      overflow: auto;
+    }
 
-.vertical .sectionTitle {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 1rem;
-  line-height: 1.25rem;
-  letter-spacing: 0.031rem;
-  color: #101010;
-  position: sticky;
-  top: 0rem;
-  left: 1rem;
-  margin-left:1rem;
-}
+    .vertical {
+      overflow: auto;
+      position: relative;
+      min-width: 100%;
+      min-height: 13.438rem;
+      padding-top: 1rem;
+    }
 
-.vertical .main .mdc-card,#seeAllContainer .mdc-card {
-  margin: 0.5rem 1rem;
-  display: flex;
-  flex-direction: row;
-  box-shadow: none;
-}
+    .vertical .sectionTitle {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 1rem;
+      line-height: 1.25rem;
+      letter-spacing: 0.031rem;
+      color: #101010;
+      position: sticky;
+      top: 0rem;
+      left: 1rem;
+      margin-left: 1rem;
+    }
 
-.vertical .main .mdc-card .column,#seeAllContainer .mdc-card .column {
-  margin: 0.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.vertical .main .mdc-card .image,#seeAllContainer .mdc-card .column .image {
-  width: 7.938rem;
-  background-size: cover;
-  height: 5.5rem;
-  border-radius: 0.25rem;
-  -webkit-border-radius: 0.25rem;
-  -moz-border-radius: 0.25rem;
-  -ms-border-radius: 0.25rem;
-  -o-border-radius: 0.25rem;
-}
+    .vertical .main .mdc-card,
+    .verticalContainer .mdc-card {
+      margin: 0.5rem 1rem;
+      display: flex;
+      flex-direction: row;
+      box-shadow: none;
+    }
 
-.vertical .main .mdc-card .column .mdc-card-body .title,#seeAllContainer .mdc-card .column .mdc-card-body .title {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: #101010;
-}
-.vertical .main .mdc-card .column .mdc-card-body .description, #seeAllContainer .mdc-card .column .mdc-card-body .description {
-  font-style: normal;
-  font-weight: 400;
-  font-size:0.75rem;
-  line-height: 1rem;
-  color: #5f5f5f;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-.vertical .main .column .mdc-card-footer, #seeAllContainer .column .mdc-card-footer {
-  padding: 0.25rem;
-}
-.vertical .main .column .duration, #seeAllContainer .column .duration {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height:1rem;
-  color: #5f5f5f;
-  margin-top: 0.5rem;
-}
+    .vertical .main .mdc-card .column,
+    .verticalContainer .mdc-card .column {
+      margin: 0.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.vertical .main .column .duration .icon, #seeAllContainer .column .duration .icon{
-  margin-right: 0.35rem;
-  font-size: 1.125rem !important;
-}
+    .vertical .main .mdc-card .image,
+    .verticalContainer .mdc-card .column .image {
+      width: 7.938rem;
+      background-size: cover;
+      height: 5.5rem;
+      border-radius: 0.25rem;
+      -webkit-border-radius: 0.25rem;
+      -moz-border-radius: 0.25rem;
+      -ms-border-radius: 0.25rem;
+      -o-border-radius: 0.25rem;
+    }
+
+    .vertical .main .mdc-card .column .mdc-card-body .title,
+    .verticalContainer .mdc-card .column .mdc-card-body .title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      color: #101010;
+    }
+
+    .vertical .main .mdc-card .column .mdc-card-body .description,
+    .verticalContainer .mdc-card .column .mdc-card-body .description {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      color: #5f5f5f;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+
+    .vertical .main .column .mdc-card-footer,
+    .verticalContainer .column .mdc-card-footer {
+      padding: 0.25rem;
+    }
+
+    .vertical .main .column .duration,
+    .verticalContainer .column .duration {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      font-weight: 400;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      color: #5f5f5f;
+      margin-top: 0.5rem;
+    }
+
+    .vertical .main .column .duration .icon,
+    .verticalContainer .column .duration .icon {
+      margin-right: 0.35rem;
+      font-size: 1.125rem !important;
+    }

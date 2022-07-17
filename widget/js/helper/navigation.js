@@ -1,7 +1,8 @@
 class Navigation {
 	static state = {
 		searchOpened: true,
-		seeAllState: null
+		seeAllState: null,
+		activeLayOut:'main'
 	}
 	static setData(data) {
 		this.state.searchOpened = data;
@@ -12,6 +13,8 @@ class Navigation {
 	}
 
 	static openMain = () => {
+		this.state.activeLayOut = 'main';
+
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
@@ -35,6 +38,8 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		emptySearch.classList.add("hidden");
 		sortIcon.classList.add("hidden");
+		searchContainer.classList.add("hidden");
+		
 		// document.getElementById("videoPageContainer").classList.add("hidden");
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
 
@@ -43,6 +48,8 @@ class Navigation {
 	}
 
 	static openExplore = () => {
+		this.state.activeLayOut = 'explore';
+
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
@@ -54,6 +61,7 @@ class Navigation {
 		userContainer.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		emptySearch.classList.add("hidden");
+		searchContainer.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 
 		searchBar.classList.remove("hidden");
@@ -66,6 +74,7 @@ class Navigation {
 	}
 
 	static openSeeAll = (type, title, state) => {
+		this.state.activeLayOut = 'see all';
 
 		mainContainer.addEventListener("scroll", Utilities.scrollNextPage);
 		config.searchFrom = "from-see-all";
@@ -95,6 +104,7 @@ class Navigation {
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
+		searchContainer.classList.add("hidden");
 		emptySearch.classList.add("hidden");
 
 		if (state) {
@@ -112,12 +122,15 @@ class Navigation {
 	}
 
 	static openSearch = () => {
+		this.state.activeLayOut = 'search';
 
 		mainContainer.addEventListener("scroll", Utilities.scrollNextPage);
 		Utilities.scrollTop();
-		seeAllContainer.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
+		searchContainer.classList.remove("hidden");
+		
+		seeAllContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
@@ -125,10 +138,6 @@ class Navigation {
 		emptySearch.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 
-		// Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
-		// 	static myTimeout = setTimeout(() => {
-		// 		searchCardsRender(fakeData, seeAllContainer, () => { })
-		// 	}, 1000);
 		if (Navigation.state.searchOpened) {
 			buildfire.history.push("Search", {
 				showLabelInTitlebar: true,
@@ -141,6 +150,7 @@ class Navigation {
 	}
 
 	static openPageDetails = (id, title) => {
+		this.state.activeLayOut = 'page details';
 
 		if (!mainPage.classList.contains("hidden")) {
 			// buildfire.history.push("Home from Details");
@@ -180,6 +190,7 @@ class Navigation {
 		myList_PageContainer.classList.add("hidden");
 		teamEffectiveness_PageContainer.classList.add("hidden");
 		userProfileContainer.classList.add("hidden");
+		searchContainer.classList.add("hidden");
 
 		pageDetails.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
@@ -192,13 +203,8 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	// static openVideoPageDetails = () => {
-	// 	document.getElementById("videoPageContainer").classList.remove("hidden");
-	// 	document.getElementById("mainContainer").classList.add("hidden");
-
-	// }
-
 	static openCourseDetails = (id, title, from) => {
+		this.state.activeLayOut = 'course details';
 
 		if (from == "from active-card") {
 			buildfire.history.push(title, {
@@ -233,6 +239,7 @@ class Navigation {
 		myList_PageContainer.classList.add("hidden");
 		teamEffectiveness_PageContainer.classList.add("hidden");
 		userProfileContainer.classList.add("hidden");
+		searchContainer.classList.add("hidden");
 
 		courseDetailsContainer.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
@@ -245,20 +252,26 @@ class Navigation {
 	}
 
 	static openEmptySearch = () => {
+		this.state.activeLayOut = 'search';
+
 		emptySearch.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
-		mainPage.classList.add("hidden");
 		seeAllContainer.classList.remove("hidden");
+		
+		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
+		searchContainer.classList.add("hidden");
 
 		Utilities.setAppTheme();
 	}
 
 	static openUserProfile = () => {
+		this.state.activeLayOut = 'user profile';
+
 		ChartContainer.innerHTML = `<canvas id="assesmentProgress" class="assesmentsChart"></canvas>`;
 		UserProfile.userProfile();
 		mainContainer.classList.add("hidden");
@@ -266,6 +279,8 @@ class Navigation {
 		explorePage.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
+		searchContainer.classList.add("hidden");
+
 		userProfileContainer.classList.remove("hidden");
 		userProfile.classList.remove("hidden");
 		buildfire.history.push("Growth Profile", {
@@ -277,12 +292,15 @@ class Navigation {
 	}
 
 	static openUserList = (options) => {
+		this.state.activeLayOut = 'user list';
+
 		mainContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		teamEffectiveness_PageContainer.classList.add("hidden");
+		searchContainer.classList.add("hidden");
 
 		if (options?.title)
 			buildfire.history.push(`My ${options?.title}`, {
@@ -306,12 +324,15 @@ class Navigation {
 	}
 
 	static openTeamEffectivenessList = (options) => {
+		this.state.activeLayOut = 'team effectiveness list';
+
 		mainContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
+		searchContainer.classList.add("hidden");
 
 		if (options?.title)
 			buildfire.history.push(options.title, {
