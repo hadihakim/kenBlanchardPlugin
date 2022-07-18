@@ -23,15 +23,8 @@ class Explore {
     this.state = data;
   };
 
-  static getDataById = (id) => {
-    let data = this.state.data.data.sections.filter(
-      (section) => section.id === id
-    );
-    return data[0];
-  };
-
   static seeAllButton = (id, title, type) => {
-    let data = this.getDataById(id);
+    let data = HandleAPI.getDataByID(id, 'section');
     let seeAllState = {
       title: "see all",
       data: data,
@@ -234,8 +227,8 @@ class Explore {
 
   static cardRender = (sectionId, type) => {
     const sectionsContainer = document.getElementById(sectionId);
-
-    this.state.data.data.sections.forEach((element) => {
+    // all api data are stored in the HandleAPI class ->
+    HandleAPI.state.data.sections.forEach((element) => {
       let skeleton = "vertical";
       if (
         // && element.isExplore
