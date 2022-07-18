@@ -9,7 +9,9 @@ class Search {
     pageSize: 6,
     searchTime: 300,
     renderedCards: [],
-    fetchNext: true
+    fetchNext: true,
+    emptySearch:true,
+    searchText:""
   };
 
   static pointers = {
@@ -34,9 +36,9 @@ class Search {
 
   static hasSearch = (data) => {
     return (
-      config.search == "" ||
-      data.meta.title.toLowerCase().search(config.search.toLowerCase()) >= 0 ||
-      data.meta.description.toLowerCase().search(config.search.toLowerCase()) >=
+      this.state.searchText == "" ||
+      data.meta.title.toLowerCase().search(this.state.searchText.toLowerCase()) >= 0 ||
+      data.meta.description.toLowerCase().search(this.state.searchText.toLowerCase()) >=
       0
     );
   };
@@ -200,8 +202,10 @@ class Search {
       );
       if (element.layout == "horizontal-1") {
         Skeleton.horizontal1_Skeleton(container);
-      } else {
+      } else if(element.layout == "horizontal") {
         Skeleton.horizontal_Skeleton(container);
+      }else{
+        Skeleton.verticalSeeAll_Skeleton(container);
       }
       const myTimeout = setTimeout(() => {
         Explore.filterAndPrintData(this.state.data, element, "main");
@@ -215,8 +219,10 @@ class Search {
       );
       if (element.layout == "horizontal-1") {
         Skeleton.horizontal1_Skeleton(container);
-      } else {
+      } else if(element.layout == "horizontal") {
         Skeleton.horizontal_Skeleton(container);
+      }else{
+        Skeleton.verticalSeeAll_Skeleton(container);
       }
       // }
       const myTimeout = setTimeout(() => {
@@ -245,28 +251,23 @@ class Search {
 
   static search = (e) => {
     let searchedData = e.target.value;
-    config.search = searchedData;
+    this.state.searchText = searchedData;
     this.state.page = 1;
 
     Navigation.openSearch();
     Skeleton.verticalSeeAll_Skeleton(searchContainer);
 
-    clearTimeout(this.state.searchTime);
-    this.state.searchTime = setTimeout(() => {
-
-      const myTimeout = setTimeout(() => {
-        this.state.renderedCards = [];
-        let allAssets = this.state.data.data.assets_info;
-        for (const asset in allAssets) {
-          if (this.hasSearch(allAssets[asset])) {
-            this.state.renderedCards.push(allAssets[asset])
-          }
-        }
-        document.getElementById(this.pointers.searchContainer).innerHTML = '';
-        this.printSearchedCards();
-        document.getElementById(this.pointers.searchContainer).addEventListener('scroll', (e) => this.lazyLoad(e))
-      }, 1000);
-    }, 300);
+    this.state.renderedCards = [];
+    let allAssets = this.state.data.data.assets_info;
+    for (const asset in allAssets) {
+      if (this.hasSearch(allAssets[asset])) {
+        this.state.renderedCards.push(allAssets[asset])
+      }
+    }
+    document.getElementById(this.pointers.searchContainer).innerHTML = '';
+    this.state.emptySearch=true;
+    this.printSearchedCards();
+    document.getElementById(this.pointers.searchContainer).addEventListener('scroll', (e) => this.lazyLoad(e))
   };
 
   static printSearchedCards = () => {
@@ -279,10 +280,9 @@ class Search {
     this.state.page += 1;
     this.state.renderedCards = this.sort(this.state.renderedCards, this.state.sortType);
     
-    let emptySearch = true;
     for (let i = firstIndex; i < lastIndex; i++) {
       if (HandleAPI.handleFilter(this.state.renderedCards[i].meta.topics)) {
-        emptySearch = false;
+        this.state.emptySearch = false;
         const nodesClone = document.getElementById(this.pointers.seeAllTemplate).content.cloneNode(true);
 
         let image = nodesClone.querySelectorAll(".image");
@@ -311,7 +311,7 @@ class Search {
         document.getElementById(this.pointers.searchContainer).appendChild(nodesClone);
       }
     }
-    if(emptySearch){
+    if(this.state.emptySearch){
       console.log("Empty will be shown --->");
       Utilities.showEmpty(document.getElementById(this.pointers.searchContainer));
     }
@@ -333,7 +333,13 @@ class Search {
     sortIcon.addEventListener("click", this.sortDrawer);
 
     let input = document.getElementById(this.pointers.searchInput);
-    input.addEventListener("keyup", (e) => this.search(e));
+
+    input.addEventListener("keyup", (e) =>{
+      searchInputHandler(e)
+    });
+    const searchInputHandler=Utilities._debounce(e=>{
+      this.search(e)
+    },this.state.searchTime);
     this.trendingRender(this.state.data, "trendingContainer");
   };
 }

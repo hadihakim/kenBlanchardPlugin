@@ -21,7 +21,7 @@ class AudioRender {
     tabs: [],
     audioDrawerItemsList: [
       {
-        text: "Mark Complete",
+        text: Strings.AUDIO_DRAWER_MARK_COMPLETE,
         secondaryText: "",
         imageUrl: "",
         selected: false,
@@ -29,15 +29,15 @@ class AudioRender {
     ],
     shortcutDrawerItemsList: [
       {
-        text: "Bookmark Lesson",
+        text: Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK,
         secondaryText: "",
         imageUrl: "",
         selected: false,
       },
-      { text: "Add Note", secondaryText: "", imageUrl: "", selected: false },
-      { text: "Share", secondaryText: "", imageUrl: "", selected: false },
+      { text: Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE, secondaryText: "", imageUrl: "", selected: false },
+      { text: Strings.AUDIO_SHORTCUTS_DRAWER_SHARE, secondaryText: "", imageUrl: "", selected: false },
       {
-        text: "Mark Complete",
+        text: Strings.AUDIO_SHORTCUTS_DRAWER_MARK_COMPLETE,
         secondaryText: "",
         imageUrl: "",
         selected: false,
