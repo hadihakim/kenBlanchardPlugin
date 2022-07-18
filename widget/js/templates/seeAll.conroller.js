@@ -10,6 +10,7 @@ class SeeAll {
     page: 1,
     pageSize: 7,
     fetchNext:true,
+    scrollTime:300,
   };
   static pointers = {
     searchBar: "searchBar",
@@ -23,6 +24,10 @@ class SeeAll {
     this.state = {...this.state, ...options};
   };
 
+  static lazyLoadHandler=Utilities._debounce(e=>{
+    this.lazyLoad(e)
+  },this.state.scrollTime);
+  
   static seeAllCardsRender = () => {
     let seeAllContainer = document.getElementById(this.pointers.seeAllContainer);
     let myAssets = this.state.data.assets || [];
@@ -34,7 +39,10 @@ class SeeAll {
     
     this.state.page = 1;
     seeAllContainer.innerHTML = '';
-    seeAllContainer.addEventListener('scroll', (e)=>this.lazyLoad(e));
+    seeAllContainer.addEventListener('scroll', (e)=>{
+      this.lazyLoadHandler(e);
+    });
+    
     this.printCards();
   }
 
@@ -82,6 +90,7 @@ class SeeAll {
   }
 
   static lazyLoad = (e) => {
+    console.log("from scroll");
     if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
       this.state.fetchNext = false;
       this.printCards();

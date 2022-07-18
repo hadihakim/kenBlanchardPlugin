@@ -203,6 +203,7 @@ class MyList {
         let listContainer = document.getElementById(this.pointers.listContainer);
         listContainer.innerHTML = "";
         listContainer.addEventListener('scroll', (e) => this.lazyLoad(e))
+        
         let userProfileContainer = document.getElementById(this.pointers.userProfileContainer);
         userProfileContainer.innerHTML = '';
 

@@ -10,6 +10,7 @@ class TeamEffectivenessList {
         page: 1,
         pageSize: 7,
         fetchNext: false,
+        scrollTime:300,
     }
 
     static pointers = {
@@ -268,6 +269,7 @@ class TeamEffectivenessList {
     }
 
     static lazyLoad = (e) => {
+        console.log("www");
         if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
             this.state.fetchNext = false;
             switch (this.state.selectedNav) {
@@ -282,7 +284,9 @@ class TeamEffectivenessList {
             }
         }
     }
-
+    static lazyLoadHandler=Utilities._debounce(e=>{
+        this.lazyLoad(e)
+      },this.state.scrollTime);
     static init = () => {
         let activeContainer = document.getElementById(this.pointers.teamEffectiveness_ListContainer);
         let archiveContainer = document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer);
@@ -291,8 +295,8 @@ class TeamEffectivenessList {
         archiveContainer.innerHTML = '';
         this.state.page = 1;
 
-        activeContainer.addEventListener('scroll', (e) => this.lazyLoad(e));
-        archiveContainer.addEventListener('scroll', (e) => this.lazyLoad(e));
+        activeContainer.addEventListener('scroll', (e) => this.lazyLoadHandler(e));
+        archiveContainer.addEventListener('scroll', (e) => this.lazyLoadHandler(e));
         
         this.loadTabs();
 
