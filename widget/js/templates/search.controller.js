@@ -301,10 +301,10 @@ class Search {
         let id = this.state.renderedCards[i].id;
         title[0].innerText = this.state.renderedCards[i].meta.title;
         if (this.state.renderedCards[i].meta.duration > 0) {
-          duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
+          duration[0].innerHTML = `<span class="iconsTheme material-icons icon schedule-icon"> schedule </span>
                                   <span class="schedule-text bodyText-AppTheme">
                               ${Utilities.timeConvert(
-            this.state.renderedCards[i].meta.duration, "min"
+            this.state.renderedCards[i].meta.duration, "hh|mm"
           )}</span>`;
         }
         card[0].addEventListener("click", () => {
@@ -318,6 +318,7 @@ class Search {
       Utilities.showEmpty(document.getElementById(this.pointers.searchContainer));
     }
     this.state.fetchNext = true;
+    Utilities.setAppTheme();
   }
 
   static lazyLoad = (e) => {

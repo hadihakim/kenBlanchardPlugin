@@ -14,12 +14,20 @@ class HandleAPI {
     static getDataByID = (id, type) => {
         switch (type) {
             case "section":
-                return new Promise((resolve, reject) => {
-                    Assets.get(id, (err, res) => {
-                        if (err) reject(err);
-                        resolve(res);
-                    })
-                });
+                // return new Promise((resolve, reject) => {
+                //     Assets.get(id, (err, res) => {
+                //         if (err) reject(err);
+                //         resolve(res);
+                //     })
+                // });
+                let mySection;
+                this.state.data.sections.forEach(section=>{
+                    if(section.id === id){
+                        mySection = section;
+                        return;
+                    }
+                })
+                return mySection;
                 break;
             case "assets_info":
                 return new Promise((resolve, reject) => {
