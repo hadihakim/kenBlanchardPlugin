@@ -60,6 +60,10 @@ const Strings = {
 	//article strings
 	ARTICLE_TAP_KEY_TAKEAWAYS:"KEY TAKEAWAYS",
 	ARTICLE_TAP_FULL_ARTICLE:"FULL ARTICLE",
+
+	// shortcuts
+	SHORTCUT_REMOVE_BOOKMARK:"Remove Bookmark",
+	SHORTCUT_SET_REMINDER:"Set Reminder",
 	
 }
 
