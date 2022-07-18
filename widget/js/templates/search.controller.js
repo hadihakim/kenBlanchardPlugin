@@ -254,7 +254,10 @@ class Search {
         this.state.renderedCards = [];
         let allAssets = this.state.data.data.assets_info;
         for (const asset in allAssets) {
+          
           if (this.hasSearch(allAssets[asset])) {
+            console.log("from loop", allAssets[asset]);
+            allAssets[asset].id=asset
             this.state.renderedCards.push(allAssets[asset])
           }
         }
