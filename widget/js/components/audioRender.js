@@ -21,14 +21,6 @@ class AudioRender {
     tabs: [],
     audioDrawerItemsList: [
       {
-        text: Strings.AUDIO_DRAWER_MARK_COMPLETE,
-        secondaryText: "",
-        imageUrl: "",
-        selected: false,
-      },
-    ],
-    shortcutDrawerItemsList: [
-      {
         text: Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK,
         secondaryText: "",
         imageUrl: "",
@@ -99,7 +91,7 @@ class AudioRender {
             : Strings.AUDIO_TAP_1
         }</span>
       </span>
-      <span class="mdc-tab-indicator">
+      <span class="mdc-tab-indicator test">
         <span
           class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"
         ></span>
@@ -114,7 +106,7 @@ class AudioRender {
       audioTabContainer[0].appendChild(tabButton);
     });
     let buttons = nodesClone.querySelectorAll(".mdc-tab");
-    let tabIndicators = nodesClone.querySelectorAll(".mdc-tab-indicator");
+    let tabIndicators = nodesClone.querySelectorAll(".test");
     tabIndicators[0].classList.add("mdc-tab-indicator--active");
     buttons.forEach((button, idx) => {
       button.addEventListener("click", () => {
@@ -248,16 +240,28 @@ class AudioRender {
         shortcutItem.querySelectorAll(".shortcutDrawer");
       shortcutDrawerElements.forEach((e) => {
         e.addEventListener("click", () => {
-          this.drawerHandler(this.state.shortcutDrawerItemsList);
+          let list=[{
+            text: Strings.SHORTCUT_REMOVE_BOOKMARK,
+            secondaryText: "",
+            imageUrl: "",
+            selected: false,
+          },
+          { text: Strings.SHORTCUT_SET_REMINDER, secondaryText: "", imageUrl: "", selected: false },
+          ];
+          this.drawerHandler(list)
         });
       });
     });
+
     return div;
   };
 
   static drawerHandler = (itemsList) => {
     PageDetails.openDrawerAudioOrVideoOrArticle(itemsList);
   };
+  static openShortcutDrawer=()=>{
+    console.log("hi");
+  }
 
   static init = (data) => {
     this.setState(data);

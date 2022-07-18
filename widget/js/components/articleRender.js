@@ -93,7 +93,7 @@ if(this.state.data.showKeyTakeaways){
 }
 
         icon[0].addEventListener("click", ()=>{
-          let listItems = [{text: 'Mark Complete', secondaryText: '', imageUrl:'', selected: false}] ;
+          let listItems = [{text: Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK, secondaryText: '', imageUrl:'', selected: false}, {text: Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE, secondaryText: '', imageUrl:'', selected: false}, {text: Strings.VIDEO_SHORTCUTS_DRAWER_SHARE, secondaryText: '', imageUrl:'', selected: false}, {text: Strings.VIDEO_SHORTCUTS_DRAWER_MARK_COMPLETE, secondaryText: '', imageUrl:'', selected: false}];
           PageDetails.openDrawerAudioOrVideoOrArticle(listItems)
         });
 
