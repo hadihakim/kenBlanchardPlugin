@@ -59,7 +59,7 @@ class summaryRender {
             });
             // buildfire.history.push("page detail from chapter",{id:this.state.id});
             this.state.chapterData = chapter;
-            this.graphicalSummariesSecondPage();
+            chapter.premium?this.graphicalSummariesFourthPage():this.graphicalSummariesSecondPage();
           });
         });
     
