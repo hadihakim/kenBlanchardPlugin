@@ -6,9 +6,7 @@ document.getElementById("userProfilePicture").addEventListener("click", () => {
 
 const loadData = async (data) => {
   UserProfile.init(authManager.currentUser);
-  Explore.setPageData({ data: { data }, userData: authManager.currentUser });
-  Explore.init("main");
-  Explore.init("explore");
+  Explore.init();
   Search.setData({ data });
   Search.init();
   Utilities.initBack();
@@ -19,12 +17,12 @@ const loadData = async (data) => {
 const init = async() => {
   Utilities.getAppTheme();
   // UserProfile.init();
-  Skeleton.initMainSkeleton(sectionsContainer);
+  // Skeleton.initMainSkeleton(sectionsContainer);
   Utilities.setAppTheme();
 
   await HandleAPI.getSettingsData();
   await HandleAPI.getCurrentUser();
-  loadData(HandleAPI.state.data)
+  loadData(HandleAPI.state.data);
 }
 
 init();

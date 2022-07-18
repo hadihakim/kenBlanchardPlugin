@@ -111,8 +111,7 @@ class Navigation {
 		}
 		Search.state.searchText = '';
 
-		SeeAll.setData(state);
-		SeeAll.init();
+		SeeAll.init(state);
 
 		Utilities.setAppTheme();
 

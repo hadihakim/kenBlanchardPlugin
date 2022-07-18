@@ -38,12 +38,20 @@ class HandleAPI {
                 });
                 break;
             case "topic":
-                return new Promise((resolve, reject) => {
-                    Assets.get(id, (err, res) => {
-                        if (err) reject(err);
-                        resolve(res);
-                    })
-                });
+                // return new Promise((resolve, reject) => {
+                //     Assets.get(id, (err, res) => {
+                //         if (err) reject(err);
+                //         resolve(res);
+                //     })
+                // });
+                let myTopic;
+                this.state.data.topics.forEach(topic=>{
+                    if(topic.id === id){
+                        myTopic = topic.title;
+                        return;
+                    }
+                })
+                return myTopic;
                 break;
             default:
                 break;

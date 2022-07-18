@@ -1,9 +1,9 @@
 class SeeAll {
   static state = {
     title: "see all",
-    data: fakeData,
+    data: {},
     userData: config.userConfig,
-    renderedCards: fakeData,
+    renderedCards: [],
     pageType: "seeAll",
     duration: true,
     printedCards: 0,
@@ -26,10 +26,10 @@ class SeeAll {
   static seeAllCardsRender = () => {
     let seeAllContainer = document.getElementById(this.pointers.seeAllContainer);
     let myAssets = this.state.data.assets || [];
-    
+
     this.state.renderedCards = []; 
     myAssets.forEach(asset => {
-      this.state.renderedCards.push(this.state.apiData.data.assets_info[asset]);
+      this.state.renderedCards.push(HandleAPI.state.data.assets_info[asset]);
     })
     
     this.state.page = 1;
@@ -88,7 +88,8 @@ class SeeAll {
     }
   }
 
-  static init() {
+  static init(options) {
+		this.setData(options);
 
     Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
 

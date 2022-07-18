@@ -26,13 +26,13 @@ class Utilities {
 			case "hh|mm":
 				minutes = String(minutes).padStart(1, "0");
 				hours = String(hours).padStart(1, "0");
-				return hours!=="0"?(hours + "h ") + (minutes!=="0"?minutes + "min":"")
+				return hours !== "0" ? (hours + "h ") + (minutes !== "0" ? minutes + "min" : "")
 					:
-				(minutes!=="0"?minutes + "min":"")
+					(minutes !== "0" ? minutes + "min" : "")
 			default:
 				return "unknown"
 		}
-	  };
+	};
 
 	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
@@ -236,22 +236,22 @@ class Utilities {
 									} else if (config.searchFrom == "from-see-all") {
 										Navigation.openSeeAll();
 									}
-								} else if ( from == "Details from CourseDetails") {
+								} else if (from == "Details from CourseDetails") {
 									let id = result[result.length - 1].options.id;
-									Navigation.openPageDetails(id,result[result.length - 1].options.title);
+									Navigation.openPageDetails(id, result[result.length - 1].options.title);
 
 								} else if (from == "user profile from list" || from == "User profile from Details") {
 									Navigation.openUserProfile();
 								} else if (from == "user List from temEffectiveness list") {
-									PageDetails.innerHtml="";
+									PageDetails.innerHtml = "";
 									Navigation.openUserList();
 								} else if (from == "Personal home Page") {
 									Navigation.openMain();
 								} else if (from == "active list from CourseDetails") {
 									Navigation.openTeamEffectivenessList(result[result.length - 1].options.to);
-								}else if(from == "page detail from chapter"){
-									summaryRender.init(result[result.length - 1].options.id,result[result.length - 1].options.data);
-								}else if(from == "search from details"){
+								} else if (from == "page detail from chapter") {
+									summaryRender.init(result[result.length - 1].options.id, result[result.length - 1].options.data);
+								} else if (from == "search from details") {
 									Navigation.openSearch();
 								}
 								break;
@@ -304,7 +304,6 @@ class Utilities {
 	}
 
 	static showEmpty = (container) => {
-		console.log("from function ----");
 		container.innerHTML = `
 		<div class="emptySearch_Container">
 			<img src="./media/empty_page.svg" alt="Empty Search" />
@@ -314,14 +313,23 @@ class Utilities {
 		`
 	}
 
-	static _debounce=(cb,delay=1000)=>{
+	static _debounce = (cb, delay = 1000) => {
 		let timeout;
-		return (...args) =>{
-		  clearTimeout(timeout);
-		  timeout = setTimeout(()=>{
-			cb(...args);
-		  },delay);
+		return (...args) => {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				cb(...args);
+			}, delay);
 		}
-	  }
+	}
+
+	static showToast = message => {
+		buildfire.dialog.toast({
+			message: message,
+			duration:300,
+			hideDismissButton:true,
+			type:'info',
+		});
+	}
 };
 
