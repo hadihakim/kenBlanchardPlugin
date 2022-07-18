@@ -9,7 +9,9 @@ class Search {
     pageSize: 6,
     searchTime: 300,
     renderedCards: [],
-    fetchNext: true
+    fetchNext: true,
+    emptySearch:true,
+    searchText:""
   };
 
   static pointers = {
@@ -34,9 +36,9 @@ class Search {
 
   static hasSearch = (data) => {
     return (
-      config.search == "" ||
-      data.meta.title.toLowerCase().search(config.search.toLowerCase()) >= 0 ||
-      data.meta.description.toLowerCase().search(config.search.toLowerCase()) >=
+      this.state.searchText == "" ||
+      data.meta.title.toLowerCase().search(this.state.searchText.toLowerCase()) >= 0 ||
+      data.meta.description.toLowerCase().search(this.state.searchText.toLowerCase()) >=
       0
     );
   };
@@ -52,7 +54,7 @@ class Search {
     });
   };
 
-  static sort = (data, type=this.state.sortType) => {
+  static sort = (data, type = this.state.sortType) => {
     if (type === "Most Recent") {
       data.sort((a, b) => {
         if (a.meta.createdOn < b.meta.createdOn) {
@@ -200,8 +202,10 @@ class Search {
       );
       if (element.layout == "horizontal-1") {
         Skeleton.horizontal1_Skeleton(container);
-      } else {
+      } else if(element.layout == "horizontal") {
         Skeleton.horizontal_Skeleton(container);
+      }else{
+        Skeleton.verticalSeeAll_Skeleton(container);
       }
       const myTimeout = setTimeout(() => {
         Explore.filterAndPrintData(this.state.data, element, "main");
@@ -209,24 +213,30 @@ class Search {
     });
 
     this.state.data.data.sections.forEach((element) => {
-      if (element.isExplore) {
-        const container = document.getElementById(
-          `${element.id}-container-explore`
-        );
-        if (element.layout == "horizontal-1") {
-          Skeleton.horizontal1_Skeleton(container);
-        } else {
-          Skeleton.horizontal_Skeleton(container);
-        }
+      // if (element.isExplore) {
+      const container = document.getElementById(
+        `${element.id}-container-explore`
+      );
+      if (element.layout == "horizontal-1") {
+        Skeleton.horizontal1_Skeleton(container);
+      } else if(element.layout == "horizontal") {
+        Skeleton.horizontal_Skeleton(container);
+      }else{
+        Skeleton.verticalSeeAll_Skeleton(container);
       }
+      // }
       const myTimeout = setTimeout(() => {
         Explore.filterAndPrintData(this.state.data, element, "explore");
       }, 1000);
     });
 
     if (Navigation.state.activeLayOut === 'see all') {
-      config.renderedCard = 0;
-      SeeAll.seeAllCardsRender();
+      document.getElementById(this.pointers.seeAllContainer).innerHTML = '';
+      Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
+      setTimeout(() => {
+        config.renderedCard = 0;
+        SeeAll.seeAllCardsRender();
+      }, 300)
     }
 
     if (Navigation.state.activeLayOut === 'search') {
@@ -241,31 +251,24 @@ class Search {
 
   static search = (e) => {
     let searchedData = e.target.value;
-    config.search = searchedData;
+    this.state.searchText = searchedData;
     this.state.page = 1;
 
     Navigation.openSearch();
     Skeleton.verticalSeeAll_Skeleton(searchContainer);
 
-    clearTimeout(this.state.searchTime);
-    this.state.searchTime = setTimeout(() => {
-
-      const myTimeout = setTimeout(() => {
-        this.state.renderedCards = [];
-        let allAssets = this.state.data.data.assets_info;
-        for (const asset in allAssets) {
-          
-          if (this.hasSearch(allAssets[asset])) {
-            console.log("from loop", allAssets[asset]);
-            allAssets[asset].id=asset
-            this.state.renderedCards.push(allAssets[asset])
-          }
-        }
-        document.getElementById(this.pointers.searchContainer).innerHTML = '';
-        this.printSearchedCards();
-        document.getElementById(this.pointers.searchContainer).addEventListener('scroll', (e) => this.lazyLoad(e))
-      }, 1000);
-    }, 300);
+    this.state.renderedCards = [];
+    let allAssets = this.state.data.data.assets_info;
+    for (const asset in allAssets) {
+      if (this.hasSearch(allAssets[asset])) {
+        allAssets[asset].id=asset
+        this.state.renderedCards.push(allAssets[asset])
+      }
+    }
+    document.getElementById(this.pointers.searchContainer).innerHTML = '';
+    this.state.emptySearch=true;
+    this.printSearchedCards();
+    document.getElementById(this.pointers.searchContainer).addEventListener('scroll', (e) => this.lazyLoad(e))
   };
 
   static printSearchedCards = () => {
@@ -277,9 +280,10 @@ class Search {
 
     this.state.page += 1;
     this.state.renderedCards = this.sort(this.state.renderedCards, this.state.sortType);
-
+    
     for (let i = firstIndex; i < lastIndex; i++) {
       if (HandleAPI.handleFilter(this.state.renderedCards[i].meta.topics)) {
+        this.state.emptySearch = false;
         const nodesClone = document.getElementById(this.pointers.seeAllTemplate).content.cloneNode(true);
 
         let image = nodesClone.querySelectorAll(".image");
@@ -308,6 +312,10 @@ class Search {
         document.getElementById(this.pointers.searchContainer).appendChild(nodesClone);
       }
     }
+    if(this.state.emptySearch){
+      console.log("Empty will be shown --->");
+      Utilities.showEmpty(document.getElementById(this.pointers.searchContainer));
+    }
     this.state.fetchNext = true;
   }
 
@@ -326,7 +334,13 @@ class Search {
     sortIcon.addEventListener("click", this.sortDrawer);
 
     let input = document.getElementById(this.pointers.searchInput);
-    input.addEventListener("keyup", (e) => this.search(e));
+
+    input.addEventListener("keyup", (e) =>{
+      searchInputHandler(e)
+    });
+    const searchInputHandler=Utilities._debounce(e=>{
+      this.search(e)
+    },this.state.searchTime);
     this.trendingRender(this.state.data, "trendingContainer");
   };
 }

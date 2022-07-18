@@ -103,7 +103,7 @@ class Explore {
           sectionsContainer.classList.add("hidden");
         } else {
           sectionsContainer.classList.remove("hidden");
-          renderArray = Search.sort(renderArray, config.sortType);
+          renderArray = Search.sort(renderArray);
           renderArray.forEach((element) => {
             if (element.layout === "horizontal") {
               this.printRecommended(

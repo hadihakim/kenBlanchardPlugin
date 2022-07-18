@@ -36,14 +36,13 @@ class Navigation {
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		searchContainer.classList.add("hidden");
 		
 		// document.getElementById("videoPageContainer").classList.add("hidden");
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
 
-		config.search = '';
+		Search.state.searchText = '';
 		Utilities.setAppTheme();
 	}
 
@@ -60,7 +59,6 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		pageDetails.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		searchContainer.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 
@@ -69,7 +67,7 @@ class Navigation {
 		explorePage.classList.remove("hidden");
 
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
-		config.search = '';
+		Search.state.searchText = '';
 		Utilities.setAppTheme();
 	}
 
@@ -105,14 +103,13 @@ class Navigation {
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		searchContainer.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 
 		if (state) {
 			this.state.seeAllState = state;
 		} else {
 			state = this.state.seeAllState;
 		}
-		config.search = '';
+		Search.state.searchText = '';
 
 		SeeAll.setData(state);
 		SeeAll.init();
@@ -135,7 +132,6 @@ class Navigation {
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 
 		if (Navigation.state.searchOpened) {
@@ -201,7 +197,6 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		searchBar.classList.add("hidden");
 		sortIcon.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
@@ -212,7 +207,7 @@ class Navigation {
 		pageDetails.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
 
-		config.search = '';
+		Search.state.searchText = '';
 		PageDetails.init(id);
 		Utilities.scrollTop();
 
@@ -250,7 +245,6 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		searchBar.classList.add("hidden");
 		sortIcon.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
@@ -261,7 +255,7 @@ class Navigation {
 		courseDetailsContainer.classList.remove("hidden");
 		mainContainer.classList.remove("hidden");
 
-		config.search = '';
+		Search.state.searchText = '';
 
 		CourseDetails.init(id);
 
@@ -271,7 +265,6 @@ class Navigation {
 	static openEmptySearch = () => {
 		this.state.activeLayOut = 'search';
 
-		emptySearch.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
 		seeAllContainer.classList.remove("hidden");
@@ -304,7 +297,7 @@ class Navigation {
 		buildfire.history.push("Growth Profile", {
 			showLabelInTitlebar: true,
 		});
-		config.search = '';
+		Search.state.searchText = '';
 
 		Utilities.setAppTheme();
 	}
@@ -329,7 +322,7 @@ class Navigation {
 		myList_PageContainer.classList.remove("hidden");
 		userProfileContainer.classList.remove("hidden");
 
-		config.search = '';
+		Search.state.searchText = '';
 		if (options?.data) {
 			let _options = {
 				data: options.data
@@ -363,7 +356,7 @@ class Navigation {
 		teamEffectiveness_PageContainer.classList.remove("hidden");
 		userProfileContainer.classList.remove("hidden");
 
-		config.search = '';
+		Search.state.searchText = '';
 
 		if (options?.id) {
 			// call api

@@ -29,22 +29,19 @@ class UserProfile {
         image:
           "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
         label: "Newbie",
-        message:
-          "Complete 3 courses or 25 content pieces and collect this badge!",
+        message: Strings.USER_PROFILE_BADGES__TO_ACHIEVE_DIALOG_BODY,
       },
       {
         image:
           "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
         label: "Ambassador",
-        message:
-          "Complete 3 courses or 25 content pieces and collect this badge!",
+        message: Strings.USER_PROFILE_BADGES__TO_ACHIEVE_DIALOG_BODY,
       },
       {
         image:
           "https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png",
         label: "Ambassador",
-        message:
-          "Complete 3 courses or 25 content pieces and collect this badge!",
+        message: Strings.USER_PROFILE_BADGES__TO_ACHIEVE_DIALOG_BODY,
       },
     ],
 
@@ -438,10 +435,10 @@ class UserProfile {
     });
     this.loadCharts(percent);
     let canvas = document.createElement("canvas");
-    Utilities.setAttributesHandler(canvas,{
-      id:"assesmentProgress",
-      class:"assesmentsChart"
-    })
+    Utilities.setAttributesHandler(canvas, {
+      id: "assesmentProgress",
+      class: "assesmentsChart",
+    });
     assesmentsBar[0].appendChild(canvas);
     return nodesClone;
   };

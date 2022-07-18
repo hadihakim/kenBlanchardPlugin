@@ -5,7 +5,6 @@ class Skeleton {
 	}
 
     static horizontal1_Skeleton = (container) => {
-		emptySearch.classList.add("hidden");
         Utilities.scrollTop();
         container.innerHTML = '';
         const nodesClone = horizontal1_SkeletonTemplate.content.cloneNode(true);
@@ -21,7 +20,6 @@ class Skeleton {
     }
 
     static horizontal_Skeleton = (container) => {
-		emptySearch.classList.add("hidden");
         Utilities.scrollTop();
         container.innerHTML = '';
         const nodesClone = horizontalSkeletonTemplate.content.cloneNode(true);
@@ -40,7 +38,6 @@ class Skeleton {
     }
 
     static verticalSeeAll_Skeleton = (container) => {
-		emptySearch.classList.add("hidden");
         Utilities.scrollTop();
         container.innerHTML = '';
         const nodesClone = verticalSeeAll_SkeletonTemplate.content.cloneNode(true);
@@ -67,11 +64,11 @@ class Skeleton {
 		this.state.mainSkeletonSections.forEach((section,idx)=>{
 			let headContainer = ui.createElement('div',container, `<div class="container-header">${section}</div>`, ['horizontal'], `skeletonSection-${idx}`);
 			let skeletonContainer = ui.createElement('div',headContainer, '', [], `skeletonContainer-${idx}`);
-			// if(idx==0){
-			// 	this.horizontal1_Skeleton(skeletonContainer);
-			// }else{
-			// 	this.horizontal_Skeleton(skeletonContainer);
-			// }
+			if(idx==0){
+				this.horizontal1_Skeleton(skeletonContainer);
+			}else{
+				this.horizontal_Skeleton(skeletonContainer);
+			}
 		})
 	}
 }

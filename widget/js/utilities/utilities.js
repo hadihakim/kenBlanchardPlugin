@@ -302,5 +302,26 @@ class Utilities {
 			el.setAttribute(key, attrs[key]);
 		}
 	}
+
+	static showEmpty = (container) => {
+		console.log("from function ----");
+		container.innerHTML = `
+		<div class="emptySearch_Container">
+			<img src="./media/empty_page.svg" alt="Empty Search" />
+			<p id="emptyTitle">Nothing Found</p>
+			<p id="emptyDescription">Refine your search...</p>
+      	</div>
+		`
+	}
+
+	static _debounce=(cb,delay=1000)=>{
+		let timeout;
+		return (...args) =>{
+		  clearTimeout(timeout);
+		  timeout = setTimeout(()=>{
+			cb(...args);
+		  },delay);
+		}
+	  }
 };
 
