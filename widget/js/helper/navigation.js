@@ -170,7 +170,15 @@ class Navigation {
 			});
 		}else if(!pageDetails.classList.contains("hidden")) {
 			console.log("from chapters");
-		}else{
+		}else if(!searchContainer.classList.contains("hidden")){
+			// search from details
+			buildfire.history.push(title, {
+				showLabelInTitlebar: true,
+				from: "search from details",
+
+			});
+		}
+		else{
 			
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,

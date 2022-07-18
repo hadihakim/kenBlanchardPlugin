@@ -213,34 +213,6 @@ class Utilities {
 							case "Explore":
 								Navigation.openMain();
 								break;
-							// case "Home from See All":
-							// 	Navigation.openMain();
-							// 	break;
-							// case "Explore from See All":
-							// 	Navigation.openExplore();
-							// 	break;
-							// case "Explore from Details":
-							// 	Navigation.openExplore();
-							// 	break;
-							// case "See All from Details":
-							// 	if (config.searchFrom == "from-main" || config.searchFrom == "from-explore") {
-							// 		Navigation.openSearch();
-							// 	} else if (config.searchFrom == "from-see-all") {
-							// 		Navigation.openSeeAll();
-							// 	}
-							// break;
-							// case "page detail from chapter":
-							// 	let id = result[result.length - 1].options.id;
-							// 	Navigation.openPageDetails(id);
-							// 	PageDetails.setState(id);
-							// 	PageDetails.init();
-							// 	break;
-							// case "Details from CourseDetails":
-							// 	let id2 = result[result.length - 1].options.id;
-							// 	Navigation.openPageDetails();
-							// 	PageDetails.setState(id2);
-							// 	PageDetails.init();
-							// 	break;
 							case "Search":
 								if (config.searchFrom == "from-main") {
 									Navigation.openMain();
@@ -252,13 +224,6 @@ class Utilities {
 							case "Growth Profile":
 								Navigation.openMain();
 								break;
-							// case "user profile from list":
-							// 	Navigation.openUserProfile();
-							// 	break;
-
-							// case "user List from temEffectiveness list":
-							// 	Navigation.openUserList();
-							// 	break;
 							default:
 								let from = result[result.length - 1].options.from;
 								if (from == "Home from See All" || from == "Home from Details") {
@@ -286,6 +251,8 @@ class Utilities {
 									Navigation.openTeamEffectivenessList(result[result.length - 1].options.to);
 								}else if(from == "page detail from chapter"){
 									summaryRender.init(result[result.length - 1].options.id,result[result.length - 1].options.data);
+								}else if(from == "search from details"){
+									Navigation.openSearch();
 								}
 								break;
 						}
