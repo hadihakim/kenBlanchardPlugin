@@ -52,7 +52,7 @@ class Search {
     });
   };
 
-  static sort = (data, type=this.state.sortType) => {
+  static sort = (data, type = this.state.sortType) => {
     if (type === "Most Recent") {
       data.sort((a, b) => {
         if (a.meta.createdOn < b.meta.createdOn) {
@@ -209,24 +209,28 @@ class Search {
     });
 
     this.state.data.data.sections.forEach((element) => {
-      if (element.isExplore) {
-        const container = document.getElementById(
-          `${element.id}-container-explore`
-        );
-        if (element.layout == "horizontal-1") {
-          Skeleton.horizontal1_Skeleton(container);
-        } else {
-          Skeleton.horizontal_Skeleton(container);
-        }
+      // if (element.isExplore) {
+      const container = document.getElementById(
+        `${element.id}-container-explore`
+      );
+      if (element.layout == "horizontal-1") {
+        Skeleton.horizontal1_Skeleton(container);
+      } else {
+        Skeleton.horizontal_Skeleton(container);
       }
+      // }
       const myTimeout = setTimeout(() => {
         Explore.filterAndPrintData(this.state.data, element, "explore");
       }, 1000);
     });
 
     if (Navigation.state.activeLayOut === 'see all') {
-      config.renderedCard = 0;
-      SeeAll.seeAllCardsRender();
+      document.getElementById(this.pointers.seeAllContainer).innerHTML = '';
+      Skeleton.verticalSeeAll_Skeleton(seeAllContainer);
+      setTimeout(() => {
+        config.renderedCard = 0;
+        SeeAll.seeAllCardsRender();
+      }, 300)
     }
 
     if (Navigation.state.activeLayOut === 'search') {
@@ -274,9 +278,11 @@ class Search {
 
     this.state.page += 1;
     this.state.renderedCards = this.sort(this.state.renderedCards, this.state.sortType);
-
+    
+    let emptySearch = true;
     for (let i = firstIndex; i < lastIndex; i++) {
       if (HandleAPI.handleFilter(this.state.renderedCards[i].meta.topics)) {
+        emptySearch = false;
         const nodesClone = document.getElementById(this.pointers.seeAllTemplate).content.cloneNode(true);
 
         let image = nodesClone.querySelectorAll(".image");
@@ -304,6 +310,10 @@ class Search {
         });
         document.getElementById(this.pointers.searchContainer).appendChild(nodesClone);
       }
+    }
+    if(emptySearch){
+      console.log("Empty will be shown --->");
+      Utilities.showEmpty(document.getElementById(this.pointers.searchContainer));
     }
     this.state.fetchNext = true;
   }

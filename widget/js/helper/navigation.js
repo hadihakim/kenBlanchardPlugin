@@ -36,7 +36,6 @@ class Navigation {
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		seeAllContainer.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		searchContainer.classList.add("hidden");
 		
@@ -60,7 +59,6 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		pageDetails.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		searchContainer.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 
@@ -105,7 +103,6 @@ class Navigation {
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		searchContainer.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 
 		if (state) {
 			this.state.seeAllState = state;
@@ -135,7 +132,6 @@ class Navigation {
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
 		pageDetails.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 
 		if (Navigation.state.searchOpened) {
@@ -193,7 +189,6 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		searchBar.classList.add("hidden");
 		sortIcon.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		courseDetailsContainer.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
@@ -242,7 +237,6 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		searchBar.classList.add("hidden");
 		sortIcon.classList.add("hidden");
-		emptySearch.classList.add("hidden");
 		pageDetails.classList.add("hidden");
 		userProfile.classList.add("hidden");
 		myList_PageContainer.classList.add("hidden");
@@ -263,7 +257,6 @@ class Navigation {
 	static openEmptySearch = () => {
 		this.state.activeLayOut = 'search';
 
-		emptySearch.classList.remove("hidden");
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
 		seeAllContainer.classList.remove("hidden");
