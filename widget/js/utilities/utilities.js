@@ -271,7 +271,7 @@ class Utilities {
 									} else if (config.searchFrom == "from-see-all") {
 										Navigation.openSeeAll();
 									}
-								} else if (from == "page detail from chapter" || from == "Details from CourseDetails") {
+								} else if ( from == "Details from CourseDetails") {
 									let id = result[result.length - 1].options.id;
 									Navigation.openPageDetails(id,result[result.length - 1].options.title);
 
@@ -284,6 +284,8 @@ class Utilities {
 									Navigation.openMain();
 								} else if (from == "active list from CourseDetails") {
 									Navigation.openTeamEffectivenessList(result[result.length - 1].options.to);
+								}else if(from == "page detail from chapter"){
+									summaryRender.init(result[result.length - 1].options.id,result[result.length - 1].options.data);
 								}
 								break;
 						}

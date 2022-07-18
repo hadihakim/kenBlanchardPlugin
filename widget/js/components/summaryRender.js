@@ -55,6 +55,7 @@ class summaryRender {
               from: "page detail from chapter",
               id: this.state.id,
               title:chapter.subTitle,
+              data:this.state.data,
             });
             // buildfire.history.push("page detail from chapter",{id:this.state.id});
             this.state.chapterData = chapter;
