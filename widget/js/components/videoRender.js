@@ -124,7 +124,7 @@ class videoDetails {
 
     static openMoreOptions = () => {
         let listItems = [];
-        (this.state.activeTab === "details" || this.state.activeTab === "transcript" ? listItems = [{text: 'Mark Complete', secondaryText: '', imageUrl:'', selected: false}] : listItems = [{text: 'Bookmark Lesson', secondaryText: '', imageUrl:'', selected: false}, {text: 'Add Note', secondaryText: '', imageUrl:'', selected: false}, {text: 'Share', secondaryText: '', imageUrl:'', selected: false}, {text: 'Mark Complete', secondaryText: '', imageUrl:'', selected: false}])
+        (this.state.activeTab === "details" || this.state.activeTab === "transcript" ? listItems = [{text: Strings.VIDEO_DRAWER_MARK_COMPLETE, secondaryText: '', imageUrl:'', selected: false}] : listItems = [{text: Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK, secondaryText: '', imageUrl:'', selected: false}, {text: Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE, secondaryText: '', imageUrl:'', selected: false}, {text: Strings.VIDEO_SHORTCUTS_DRAWER_SHARE, secondaryText: '', imageUrl:'', selected: false}, {text: Strings.VIDEO_SHORTCUTS_DRAWER_MARK_COMPLETE, secondaryText: '', imageUrl:'', selected: false}])
           PageDetails.openDrawerAudioOrVideoOrArticle(listItems)
     }
 

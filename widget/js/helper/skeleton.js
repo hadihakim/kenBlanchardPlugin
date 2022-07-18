@@ -64,11 +64,11 @@ class Skeleton {
 		this.state.mainSkeletonSections.forEach((section,idx)=>{
 			let headContainer = ui.createElement('div',container, `<div class="container-header">${section}</div>`, ['horizontal'], `skeletonSection-${idx}`);
 			let skeletonContainer = ui.createElement('div',headContainer, '', [], `skeletonContainer-${idx}`);
-			// if(idx==0){
-			// 	this.horizontal1_Skeleton(skeletonContainer);
-			// }else{
-			// 	this.horizontal_Skeleton(skeletonContainer);
-			// }
+			if(idx==0){
+				this.horizontal1_Skeleton(skeletonContainer);
+			}else{
+				this.horizontal_Skeleton(skeletonContainer);
+			}
 		})
 	}
 }

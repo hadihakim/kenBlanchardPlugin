@@ -32,7 +32,7 @@ const Strings = {
 	USER_PROFILE_BADGES_ACHIEVED_TEXT:"Badges Achieved",
 	USER_PROFILE_BADGES__TO_ACHIEVE_TEXT:"Badges To Achieve",
 	USER_PROFILE_AVERAGE_CHART_TEXT:"Average Progress",
-	
+	USER_PROFILE_BADGES__TO_ACHIEVE_DIALOG_BODY:"Complete 3 courses or 25 content pieces and collect this badge!",	
 	
 	// Empty state
 	EMPTY_TITLE:"Nothing Found",
@@ -42,13 +42,24 @@ const Strings = {
 	VIDEO_DETAILS_TAB: "Details",
 	VIDEO_TRANSCRIPT_TAB: "Transcript",
 	VIDEO_SHORTCUTS_TAB: "Shortcuts",
+	VIDEO_DRAWER_MARK_COMPLETE:"Mark Complete",
+	VIDEO_SHORTCUTS_DRAWER_BOOKMARK:"Bookmark Lesson",
+	VIDEO_SHORTCUTS_DRAWER_ADD_NOTE:"Add Note",
+	VIDEO_SHORTCUTS_DRAWER_SHARE:"Share",
+	VIDEO_SHORTCUTS_DRAWER_MARK_COMPLETE:"Mark Complete",
 	// audio strings
 	AUDIO_TAP_1:"details",
 	AUDIO_TAP_2:"transcript",
 	AUDIO_TAP_3:"shortcuts",
+	AUDIO_DRAWER_MARK_COMPLETE:"Mark Complete",
+	AUDIO_SHORTCUTS_DRAWER_BOOKMARK:"Bookmark Lesson",
+	AUDIO_SHORTCUTS_DRAWER_ADD_NOTE:"Add Note",
+	AUDIO_SHORTCUTS_DRAWER_SHARE:"Share",
+	AUDIO_SHORTCUTS_DRAWER_MARK_COMPLETE:"Mark Complete",
 
 	//article strings
 	ARTICLE_TAP_KEY_TAKEAWAYS:"KEY TAKEAWAYS",
 	ARTICLE_TAP_FULL_ARTICLE:"FULL ARTICLE",
+	
 }
 
