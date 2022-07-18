@@ -174,7 +174,7 @@ class Navigation {
 			});
 		}else if(!pageDetails.classList.contains("hidden")) {
 			console.log("from chapters");
-		}else if(!contentContainer.classLisbt.contains("hidden")){
+		}else{
 			
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
