@@ -4,7 +4,6 @@
 /* shared style for all cards */
 .sectionContainer {
     padding: 1rem;
-    position: relative;
 }
 
 .sectionContainer .sectionHeader {
@@ -12,12 +11,7 @@
     flex-direction: row;
     justify-content: space-between;
     position: sticky;
-    top: 4rem;
-    z-index: 1;
     background: white;
-    height: 3rem;
-    /* line-height: 3rem; */
-    padding-top: 0.75rem;
 }
 
 .sectionContainer .sectionHeader .sectionTitle {
