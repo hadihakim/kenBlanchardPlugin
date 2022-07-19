@@ -62,7 +62,9 @@ const Strings = {
 	ARTICLE_TAP_FULL_ARTICLE:"FULL ARTICLE",
 
 	// shortcuts
-	SHORTCUT_REMOVE_BOOKMARK:"Remove Bookmark",
+	
+	SHORTCUT_BOOKMARK_SHORTCUT:"Bookmark Shortcut",
+	SHORTCUT_BOOKMARK_SHORTCUT:"Remove Bookmark",
 	SHORTCUT_SET_REMINDER:"Set Reminder",
 	
 }
