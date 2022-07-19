@@ -295,11 +295,22 @@ class videoDetails {
       : "";
   };
 
+  static checkIsBookmarked = async() => {
+    let allBookmarks=await getAllBookmarks();
+    let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===this.state.data.id);
+    filteredBookmarks.length>0?
+      this.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK
+      :
+      this.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK
+    ;
+  };
+
   static initVideoDetails = (data) => {
     this.setState(data);
     this.checkTabsExistance();
     this.renderVideoMainPage();
     this.renderTabs();
     this.initActiveTab();
+    this.checkIsBookmarked();
   };
 }
