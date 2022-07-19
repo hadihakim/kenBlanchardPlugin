@@ -1,5 +1,6 @@
 class AudioRender {
   static state = {
+    id:"",
     data: {},
     tabs: [],
     audioDrawerItemsList: [
@@ -48,7 +49,8 @@ class AudioRender {
     pageDetails: "pageDetails",
     audioTemplate: "audioTemplate",
   };
-  static setState = (data) => {
+  static setState = (id,data) => {
+    this.state.id=id;
     this.state.data = data;
     this.state.tabs = [];
     if (data.showDetails) {
@@ -124,6 +126,7 @@ class AudioRender {
           tabIndicators[idx].classList.add("mdc-tab-indicator--active");
         });
       });
+ 
     }
 
     container.appendChild(nodesClone);
@@ -171,6 +174,7 @@ class AudioRender {
         element[0].innerHTML = "";
         element[0].appendChild(this.detailsUi(this.state.data.details));
       }
+      
       Utilities.setAppTheme();
     }
   };
@@ -275,8 +279,8 @@ class AudioRender {
     ;
   };
 
-  static init = (data) => {
-    this.setState(data);
+  static init = (id,data) => {
+    this.setState(id,data);
     this.render();
     this.checkIsBookmarked();
     

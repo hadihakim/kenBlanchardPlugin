@@ -1,10 +1,10 @@
-const{addBookmark,deletesBookmark,getAllBookmarks}= Utilities.bookmark();
+const { addBookmark, deletesBookmark, getAllBookmarks } = Utilities.bookmark();
 class PageDetails {
   static state = {
     id: "",
     data: {},
     chapterData: {},
-    isBookmarked:false,
+    isBookmarked: false,
   }
   static setState = async (id) => {
     this.state.id = id;
@@ -12,7 +12,88 @@ class PageDetails {
     this.state.data = newRes.data
   }
 
+  static audioDrawerItemsListAction = (resultText) => {
+    switch (resultText) {
+      case Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK:
+        addBookmark({
+          id: this.state.data.id,
+          title: this.state.data.meta.title,
+          icon: Utilities.cropImage(this.state.data.meta.image, "s", "1:1"),
+          type: this.state.data.type
+        });
+        AudioRender.state.audioDrawerItemsList[0].text = Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+        break;
+      case Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK:
+        deletesBookmark(this.state.data.id, this.state.data.type);
+        AudioRender.state.audioDrawerItemsList[0].text = Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
+        break;
+      case Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE:
+        Utilities.addNote({
+          itemId: this.state.id,
+          title: this.state.data.title,
+          imageUrl: this.state.data.image,
+        });
+        break;
+      default:
+        break;
+    }
 
+
+  }
+
+  static articleDrawerItemsListAction(resultText) {
+    switch (resultText) {
+      case Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK:
+        addBookmark({
+          id: this.state.data.id,
+          title: this.state.data.meta.title,
+          icon: Utilities.cropImage(this.state.data.meta.image, "s", "1:1"),
+          type: "article"
+        });
+        ArticleRender.state.articleDrawerItemsList[0].text = Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+        break;
+      case Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK:
+        deletesBookmark(this.state.data.id, "article");
+        ArticleRender.state.articleDrawerItemsList[0].text = Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK;
+        break;
+      case Strings.ARTICLE_SHORTCUTS_DRAWER_ADD_NOTE:
+        Utilities.addNote({
+          itemId: this.state.id,
+          title: this.state.data.title,
+          imageUrl: this.state.data.image,
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  static videoDrawerItemsListAction(resultText) {
+    switch (resultText) {
+      case Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK:
+        addBookmark({
+          id: this.state.data.id,
+          title: this.state.data.meta.title,
+          icon: Utilities.cropImage(this.state.data.meta.image, "s", "1:1"),
+          type: this.state.data.type
+        });
+        videoDetails.state.videoDrawerItemsList[0].text = Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+        break;
+      case Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK:
+        deletesBookmark(this.state.data.id, this.state.data.type);
+        videoDetails.state.videoDrawerItemsList[0].text = Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK;
+        break;
+      case Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE:
+        Utilities.addNote({
+          itemId: this.state.id,
+          title: this.state.data.title,
+          imageUrl: this.state.data.image,
+        });
+        break;
+      default:
+        break;
+    }
+  }
 
   static openDrawerAudioOrVideoOrArticle = (options) => {
     buildfire.components.drawer.open(
@@ -26,83 +107,31 @@ class PageDetails {
         autoUseImageCdn: true,
         listItems: options
       },
-       (err, result) => {
+      (err, result) => {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
-        console.log("Selected Contacts", result.text);
-        if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK && this.state.data.type === "audio")  {
-            addBookmark({
-              id: this.state.data.id,
-              title:this.state.data.meta.title,
-              icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
-              type: this.state.data.type
-            });
-            AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
-          }
-          if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK && this.state.data.type === "audio") {
-            deletesBookmark(this.state.data.id, this.state.data.type);
-            AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
+        // to manage bookmarks and notes for each asset type
+        switch (this.state.data.type) {
+          case "audio":
+            this.audioDrawerItemsListAction(result.text);
+            break;
+          case "video":
+            this.videoDrawerItemsListAction(result.text);
+            break;
+          case "article":
+            this.articleDrawerItemsListAction(result.text);
+            break;
+          default:
+            break;
         }
-        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK && this.state.data.type === "video") {
-          console.log(result, "HADI");
-          addBookmark({
-            id: this.state.data.id,
-            title:this.state.data.meta.title,
-            icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
-            type: this.state.data.type
-          });
-
-          videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
-        }
-        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK && this.state.data.type === "video") {
-          deletesBookmark(this.state.data.id, this.state.data.type);
-          videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK;
-      }
-      if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK && this.state.data.type === "article") {
-        addBookmark({
-          id: this.state.data.id,
-          title:this.state.data.meta.title,
-          icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
-          type: "article"
-        });
-        ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
-      }
-      if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK && this.state.data.type === "article") {
-        deletesBookmark(this.state.data.id,"article");
-        ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK;
-    }
-      // for reminder
+        // for reminder
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
-        }
-        // for notes
-            //audio
-        if(result.text ==Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE ){
-          Utilities.addNote({
-            itemId: this.state.id,
-            title: this.state.data.title,
-            imageUrl: this.state.data.image,
-            });
-        }
-            //video
-        if(result.text ==Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE){
-          Utilities.addNote({
-            itemId: this.state.id,
-            title: this.state.data.title,
-            imageUrl: this.state.data.image,
-            });
-        }
-            //article
-         if(result.text ==Strings.ARTICLE_SHORTCUTS_DRAWER_ADD_NOTE){
-          Utilities.addNote({
-            itemId: this.state.id,
-            title: this.state.data.title,
-            imageUrl: this.state.data.image,
-            });
         }
       }
     );
   }
+
   static openReminderDrawer = () => {
     buildfire.components.drawer.open(
       {
@@ -114,10 +143,10 @@ class PageDetails {
         triggerCallbackOnUIDismiss: false,
         autoUseImageCdn: true,
         listItems: [
-          {text: "10 Minutes",imageUrl: "",selected: false,},
+          { text: "10 Minutes", imageUrl: "", selected: false, },
           { text: "30 Minutes", imageUrl: "", selected: false },
           { text: "1 Hour", imageUrl: "", selected: false },
-          {text: "1 day", imageUrl: "",selected: false,},
+          { text: "1 day", imageUrl: "", selected: false, },
         ]
       },
       (err, result) => {
@@ -135,16 +164,16 @@ class PageDetails {
       CourseRender.init(this.state.id, this.state.data)
     }
     else if (this.state.data.type === "audio") {
-      AudioRender.init(this.state.data);
+      AudioRender.init(this.state.id, this.state.data);
     }
     else if (this.state.data.type === "article") {
-      ArticleRender.init(this.state.id,this.state.data);
+      ArticleRender.init(this.state.id, this.state.data);
     }
     else if (this.state.data.type === "PDF") {
       console.log(" PDF pageDetails ");
     }
     else if (this.state.data.type === "video") {
-      videoDetails.initVideoDetails(this.state.data);
+      videoDetails.initVideoDetails(this.state.id, this.state.data);
     }
 
     Utilities.setAppTheme();

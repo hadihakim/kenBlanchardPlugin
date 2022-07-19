@@ -1,5 +1,6 @@
 class videoDetails {
   static state = {
+    id:"",
     data: {},
     tabs: [],
     activeTab: "",
@@ -45,7 +46,8 @@ class videoDetails {
     ],
   };
 
-  static setState = async (data) => {
+  static setState = async (id,data) => {
+    this.state.id = id;
     this.state.data = data;
     this.state.tabs = [];
     this.state.activeTab = "";
@@ -305,8 +307,8 @@ class videoDetails {
     ;
   };
 
-  static initVideoDetails = (data) => {
-    this.setState(data);
+  static initVideoDetails = (id,data) => {
+    this.setState(id,data);
     this.checkTabsExistance();
     this.renderVideoMainPage();
     this.renderTabs();

@@ -374,7 +374,7 @@ class Utilities {
 				options,
 				(err, bookmark) => {
 				  if (err) return console.error(err);
-				  this.showToast(options.type === "video" ? Strings.VIDEO_ADDED_BOOKMARK :options.type === "audio"? Strings.AUDIO_ADDED_BOOKMARK:"hi")
+				  this.showToast(options.type === "video" ? Strings.VIDEO_ADDED_BOOKMARK :options.type === "audio"? Strings.AUDIO_ADDED_BOOKMARK:Strings.ARTICLE_ADDED_BOOKMARK)
 				  console.log("Bookmark ", bookmark);
 				}
 			);
@@ -383,7 +383,7 @@ class Utilities {
 
 		const deletesBookmark=(id,type)=>{
 			buildfire.bookmarks.delete(id, () => {
-				this.showToast(type === "video" ? Strings.VIDEO_REMOVED_BOOKMARK : options.type === "audio"? Strings.AUDIO_REMOVED_BOOKMARK:"hii")
+				this.showToast(type === "video" ? Strings.VIDEO_REMOVED_BOOKMARK : type === "audio"? Strings.AUDIO_REMOVED_BOOKMARK:Strings.ARTICLE_REMOVED_BOOKMARK)
 				console.log("Bookmark deleted successfully");
 			});
 		}
