@@ -10,6 +10,7 @@ class ArticleRender {
       { text: Strings.ARTICLE_SHORTCUTS_DRAWER_SHARE, secondaryText: '', imageUrl: '', selected: false },
       { text: Strings.ARTICLE_SHORTCUTS_DRAWER_MARK_COMPLETE, secondaryText: '', imageUrl: '', selected: false }
     ],
+  
 
   }
   static pointers = {
@@ -105,7 +106,7 @@ class ArticleRender {
     });
 
     container.appendChild(firstClone);
-    this.hasNotes(title[0]);
+    // this.hasNotes(title[0]);
     
     Utilities.setAppTheme();
   }
@@ -119,15 +120,16 @@ class ArticleRender {
       this.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK
     ;
   };
-  static hasNotes =async(title) => {
-    let notes= await Utilities.assetsHasNotes(this.state.id);
-   if(notes){
-    console.log("hiii");
-    let noteIcon = ui.createElement('span',title,"text_snippet",["material-icons","icon" ])
-    noteIcon.setAttribute('id',"articleNoteIcon");
-   }
-  }
-  static init = async(id,data) => {
+  // static hasNotes =async(title) => {
+  //   let notes= await Utilities.assetsHasNotes(this.state.id);
+  //  if(notes){
+   
+  //   let noteIcon = ui.createElement('span',title,"text_snippet",["material-icons","icon" ])
+  //   noteIcon.setAttribute('id',"articleNoteIcon");
+   
+  //  }
+  // }
+  static init = (id,data) => {
     this.setState(id,data);
     this.render();
     this.checkIsBookmarked();
