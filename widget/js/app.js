@@ -5,7 +5,8 @@ document.getElementById("userProfilePicture").addEventListener("click", () => {
 
 
 const loadData = async (data) => {
-  UserProfile.init(authManager.currentUser);
+  let userData = await authManager.currentUser;
+  UserProfile.init(userData);
   Explore.init();
   Search.setData({ data });
   Search.init();
@@ -22,7 +23,8 @@ const init = async() => {
 
   await HandleAPI.getSettingsData();
   await HandleAPI.getCurrentUser();
-  loadData(HandleAPI.state.data);
+  // await HandleAPI.getStats()
+  loadData(HandleAPI.state.data)
 }
 
 init();

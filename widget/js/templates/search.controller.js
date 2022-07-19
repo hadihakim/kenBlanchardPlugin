@@ -235,8 +235,9 @@ class Search {
   }
 
   static search = (e) => {
-    let searchedData = e.target.value;
+    let searchedData = e.target.value.trim("");
     this.state.searchText = searchedData;
+    console.log(searchedData);
     this.state.page = 1;
 
     Navigation.openSearch();
@@ -322,9 +323,9 @@ class Search {
 
     let input = document.getElementById(this.pointers.searchInput);
 
-    input.addEventListener("keyup", (e) => {
+    input.addEventListener("keyup", (e) =>{
       Skeleton.verticalSeeAll_Skeleton(searchContainer);
-      searchInputHandler(e);
+      searchInputHandler(e)
     });
     const searchInputHandler = Utilities._debounce(e => {
       this.search(e)

@@ -1,6 +1,6 @@
 class UserProfile {
   static state = {
-    userData: null,
+    userData: {},
     data: {},
     testChart: null,
     userProfileTabs: ["activity", "insights", "badges"],
@@ -118,6 +118,7 @@ class UserProfile {
     );
     let growthProfile = document.getElementById(this.pointers.growthProfile);
     if (this.state.userData) {
+      console.log(this.state.userData, "USER DATA");
       // let userAchievements = this.state.userData.badges.filter(
       //   (el) => el.active === true
       // );

@@ -81,10 +81,20 @@ class HandleAPI {
                         sections:res.sections,
                         topics:res.topics
                     }
+                    console.log("options", options);
                     HandleAPI.setState(options);
                     resolve(res);
                 })
             }
+        });
+    }
+
+    static getStats=()=>{
+        return new Promise((resolve, reject) =>{
+            Stats.get(async (err, res) => {
+                if (err) reject(err);
+                resolve(res);
+            })
         });
     }
 

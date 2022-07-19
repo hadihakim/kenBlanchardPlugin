@@ -38,28 +38,40 @@ const Strings = {
 	EMPTY_TITLE:"Nothing Found",
 	EMPTY_DESCRIPTION:"Refine your search...",
 
-	// Video Details
+	// Video Strings
 	VIDEO_DETAILS_TAB: "Details",
 	VIDEO_TRANSCRIPT_TAB: "Transcript",
 	VIDEO_SHORTCUTS_TAB: "Shortcuts",
 	VIDEO_DRAWER_MARK_COMPLETE:"Mark Complete",
 	VIDEO_SHORTCUTS_DRAWER_BOOKMARK:"Bookmark Lesson",
+	VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK:"Remove Bookmark",
 	VIDEO_SHORTCUTS_DRAWER_ADD_NOTE:"Add Note",
 	VIDEO_SHORTCUTS_DRAWER_SHARE:"Share",
 	VIDEO_SHORTCUTS_DRAWER_MARK_COMPLETE:"Mark Complete",
+	VIDEO_ADDED_BOOKMARK:" vid Lesson has been added to your bookmarks!",
+	VIDEO_REMOVED_BOOKMARK:"Vid Lesson has been removed from your bookmarks!",
 	// audio strings
 	AUDIO_TAP_1:"details",
 	AUDIO_TAP_2:"transcript",
 	AUDIO_TAP_3:"shortcuts",
 	AUDIO_DRAWER_MARK_COMPLETE:"Mark Complete",
 	AUDIO_SHORTCUTS_DRAWER_BOOKMARK:"Bookmark Lesson",
+	AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK:"Remove Bookmark",
 	AUDIO_SHORTCUTS_DRAWER_ADD_NOTE:"Add Note",
 	AUDIO_SHORTCUTS_DRAWER_SHARE:"Share",
 	AUDIO_SHORTCUTS_DRAWER_MARK_COMPLETE:"Mark Complete",
+	AUDIO_ADDED_BOOKMARK:"aud Lesson has been added to your bookmarks!",
+	AUDIO_REMOVED_BOOKMARK:" AUD Lesson has been removed from your bookmarks!",
 
 	//article strings
 	ARTICLE_TAP_KEY_TAKEAWAYS:"KEY TAKEAWAYS",
 	ARTICLE_TAP_FULL_ARTICLE:"FULL ARTICLE",
+
+	// shortcuts
+	
+	SHORTCUT_BOOKMARK_SHORTCUT:"Bookmark Shortcut",
+	SHORTCUT_BOOKMARK_REMOVE:"Remove Bookmark",
+	SHORTCUT_SET_REMINDER:"Set Reminder",
 	
 }
 

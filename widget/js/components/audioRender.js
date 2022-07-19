@@ -1,41 +1,26 @@
-let transcript = [
-  {
-    timestamp: "00:20",
-    title:
-      "Talking to someone while they scan the room, study a computer screen, or gaze out the window is like trying to hit a moving target.",
-  },
-  {
-    timestamp: "00:20",
-    title:
-      "Talking to someone while they scan the room, study a computer screen, or gaze out the window is like trying to hit a moving target.",
-  },
-  {
-    timestamp: "00:20",
-    title:
-      "Talking to someone out the window is like trying to hit a moving target.",
-  },
-];
 class AudioRender {
   static state = {
     data: {},
     tabs: [],
     audioDrawerItemsList: [
       {
-        text: Strings.AUDIO_DRAWER_MARK_COMPLETE,
-        secondaryText: "",
-        imageUrl: "",
-        selected: false,
-      },
-    ],
-    shortcutDrawerItemsList: [
-      {
         text: Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK,
         secondaryText: "",
         imageUrl: "",
         selected: false,
       },
-      { text: Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE, secondaryText: "", imageUrl: "", selected: false },
-      { text: Strings.AUDIO_SHORTCUTS_DRAWER_SHARE, secondaryText: "", imageUrl: "", selected: false },
+      {
+        text: Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.AUDIO_SHORTCUTS_DRAWER_SHARE,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
       {
         text: Strings.AUDIO_SHORTCUTS_DRAWER_MARK_COMPLETE,
         secondaryText: "",
@@ -43,6 +28,20 @@ class AudioRender {
         selected: false,
       },
     ],
+    shortcutDrawerItemsList: [
+      {
+        text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.SHORTCUT_SET_REMINDER,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+    ]
   };
 
   static pointers = {
@@ -81,49 +80,52 @@ class AudioRender {
     url('${Utilities.cropImage(this.state.data.meta.image)}'
     `;
     audioTitle[0].innerText = this.state.data.meta.title;
-    this.state.tabs.forEach((tab, idx) => {
-      let tabButton = document.createElement("button");
-      Utilities.setAttributesHandler(tabButton, {
-        class: "mdc-tab",
-        role: "tab",
-        "aria-selected": "true",
-        tabindex: `${idx}`,
-      });
-      let buttonInnerHtml = `
-          <span class="mdc-tab__content">
-        <span class="mdc-tab__text-label">${
-          tab.toLocaleLowerCase() === "transcript"
-            ? Strings.AUDIO_TAP_2
-            : tab.toLocaleLowerCase() === "shortcuts"
-            ? Strings.AUDIO_TAP_3
-            : Strings.AUDIO_TAP_1
-        }</span>
-      </span>
-      <span class="mdc-tab-indicator">
-        <span
-          class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"
-        ></span>
-      </span>
-      <span class="mdc-tab__ripple"></span>
-          `;
-
-      tabButton.innerHTML = buttonInnerHtml;
-      tabButton.addEventListener("click", () => {
-        this.tabClickHandler(tab);
-      });
-      audioTabContainer[0].appendChild(tabButton);
-    });
-    let buttons = nodesClone.querySelectorAll(".mdc-tab");
-    let tabIndicators = nodesClone.querySelectorAll(".mdc-tab-indicator");
-    tabIndicators[0].classList.add("mdc-tab-indicator--active");
-    buttons.forEach((button, idx) => {
-      button.addEventListener("click", () => {
-        tabIndicators.forEach((e, index) => {
-          e.classList.remove("mdc-tab-indicator--active");
+    if (this.state.tabs.length) {
+      this.state.tabs.forEach((tab, idx) => {
+        let tabButton = document.createElement("button");
+        Utilities.setAttributesHandler(tabButton, {
+          class: "mdc-tab",
+          role: "tab",
+          "aria-selected": "true",
+          tabindex: `${idx}`,
         });
-        tabIndicators[idx].classList.add("mdc-tab-indicator--active");
+        let buttonInnerHtml = `
+            <span class="mdc-tab__content">
+          <span class="mdc-tab__text-label">${
+            tab.toLocaleLowerCase() === "transcript"
+              ? Strings.AUDIO_TAP_2
+              : tab.toLocaleLowerCase() === "shortcuts"
+              ? Strings.AUDIO_TAP_3
+              : Strings.AUDIO_TAP_1
+          }</span>
+        </span>
+        <span class="mdc-tab-indicator test">
+          <span
+            class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"
+          ></span>
+        </span>
+        <span class="mdc-tab__ripple"></span>
+            `;
+
+        tabButton.innerHTML = buttonInnerHtml;
+        tabButton.addEventListener("click", () => {
+          this.tabClickHandler(tab);
+        });
+        audioTabContainer[0].appendChild(tabButton);
       });
-    });
+      let buttons = nodesClone.querySelectorAll(".mdc-tab");
+      let tabIndicators = nodesClone.querySelectorAll(".test");
+      tabIndicators[0].classList.add("mdc-tab-indicator--active");
+      buttons.forEach((button, idx) => {
+        button.addEventListener("click", () => {
+          tabIndicators.forEach((e, index) => {
+            e.classList.remove("mdc-tab-indicator--active");
+          });
+          tabIndicators[idx].classList.add("mdc-tab-indicator--active");
+        });
+      });
+    }
+
     container.appendChild(nodesClone);
     this.tabsListHandler(tabListContainer);
   };
@@ -141,7 +143,7 @@ class AudioRender {
       } else if (this.state.tabs[0] === "details") {
         this.tabClickHandler(this.state.tabs[0]);
       }
-    }else {
+    } else {
       if (this.state.tabs[0] === "transcript") {
         this.tabClickHandler(this.state.tabs[0]);
       } else if (this.state.tabs[0] === "shortcuts") {
@@ -252,16 +254,29 @@ class AudioRender {
         });
       });
     });
+
     return div;
   };
 
   static drawerHandler = (itemsList) => {
     PageDetails.openDrawerAudioOrVideoOrArticle(itemsList);
   };
+  static openShortcutDrawer = () => {
+    console.log("hi");
+  };
 
+  static checkIsBookmarked = async() => {
+    let allBookmarks=await getAllBookmarks();
+    let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===this.state.data.id);
+    filteredBookmarks.length>0?
+      this.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK
+      :
+      this.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK
+    ;
+  };
   static init = (data) => {
     this.setState(data);
-    console.log("from audio", this.state.data);
     this.render();
+    this.checkIsBookmarked();
   };
 }
