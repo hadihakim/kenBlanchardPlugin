@@ -324,19 +324,30 @@ class Utilities {
 		}
 	  }
 
+	  static showToast = message => {
+        buildfire.dialog.toast({
+            message: message,
+            duration:1000,
+            hideDismissButton:true,
+            type:'info',
+        });
+    }
+
 	static bookmark=()=>{
-		const addBookmark=(options)=>{
+		const addBookmark=(options,type)=>{
 			buildfire.bookmarks.add(
 				options,
 				(err, bookmark) => {
 				  if (err) return console.error(err);
+				  this.showToast(options.type === "video" ? Strings.VIDEO_ADDED_BOOKMARK : Strings.AUDIO_ADDED_BOOKMARK)
 				  console.log("Bookmark ", bookmark);
 				}
 			  );
 		};
 
-		const deletesBookmark=(id)=>{
+		const deletesBookmark=(id,type)=>{
 			buildfire.bookmarks.delete(id, () => {
+				this.showToast(type === "video" ? Strings.VIDEO_REMOVED_BOOKMARK : Strings.AUDIO_REMOVED_BOOKMARK)
 				console.log("Bookmark deleted successfully");
 			  });
 		}

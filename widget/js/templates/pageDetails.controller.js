@@ -27,18 +27,34 @@ class PageDetails {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
         console.log("Selected Contacts", result.text);
-        if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK) {
-            addBookmark({
-              id: this.state.data.id,
-              title:this.state.data.meta.title,
-              icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
-            });
-            AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
-          }
-          if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
-            deletesBookmark(this.state.data.id);
-            AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
+        // if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK) {
+        //     addBookmark({
+        //       id: this.state.data.id,
+        //       title:this.state.data.meta.title,
+        //       icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+        //       type: "audio"
+        //     });
+        //     AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+        //   }
+        //   if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
+        //     deletesBookmark(this.state.data.id, "audio");
+        //     AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
+        // }
+        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK) {
+          console.log(result, "HADI");
+          addBookmark({
+            id: this.state.data.id,
+            title:this.state.data.meta.title,
+            icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+            type: "video"
+          });
+
+          videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
         }
+        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
+          deletesBookmark(this.state.data.id, "video");
+          videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK;
+      }
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
         }
