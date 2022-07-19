@@ -323,5 +323,42 @@ class Utilities {
 		  },delay);
 		}
 	  }
+
+	  static addNote(options){
+		buildfire.notes.openDialog(
+		  options,
+		  (err, data) => {
+			if (err) return console.error(err);
+		
+			const { hasNotes, noteCount, itemId } = data;
+		
+			if (hasNotes) {
+			  console.log(`Video with id ${itemId} has ${noteCount} notes!`);
+			  buildfire.components.toast.showToastMessage({ text: "Notes added successfully!" });
+			} else {
+			  console.log(`No notes yet!`);
+			}
+		  }
+		);
+	  }
+	  static assetsHasNote(id){
+		buildfire.notes.getByItemId(
+			{
+			  itemId: id,
+			},
+			(err, data) => {
+			  if (err) return console.error(err);
+		  
+			  const { hasNotes, noteCount, itemId } = data;
+		  
+			  if (hasNotes) {
+				console.log("kkkkkkk");
+				return true
+			  } else {
+				return false;
+			}
+			}
+		  );
+	  }
 };
 

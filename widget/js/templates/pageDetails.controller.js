@@ -9,6 +9,9 @@ class PageDetails {
     let newRes = await HandleAPI.getDataByID(id, "assets_info")
     this.state.data = newRes.data
   }
+
+
+
   static openDrawerAudioOrVideoOrArticle = (options) => {
     buildfire.components.drawer.open(
       {
@@ -27,6 +30,24 @@ class PageDetails {
         console.log("Selected Contacts", result.text);
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
+        }else if(result.text ==Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE){
+          Utilities.addNote({
+            itemId: this.state.id,
+            title: this.state.data.title,
+            imageUrl: this.state.data.image,
+            });
+        }else if(result.text ==Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE){
+          Utilities.addNote({
+            itemId: this.state.id,
+            title: this.state.data.title,
+            imageUrl: this.state.data.image,
+            });
+        }else if(result.text ==Strings.ARTICLE_SHORTCUTS_DRAWER_ADD_NOTE){
+          Utilities.addNote({
+            itemId: this.state.id,
+            title: this.state.data.title,
+            imageUrl: this.state.data.image,
+            });
         }
       }
     );
