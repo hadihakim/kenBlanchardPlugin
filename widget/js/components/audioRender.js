@@ -73,49 +73,53 @@ class AudioRender {
     url('${Utilities.cropImage(this.state.data.meta.image)}'
     `;
     audioTitle[0].innerText = this.state.data.meta.title;
-    this.state.tabs.forEach((tab, idx) => {
-      let tabButton = document.createElement("button");
-      Utilities.setAttributesHandler(tabButton, {
-        class: "mdc-tab",
-        role: "tab",
-        "aria-selected": "true",
-        tabindex: `${idx}`,
-      });
-      let buttonInnerHtml = `
-          <span class="mdc-tab__content">
-        <span class="mdc-tab__text-label">${
-          tab.toLocaleLowerCase() === "transcript"
-            ? Strings.AUDIO_TAP_2
-            : tab.toLocaleLowerCase() === "shortcuts"
-            ? Strings.AUDIO_TAP_3
-            : Strings.AUDIO_TAP_1
-        }</span>
-      </span>
-      <span class="mdc-tab-indicator test">
-        <span
-          class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"
-        ></span>
-      </span>
-      <span class="mdc-tab__ripple"></span>
-          `;
-
-      tabButton.innerHTML = buttonInnerHtml;
-      tabButton.addEventListener("click", () => {
-        this.tabClickHandler(tab);
-      });
-      audioTabContainer[0].appendChild(tabButton);
-    });
-    let buttons = nodesClone.querySelectorAll(".mdc-tab");
-    let tabIndicators = nodesClone.querySelectorAll(".test");
-    tabIndicators[0].classList.add("mdc-tab-indicator--active");
-    buttons.forEach((button, idx) => {
-      button.addEventListener("click", () => {
-        tabIndicators.forEach((e, index) => {
-          e.classList.remove("mdc-tab-indicator--active");
+    if(this.state.tabs.length){
+      this.state.tabs.forEach((tab, idx) => {
+        let tabButton = document.createElement("button");
+        Utilities.setAttributesHandler(tabButton, {
+          class: "mdc-tab",
+          role: "tab",
+          "aria-selected": "true",
+          tabindex: `${idx}`,
         });
-        tabIndicators[idx].classList.add("mdc-tab-indicator--active");
+        let buttonInnerHtml = `
+            <span class="mdc-tab__content">
+          <span class="mdc-tab__text-label">${
+            tab.toLocaleLowerCase() === "transcript"
+              ? Strings.AUDIO_TAP_2
+              : tab.toLocaleLowerCase() === "shortcuts"
+              ? Strings.AUDIO_TAP_3
+              : Strings.AUDIO_TAP_1
+          }</span>
+        </span>
+        <span class="mdc-tab-indicator test">
+          <span
+            class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"
+          ></span>
+        </span>
+        <span class="mdc-tab__ripple"></span>
+            `;
+  
+        tabButton.innerHTML = buttonInnerHtml;
+        tabButton.addEventListener("click", () => {
+          this.tabClickHandler(tab);
+        });
+        audioTabContainer[0].appendChild(tabButton);
       });
-    });
+      let buttons = nodesClone.querySelectorAll(".mdc-tab");
+      let tabIndicators = nodesClone.querySelectorAll(".test");
+      tabIndicators[0].classList.add("mdc-tab-indicator--active");
+      buttons.forEach((button, idx) => {
+        button.addEventListener("click", () => {
+          tabIndicators.forEach((e, index) => {
+            e.classList.remove("mdc-tab-indicator--active");
+          });
+          tabIndicators[idx].classList.add("mdc-tab-indicator--active");
+        });
+      });
+    }
+    
+
     container.appendChild(nodesClone);
     this.tabsListHandler(tabListContainer);
   };
@@ -241,7 +245,7 @@ class AudioRender {
       shortcutDrawerElements.forEach((e) => {
         e.addEventListener("click", () => {
           let list=[{
-            text: Strings.SHORTCUT_REMOVE_BOOKMARK,
+            text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
             secondaryText: "",
             imageUrl: "",
             selected: false,

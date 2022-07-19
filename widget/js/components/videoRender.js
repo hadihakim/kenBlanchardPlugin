@@ -185,7 +185,7 @@ class videoDetails {
       shortcutDrawerElements.forEach((e) => {
         e.addEventListener("click", () => {
           let list = [{
-            text: Strings.SHORTCUT_REMOVE_BOOKMARK,
+            text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
             secondaryText: "",
             imageUrl: "",
             selected: false,
