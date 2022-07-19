@@ -101,21 +101,7 @@ class Search {
             title.classList.remove("unSelectedTrending");
             this.state.filterArr.push(trendingTopic);
           }
-          this.state.data.data.sections.forEach((element) => {
-            if (element.isExplore) {
-              const container = document.getElementById(
-                `${element.id}-container-explore`
-              );
-              if (element.layout == "horizontal-1") {
-                Skeleton.horizontal1_Skeleton(container);
-              } else {
-                Skeleton.horizontal_Skeleton(container);
-              }
-            }
-            const myTimeout = setTimeout(() => {
-              Explore.filterAndPrintData(this.state.data, element, "explore");
-            }, 1000);
-          });
+          this.runSortFilterResult();
         });
       });
       Utilities.setAppTheme();
@@ -158,6 +144,7 @@ class Search {
             dot.classList.remove("hidden");
           }
           this.runSortFilterResult();
+          this.trendingRender();
         }
       }
     );
@@ -196,6 +183,7 @@ class Search {
   };
 
   static runSortFilterResult = () => {
+
     // run the skeleton before showing the data
     this.state.data.data.sections.forEach((element) => {
       const container = document.getElementById(
