@@ -1,16 +1,55 @@
 class videoDetails {
-
   static state = {
     data: {},
     tabs: [],
-    activeTab: ""
+    activeTab: "",
+    videoDrawerItemsList: [
+      {
+        text: Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.VIDEO_SHORTCUTS_DRAWER_SHARE,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.VIDEO_SHORTCUTS_DRAWER_MARK_COMPLETE,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+    ],
+    shortcutDrawerItemsList: [
+      {
+        text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.SHORTCUT_SET_REMINDER,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+    ],
   };
 
   static setState = async (data) => {
     this.state.data = data;
     this.state.tabs = [];
-    this.state.activeTab = ""
-  }
+    this.state.activeTab = "";
+  };
 
   static pointers = {
     videoPageContainer: "videoPageContainer",
@@ -18,14 +57,14 @@ class videoDetails {
     videoTabs: "videoTabs",
     videoShortcutsContainer: "videoShortcutsContainer",
     videoDetailsContainer: "videoDetailsContainer",
-    pageDetails: "pageDetails"
+    pageDetails: "pageDetails",
   };
 
   static checkTabsExistance = () => {
     if (this.state.data.showDetails) this.state.tabs.push("details");
     if (this.state.data.showTranscript) this.state.tabs.push("transcript");
     if (this.state.data.showCheckList) this.state.tabs.push("shortcuts");
-  }
+  };
 
   static renderTabs = () => {
     if (this.state.tabs.length < 2) {
@@ -38,32 +77,45 @@ class videoDetails {
         button.setAttribute("role", "tab");
         button.setAttribute("tabindex", `${idx}`);
         button.innerHTML = `<span class="mdc-tab__content">
-                <span class="mdc-tab__text-label headerText-AppTheme">${el === "details" ? Strings.VIDEO_DETAILS_TAB : el === "transcript" ? Strings.VIDEO_TRANSCRIPT_TAB : el === "shortcuts" ? Strings.VIDEO_SHORTCUTS_TAB : ""}</span>
+                <span class="mdc-tab__text-label headerText-AppTheme">${
+                  el === "details"
+                    ? Strings.VIDEO_DETAILS_TAB
+                    : el === "transcript"
+                    ? Strings.VIDEO_TRANSCRIPT_TAB
+                    : el === "shortcuts"
+                    ? Strings.VIDEO_SHORTCUTS_TAB
+                    : ""
+                }</span>
             </span>
             <span id="indicator-${el}" class="mdc-tab-indicator">
                 <span
                     class="mdc-tab-indicator__content mdc-tab-indicator__content--underline primaryTheme-border"></span>
             </span>
-            <span class="mdc-tab__ripple"></span>`
+            <span class="mdc-tab__ripple"></span>`;
 
-        button.addEventListener("click", () => { this.tabClickHandler(el) });
+        button.addEventListener("click", () => {
+          this.tabClickHandler(el);
+        });
         container.appendChild(button);
-      })
+      });
     }
-
-  }
+  };
 
   static renderVideoMainPage = () => {
     let pageDetails = document.getElementById(this.pointers.pageDetails);
     pageDetails.innerHTML = `<div class="pageVideo" id="videoPageContainer">
-        <div class="videoTopContainer" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${Utilities.cropImage(this.state.data.meta.image)}')" id="videoTopContainer">
+        <div class="videoTopContainer" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${Utilities.cropImage(
+          this.state.data.meta.image
+        )}')" id="videoTopContainer">
           <!-- <img src="" alt="" class="videoImage"> -->
           <span class="material-icons icon videoSpan">
             play_circle_outline
           </span>
         </div>
         <div class="titleContainer">
-          <p class="videoTitle headerText-AppTheme" id="videoTitle">${this.state.data.meta.title}</p>
+          <p class="videoTitle headerText-AppTheme" id="videoTitle">${
+            this.state.data.meta.title
+          }</p>
           <span class="material-icons icon videoMore" id="videoMore">
             more_horiz
           </span>
@@ -81,69 +133,101 @@ class videoDetails {
         </div>
         <div class="choosenContainer" id="videoChoosenContainer">
         </div>
-      </div>`
+      </div>`;
     document.getElementById("videoMore").addEventListener("click", () => {
       this.openMoreOptions();
     });
-
-  }
+  };
 
   static tabClickHandler = (el) => {
-    (el === "details") ? this.renderVideoDetails(el) : el === "transcript" ? this.renderVideoTranscript(el) : el === "shortcuts" ? this.renderVideoShortcuts(el) : "";
-  }
-
+    el === "details"
+      ? this.renderVideoDetails(el)
+      : el === "transcript"
+      ? this.renderVideoTranscript(el)
+      : el === "shortcuts"
+      ? this.renderVideoShortcuts(el)
+      : "";
+  };
 
   static removeActiveTabs = (tabs, el) => {
-    const result = tabs.filter(tabs => tabs != el);
+    const result = tabs.filter((tabs) => tabs != el);
     result.forEach((tab) => {
-      document.getElementById(`indicator-${tab}`).classList.remove("mdc-tab-indicator--active");
-    })
-  }
+      document
+        .getElementById(`indicator-${tab}`)
+        .classList.remove("mdc-tab-indicator--active");
+    });
+  };
 
   static renderVideoDetails = (el) => {
-    if (this.state.tabs.length > 1 && !document.getElementById(`indicator-${el}`).classList.contains("mdc-tab-indicator--active")) {
-      document.getElementById(`indicator-${el}`).classList.add("mdc-tab-indicator--active");
+    if (
+      this.state.tabs.length > 1 &&
+      !document
+        .getElementById(`indicator-${el}`)
+        .classList.contains("mdc-tab-indicator--active")
+    ) {
+      document
+        .getElementById(`indicator-${el}`)
+        .classList.add("mdc-tab-indicator--active");
       this.removeActiveTabs(this.state.tabs, el);
     }
-    let container = document.getElementById(this.pointers.videoChoosenContainer);
+    let container = document.getElementById(
+      this.pointers.videoChoosenContainer
+    );
     container.innerHTML = `${this.state.data.details}`;
     this.state.activeTab = "details";
-  }
+  };
 
   static renderVideoTranscript = (el) => {
-    if (this.state.tabs.length > 1 && !document.getElementById(`indicator-${el}`).classList.contains("mdc-tab-indicator--active")) {
-      document.getElementById(`indicator-${el}`).classList.add("mdc-tab-indicator--active");
+    if (
+      this.state.tabs.length > 1 &&
+      !document
+        .getElementById(`indicator-${el}`)
+        .classList.contains("mdc-tab-indicator--active")
+    ) {
+      document
+        .getElementById(`indicator-${el}`)
+        .classList.add("mdc-tab-indicator--active");
       this.removeActiveTabs(this.state.tabs, el);
     }
-    let container = document.getElementById(this.pointers.videoChoosenContainer);
+    let container = document.getElementById(
+      this.pointers.videoChoosenContainer
+    );
     container.innerHTML = `${this.state.data.transcript}`;
     this.state.activeTab = "transcript";
     Utilities.setAppTheme();
-
-  }
+  };
 
   static openMoreOptions = () => {
-    let listItems = [{ text: Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK, secondaryText: '', imageUrl: '', selected: false }, { text: Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE, secondaryText: '', imageUrl: '', selected: false }, { text: Strings.VIDEO_SHORTCUTS_DRAWER_SHARE, secondaryText: '', imageUrl: '', selected: false }, { text: Strings.VIDEO_SHORTCUTS_DRAWER_MARK_COMPLETE, secondaryText: '', imageUrl: '', selected: false }];
-    PageDetails.openDrawerAudioOrVideoOrArticle(listItems)
-  }
+    PageDetails.openDrawerAudioOrVideoOrArticle(
+      this.state.videoDrawerItemsList
+    );
+  };
 
   static renderVideoShortcuts = (el) => {
-    if (this.state.tabs.length > 1 && !document.getElementById(`indicator-${el}`).classList.contains("mdc-tab-indicator--active")) {
-      document.getElementById(`indicator-${el}`).classList.add("mdc-tab-indicator--active");
+    if (
+      this.state.tabs.length > 1 &&
+      !document
+        .getElementById(`indicator-${el}`)
+        .classList.contains("mdc-tab-indicator--active")
+    ) {
+      document
+        .getElementById(`indicator-${el}`)
+        .classList.add("mdc-tab-indicator--active");
       this.removeActiveTabs(this.state.tabs, el);
     }
 
-    let container = document.getElementById(this.pointers.videoChoosenContainer);
+    let container = document.getElementById(
+      this.pointers.videoChoosenContainer
+    );
     container.innerHTML = ``;
     //let shortcutContainer = document.getElementById(this.pointers.videoShortcutsContainer);
-    let div = document.createElement('div');
+    let div = document.createElement("div");
     Utilities.setAttributesHandler(div, {
       class: "videoShortcutsContainer",
-      id: "videoShortcutsContainer"
-
+      id: "videoShortcutsContainer",
     });
     this.state.data.checkList.forEach((el, idx) => {
-      let element = document.createElement('div');
+      let element = document.createElement("div");
       element.classList.add("shortcutVideoElement");
       element.innerHTML = `
             <div class="mdc-checkbox mdc-checkbox--touch">
@@ -166,8 +250,13 @@ class videoDetails {
           <div class="mdc-checkbox__ripple"></div>
         </div>
             <div class="shorcutElementDetails">
-                <p class="shortcutText headerText-AppTheme">${idx + 1}. ${el.title}</p>
-                <p class="shortcutDuration bodyText-AppTheme">${Utilities.timeConvert(el.timeStamp, "hh:mm:ss")}</p>
+                <p class="shortcutText headerText-AppTheme">${idx + 1}. ${
+        el.title
+      }</p>
+                <p class="shortcutDuration bodyText-AppTheme">${Utilities.timeConvert(
+                  el.timeStamp,
+                  "hh:mm:ss"
+                )}</p>
             </div>
             <div class="shortcutActions">
                 <span class="material-icons icon">
@@ -180,31 +269,31 @@ class videoDetails {
 
             </div>`;
       div.appendChild(element);
-      let shortcutDrawerElements =
-      element.querySelectorAll(".videoShortCutDrawer");
+      let shortcutDrawerElements = element.querySelectorAll(
+        ".videoShortCutDrawer"
+      );
       shortcutDrawerElements.forEach((e) => {
         e.addEventListener("click", () => {
-          let list = [{
-            text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
-            secondaryText: "",
-            imageUrl: "",
-            selected: false,
-          },
-          { text: Strings.SHORTCUT_SET_REMINDER, secondaryText: "", imageUrl: "", selected: false },
-          ];
-          PageDetails.openDrawerAudioOrVideoOrArticle(list)
+          PageDetails.openDrawerAudioOrVideoOrArticle(
+            this.state.shortcutDrawerItemsList
+          );
         });
       });
       container.appendChild(div);
-    })
+    });
     this.state.activeTab = "shortcuts";
     Utilities.setAppTheme();
-  }
+  };
 
   static initActiveTab = () => {
-    (this.state.tabs[0] === "details" ? this.renderVideoDetails(this.state.tabs[0]) : this.state.tabs[0] === "transcript" ? this.renderVideoTranscript(this.state.tabs[0]) : this.state.tabs[0] === "shortcuts" ? this.renderVideoShortcuts(this.state.tabs[0]) : "")
-  }
-
+    this.state.tabs[0] === "details"
+      ? this.renderVideoDetails(this.state.tabs[0])
+      : this.state.tabs[0] === "transcript"
+      ? this.renderVideoTranscript(this.state.tabs[0])
+      : this.state.tabs[0] === "shortcuts"
+      ? this.renderVideoShortcuts(this.state.tabs[0])
+      : "";
+  };
 
   static initVideoDetails = (data) => {
     this.setState(data);
@@ -212,5 +301,5 @@ class videoDetails {
     this.renderVideoMainPage();
     this.renderTabs();
     this.initActiveTab();
-  }
+  };
 }
