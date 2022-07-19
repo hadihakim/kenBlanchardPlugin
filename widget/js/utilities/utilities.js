@@ -352,7 +352,6 @@ class Utilities {
 			  const { hasNotes, noteCount, itemId } = data;
 		  
 			  if (hasNotes) {
-				console.log("kkkkkkk");
 				return true
 			  } else {
 				return false;
@@ -360,5 +359,34 @@ class Utilities {
 			}
 		  );
 	  }
+	static bookmark=()=>{
+		const addBookmark=(options)=>{
+			buildfire.bookmarks.add(
+				options,
+				(err, bookmark) => {
+				  if (err) return console.error(err);
+				  console.log("Bookmark ", bookmark);
+				}
+			  );
+		};
+
+		const deletesBookmark=(id)=>{
+			buildfire.bookmarks.delete(id, () => {
+				console.log("Bookmark deleted successfully");
+			  });
+		}
+
+		const getAllBookmarks=()=>{
+			return new Promise((resolve, reject) => {
+				buildfire.bookmarks.getAll((err, bookmarks) => {
+					if (err) reject(err);
+					resolve(bookmarks);
+				  });
+			})
+		
+		}
+		return {addBookmark,deletesBookmark,getAllBookmarks}
+	}
+
 };
 

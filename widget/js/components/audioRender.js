@@ -1,20 +1,3 @@
-let transcript = [
-  {
-    timestamp: "00:20",
-    title:
-      "Talking to someone while they scan the room, study a computer screen, or gaze out the window is like trying to hit a moving target.",
-  },
-  {
-    timestamp: "00:20",
-    title:
-      "Talking to someone while they scan the room, study a computer screen, or gaze out the window is like trying to hit a moving target.",
-  },
-  {
-    timestamp: "00:20",
-    title:
-      "Talking to someone out the window is like trying to hit a moving target.",
-  },
-];
 class AudioRender {
   static state = {
     data: {},
@@ -26,8 +9,18 @@ class AudioRender {
         imageUrl: "",
         selected: false,
       },
-      { text: Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE, secondaryText: "", imageUrl: "", selected: false },
-      { text: Strings.AUDIO_SHORTCUTS_DRAWER_SHARE, secondaryText: "", imageUrl: "", selected: false },
+      {
+        text: Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.AUDIO_SHORTCUTS_DRAWER_SHARE,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
       {
         text: Strings.AUDIO_SHORTCUTS_DRAWER_MARK_COMPLETE,
         secondaryText: "",
@@ -35,6 +28,21 @@ class AudioRender {
         selected: false,
       },
     ],
+    shortcutDrawerItemsList: [
+      {
+        text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+      {
+        text: Strings.SHORTCUT_SET_REMINDER,
+        secondaryText: "",
+        imageUrl: "",
+        selected: false,
+      },
+    ],
+    isBookmarked: false
   };
 
   static pointers = {
@@ -73,7 +81,7 @@ class AudioRender {
     url('${Utilities.cropImage(this.state.data.meta.image)}'
     `;
     audioTitle[0].innerText = this.state.data.meta.title;
-    if(this.state.tabs.length){
+    if (this.state.tabs.length) {
       this.state.tabs.forEach((tab, idx) => {
         let tabButton = document.createElement("button");
         Utilities.setAttributesHandler(tabButton, {
@@ -99,7 +107,7 @@ class AudioRender {
         </span>
         <span class="mdc-tab__ripple"></span>
             `;
-  
+
         tabButton.innerHTML = buttonInnerHtml;
         tabButton.addEventListener("click", () => {
           this.tabClickHandler(tab);
@@ -118,7 +126,6 @@ class AudioRender {
         });
       });
     }
-    
 
     container.appendChild(nodesClone);
     this.tabsListHandler(tabListContainer);
@@ -137,7 +144,7 @@ class AudioRender {
       } else if (this.state.tabs[0] === "details") {
         this.tabClickHandler(this.state.tabs[0]);
       }
-    }else {
+    } else {
       if (this.state.tabs[0] === "transcript") {
         this.tabClickHandler(this.state.tabs[0]);
       } else if (this.state.tabs[0] === "shortcuts") {
@@ -244,15 +251,7 @@ class AudioRender {
         shortcutItem.querySelectorAll(".shortcutDrawer");
       shortcutDrawerElements.forEach((e) => {
         e.addEventListener("click", () => {
-          let list=[{
-            text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
-            secondaryText: "",
-            imageUrl: "",
-            selected: false,
-          },
-          { text: Strings.SHORTCUT_SET_REMINDER, secondaryText: "", imageUrl: "", selected: false },
-          ];
-          this.drawerHandler(list)
+          this.drawerHandler(this.state.shortcutDrawerItemsList);
         });
       });
     });
@@ -263,13 +262,23 @@ class AudioRender {
   static drawerHandler = (itemsList) => {
     PageDetails.openDrawerAudioOrVideoOrArticle(itemsList);
   };
-  static openShortcutDrawer=()=>{
+  static openShortcutDrawer = () => {
     console.log("hi");
-  }
+  };
 
+  static checkIsBookmarked = async() => {
+    let allBookmarks=await getAllBookmarks();
+    let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===this.state.data.id);
+    filteredBookmarks.length>0?
+      this.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK
+      :
+      this.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK
+    ;
+  };
   static init = (data) => {
     this.setState(data);
     console.log("from audio", this.state.data);
     this.render();
+    this.checkIsBookmarked();
   };
 }
