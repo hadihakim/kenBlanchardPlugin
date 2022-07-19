@@ -321,7 +321,43 @@ class Utilities {
 				cb(...args);
 			}, delay);
 		}
-	  }
+	}
+
+	static addNote(options) {
+		buildfire.notes.openDialog(
+			options,
+			(err, data) => {
+				if (err) return console.error(err);
+
+				const { hasNotes, noteCount, itemId } = data;
+
+				if (hasNotes) {
+					this.showToast("Notes added successfully!");
+				} else {
+					console.log(`No notes yet!`);
+				}
+			}
+		);
+	}
+	static assetsHasNotes(id) {
+		return new Promise((resolve, reject) => {
+			buildfire.notes.getByItemId(
+				{
+					itemId: id,
+				},
+				(err, data) => {
+					if (err) reject(err);
+					const { hasNotes, noteCount, itemId } = data;
+					if (hasNotes) {
+						resolve(true);
+					} else {
+						resolve(false);
+					}
+				}
+			);
+		})
+
+	}
 
 	  static showToast = message => {
         buildfire.dialog.toast({
@@ -338,29 +374,30 @@ class Utilities {
 				options,
 				(err, bookmark) => {
 				  if (err) return console.error(err);
-				  this.showToast(options.type === "video" ? Strings.VIDEO_ADDED_BOOKMARK : Strings.AUDIO_ADDED_BOOKMARK)
+				  this.showToast(options.type === "video" ? Strings.VIDEO_ADDED_BOOKMARK :options.type === "audio"? Strings.AUDIO_ADDED_BOOKMARK:"hi")
 				  console.log("Bookmark ", bookmark);
 				}
-			  );
+			);
 		};
+
 
 		const deletesBookmark=(id,type)=>{
 			buildfire.bookmarks.delete(id, () => {
-				this.showToast(type === "video" ? Strings.VIDEO_REMOVED_BOOKMARK : Strings.AUDIO_REMOVED_BOOKMARK)
+				this.showToast(type === "video" ? Strings.VIDEO_REMOVED_BOOKMARK : options.type === "audio"? Strings.AUDIO_REMOVED_BOOKMARK:"hii")
 				console.log("Bookmark deleted successfully");
-			  });
+			});
 		}
 
-		const getAllBookmarks=()=>{
+		const getAllBookmarks = () => {
 			return new Promise((resolve, reject) => {
 				buildfire.bookmarks.getAll((err, bookmarks) => {
 					if (err) reject(err);
 					resolve(bookmarks);
-				  });
+				});
 			})
-		
+
 		}
-		return {addBookmark,deletesBookmark,getAllBookmarks}
+		return { addBookmark, deletesBookmark, getAllBookmarks }
 	}
 
 };

@@ -11,6 +11,9 @@ class PageDetails {
     let newRes = await HandleAPI.getDataByID(id, "assets_info")
     this.state.data = newRes.data
   }
+
+
+
   static openDrawerAudioOrVideoOrArticle = (options) => {
     buildfire.components.drawer.open(
       {
@@ -55,8 +58,47 @@ class PageDetails {
           deletesBookmark(this.state.data.id, this.state.data.type);
           videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK;
       }
+      if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK && this.state.data.type === "article") {
+        addBookmark({
+          id: this.state.data.id,
+          title:this.state.data.meta.title,
+          icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+          type: "article"
+        });
+        ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+      }
+      if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK && this.state.data.type === "article") {
+        deletesBookmark(this.state.data.id,"article");
+        ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK;
+    }
+      // for reminder
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
+        }
+        // for notes
+            //audio
+        if(result.text ==Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE ){
+          Utilities.addNote({
+            itemId: this.state.id,
+            title: this.state.data.title,
+            imageUrl: this.state.data.image,
+            });
+        }
+            //video
+        if(result.text ==Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE){
+          Utilities.addNote({
+            itemId: this.state.id,
+            title: this.state.data.title,
+            imageUrl: this.state.data.image,
+            });
+        }
+            //article
+         if(result.text ==Strings.ARTICLE_SHORTCUTS_DRAWER_ADD_NOTE){
+          Utilities.addNote({
+            itemId: this.state.id,
+            title: this.state.data.title,
+            imageUrl: this.state.data.image,
+            });
         }
       }
     );
@@ -96,7 +138,7 @@ class PageDetails {
       AudioRender.init(this.state.data);
     }
     else if (this.state.data.type === "article") {
-      ArticleRender.init(this.state.data);
+      ArticleRender.init(this.state.id,this.state.data);
     }
     else if (this.state.data.type === "PDF") {
       console.log(" PDF pageDetails ");
