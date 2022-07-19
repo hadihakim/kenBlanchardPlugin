@@ -1,6 +1,6 @@
 class Explore {
   static state = {
-    data: fakeData,
+    data: [],
     userData: config.userConfig,
   };
 
@@ -19,8 +19,8 @@ class Explore {
     recommendedTemplate: "recommendedTemplate",
   };
 
-  static setPageData = (data) => {
-    this.state = data;
+  static setPageData = (options) => {
+    this.state = {...this.state, ...options};
   };
 
   static seeAllButton = (id, title, type) => {
@@ -30,7 +30,6 @@ class Explore {
       title: "see all",
       data: data,
       userData: authManager.currentUser,
-      pageType: "seeAll",
       duration: true,
     };
 

@@ -313,7 +313,7 @@ class Utilities {
 		`
 	}
 
-	static _debounce = (cb, delay = 1000) => {
+	static _debounce = (cb, delay = 300) => {
 		let timeout;
 		return (...args) => {
 			clearTimeout(timeout);

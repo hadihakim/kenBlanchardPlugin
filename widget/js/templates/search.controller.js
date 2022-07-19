@@ -240,7 +240,6 @@ class Search {
     this.state.page = 1;
 
     Navigation.openSearch();
-    Skeleton.verticalSeeAll_Skeleton(searchContainer);
 
     this.state.renderedCards = [];
     let allAssets = this.state.data.data.assets_info;
@@ -324,7 +323,8 @@ class Search {
     let input = document.getElementById(this.pointers.searchInput);
 
     input.addEventListener("keyup", (e) => {
-      searchInputHandler(e)
+      Skeleton.verticalSeeAll_Skeleton(searchContainer);
+      searchInputHandler(e);
     });
     const searchInputHandler = Utilities._debounce(e => {
       this.search(e)

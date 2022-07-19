@@ -19,7 +19,15 @@ class SeeAll {
     seeAllTemplate: "seeAllTemplate",
   };
 
+  /*
+  options include =>
+    - data: section object from API
+    - duration: to check if cards contain duration and time
+    - title: title will be print in the head of the page
+    - userData: user profile data 
+  */
   static setData = (options) => {
+    console.log("options -=>", options);
     this.state = {...this.state, ...options};
   };
 
