@@ -1,8 +1,10 @@
+const{addBookmark,deletesBookmark,getAllBookmarks}= Utilities.bookmark();
 class PageDetails {
   static state = {
     id: "",
     data: {},
-    chapterData: {}
+    chapterData: {},
+    isBookmarked:false,
   }
   static setState = async (id) => {
     this.state.id = id;
@@ -21,10 +23,22 @@ class PageDetails {
         autoUseImageCdn: true,
         listItems: options
       },
-      (err, result) => {
+       (err, result) => {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
         console.log("Selected Contacts", result.text);
+        if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK) {
+            addBookmark({
+              id: this.state.data.id,
+              title:this.state.data.meta.title,
+              icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+            });
+            AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+          }
+          if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
+            deletesBookmark(this.state.data.id);
+            AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
+        }
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
         }
@@ -79,7 +93,7 @@ class PageDetails {
   };
 
   static init = async (id) => {
-    pageDetails.innerHTML = "";
+    document.getElementById("pageDetails").innerHTML = "";
     await this.setState(id);
     this.detailsRender()
   }
