@@ -101,7 +101,7 @@ class Explore {
 			url('${Utilities.cropImage(asset.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title);
     });
     container.appendChild(firstClone);
   }
@@ -124,7 +124,7 @@ class Explore {
 						${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title);
     });
     container.appendChild(nodesClone);
   }
@@ -169,11 +169,11 @@ class Explore {
 
     // sort all assets
     myAssets = Search.sort(myAssets);
-    console.log("sorted asstes ->", myAssets);
     // loop through assets in the section to print cards
     myAssets.forEach(asset => {
       // check if the asset is included in the filter 
-      let printCardState = HandleAPI.handleFilter(asset.meta.topics);
+      // if the section is userSpecific it will not be affected with the filter
+      let printCardState = HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific;
       if (printCardState) {
         switch (section.layout) {
           case 'horizontal-1':
@@ -195,33 +195,38 @@ class Explore {
   static initContainers = page => {
     // all API data will be read from the HandleAPI class
     HandleAPI.state.data.sections.forEach(section => {
-      let newSectionDiv = ui.createElement('div', page == 'main' ? sectionsContainer : exploreContainer, '', ['sectionContainer'], '');
-      let newSectionHeader = ui.createElement('div', newSectionDiv, '', ['sectionHeader'], '');
-      let newSectionTitle = ui.createElement('p', newSectionHeader, `Recommended ${section.title}`, ['sectionTitle', 'headerTextTheme', 'headerText-AppTheme'], '');
-      let newSectionSeeAll = ui.createElement('p', newSectionHeader, 'See All', ['sectionTitle', 'defaultTheme', 'seeAllBtn', 'defaultlink-AppTheme'], '');
-      let newSectionCardsContainer = ui.createElement('div', newSectionDiv, '', ['sectionCardsContainer', `${section.layout}`], page == 'main' ? `${section.id}-main` : `${section.id}-explore`);
+      // check if the section has assets 
+      // if the section is userSpecific it will not appear in the explore page
+      if (section.assets.length > 0 && ((page === 'explore' && !section.userSpecific) || page === 'main')) {
+        let newSectionDiv = ui.createElement('div', page == 'main' ? sectionsContainer : exploreContainer, '', ['sectionContainer'], '');
+        let newSectionHeader = ui.createElement('div', newSectionDiv, '', ['sectionHeader'], '');
+        let newSectionTitle = ui.createElement('p', newSectionHeader, `Recommended ${section.title}`, ['sectionTitle', 'headerTextTheme', 'headerText-AppTheme'], '');
+        let newSectionSeeAll = ui.createElement('p', newSectionHeader, 'See All', ['sectionTitle', 'defaultTheme', 'seeAllBtn', 'defaultlink-AppTheme'], '');
+        let newSectionCardsContainer = ui.createElement('div', newSectionDiv, '', ['sectionCardsContainer', `${section.layout}`], page == 'main' ? `${section.id}-main` : `${section.id}-explore`);
 
-      if (section.userSpecific) {
-        newSectionSeeAll.innerHTML = '';
-        newSectionTitle.innerHTML = section.title;
-      } else {
-        newSectionSeeAll.addEventListener("click", () => {
-          //   let options = {
-          //     title: element.title,
-          //     data: myListData
-          //   }
-          //   Navigation.openUserList(options);
-          // } else {
-          // }
+        // if the section is userSpecific the title will appear without adding new words
+        // if the section is userSpecific see all button will not appear
+        if (section.userSpecific) {
+          newSectionSeeAll.innerHTML = '';
+          newSectionTitle.innerHTML = section.title;
+        } else {
+          newSectionSeeAll.addEventListener("click", () => {
+            //   let options = {
+            //     title: element.title,
+            //     data: myListData
+            //   }
+            //   Navigation.openUserList(options);
+            // } else {
+            // }
 
-          // see all is working on explore and main page
-          this.seeAllButton(section.id, section.title, page);
-          console.log("see all");
-        });
+            // see all is working on explore and main page
+            this.seeAllButton(section.id, section.title, page);
+          });
+        }
+
+        // calling function to print all cards in the pages
+        this.setCardsReady(section, page);
       }
-
-      // calling function to print all cards in the pages
-      this.setCardsReady(section, page);
     })
   }
 
