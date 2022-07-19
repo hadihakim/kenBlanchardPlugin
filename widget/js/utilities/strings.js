@@ -64,7 +64,7 @@ const Strings = {
 	// shortcuts
 	
 	SHORTCUT_BOOKMARK_SHORTCUT:"Bookmark Shortcut",
-	SHORTCUT_BOOKMARK_SHORTCUT:"Remove Bookmark",
+	SHORTCUT_BOOKMARK_REMOVE:"Remove Bookmark",
 	SHORTCUT_SET_REMINDER:"Set Reminder",
 	
 }
