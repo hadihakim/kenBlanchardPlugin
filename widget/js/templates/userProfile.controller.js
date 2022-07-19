@@ -1,6 +1,6 @@
 class UserProfile {
   static state = {
-    userData: null,
+    userData: {},
     data: {},
     testChart: null,
     userProfileTabs: ["activity", "insights", "badges"],
