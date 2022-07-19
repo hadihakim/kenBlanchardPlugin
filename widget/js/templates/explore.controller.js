@@ -158,6 +158,7 @@ class Explore {
   static setCardsReady = (section, page) => {
     let sectionContainerId = page == 'main' ? `${section.id}-main` : `${section.id}-explore`;
     let sectionContainer = document.getElementById(sectionContainerId);
+    let emptySection = true;
 
     // get all assets in the section
     let myAssets = [];
@@ -175,6 +176,7 @@ class Explore {
       // if the section is userSpecific it will not be affected with the filter
       let printCardState = HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific;
       if (printCardState) {
+        emptySection = false;
         switch (section.layout) {
           case 'horizontal-1':
             this.horizontal1_Render(asset, sectionContainer);
@@ -188,6 +190,11 @@ class Explore {
         }
       }
     })
+    if(emptySection){
+      // if the section is empty it will be removed
+      let mainSectionRow = document.getElementById(`${section.id}-mainSectionRow-${page}`);
+      mainSectionRow.remove();
+    }
     // calling function to set the app theme 
     Utilities.setAppTheme();
   }
@@ -198,7 +205,7 @@ class Explore {
       // check if the section has assets 
       // if the section is userSpecific it will not appear in the explore page
       if (section.assets.length > 0 && ((page === 'explore' && !section.userSpecific) || page === 'main')) {
-        let newSectionDiv = ui.createElement('div', page == 'main' ? sectionsContainer : exploreContainer, '', ['sectionContainer'], '');
+        let newSectionDiv = ui.createElement('div', page == 'main' ? sectionsContainer : exploreContainer, '', ['sectionContainer'], `${section.id}-mainSectionRow-${page}`);
         let newSectionHeader = ui.createElement('div', newSectionDiv, '', ['sectionHeader'], '');
         let newSectionTitle = ui.createElement('p', newSectionHeader, `Recommended ${section.title}`, ['sectionTitle', 'headerTextTheme', 'headerText-AppTheme'], '');
         let newSectionSeeAll = ui.createElement('p', newSectionHeader, 'See All', ['sectionTitle', 'defaultTheme', 'seeAllBtn', 'defaultlink-AppTheme'], '');
@@ -232,6 +239,7 @@ class Explore {
 
   static init = () => {
     sectionsContainer.innerHTML = '';
+    exploreContainer.innerHTML = '';
     // init main page
     this.initContainers('main');
 
