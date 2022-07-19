@@ -327,7 +327,7 @@ class Utilities {
 	  static showToast = message => {
         buildfire.dialog.toast({
             message: message,
-            duration:1000,
+            duration:3000,
             hideDismissButton:true,
             type:'info',
         });
