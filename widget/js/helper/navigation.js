@@ -71,7 +71,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openSeeAll = (type, title, state) => {
+	static openSeeAll = (type, title, _seeAllOptions) => {
 		this.state.activeLayOut = 'see all';
 
 		mainContainer.addEventListener("scroll", Utilities.scrollNextPage);
@@ -104,15 +104,14 @@ class Navigation {
 		pageDetails.classList.add("hidden");
 		searchContainer.classList.add("hidden");
 
-		if (state) {
-			this.state.seeAllState = state;
+		if (_seeAllOptions) {
+			this.state.seeAllState = _seeAllOptions;
 		} else {
-			state = this.state.seeAllState;
+			_seeAllOptions = this.state.seeAllState;
 		}
 		Search.state.searchText = '';
 
-		SeeAll.setData(state);
-		SeeAll.init();
+		SeeAll.init(_seeAllOptions);
 
 		Utilities.setAppTheme();
 

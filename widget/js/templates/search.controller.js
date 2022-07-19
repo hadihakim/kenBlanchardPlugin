@@ -10,8 +10,8 @@ class Search {
     searchTime: 300,
     renderedCards: [],
     fetchNext: true,
-    emptySearch:true,
-    searchText:""
+    emptySearch: true,
+    searchText: ""
   };
 
   static pointers = {
@@ -57,10 +57,10 @@ class Search {
   static sort = (data, type = this.state.sortType) => {
     if (type === "Most Recent") {
       data.sort((a, b) => {
-        if (a.meta.createdOn < b.meta.createdOn) {
+        if (new Date(a.meta.createdOn) < new Date(b.meta.createdOn)) {
           return -1;
         }
-        if (a.meta.createdOn > b.meta.createdOn) {
+        if (new Date(a.meta.createdOn) > new Date(b.meta.createdOn)) {
           return 1;
         }
       });
@@ -101,21 +101,7 @@ class Search {
             title.classList.remove("unSelectedTrending");
             this.state.filterArr.push(trendingTopic);
           }
-          this.state.data.data.sections.forEach((element) => {
-            if (element.isExplore) {
-              const container = document.getElementById(
-                `${element.id}-container-explore`
-              );
-              if (element.layout == "horizontal-1") {
-                Skeleton.horizontal1_Skeleton(container);
-              } else {
-                Skeleton.horizontal_Skeleton(container);
-              }
-            }
-            const myTimeout = setTimeout(() => {
-              Explore.filterAndPrintData(this.state.data, element, "explore");
-            }, 1000);
-          });
+          this.runSortFilterResult();
         });
       });
       Utilities.setAppTheme();
@@ -158,6 +144,7 @@ class Search {
             dot.classList.remove("hidden");
           }
           this.runSortFilterResult();
+          this.trendingRender();
         }
       }
     );
@@ -196,39 +183,37 @@ class Search {
   };
 
   static runSortFilterResult = () => {
-    this.state.data.data.sections.forEach((element) => {
-      const container = document.getElementById(
-        `${element.id}-container-main`
-      );
-      if (element.layout == "horizontal-1") {
-        Skeleton.horizontal1_Skeleton(container);
-      } else if(element.layout == "horizontal") {
-        Skeleton.horizontal_Skeleton(container);
-      }else{
-        Skeleton.verticalSeeAll_Skeleton(container);
-      }
-      const myTimeout = setTimeout(() => {
-        Explore.filterAndPrintData(this.state.data, element, "main");
-      }, 1000);
-    });
 
+    // run the skeleton before showing the data
     this.state.data.data.sections.forEach((element) => {
-      // if (element.isExplore) {
       const container = document.getElementById(
-        `${element.id}-container-explore`
+        `${element.id}-main`
       );
-      if (element.layout == "horizontal-1") {
+      if (element.layout == "horizontal-1" && container) {
         Skeleton.horizontal1_Skeleton(container);
-      } else if(element.layout == "horizontal") {
+      } else if (element.layout == "horizontal" && container) {
         Skeleton.horizontal_Skeleton(container);
-      }else{
+      } else if (container) {
         Skeleton.verticalSeeAll_Skeleton(container);
       }
-      // }
-      const myTimeout = setTimeout(() => {
-        Explore.filterAndPrintData(this.state.data, element, "explore");
-      }, 1000);
     });
+    this.state.data.data.sections.forEach((element) => {
+      const container = document.getElementById(
+        `${element.id}-explore`
+      );
+      if (element.layout == "horizontal-1" && container) {
+        Skeleton.horizontal1_Skeleton(container);
+      } else if (element.layout == "horizontal" && container) {
+        Skeleton.horizontal_Skeleton(container);
+      } else if (container) {
+        Skeleton.verticalSeeAll_Skeleton(container);
+      }
+    });
+    // render the data in the ui
+    setTimeout(() => {
+      Explore.init();
+    }, 300);
+
 
     if (Navigation.state.activeLayOut === 'see all') {
       document.getElementById(this.pointers.seeAllContainer).innerHTML = '';
@@ -256,18 +241,19 @@ class Search {
     this.state.page = 1;
 
     Navigation.openSearch();
-    
 
     this.state.renderedCards = [];
     let allAssets = this.state.data.data.assets_info;
     for (const asset in allAssets) {
       if (this.hasSearch(allAssets[asset])) {
-        allAssets[asset].id=asset
-        this.state.renderedCards.push(allAssets[asset])
+        let returnedObj = allAssets[asset];
+        returnedObj.id = asset
+
+        this.state.renderedCards.push(returnedObj);
       }
     }
     document.getElementById(this.pointers.searchContainer).innerHTML = '';
-    this.state.emptySearch=true;
+    this.state.emptySearch = true;
     this.printSearchedCards();
     document.getElementById(this.pointers.searchContainer).addEventListener('scroll', (e) => this.lazyLoad(e))
   };
@@ -280,10 +266,10 @@ class Search {
     }
 
     this.state.page += 1;
-    this.state.renderedCards = this.sort(this.state.renderedCards, this.state.sortType);
-    
+    let printedAssetAtt = this.sort(this.state.renderedCards);
+
     for (let i = firstIndex; i < lastIndex; i++) {
-      if (HandleAPI.handleFilter(this.state.renderedCards[i].meta.topics)) {
+      if (HandleAPI.handleFilter(printedAssetAtt[i].meta.topics)) {
         this.state.emptySearch = false;
         const nodesClone = document.getElementById(this.pointers.seeAllTemplate).content.cloneNode(true);
 
@@ -292,28 +278,28 @@ class Search {
         let duration = nodesClone.querySelectorAll(".duration");
         let description = nodesClone.querySelectorAll(".description");
         let card = nodesClone.querySelectorAll(".mdc-card");
-        description[0].innerText = this.state.renderedCards[i].meta.description;
+        description[0].innerText = printedAssetAtt[i].meta.description;
         image[0].style.backgroundImage = `url('${Utilities.cropImage(
-          this.state.renderedCards[i].meta.image,
+          printedAssetAtt[i].meta.image,
           "full_width",
           "4:3"
         )}')`;
-        let id = this.state.renderedCards[i].id;
-        title[0].innerText = this.state.renderedCards[i].meta.title;
-        if (this.state.renderedCards[i].meta.duration > 0) {
+        let id = printedAssetAtt[i].id;
+        title[0].innerText = printedAssetAtt[i].meta.title;
+        if (printedAssetAtt[i].meta.duration > 0) {
           duration[0].innerHTML = `<span class="iconsTheme material-icons icon schedule-icon"> schedule </span>
                                   <span class="schedule-text bodyText-AppTheme">
                               ${Utilities.timeConvert(
-            this.state.renderedCards[i].meta.duration, "hh|mm"
+            printedAssetAtt[i].meta.duration, "hh|mm"
           )}</span>`;
         }
         card[0].addEventListener("click", () => {
-          Navigation.openPageDetails(id, this.state.renderedCards[i].meta.title);
+          Navigation.openPageDetails(id, printedAssetAtt[i].meta.title);
         });
         document.getElementById(this.pointers.searchContainer).appendChild(nodesClone);
       }
     }
-    if(this.state.emptySearch){
+    if (this.state.emptySearch) {
       console.log("Empty will be shown --->");
       Utilities.showEmpty(document.getElementById(this.pointers.searchContainer));
     }
@@ -341,9 +327,9 @@ class Search {
       Skeleton.verticalSeeAll_Skeleton(searchContainer);
       searchInputHandler(e)
     });
-    const searchInputHandler=Utilities._debounce(e=>{
+    const searchInputHandler = Utilities._debounce(e => {
       this.search(e)
-    },this.state.searchTime);
+    }, this.state.searchTime);
     this.trendingRender(this.state.data, "trendingContainer");
   };
 }

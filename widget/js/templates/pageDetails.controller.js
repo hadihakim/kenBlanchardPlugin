@@ -30,58 +30,54 @@ class PageDetails {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
         console.log("Selected Contacts", result.text);
-        //for bookmark 
-            //audio
-        if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK) {
+        if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK && this.state.data.type === "audio")  {
             addBookmark({
               id: this.state.data.id,
               title:this.state.data.meta.title,
               icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
-              type: "audio"
+              type: this.state.data.type
             });
             AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
           }
-          if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
-            deletesBookmark(this.state.data.id, "audio");
+          if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK && this.state.data.type === "audio") {
+            deletesBookmark(this.state.data.id, this.state.data.type);
             AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
         }
-            //article
-        if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK) {
-          addBookmark({
-            id: this.state.data.id,
-            title:this.state.data.meta.title,
-            icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
-            type: "article"
-          });
-          ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
-        }
-        if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
-          deletesBookmark(this.state.data.id,"article");
-          ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK;
-      }
-          //video
-        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK) {
+        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK && this.state.data.type === "video") {
           console.log(result, "HADI");
           addBookmark({
             id: this.state.data.id,
             title:this.state.data.meta.title,
             icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
-            type: "video"
+            type: this.state.data.type
           });
 
           videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
         }
-        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
-          deletesBookmark(this.state.data.id, "video");
+        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK && this.state.data.type === "video") {
+          deletesBookmark(this.state.data.id, this.state.data.type);
           videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK;
       }
+      if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK && this.state.data.type === "article") {
+        addBookmark({
+          id: this.state.data.id,
+          title:this.state.data.meta.title,
+          icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+          type: "article"
+        });
+        ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+      }
+      if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK && this.state.data.type === "article") {
+        deletesBookmark(this.state.data.id,"article");
+        ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK;
+    }
       // for reminder
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
         }
         // for notes
             //audio
-        if(result.text ==Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE){
+        if(result.text ==Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE ){
           Utilities.addNote({
             itemId: this.state.id,
             title: this.state.data.title,

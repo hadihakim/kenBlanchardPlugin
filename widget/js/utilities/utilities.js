@@ -304,7 +304,6 @@ class Utilities {
 	}
 
 	static showEmpty = (container) => {
-		console.log("from function ----");
 		container.innerHTML = `
 		<div class="emptySearch_Container">
 			<img src="./media/empty_page.svg" alt="Empty Search" />
@@ -314,7 +313,7 @@ class Utilities {
 		`
 	}
 
-	static _debounce = (cb, delay = 1000) => {
+	static _debounce = (cb, delay = 300) => {
 		let timeout;
 		return (...args) => {
 			clearTimeout(timeout);
@@ -363,7 +362,7 @@ class Utilities {
 	  static showToast = message => {
         buildfire.dialog.toast({
             message: message,
-            duration:1000,
+            duration:3000,
             hideDismissButton:true,
             type:'info',
         });
