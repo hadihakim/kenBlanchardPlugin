@@ -30,6 +30,8 @@ class PageDetails {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
         console.log("Selected Contacts", result.text);
+        //for bookmark 
+            //audio
         if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK) {
             addBookmark({
               id: this.state.data.id,
@@ -42,21 +44,42 @@ class PageDetails {
             deletesBookmark(this.state.data.id);
             AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
         }
+            //article
+        if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK) {
+          addBookmark({
+            id: this.state.data.id,
+            title:this.state.data.meta.title,
+            icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+          });
+          ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+        }
+        if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
+          deletesBookmark(this.state.data.id);
+          ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK;
+      }
+        // for reminder
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
-        }else if(result.text ==Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE){
+        }
+        // for notes
+            //audio
+        if(result.text ==Strings.AUDIO_SHORTCUTS_DRAWER_ADD_NOTE){
           Utilities.addNote({
             itemId: this.state.id,
             title: this.state.data.title,
             imageUrl: this.state.data.image,
             });
-        }else if(result.text ==Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE){
+        }
+            //video
+        if(result.text ==Strings.VIDEO_SHORTCUTS_DRAWER_ADD_NOTE){
           Utilities.addNote({
             itemId: this.state.id,
             title: this.state.data.title,
             imageUrl: this.state.data.image,
             });
-        }else if(result.text ==Strings.ARTICLE_SHORTCUTS_DRAWER_ADD_NOTE){
+        }
+            //article
+         if(result.text ==Strings.ARTICLE_SHORTCUTS_DRAWER_ADD_NOTE){
           Utilities.addNote({
             itemId: this.state.id,
             title: this.state.data.title,
@@ -101,7 +124,7 @@ class PageDetails {
       AudioRender.init(this.state.data);
     }
     else if (this.state.data.type === "article") {
-      ArticleRender.init(this.state.data);
+      ArticleRender.init(this.state.id,this.state.data);
     }
     else if (this.state.data.type === "PDF") {
       console.log(" PDF pageDetails ");

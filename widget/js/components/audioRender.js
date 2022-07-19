@@ -275,10 +275,12 @@ class AudioRender {
       this.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK
     ;
   };
+
   static init = (data) => {
     this.setState(data);
     console.log("from audio", this.state.data);
     this.render();
     this.checkIsBookmarked();
+    
   };
 }

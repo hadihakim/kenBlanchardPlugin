@@ -26,13 +26,13 @@ class Utilities {
 			case "hh|mm":
 				minutes = String(minutes).padStart(1, "0");
 				hours = String(hours).padStart(1, "0");
-				return hours!=="0"?(hours + "h ") + (minutes!=="0"?minutes + "min":"")
+				return hours !== "0" ? (hours + "h ") + (minutes !== "0" ? minutes + "min" : "")
 					:
-				(minutes!=="0"?minutes + "min":"")
+					(minutes !== "0" ? minutes + "min" : "")
 			default:
 				return "unknown"
 		}
-	  };
+	};
 
 	static getAppTheme = () => {
 		buildfire.appearance.getAppTheme((err, appTheme) => {
@@ -236,22 +236,22 @@ class Utilities {
 									} else if (config.searchFrom == "from-see-all") {
 										Navigation.openSeeAll();
 									}
-								} else if ( from == "Details from CourseDetails") {
+								} else if (from == "Details from CourseDetails") {
 									let id = result[result.length - 1].options.id;
-									Navigation.openPageDetails(id,result[result.length - 1].options.title);
+									Navigation.openPageDetails(id, result[result.length - 1].options.title);
 
 								} else if (from == "user profile from list" || from == "User profile from Details") {
 									Navigation.openUserProfile();
 								} else if (from == "user List from temEffectiveness list") {
-									PageDetails.innerHtml="";
+									PageDetails.innerHtml = "";
 									Navigation.openUserList();
 								} else if (from == "Personal home Page") {
 									Navigation.openMain();
 								} else if (from == "active list from CourseDetails") {
 									Navigation.openTeamEffectivenessList(result[result.length - 1].options.to);
-								}else if(from == "page detail from chapter"){
-									summaryRender.init(result[result.length - 1].options.id,result[result.length - 1].options.data);
-								}else if(from == "search from details"){
+								} else if (from == "page detail from chapter") {
+									summaryRender.init(result[result.length - 1].options.id, result[result.length - 1].options.data);
+								} else if (from == "search from details") {
 									Navigation.openSearch();
 								}
 								break;
@@ -314,78 +314,79 @@ class Utilities {
 		`
 	}
 
-	static _debounce=(cb,delay=1000)=>{
+	static _debounce = (cb, delay = 1000) => {
 		let timeout;
-		return (...args) =>{
-		  clearTimeout(timeout);
-		  timeout = setTimeout(()=>{
-			cb(...args);
-		  },delay);
+		return (...args) => {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => {
+				cb(...args);
+			}, delay);
 		}
-	  }
+	}
 
-	  static addNote(options){
+	static addNote(options) {
 		buildfire.notes.openDialog(
-		  options,
-		  (err, data) => {
-			if (err) return console.error(err);
-		
-			const { hasNotes, noteCount, itemId } = data;
-		
-			if (hasNotes) {
-			  console.log(`Video with id ${itemId} has ${noteCount} notes!`);
-			  buildfire.components.toast.showToastMessage({ text: "Notes added successfully!" });
-			} else {
-			  console.log(`No notes yet!`);
-			}
-		  }
-		);
-	  }
-	  static assetsHasNote(id){
-		buildfire.notes.getByItemId(
-			{
-			  itemId: id,
-			},
+			options,
 			(err, data) => {
-			  if (err) return console.error(err);
-		  
-			  const { hasNotes, noteCount, itemId } = data;
-		  
-			  if (hasNotes) {
-				return true
-			  } else {
-				return false;
+				if (err) return console.error(err);
+
+				const { hasNotes, noteCount, itemId } = data;
+
+				if (hasNotes) {
+					console.log(`Video with id ${itemId} has ${noteCount} notes!`);
+					buildfire.components.toast.showToastMessage({ text: "Notes added successfully!" });
+				} else {
+					console.log(`No notes yet!`);
+				}
 			}
-			}
-		  );
-	  }
-	static bookmark=()=>{
-		const addBookmark=(options)=>{
+		);
+	}
+	static assetsHasNotes(id) {
+		return new Promise((resolve, reject) => {
+			buildfire.notes.getByItemId(
+				{
+					itemId: id,
+				},
+				(err, data) => {
+					if (err) reject(err);
+					const { hasNotes, noteCount, itemId } = data;
+					if (hasNotes) {
+						resolve(true);
+					} else {
+						resolve(false);
+					}
+				}
+			);
+		})
+
+	}
+	static bookmark = () => {
+		const addBookmark = (options) => {
 			buildfire.bookmarks.add(
 				options,
 				(err, bookmark) => {
-				  if (err) return console.error(err);
-				  console.log("Bookmark ", bookmark);
+					if (err) return console.error(err);
+					console.log("Bookmark ", bookmark);
 				}
-			  );
+			);
 		};
 
-		const deletesBookmark=(id)=>{
+		const deletesBookmark = (id) => {
 			buildfire.bookmarks.delete(id, () => {
 				console.log("Bookmark deleted successfully");
-			  });
+			});
 		}
 
-		const getAllBookmarks=()=>{
+		const getAllBookmarks = () => {
 			return new Promise((resolve, reject) => {
 				buildfire.bookmarks.getAll((err, bookmarks) => {
 					if (err) reject(err);
 					resolve(bookmarks);
-				  });
+				});
 			})
-		
+
 		}
-		return {addBookmark,deletesBookmark,getAllBookmarks}
+		return { addBookmark, deletesBookmark, getAllBookmarks }
 	}
 
 };
