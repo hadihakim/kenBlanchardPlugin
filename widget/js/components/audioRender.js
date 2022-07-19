@@ -41,8 +41,7 @@ class AudioRender {
         imageUrl: "",
         selected: false,
       },
-    ],
-    isBookmarked: false
+    ]
   };
 
   static pointers = {
@@ -278,7 +277,6 @@ class AudioRender {
 
   static init = (data) => {
     this.setState(data);
-    console.log("from audio", this.state.data);
     this.render();
     this.checkIsBookmarked();
     

@@ -333,8 +333,7 @@ class Utilities {
 				const { hasNotes, noteCount, itemId } = data;
 
 				if (hasNotes) {
-					console.log(`Video with id ${itemId} has ${noteCount} notes!`);
-					buildfire.components.toast.showToastMessage({ text: "Notes added successfully!" });
+					this.showToast("Notes added successfully!");
 				} else {
 					console.log(`No notes yet!`);
 				}
@@ -360,19 +359,32 @@ class Utilities {
 		})
 
 	}
-	static bookmark = () => {
-		const addBookmark = (options) => {
+
+	  static showToast = message => {
+        buildfire.dialog.toast({
+            message: message,
+            duration:1000,
+            hideDismissButton:true,
+            type:'info',
+        });
+    }
+
+	static bookmark=()=>{
+		const addBookmark=(options,type)=>{
 			buildfire.bookmarks.add(
 				options,
 				(err, bookmark) => {
-					if (err) return console.error(err);
-					console.log("Bookmark ", bookmark);
+				  if (err) return console.error(err);
+				  this.showToast(options.type === "video" ? Strings.VIDEO_ADDED_BOOKMARK :options.type === "audio"? Strings.AUDIO_ADDED_BOOKMARK:"hi")
+				  console.log("Bookmark ", bookmark);
 				}
 			);
 		};
 
-		const deletesBookmark = (id) => {
+
+		const deletesBookmark=(id,type)=>{
 			buildfire.bookmarks.delete(id, () => {
+				this.showToast(type === "video" ? Strings.VIDEO_REMOVED_BOOKMARK : options.type === "audio"? Strings.AUDIO_REMOVED_BOOKMARK:"hii")
 				console.log("Bookmark deleted successfully");
 			});
 		}

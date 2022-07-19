@@ -37,11 +37,12 @@ class PageDetails {
               id: this.state.data.id,
               title:this.state.data.meta.title,
               icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+              type: "audio"
             });
             AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
           }
           if (result.text===Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
-            deletesBookmark(this.state.data.id);
+            deletesBookmark(this.state.data.id, "audio");
             AudioRender.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK;
         }
             //article
@@ -50,14 +51,31 @@ class PageDetails {
             id: this.state.data.id,
             title:this.state.data.meta.title,
             icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+            type: "article"
           });
           ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
         }
         if (result.text===Strings.ARTICLE_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
-          deletesBookmark(this.state.data.id);
+          deletesBookmark(this.state.data.id,"article");
           ArticleRender.state.articleDrawerItemsList[0].text=Strings.ARTICLE_SHORTCUTS_DRAWER_BOOKMARK;
       }
-        // for reminder
+          //video
+        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK) {
+          console.log(result, "HADI");
+          addBookmark({
+            id: this.state.data.id,
+            title:this.state.data.meta.title,
+            icon: Utilities.cropImage(this.state.data.meta.image,"s","1:1"),
+            type: "video"
+          });
+
+          videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK;
+        }
+        if (result.text===Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK) {
+          deletesBookmark(this.state.data.id, "video");
+          videoDetails.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK;
+      }
+      // for reminder
         if (result.text == Strings.SHORTCUT_SET_REMINDER) {
           this.openReminderDrawer();
         }
