@@ -109,7 +109,7 @@ class videoDetails {
         <div class="videoTopContainer" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${Utilities.cropImage(
           this.state.data.meta.image
         )}')" id="videoTopContainer">
-          <!-- <img src="" alt="" class="videoImage"> -->
+          <!-- <img src="" alt="" class="videoImage" loading="lazy"> -->
           <span class="material-icons icon videoSpan">
             play_circle_outline
           </span>
