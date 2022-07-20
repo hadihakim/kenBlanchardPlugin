@@ -306,7 +306,7 @@ class Utilities {
 	static showEmpty = (container) => {
 		container.innerHTML = `
 		<div class="emptySearch_Container">
-			<img src="./media/empty_page.svg" alt="Empty Search" />
+			<img src="./media/empty_page.svg" alt="Empty Search" loading="lazy"/>
 			<p id="emptyTitle">Nothing Found</p>
 			<p id="emptyDescription">Refine your search...</p>
       	</div>
@@ -422,8 +422,9 @@ class Utilities {
 			  height: 6.5rem;
 			  margin-bottom: 1.5rem;
 			  "
+			  loading="lazy"
 			/>
-			<div style="text-align: center;>
+			<div style="text-align: center;">
 			  <h2
 				style="
 				font-style: normal;

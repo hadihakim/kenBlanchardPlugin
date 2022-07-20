@@ -103,6 +103,7 @@ class summaryRender {
                         src="${Utilities.cropImage(page.pageImage)}"
                         alt=""
                         class="top-image"
+                        loading="lazy"
                       />
                       <div class="text-content">
                         <p class="bodyText-AppTheme">
