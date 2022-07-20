@@ -501,3 +501,15 @@ const archiveTeamList = [
       id: "62b3439f864d49037aac9b60"
   }
 ]
+
+const mostPopular={
+  "views": {
+      "62d03d68f4c2d20396f85f04": 2,
+      "62cf03fcd263c70397f2d8c5": 5,
+      "62cf23c9c0092d039610591a": 6,
+  },
+  "createdOn": "2022-07-18T16:14:30.482Z",
+  "createdBy": "ibrahem.omari96@gmail.com",
+  "lastUpdatedOn": "2022-07-18T16:14:30.482Z",
+  "lastUpdatedBy": "ibrahem.omari96@gmail.com"
+}
