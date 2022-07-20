@@ -6,97 +6,98 @@ html[buildfire][safe-area="true"] body {
   -webkit-overflow-scrolling: auto !important;
 }
 
-html, body {
-   margin: 0;
+html,
+body {
+  margin: 0;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 #mainContainer {
-	height: 100vh;
-	overflow-y: scroll;
-	overflow-x: hidden;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .exploreAll-btn-container {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .exploreAll-btn-container .mdc-button {
-    width: 8.938rem !important;
-    height: 2.5rem !important;
-    background-color: #47a53e;
-    border-radius: 0.25rem !important;
-	-webkit-border-radius: 0.25rem !important;
-	-moz-border-radius: 0.25rem !important;
-	-ms-border-radius: 0.25rem !important;
-	-o-border-radius: 0.25rem !important;
+  width: 8.938rem !important;
+  height: 2.5rem !important;
+  background-color: #47a53e;
+  border-radius: 0.25rem !important;
+  -webkit-border-radius: 0.25rem !important;
+  -moz-border-radius: 0.25rem !important;
+  -ms-border-radius: 0.25rem !important;
+  -o-border-radius: 0.25rem !important;
 }
 
 .exploreAll-btn-container .mdc-button .mdc-button__label {
-	font-style: normal;
-	font-weight: 600;
-	font-size: 1rem;
-	line-height:1.5rem;
-	text-align: center;
-	letter-spacing: 0.063rem;
-	text-transform: uppercase;
-	color: #ffffff;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.063rem;
+  text-transform: uppercase;
+  color: #ffffff;
 }
 
 .hidden {
-	display: none !important;
+  display: none !important;
 }
 
 .recommendedSections .recommendedContainer .mdc-card .duration .schedule-icon,
 #seeAllContainer .column .mdc-card-footer .duration .schedule-icon,
 .horizontal .main .mdc-card .mdc-card-footer .duration .schedule-icon,
 .horizontal .explore .mdc-card .mdc-card-footer .duration .schedule-icon {
-	margin-right: 0.35rem;
-	color: #0297a0;
-	font-size:1.125rem !important;
+  margin-right: 0.35rem;
+  color: #0297a0;
+  font-size: 1.125rem !important;
 }
 
 .recommendedSections .recommendedContainer .mdc-card .duration .schedule-text,
 #seeAllContainer .column .mdc-card-footer .duration .schedule-text {
-	font-size: 0.75rem;
-	line-height: 1rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
-.mdc-card{
-	cursor: pointer;
+.mdc-card {
+  cursor: pointer;
 }
 
-.emptySearch_Container{
-	color: #101010;
-	margin-top: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
+.emptySearch_Container {
+  color: #101010;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.emptySearch_Container img{
-	margin-bottom: 1.5rem;
+.emptySearch_Container img {
+  margin-bottom: 1.5rem;
 }
 
-.emptySearch_Container #emptyTitle{
-	font-style: normal;
-	font-weight: bold;
-	font-size: 1rem;
-	line-height: 1.25rem;
-	letter-spacing: 0.031rem;
+.emptySearch_Container #emptyTitle {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.031rem;
 }
-.emptySearch_Container #emptyDescription{
-	font-style: normal;
-	font-weight: 400;
-	line-height: 1.25rem;
-	font-size: 0.875rem;
-	letter-spacing: 0.009rem;
-	color: #5F5F5F;
+.emptySearch_Container #emptyDescription {
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.009rem;
+  color: #5f5f5f;
 }

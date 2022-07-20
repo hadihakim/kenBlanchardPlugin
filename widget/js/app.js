@@ -23,7 +23,6 @@ const init = async () => {
 
   await HandleAPI.getSettingsData();
   await HandleAPI.getCurrentUser();
-  // await HandleAPI.getStats()
   loadData(HandleAPI.state.data);
 }
 

@@ -72,6 +72,8 @@ const Strings = {
 	ARTICLE_SHORTCUTS_DRAWER_ADD_NOTE:"Add Note",
 	ARTICLE_SHORTCUTS_DRAWER_SHARE:"Share",
 	ARTICLE_SHORTCUTS_DRAWER_MARK_COMPLETE:"Mark Complete",
+	ARTICLE_ADDED_BOOKMARK:"article Lesson has been added to your bookmarks!",
+	ARTICLE_REMOVED_BOOKMARK:" article Lesson has been removed from your bookmarks!",
 
 	// shortcuts
 	
@@ -79,5 +81,9 @@ const Strings = {
 	SHORTCUT_BOOKMARK_REMOVE:"Remove Bookmark",
 	SHORTCUT_SET_REMINDER:"Set Reminder",
 	
+	// achieved badge dialog
+	ACHIEVED_BADGE_DIALOG_TITLE:"Congratulations!",
+	ACHIEVED_BADGE_DIALOG_SUBTITLE:"You just reached new level!",
+	ACHIEVED_BADGE_DIALOG_BUTTON:"COLLECT",
 }
 

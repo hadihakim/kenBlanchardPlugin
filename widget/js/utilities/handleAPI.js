@@ -92,6 +92,7 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Stats.get(async (err, res) => {
                 if (err) reject(err);
+                console.log("stats", res);
                 resolve(res);
             })
         });

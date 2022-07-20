@@ -1,5 +1,6 @@
 class videoDetails {
   static state = {
+    id:"",
     data: {},
     tabs: [],
     activeTab: "",
@@ -45,7 +46,8 @@ class videoDetails {
     ],
   };
 
-  static setState = async (data) => {
+  static setState = async (id,data) => {
+    this.state.id = id;
     this.state.data = data;
     this.state.tabs = [];
     this.state.activeTab = "";
@@ -107,7 +109,7 @@ class videoDetails {
         <div class="videoTopContainer" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${Utilities.cropImage(
           this.state.data.meta.image
         )}')" id="videoTopContainer">
-          <!-- <img src="" alt="" class="videoImage"> -->
+          <!-- <img src="" alt="" class="videoImage" loading="lazy"> -->
           <span class="material-icons icon videoSpan">
             play_circle_outline
           </span>
@@ -305,8 +307,8 @@ class videoDetails {
     ;
   };
 
-  static initVideoDetails = (data) => {
-    this.setState(data);
+  static initVideoDetails = (id,data) => {
+    this.setState(id,data);
     this.checkTabsExistance();
     this.renderVideoMainPage();
     this.renderTabs();

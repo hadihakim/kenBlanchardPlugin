@@ -11,7 +11,8 @@ class Search {
     renderedCards: [],
     fetchNext: true,
     emptySearch: true,
-    searchText: ""
+    searchText: "",
+    mostPopularState: false
   };
 
   static pointers = {
@@ -55,12 +56,21 @@ class Search {
   };
 
   static sort = (data, type = this.state.sortType) => {
-    if (type === "Most Recent") {
+    if (type === Strings.SORT_MOST_RECENT_TEXT) {
       data.sort((a, b) => {
         if (new Date(a.meta.createdOn) < new Date(b.meta.createdOn)) {
           return -1;
         }
         if (new Date(a.meta.createdOn) > new Date(b.meta.createdOn)) {
+          return 1;
+        }
+      });
+    }else if (type === Strings.SORT_MOST_POPULAR_TEXT) {
+      data.sort((a, b) => {
+        if (a.meta.views > b.meta.views) {
+          return -1;
+        }
+        if (a.meta.views < b.meta.views) {
           return 1;
         }
       });
@@ -170,12 +180,22 @@ class Search {
           { text: Strings.SORT_MOST_RECENT_TEXT, selected: false },
         ],
       },
-      (err, result) => {
+     async (err, result) => {
         if (err) return console.error(err);
         if (result) {
+          if (result.text===Strings.SORT_MOST_POPULAR_TEXT && !this.state.mostPopularState) {
+            // mostPopular.views
+            let mostPopularAssets=await HandleAPI.getStats();
+            for (const key in mostPopularAssets.views) {
+              if (Object.hasOwnProperty.call( mostPopularAssets.views, key)) {
+                const element =  mostPopularAssets.views[key];
+                HandleAPI.state.data.assets_info[key].meta.views=element;
+              }
+            }
+            this.state.mostPopularState=true;
+          }
           buildfire.components.drawer.closeDrawer();
           this.state.sortType = result.text;
-
           this.runSortFilterResult();
         }
       }

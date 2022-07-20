@@ -311,7 +311,7 @@ class UserProfile {
       let badgeElement = document.createElement("div");
       badgeElement.classList.add("badge");
       let badgeElementContent = `
-			<img src=${badge.image} alt="${badge.label}"/>
+			<img src=${badge.image} alt="${badge.label}" loading="lazy"/>
 			<label class="headerText-AppTheme">${badge.label}</label>
 		`;
       badgeElement.innerHTML = badgeElementContent;
@@ -326,7 +326,7 @@ class UserProfile {
       let badgeElement = document.createElement("div");
       badgeElement.classList.add("badge");
       let badgeElementContent = `
-			<img src=${badge.image} alt="${badge.label}"/>
+			<img src=${badge.image} alt="${badge.label}" loading="lazy"/>
 			<label class="headerText-AppTheme">${badge.label}</label>
 		`;
       badgeElement.innerHTML = badgeElementContent;
