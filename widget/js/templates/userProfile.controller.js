@@ -206,15 +206,14 @@ class UserProfile {
       let tabButtonContent = `
 						<span class="mdc-tab__content">
 						  <span class="mdc-tab__text-label">
-              ${
-                tab === "activity"
-                  ? Strings.USER_PROFILE_TAP_1
-                  : tab === "insights"
-                  ? Strings.USER_PROFILE_TAP_2
-                  : tab === "badges"
-                  ? Strings.USER_PROFILE_TAP_3
-                  : ""
-              }
+              ${tab === "activity"
+          ? Strings.USER_PROFILE_TAP_1
+          : tab === "insights"
+            ? Strings.USER_PROFILE_TAP_2
+            : tab === "badges"
+              ? Strings.USER_PROFILE_TAP_3
+              : ""
+        }
               </span>
 						</span>
 						<span class="mdc-tab-indicator user-tab-indicator">
@@ -244,6 +243,7 @@ class UserProfile {
     container.appendChild(nodesClone);
     this.tabsListHandler(userTabsList);
   };
+
   static tabsListHandler = (container) => {
     if (this.state.userProfileTabs.length <= 1) {
       let element = document.querySelectorAll(
@@ -281,12 +281,11 @@ class UserProfile {
         let userActivityPage = document.createElement("div");
         userActivityPage.setAttribute("id", "userActivityPage");
         element[0].appendChild(userActivityPage);
-        // Explore.setPageData();
-        Explore.cardRender("userActivityPage", "userActivityPage");
+        this.initActivity("userActivityPage");
       } else if (tab === "insights") {
         element[0].innerHTML = "";
         element[0].appendChild(this.insightsUI());
-        this.loadCharts(71);
+        this.loadCharts(10);
       } else if (tab === "badges") {
         element[0].innerHTML = "";
         element[0].appendChild(this.badgesUi());
@@ -294,6 +293,7 @@ class UserProfile {
       Utilities.setAppTheme();
     }
   };
+
   static badgesUi = () => {
     let userBadgesTemplate = document.getElementById(
       this.pointers.userBadgesTemplate
@@ -340,7 +340,7 @@ class UserProfile {
           actionButtons: [
             {
               text: `<span style="color:${Utilities.state.appTheme.colors.icons}">OK</span>`,
-              action: () => {},
+              action: () => { },
             },
           ],
         });
@@ -443,6 +443,74 @@ class UserProfile {
     assesmentsBar[0].appendChild(canvas);
     return nodesClone;
   };
+
+  static setAssetsArr = () => {
+    let myAssetsAtt = {};
+    for (const asset in HandleAPI.state.assets_info) {
+      let returnObj = HandleAPI.state.assets_info[asset];
+      returnObj.id = asset;
+      if (myAssetsAtt[returnObj.type])
+        myAssetsAtt[returnObj.type].push(returnObj);
+      else {
+        myAssetsAtt[returnObj.type] = [];
+        myAssetsAtt[returnObj.type].push(returnObj);
+      }
+    }
+    return myAssetsAtt;
+  }
+
+  static getAssets = (section) => {
+    let assets = [];
+    section.assets.forEach(asset => {
+      let returnedAsset = HandleAPI.state.data.assets_info[asset]
+      returnedAsset.id = asset;
+      assets.push(returnedAsset);
+    })
+    return assets;
+  }
+
+  static getAssetTopics = assets => {
+    let myTopics = {};
+    assets.forEach(asset => {
+      asset.meta.topics.forEach(topicId=>{
+        if(!myTopics[topicId]){
+          myTopics[topicId] = HandleAPI.getDataByID(topicId, 'topic');
+        }
+      })
+    })
+    return myTopics;
+  }
+
+  static initActivity = (containerID) => {
+    // user data will be stored in this class state
+    let userContainer = document.getElementById(containerID);
+    let assetsObj = this.setAssetsArr();
+    for (const asset in assetsObj) {
+      // build section container
+      let newSectionDiv = ui.createElement('div', userContainer, '', ['sectionContainer'], `${assetsObj[asset].id}-mine`);
+      let newSectionHeader = ui.createElement('div', newSectionDiv, '', ['sectionHeader'], '');
+      let newSectionTitle = ui.createElement('p', newSectionHeader, ` My ${asset}`, ['sectionTitle', 'headerTextTheme', 'headerText-AppTheme'], '');
+      let newSectionSeeAll = ui.createElement('p', newSectionHeader, 'See All', ['sectionTitle', 'defaultTheme', 'seeAllBtn', 'defaultlink-AppTheme'], '');
+      let newSectionCardsContainer = ui.createElement('div', newSectionDiv, '', ['sectionCardsContainer', `horizontal`], `my-${assetsObj[asset].id}`);
+
+      let assetTopics = this.getAssetTopics(assetsObj[asset]);
+      // see all event listener
+      newSectionSeeAll.addEventListener("click", () => {
+        let options = {
+          title: asset,
+          data: assetTopics,
+          type: asset
+        }
+        Navigation.openUserList(options);
+      });
+
+      // build cards
+      assetsObj[asset].forEach(card => {
+        // calling function to print all cards in the pages
+        Explore.horizontal_Render(card, newSectionCardsContainer);
+      })
+    }
+  }
 
   static init = (userData) => {
     this.setData(userData);

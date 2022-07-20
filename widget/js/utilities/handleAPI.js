@@ -8,7 +8,7 @@ class HandleAPI {
     }
 
     static setState = (options) => {
-        this.state = {...this.state, ...options};
+        this.state = { ...this.state, ...options };
     }
 
     static getDataByID = (id, type) => {
@@ -21,8 +21,8 @@ class HandleAPI {
                 //     })
                 // });
                 let mySection;
-                this.state.data.sections.forEach(section=>{
-                    if(section.id === id){
+                this.state.data.sections.forEach(section => {
+                    if (section.id === id) {
                         mySection = section;
                         return;
                     }
@@ -45,9 +45,9 @@ class HandleAPI {
                 //     })
                 // });
                 let myTopic;
-                this.state.data.topics.forEach(topic=>{
-                    if(topic.id === id){
-                        myTopic = topic.title;
+                this.state.data.topics.forEach(topic => {
+                    if (topic.id === id) {
+                        myTopic = topic;
                         return;
                     }
                 })
@@ -62,7 +62,7 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Profiles.get((err, res) => {
                 if (err) reject(err)
-                console.log("Profiles.get",res);
+                console.log("Profiles.get", res);
                 resolve(res)
             })
         });
@@ -76,12 +76,11 @@ class HandleAPI {
                     if (err) reject(err);
 
                     let options = {
-                        data:res, 
-                        assets_info:res.assets_info,
-                        sections:res.sections,
-                        topics:res.topics
+                        data: res,
+                        assets_info: res.assets_info,
+                        sections: res.sections,
+                        topics: res.topics
                     }
-                    console.log("options", options);
                     HandleAPI.setState(options);
                     resolve(res);
                 })
@@ -89,8 +88,8 @@ class HandleAPI {
         });
     }
 
-    static getStats=()=>{
-        return new Promise((resolve, reject) =>{
+    static getStats = () => {
+        return new Promise((resolve, reject) => {
             Stats.get(async (err, res) => {
                 if (err) reject(err);
                 resolve(res);
@@ -98,20 +97,31 @@ class HandleAPI {
         });
     }
 
-    static handleFilter = (topics, idx=0) => {
+    static handleFilter = (topics, idx = 0) => {
         let result;
         if (idx < topics.length) {
-          result = this.handleFilter(topics, idx+1)
+            result = this.handleFilter(topics, idx + 1)
         }
-    
+
         let topicData = this.state.topics.find(
-          ({ id }) => id === topics[idx]
+            ({ id }) => id === topics[idx]
         );
-    
+
         return (
-          Search.state.filterArr.includes(topicData?.title) ||
-          Search.state.filterArr.length == 0 ||
-          result
+            Search.state.filterArr.includes(topicData?.title) ||
+            Search.state.filterArr.length == 0 ||
+            result
         )
-      }
+    }
+
+    static getUserTopicsInfo = (type) => {
+        return new Promise((resolve, reject) => {
+            Assets.getAssetTypetPerTopicsStats(type, async(err, res) => {
+                if(err) return reject(err);
+                console.log('result from the API -=>', res);
+                console.log('type in the API -=>', type);
+                resolve(res)
+            })
+        })
+    }
 }

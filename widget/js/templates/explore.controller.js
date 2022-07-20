@@ -36,56 +36,6 @@ class Explore {
     Navigation.openSeeAll(type, title, seeAllState);
   };
 
-  // deprecated function -->
-  // we still need to take progress bar from here 
-  static printRecommended = (
-    container,
-    durationState,
-    assets_info,
-    topicTitle,
-    id
-  ) => {
-    // for demo
-    let n = container.id.split("-");
-
-    const recommendedTemplate = document.getElementById(
-      this.pointers.recommendedTemplate
-    );
-    const nodesClone = recommendedTemplate.content.cloneNode(true);
-    let image = nodesClone.querySelectorAll(".image");
-    // for demo
-    if (n[n.length - 1] === "userActivityPage") {
-      let progressBar = nodesClone.querySelectorAll(".progressBar");
-      let div = document.createElement("div");
-      div.classList.add("card-progressBar");
-      div.classList.add("holderPercentage");
-      let percentageDiv = document.createElement("div");
-      percentageDiv.style.width = `${Math.floor(Math.random() * 101)}%`;
-      percentageDiv.classList.add("percentageDiv", "infoTheme")
-      div.appendChild(percentageDiv);
-      progressBar[0].appendChild(div);
-    }
-    let category = nodesClone.querySelectorAll(".category");
-    let title = nodesClone.querySelectorAll(".title");
-    let duration = nodesClone.querySelectorAll(".duration");
-    let card = nodesClone.querySelectorAll(".mdc-card");
-    image[0].style.backgroundImage = `url('${Utilities.cropImage(
-      assets_info.meta.image
-    )}')`;
-    category[0].innerText = topicTitle;
-    title[0].innerText = assets_info.meta.title;
-    if (durationState) {
-      duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
-					<span class="schedule-text bodyText-AppTheme">
-						${Utilities.timeConvert(assets_info.meta.duration, "hh|mm")}</span>`;
-    }
-    card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(id, assets_info.meta.title);
-    });
-    container.appendChild(nodesClone);
-    Utilities.setAppTheme();
-  };
-
   // new render and print cards ----->
   static horizontal1_Render = (asset, container) => {
     const template = document.getElementById(this.pointers.forYouTemplate);
@@ -106,6 +56,7 @@ class Explore {
   }
 
   static horizontal_Render = (asset, container) => {
+    console.log('horizontal asset -=>', asset );
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
@@ -115,7 +66,7 @@ class Explore {
     image[0].style.backgroundImage = `url('${Utilities.cropImage(
       asset.meta.image
     )}')`;
-    category[0].innerText = HandleAPI.getDataByID(asset.meta.topics[0], 'topic') || '';
+    category[0].innerText = HandleAPI.getDataByID(asset.meta.topics[0], 'topic')?.title || '';
     title[0].innerText = asset.meta.title;
     if (asset.meta.duration > 0) {
       duration[0].innerHTML = `<span class="material-icons icon schedule-icon"> schedule </span>
