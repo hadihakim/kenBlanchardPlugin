@@ -81,6 +81,11 @@ const Strings = {
 	SHORTCUT_BOOKMARK_REMOVE:"Remove Bookmark",
 	SHORTCUT_SET_REMINDER:"Set Reminder",
 	SHORTCUT_ADDED_BOOKMARK:"shortcut has been added to your bookmarks!",
-	SHORTCUT_REMOVED_BOOKMARK:"shortcut has been removed from your bookmarks!"
+	SHORTCUT_REMOVED_BOOKMARK:"shortcut has been removed from your bookmarks!",
+	
+	// achieved badge dialog
+	ACHIEVED_BADGE_DIALOG_TITLE:"Congratulations!",
+	ACHIEVED_BADGE_DIALOG_SUBTITLE:"You just reached new level!",
+	ACHIEVED_BADGE_DIALOG_BUTTON:"COLLECT",
 }
 

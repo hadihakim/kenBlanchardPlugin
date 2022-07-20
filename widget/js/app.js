@@ -15,7 +15,7 @@ const loadData = async (data) => {
   Utilities.setAppTheme();
 };
 
-const init = async() => {
+const init = async () => {
   Skeleton.initMainSkeleton(sectionsContainer);
   Utilities.getAppTheme();
   UserProfile.init();
@@ -23,8 +23,7 @@ const init = async() => {
 
   await HandleAPI.getSettingsData();
   await HandleAPI.getCurrentUser();
-  // await HandleAPI.getStats()
-  loadData(HandleAPI.state.data)
+  loadData(HandleAPI.state.data);
 }
 
 init();

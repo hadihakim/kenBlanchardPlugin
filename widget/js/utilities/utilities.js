@@ -306,7 +306,7 @@ class Utilities {
 	static showEmpty = (container) => {
 		container.innerHTML = `
 		<div class="emptySearch_Container">
-			<img src="./media/empty_page.svg" alt="Empty Search" />
+			<img src="./media/empty_page.svg" alt="Empty Search" loading="lazy"/>
 			<p id="emptyTitle">Nothing Found</p>
 			<p id="emptyDescription">Refine your search...</p>
       	</div>
@@ -400,5 +400,86 @@ class Utilities {
 		return { addBookmark, deletesBookmark, getAllBookmarks }
 	}
 
+	static achievedBadgeDialog = () => {
+		buildfire.dialog.alert({
+			isMessageHTML: true,
+			title:" ",
+			okButtonText:" ",
+				message:
+			  `
+			  <div
+				style="
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				background-image: url('https://i.gifer.com/origin/1a/1af8d3b487b77085d5288814f151e1de.gif');
+				"
+			  >
+			<img src="https://seeklogo.com/images/B/business-people-circle-logo-83C8022853-seeklogo.com.png"
+			  style="
+			  width: 6.5rem;
+			  height: 6.5rem;
+			  margin-bottom: 1.5rem;
+			  "
+			  loading="lazy"
+			/>
+			<div style="text-align: center;">
+			  <h2
+				style="
+				font-style: normal;
+				font-weight: 700;
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+				margin-bottom: 1rem;
+				"
+			  >${Strings.ACHIEVED_BADGE_DIALOG_TITLE}</h2>
+			  <p
+				style="
+				font-style: normal;
+				font-weight: 500;
+				font-size: 0.75rem;
+				line-height: 1rem;
+				margin-bottom: 2rem;
+				color:#5F5F5F;
+				"
+			  >${Strings.ACHIEVED_BADGE_DIALOG_SUBTITLE}</p>
+			  <h2
+				style="
+				font-style: normal;
+				font-weight: 900;
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+				margin-bottom: 2rem;
+				color:#0297A0;
+				"
+			  >LEARNER</h2>
+			</div>
+			<a 
+			  style="
+			  width: 6.625rem;
+			  height: 2.5rem;
+			  background-color:#0297A0;
+			  text-align: center;
+			  border-radius:4px;
+			  "
+			>
+			  <span
+			  style="
+			  font-style: normal;
+			  font-weight: 600 !important;
+			  font-size: 1rem !important;
+			  line-height: 1.5rem !important;
+			  letter-spacing: 0.0625rem !important;
+			  text-transform: uppercase !important;
+			  color: #fff !important;
+			  margin: 0.5rem;
+			  "
+			  >${Strings.ACHIEVED_BADGE_DIALOG_BUTTON}</span>
+			</a>
+		  </div>
+			  `,
+		  });
+	}
 };
 

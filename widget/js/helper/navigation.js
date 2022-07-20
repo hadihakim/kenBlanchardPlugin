@@ -2,7 +2,7 @@ class Navigation {
 	static state = {
 		searchOpened: true,
 		seeAllState: null,
-		activeLayOut:'main'
+		activeLayOut: 'main'
 	}
 	static setData(data) {
 		this.state.searchOpened = data;
@@ -38,7 +38,7 @@ class Navigation {
 		seeAllContainer.classList.add("hidden");
 		sortIcon.classList.add("hidden");
 		searchContainer.classList.add("hidden");
-		
+
 		// document.getElementById("videoPageContainer").classList.add("hidden");
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
 
@@ -125,7 +125,7 @@ class Navigation {
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
 		searchContainer.classList.remove("hidden");
-		
+
 		seeAllContainer.classList.add("hidden");
 		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
@@ -167,9 +167,9 @@ class Navigation {
 				from: "Explore from Details",
 
 			});
-		}else if(!pageDetails.classList.contains("hidden")) {
+		} else if (!pageDetails.classList.contains("hidden")) {
 			console.log("from chapters");
-		}else if(!searchContainer.classList.contains("hidden")){
+		} else if (!searchContainer.classList.contains("hidden")) {
 			// search from details
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
@@ -177,8 +177,8 @@ class Navigation {
 
 			});
 		}
-		else{
-			
+		else {
+
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
 				from: "User profile from Details",
@@ -267,7 +267,7 @@ class Navigation {
 		searchBar.classList.remove("hidden");
 		sortIcon.classList.remove("hidden");
 		seeAllContainer.classList.remove("hidden");
-		
+
 		mainPage.classList.add("hidden");
 		userContainer.classList.add("hidden");
 		explorePage.classList.add("hidden");
@@ -301,7 +301,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openUserList = (options) => {
+	static openUserList = async(options) => {
 		this.state.activeLayOut = 'user list';
 
 		mainContainer.classList.add("hidden");
@@ -324,9 +324,10 @@ class Navigation {
 		Search.state.searchText = '';
 		if (options?.data) {
 			let _options = {
-				data: options.data
+				data: options.data,
+				type: options.type
 			}
-			MyList.setData(_options)
+			await MyList.setData(_options);
 		}
 		MyList.init();
 
