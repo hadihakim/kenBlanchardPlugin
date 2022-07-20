@@ -41,17 +41,12 @@
 
   <!-- js -->
   <script src="../../../scripts/buildfire.js"></script>
+  <script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
   <script src="../../../scripts/buildfire/components/listView/listView.js"></script>
-  <script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
-  <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-  <!-- js -->
-  <script src="../../../scripts/buildfire.js"></script>
-  <script src="../../../scripts/materialDesign/material-components-web@4.0.0.min.js" type="text/javascript"></script>
   <script src="../../../scripts/buildfire/components/drawer/drawer.js"></script>
   <script src="../../../scripts/buildfire/components/toast/toast.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
   <!-- Bundle:scripts -->
   <script src="./js/helper/skeleton.js"></script>
@@ -71,7 +66,7 @@
   <script src="./js/templates/pageDetails.controller.js"></script>
   <script src="./js/templates/userProfile.controller.js"></script>
   <script src="./js/templates/search.controller.js"></script>
-  
+
   <script src="./js/shared/authManager.js"></script>
   <script src="./js/shared/utils/analytics.js"></script>
   <script src="./js/data/Profile.js"></script>
@@ -134,7 +129,7 @@
 
     <!-- user list of cards -->
     <div class="mainPage slide-in" id="mainPage">
-      
+
       <!-- section -->
       <section id="sectionsContainer"></section>
       <div class="exploreAll-btn-container" id="exploreBtnContainer">
@@ -157,20 +152,20 @@
     <div id="searchContainer" class="verticalContainer hidden slide-in"></div>
 
     <div id="pageDetails" class="hidden pageDetails slide-in">
-      
+
     </div>
     <div id="courseDetailsContainer" class="courseDetailsContainer hidden slide-in"></div>
     <!-- end section -->
   </div>
 
-  
+
   <!-- user profile-->
   <div id="userProfileContainer" class="hidden">
     <div id="userProfile" class="user-profile-container slide-in"></div>
     <!-- end user profile -->
     <!-- my list -- will be organized -->
     <div id="myList_PageContainer" class="myList_PageContainer slide-in hidden">
-      <div class="chartContainer">
+      <div class="chartContainer" id="myListChartContainer">
         <div class="bar">
           <canvas id="myChart"></canvas>
         </div>
@@ -414,18 +409,18 @@
       </div>
     </div>
   </template>
-	<!--Article template  -->
-	<template id="articleTemplate" >
-		<div class="articleImage" id="articleImagee">
-		</div>
-		<div class= "articleTitleContainer" id="articleTitleContainer">
-			<p id = "articleTitle" class="articleTitle headerText-AppTheme"></p>
-			<span class="material-icons icon articleIcon">more_horiz</span>
-			</div>
-		<div id="articleTabHandler" class="articleTabHandler"></div>
-			<div id="articleKeyTakeaways" class="articleKeyTakeaways slide-in headerText-AppTheme"></div>
-			<div id="articleFullArticle" class="articleFullArticle hidden slide-in headerText-AppTheme"></div>
-	</template>
+  <!--Article template  -->
+  <template id="articleTemplate">
+    <div class="articleImage" id="articleImagee">
+    </div>
+    <div class="articleTitleContainer" id="articleTitleContainer">
+      <p id="articleTitle" class="articleTitle headerText-AppTheme"></p>
+      <span class="material-icons icon articleIcon">more_horiz</span>
+    </div>
+    <div id="articleTabHandler" class="articleTabHandler"></div>
+    <div id="articleKeyTakeaways" class="articleKeyTakeaways slide-in headerText-AppTheme"></div>
+    <div id="articleFullArticle" class="articleFullArticle hidden slide-in headerText-AppTheme"></div>
+  </template>
 
   <!--Skeleton Templates-->
   <template id="horizontal1_SkeletonTemplate">
@@ -506,4 +501,3 @@
 </body>
 
 </html>
-
