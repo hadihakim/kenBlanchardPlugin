@@ -153,7 +153,11 @@ class PageDetails {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
         console.log("Selected reminder: ", result.text);
-
+        if (result.text==="10 Minutes") {
+          Utilities.setReminder(5,this.state.data.meta.title);
+          console.log(result.text);
+          Utilities.showToast(`Reminder set for ${result.text}`);
+        }
       }
     );
   }
