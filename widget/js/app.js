@@ -23,8 +23,11 @@ const init = async() => {
 
   await HandleAPI.getSettingsData();
   await HandleAPI.getCurrentUser();
-  // await HandleAPI.getStats()
   loadData(HandleAPI.state.data)
+  // Utilities.achievedBadgeDialog();
+  //  Assets.getAssetTypetPerTopicsStats("summary",(err,res)=>{
+  //   console.log("res>>>",res);
+  // })
 }
 
 init();
