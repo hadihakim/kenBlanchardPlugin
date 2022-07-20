@@ -95,7 +95,48 @@ class PageDetails {
     }
   }
 
-  static openDrawerAudioOrVideoOrArticle = (options) => {
+  static videoShortcutDrawerItemListAction(resultText, shortcut) {
+    switch (resultText) {
+      case Strings.SHORTCUT_BOOKMARK_SHORTCUT:
+        addBookmark({
+          id: shortcut.id,
+          title: shortcut.title,
+          icon: "",
+          type: "shortcut",
+        });
+        videoDetails.renderVideoShortcuts(videoDetails.state.tabs[0]);
+        break;
+      case Strings.SHORTCUT_BOOKMARK_REMOVE:
+        deletesBookmark(shortcut.id, "shortcut");
+        videoDetails.renderVideoShortcuts(videoDetails.state.tabs[0]);
+        break;
+      default:
+        break;
+    }
+  }
+
+  static audioShortcutDrawerItemListAction(resultText, shortcut) {
+    switch (resultText) {
+      case Strings.SHORTCUT_BOOKMARK_SHORTCUT:
+        addBookmark({
+          id: shortcut.id,
+          title: shortcut.title,
+          icon: "",
+          type: "shortcut",
+        });
+        AudioRender.tabClickHandler("shortcuts");
+        break;
+      case Strings.SHORTCUT_BOOKMARK_REMOVE:
+        deletesBookmark(shortcut.id, "shortcut");
+        AudioRender.tabClickHandler("shortcuts");
+        break;
+      default:
+        break;
+    }
+  }
+
+
+  static openDrawerAudioOrVideoOrArticle = (options, shortcut) => {
     buildfire.components.drawer.open(
       {
         multiSelection: false,
@@ -110,23 +151,38 @@ class PageDetails {
       (err, result) => {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
-        // to manage bookmarks and notes for each asset type
-        switch (this.state.data.type) {
-          case "audio":
-            this.audioDrawerItemsListAction(result.text);
-            break;
-          case "video":
-            this.videoDrawerItemsListAction(result.text);
-            break;
-          case "article":
-            this.articleDrawerItemsListAction(result.text);
-            break;
-          default:
-            break;
-        }
-        // for reminder
-        if (result.text == Strings.SHORTCUT_SET_REMINDER) {
-          this.openReminderDrawer();
+        if (!shortcut) {
+          // to manage bookmarks and notes for each asset type
+          switch (this.state.data.type) {
+            case "audio":
+              this.audioDrawerItemsListAction(result.text);
+              break;
+            case "video":
+              this.videoDrawerItemsListAction(result.text);
+              break;
+            case "article":
+              this.articleDrawerItemsListAction(result.text);
+              break;
+            default:
+              break;
+          }
+
+        } else {
+          // to mange bookmark for each shortcut in audio or video
+          switch (this.state.data.type) {
+            case "audio":
+              this.audioShortcutDrawerItemListAction(result.text, shortcut);
+              break;
+            case "video":
+              this.videoShortcutDrawerItemListAction(result.text, shortcut);
+              break;
+            default:
+              break;
+          }
+          // for reminder
+          if (result.text == Strings.SHORTCUT_SET_REMINDER) {
+            this.openReminderDrawer();
+          }
         }
       }
     );

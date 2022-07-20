@@ -29,20 +29,7 @@ class AudioRender {
         selected: false,
       },
     ],
-    shortcutDrawerItemsList: [
-      {
-        text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
-        secondaryText: "",
-        imageUrl: "",
-        selected: false,
-      },
-      {
-        text: Strings.SHORTCUT_SET_REMINDER,
-        secondaryText: "",
-        imageUrl: "",
-        selected: false,
-      },
-    ]
+
   };
 
   static pointers = {
@@ -212,6 +199,7 @@ class AudioRender {
     let div = document.createElement("div");
     div.classList.add("audio-shortcuts");
     shortcutsArray.forEach((shortcut, idx) => {
+      shortcut.id=shortcut.title
       let shortcutItem = document.createElement("div");
       shortcutItem.classList.add("shortcut-item");
       let shortcutItemInnerHTML = `
@@ -239,10 +227,14 @@ class AudioRender {
             <label for="check1" class="shortcut-label headerText-AppTheme"
               >${idx + 1 + ". " + shortcut.title}</label
             >
-            <span class="shortcut-time bodyText-AppTheme">${Utilities.timeConvert(
+            <span class="shortcut-time audioShortcutTime bodyText-AppTheme">${Utilities.timeConvert(
               shortcut.timeStamp,
               "hh:mm:ss"
-            )}</span>
+            )}
+            <span class="material-icons icon videoBookmarkIcon hidden " id='${shortcut.id}icon'>
+            bookmark_border
+         </span>
+            </span>
           </div>
           <label class="material-icons icon">headset</label>
           <label class="material-icons icon shortcutDrawer">more_horiz</label>
@@ -250,12 +242,33 @@ class AudioRender {
           `;
       shortcutItem.innerHTML = shortcutItemInnerHTML;
       div.appendChild(shortcutItem);
+
       let shortcutDrawerElements =
         shortcutItem.querySelectorAll(".shortcutDrawer");
-      shortcutDrawerElements.forEach((e) => {
+
+      shortcutDrawerElements.forEach(async(e) => {
+        const shortcutDrawerItemsList= [
+          {
+            text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
+            secondaryText: "",
+            imageUrl: "",
+            selected: false,
+          },
+          {
+            text: Strings.SHORTCUT_SET_REMINDER,
+            secondaryText: "",
+            imageUrl: "",
+            selected: false,
+          },
+        ]
+        // const icon= document.getElementById(`${shortcut.id}icon`);
+        // console.log(icon, "mmmmmmmmmmmmmm");
+        await this.checkIsBookmarked(shortcutDrawerItemsList,shortcut.id,"icon","shortcut");
+
         e.addEventListener("click", () => {
-          this.drawerHandler(this.state.shortcutDrawerItemsList);
-        });
+          PageDetails.openDrawerAudioOrVideoOrArticle(
+            shortcutDrawerItemsList,shortcut
+          );        });
       });
     });
 
@@ -269,20 +282,22 @@ class AudioRender {
     console.log("hi");
   };
 
-  static checkIsBookmarked = async() => {
+  static checkIsBookmarked = async(drawerList, id ,icon, to) => {
     let allBookmarks=await getAllBookmarks();
-    let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===this.state.data.id);
-    filteredBookmarks.length>0?
-      this.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK
-      :
-      this.state.audioDrawerItemsList[0].text=Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK
-    ;
+    let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===id);
+    if(filteredBookmarks.length>0){
+     drawerList[0].text= (to == "audio"?Strings.AUDIO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK:Strings.SHORTCUT_BOOKMARK_REMOVE)
+     icon? document.getElementById(`${id}icon`).classList.remove('hidden'):"";
+    }else{
+     drawerList[0].text=(to == "audio"? Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK:Strings.SHORTCUT_BOOKMARK_SHORTCUT)
+     
+    }
+    
   };
-
   static init = (id,data) => {
     this.setState(id,data);
     this.render();
-    this.checkIsBookmarked();
+    this.checkIsBookmarked(this.state.audioDrawerItemsList,this.state.id, null,"audio");
     
   };
 }
