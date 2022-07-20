@@ -129,3 +129,10 @@ span {
 .mdc-tab-scroller__scroll-area {
     overflow-x: scroll !important;
 }
+
+
+
+.shorcutElementDetails .material-icons{
+    font-size: 0.8rem !important;
+    margin: 0.2rem;
+}
