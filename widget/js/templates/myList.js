@@ -154,7 +154,7 @@ class MyList {
                 let subTitleContainer = nodesClone.querySelector("#subTitle_text");
                 let actionBtn = nodesClone.querySelectorAll(".myCard");
 
-                imageContainer.setAttribute('style', `background-image: url('${this.listState.data[i].image}')`);
+                imageContainer.setAttribute('style', `background-image: url('${Utilities.cropImage(this.listState.data[i].image)}')`);
                 titleContainer.innerHTML = this.listState.data[i].title;
                 subTitleContainer.innerHTML = this.listState.data[i].takenValue;
 
