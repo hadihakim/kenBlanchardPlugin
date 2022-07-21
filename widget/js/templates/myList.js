@@ -43,22 +43,22 @@ class MyList {
     // myTopics is the all user topics to calculate the number of taken topics
     static handleTakenNumber = (allTopics, myTopics) => {
         let myTopicsToRender = [];
-        for(const topic in allTopics){
+        for (const topic in allTopics) {
             let returnedTopic = {
                 id: allTopics[topic].id,
                 title: allTopics[topic].title,
                 imageUrl: allTopics[topic].image,
-                subtitle:'',
+                subtitle: '',
                 action: {
                     icon: 'material-icons icon',
-                    iconTextContent:'chevron_right'
+                    iconTextContent: 'chevron_right'
                 }
             }
             let topicNumber = myTopics.find((topicNumberObj) => topicNumberObj._id === topic);
             returnedTopic.description = `0 Taken On  •  ${topicNumber?.count || 0} In Total`;
             myTopicsToRender.push(returnedTopic);
         }
-        
+
         return myTopicsToRender;
     }
     // run all charts in the course list 
@@ -142,57 +142,32 @@ class MyList {
         document.getElementById(this.pointers.percentageContainer).innerHTML = `${percent}%`;
         document.getElementById(this.pointers.averageLable).innerHTML = Strings.USER_PROFILE_AVERAGE_CHART_TEXT;
     }
-    // print the list of all topics without buildfire list
-    static loadList = () => {
-        let listContainer = document.getElementById(this.pointers.listContainer);
-
-        let firstIndex = (this.listState.page - 1) * this.listState.pageSize;
-        let lastIndex = this.listState.page * this.listState.pageSize;
-        this.listState.page += 1;
-        console.log('inside cards render -=>', this.listState.data);
-
-        if (lastIndex > this.listState.data.length)
-            lastIndex = this.listState.data.length;
-
-        for (let i = firstIndex; i < lastIndex; i++) {
-            if ((this.listState.data[i].archived && this.listState.includeArchived) || !this.listState.data[i].archived) {
-                const myCard = document.getElementById(this.pointers.template);
-                const nodesClone = myCard.content.cloneNode(true);
-
-                let imageContainer = nodesClone.querySelector("#image");
-                let titleContainer = nodesClone.querySelector("#title_text");
-                let subTitleContainer = nodesClone.querySelector("#subTitle_text");
-                let actionBtn = nodesClone.querySelectorAll(".myCard");
-
-                imageContainer.setAttribute('style', `background-image: url('${this.listState.data[i].imageUrl}')`);
-                titleContainer.innerHTML = this.listState.data[i].title;
-                subTitleContainer.innerHTML = this.listState.data[i].description;
-
-                listContainer.appendChild(nodesClone);
-
-                actionBtn[0].addEventListener('click', () => {
-                    let _options = {
-                        title: this.listState.data[i].title,
-                        id: this.listState.data[i].id,
-                        activeData: activeTeamList,
-                        archiveData: archiveTeamList
-                    }
-                    Navigation.openTeamEffectivenessList(_options);
-                })
-            } else {
-                lastIndex += 1;
-                if (lastIndex > this.listState.data.length)
-                    lastIndex = this.listState.data.length;
-            }
-        }
-        this.listState.fetchNext = true;
-        Utilities.setAppTheme();
-    }
     // print the list of all topics by using buildfire list
-    static loadBuildFireList = () => {
+    static loadList = () => {
         const listView = new buildfire.components.listView(this.pointers.listContainer);
 
+        // load list
         listView.loadListViewItems(this.listState.data);
+
+        // event on click
+        listView.onItemClicked = item => {
+            let _options = {
+                title: item.title,
+                id: item.id,
+                activeData: activeTeamList,
+                archiveData: archiveTeamList
+            }
+            Navigation.openTeamEffectivenessList(_options);
+        };
+
+        // on add button clicked
+        listView.onAddButtonClicked = () => {
+            console.log('button clicked');
+        };
+        // on action button clicked
+        listView.onItemActionClicked = item => {
+            console.log(item.title);
+        };
     }
 
     static lazyLoad = (e) => {
@@ -251,7 +226,6 @@ class MyList {
             document.getElementById(this.pointers.chartDiv).classList.add('hidden');
             document.getElementById(this.pointers.listContainer).style.height = '100vh';
         }
-        this.loadBuildFireList();
         this.loadList();
     }
 }
