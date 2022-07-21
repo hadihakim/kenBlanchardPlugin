@@ -26,7 +26,7 @@ class MyList {
         userProfileTemplate: 'userProfileTemplate',
         chartDiv: 'myListChartContainer'
     }
-
+    // set state data to run the list and charts 
     static setData = async (options) => {
         document.getElementById(this.pointers.chartDiv).classList.add('hidden');
         document.getElementById(this.pointers.listContainer).style.height = '100vh';
@@ -38,20 +38,30 @@ class MyList {
 
         this.listState = { ...this.listState, ...options };
     }
-
+    // manage topic objects to be ready to print out in the list 
+    // allTopics is the all topics that will be printed in the list 
+    // myTopics is the all user topics to calculate the number of taken topics
     static handleTakenNumber = (allTopics, myTopics) => {
         let myTopicsToRender = [];
-        console.log('all topics -=>', allTopics);
         for(const topic in allTopics){
-            let returnedTopic = allTopics[topic];
+            let returnedTopic = {
+                id: allTopics[topic].id,
+                title: allTopics[topic].title,
+                imageUrl: allTopics[topic].image,
+                subtitle:'',
+                action: {
+                    icon: 'material-icons icon',
+                    iconTextContent:'chevron_right'
+                }
+            }
             let topicNumber = myTopics.find((topicNumberObj) => topicNumberObj._id === topic);
-            returnedTopic.takenValue = `0 Taken On  •  ${topicNumber?.count || 0} In Total`;
+            returnedTopic.description = `0 Taken On  •  ${topicNumber?.count || 0} In Total`;
             myTopicsToRender.push(returnedTopic);
         }
         
         return myTopicsToRender;
     }
-
+    // run all charts in the course list 
     static loadCharts = () => {
         // Bar chart
         var xValues = [["Just", "Started"], ["In", "Progress"], "Completed"];
@@ -132,7 +142,7 @@ class MyList {
         document.getElementById(this.pointers.percentageContainer).innerHTML = `${percent}%`;
         document.getElementById(this.pointers.averageLable).innerHTML = Strings.USER_PROFILE_AVERAGE_CHART_TEXT;
     }
-
+    // print the list of all topics without buildfire list
     static loadList = () => {
         let listContainer = document.getElementById(this.pointers.listContainer);
 
@@ -154,9 +164,9 @@ class MyList {
                 let subTitleContainer = nodesClone.querySelector("#subTitle_text");
                 let actionBtn = nodesClone.querySelectorAll(".myCard");
 
-                imageContainer.setAttribute('style', `background-image: url('${this.listState.data[i].image}')`);
+                imageContainer.setAttribute('style', `background-image: url('${this.listState.data[i].imageUrl}')`);
                 titleContainer.innerHTML = this.listState.data[i].title;
-                subTitleContainer.innerHTML = this.listState.data[i].takenValue;
+                subTitleContainer.innerHTML = this.listState.data[i].description;
 
                 listContainer.appendChild(nodesClone);
 
@@ -178,25 +188,13 @@ class MyList {
         this.listState.fetchNext = true;
         Utilities.setAppTheme();
     }
-
+    // print the list of all topics by using buildfire list
     static loadBuildFireList = () => {
-        console.log('pointer->', this.pointers.listContainer);
         const listView = new buildfire.components.listView(this.pointers.listContainer);
 
-        listView.loadListViewItems([
-            {
-                id: '1',
-                title: 'buildfire',
-                imageUrl: 'https://via.placeholder.com/150',
-                subtitle: 'The Most Powerful App Maker For iOS & Android',
-                description: 'BuildFire’s powerful and easy to use mobile app builder...',
-                action: {
-                    icon: 'glyphicon glyphicon-ok'
-                }
-            }
-        ]);
+        listView.loadListViewItems(this.listState.data);
     }
-
+    
     static lazyLoad = (e) => {
         if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.listState.fetchNext) {
             this.listState.fetchNext = false;
@@ -228,7 +226,6 @@ class MyList {
     }
 
     static init = () => {
-        // should be organized
         this.destroy();
 
         document.getElementById(this.pointers.includeArchived).addEventListener('click', (e) => this.initArchived(e))
@@ -255,6 +252,6 @@ class MyList {
             document.getElementById(this.pointers.listContainer).style.height = '100vh';
         }
         this.loadBuildFireList();
-        // this.loadList();
+        this.loadList();
     }
 }
