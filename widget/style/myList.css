@@ -107,6 +107,11 @@
     color: #5F5F5F;
 }
 
+.listViewItem .listViewItemCopy .listViewItemDescription .dotIcon{
+    font-size: 8px !important;
+    color: #5F5F5F !important;
+}
+
 .listViewItem .action-holder {
     width: 2rem;
     height: 2rem;

@@ -47,7 +47,7 @@ class MyList {
             let returnedTopic = {
                 id: allTopics[topic].id,
                 title: allTopics[topic].title,
-                imageUrl: allTopics[topic].image,
+                imageUrl: Utilities.cropImage(allTopics[topic].image),
                 subtitle: '',
                 action: {
                     icon: 'material-icons icon',
@@ -55,7 +55,7 @@ class MyList {
                 }
             }
             let topicNumber = myTopics.find((topicNumberObj) => topicNumberObj._id === topic);
-            returnedTopic.description = `0 Taken On  •  ${topicNumber?.count || 0} In Total`;
+            returnedTopic.description = `0 Taken On  <span class="material-icons dotIcon">fiber_manual_record</span>  ${topicNumber?.count || 0} In Total`;
             myTopicsToRender.push(returnedTopic);
         }
 

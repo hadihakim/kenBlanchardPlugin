@@ -113,9 +113,11 @@ class Explore {
     // get all assets in the section
     let myAssets = [];
     section.assets.forEach(asset => {
-      let returnedAsset = HandleAPI.state.data.assets_info[asset]
-      returnedAsset.id = asset;
-      myAssets.push(returnedAsset);
+      let returnedAsset = HandleAPI.state.data.assets_info[asset];
+      if(returnedAsset){
+        returnedAsset.id = asset;
+        myAssets.push(returnedAsset);
+      }
     })
 
     // sort all assets
