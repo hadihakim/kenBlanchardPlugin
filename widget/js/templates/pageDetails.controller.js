@@ -95,7 +95,48 @@ class PageDetails {
     }
   }
 
-  static openDrawerAudioOrVideoOrArticle = (options) => {
+  static videoShortcutDrawerItemListAction(resultText, shortcut) {
+    switch (resultText) {
+      case Strings.SHORTCUT_BOOKMARK_SHORTCUT:
+        addBookmark({
+          id: shortcut.id,
+          title: shortcut.title,
+          icon: "",
+          type: "shortcut",
+        });
+        videoDetails.renderVideoShortcuts("shortcuts");
+        break;
+      case Strings.SHORTCUT_BOOKMARK_REMOVE:
+        deletesBookmark(shortcut.id, "shortcut");
+        videoDetails.renderVideoShortcuts("shortcuts");
+        break;
+      default:
+        break;
+    }
+  }
+
+  static audioShortcutDrawerItemListAction(resultText, shortcut) {
+    switch (resultText) {
+      case Strings.SHORTCUT_BOOKMARK_SHORTCUT:
+        addBookmark({
+          id: shortcut.id,
+          title: shortcut.title,
+          icon: "",
+          type: "shortcut",
+        });
+        AudioRender.tabClickHandler("shortcuts");
+        break;
+      case Strings.SHORTCUT_BOOKMARK_REMOVE:
+        deletesBookmark(shortcut.id, "shortcut");
+        AudioRender.tabClickHandler("shortcuts");
+        break;
+      default:
+        break;
+    }
+  }
+
+
+  static openDrawerAudioOrVideoOrArticle = (options, shortcut) => {
     buildfire.components.drawer.open(
       {
         multiSelection: false,
@@ -110,29 +151,44 @@ class PageDetails {
       (err, result) => {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();
-        // to manage bookmarks and notes for each asset type
-        switch (this.state.data.type) {
-          case "audio":
-            this.audioDrawerItemsListAction(result.text);
-            break;
-          case "video":
-            this.videoDrawerItemsListAction(result.text);
-            break;
-          case "article":
-            this.articleDrawerItemsListAction(result.text);
-            break;
-          default:
-            break;
-        }
-        // for reminder
-        if (result.text == Strings.SHORTCUT_SET_REMINDER) {
-          this.openReminderDrawer();
+        if (!shortcut) {
+          // to manage bookmarks and notes for each asset type
+          switch (this.state.data.type) {
+            case "audio":
+              this.audioDrawerItemsListAction(result.text);
+              break;
+            case "video":
+              this.videoDrawerItemsListAction(result.text);
+              break;
+            case "article":
+              this.articleDrawerItemsListAction(result.text);
+              break;
+            default:
+              break;
+          }
+
+        } else {
+          // to mange bookmark for each shortcut in audio or video
+          switch (this.state.data.type) {
+            case "audio":
+              this.audioShortcutDrawerItemListAction(result.text, shortcut);
+              break;
+            case "video":
+              this.videoShortcutDrawerItemListAction(result.text, shortcut);
+              break;
+            default:
+              break;
+          }
+          // for reminder
+          if (result.text == Strings.SHORTCUT_SET_REMINDER) {
+            this.openReminderDrawer(shortcut);
+          }
         }
       }
     );
   }
 
-  static openReminderDrawer = () => {
+  static openReminderDrawer = (shortcut) => {
     buildfire.components.drawer.open(
       {
         multiSelection: false,
@@ -143,24 +199,37 @@ class PageDetails {
         triggerCallbackOnUIDismiss: false,
         autoUseImageCdn: true,
         listItems: [
-          { text: "10 Minutes", imageUrl: "", selected: false, },
-          { text: "30 Minutes", imageUrl: "", selected: false },
-          { text: "1 Hour", imageUrl: "", selected: false },
-          { text: "1 day", imageUrl: "", selected: false, },
+          { text: Strings.REMINDER_DRAWER_OP1, imageUrl: "", selected: false, },
+          { text: Strings.REMINDER_DRAWER_OP2, imageUrl: "", selected: false },
+          { text: Strings.REMINDER_DRAWER_OP3, imageUrl: "", selected: false },
+          { text: Strings.REMINDER_DRAWER_OP4, imageUrl: "", selected: false, },
         ]
       },
+  //     REMINDER_DRAWER_OP1:"10 Minutes",
+	// REMINDER_DRAWER_OP2:"30 Minutes",
+	// REMINDER_DRAWER_OP3:"1 Hour",
+	// REMINDER_DRAWER_OP4:"1 Day",
       (err, result) => {
         if (err) return console.error(err);
-        buildfire.components.drawer.closeDrawer();
-        console.log("Selected reminder: ", result.text);
-        if (result.text==="10 Minutes") {
-          Utilities.setReminder(5,this.state.data.meta.title);
-          console.log(result.text);
+        buildfire.components.drawer.closeDrawer();        
+        if (result.text===Strings.REMINDER_DRAWER_OP1) {
+          Utilities.setReminder(5,shortcut.title);
+        }else if (result.text===Strings.REMINDER_DRAWER_OP2){
+          Utilities.setReminder(1800,shortcut.title);
+          
+        }else if (result.text===Strings.REMINDER_DRAWER_OP3){
+          Utilities.setReminder(3600,shortcut.title);
+          
+        }else if (result.text===Strings.REMINDER_DRAWER_OP4){
+          Utilities.setReminder(86400,shortcut.title);
+        }
+        if (result.text) {
           Utilities.showToast(`Reminder set for ${result.text}`);
         }
       }
     );
   }
+
   static detailsRender = () => {
     if (this.state.data.type === "summary") {
       summaryRender.init(this.state.id, this.state.data);

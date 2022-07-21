@@ -23,17 +23,7 @@ const init = async () => {
 
   await HandleAPI.getSettingsData();
   await HandleAPI.getCurrentUser();
-<<<<<<< HEAD
-  loadData(HandleAPI.state.data)
-  // Utilities.achievedBadgeDialog();
-  //  Assets.getAssetTypetPerTopicsStats("summary",(err,res)=>{
-  //   console.log("res>>>",res);
-  // })
-
-
-=======
   loadData(HandleAPI.state.data);
->>>>>>> 5b3bc51534fd29f0411f1bbb8f545df64247774e
 }
 
 init();

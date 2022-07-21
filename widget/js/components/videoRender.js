@@ -30,20 +30,7 @@ class videoDetails {
         selected: false,
       },
     ],
-    shortcutDrawerItemsList: [
-      {
-        text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
-        secondaryText: "",
-        imageUrl: "",
-        selected: false,
-      },
-      {
-        text: Strings.SHORTCUT_SET_REMINDER,
-        secondaryText: "",
-        imageUrl: "",
-        selected: false,
-      },
-    ],
+    
   };
 
   static setState = async (id,data) => {
@@ -61,8 +48,10 @@ class videoDetails {
     videoDetailsContainer: "videoDetailsContainer",
     pageDetails: "pageDetails",
   };
-
-  static checkTabsExistance = () => {
+  /**
+   * @param {} void  check the active tabs 
+   */
+  static checkTabsExistence = () => {
     if (this.state.data.showDetails) this.state.tabs.push("details");
     if (this.state.data.showTranscript) this.state.tabs.push("transcript");
     if (this.state.data.showCheckList) this.state.tabs.push("shortcuts");
@@ -229,6 +218,8 @@ class videoDetails {
       id: "videoShortcutsContainer",
     });
     this.state.data.checkList.forEach((el, idx) => {
+      el.id=el.title;
+     
       let element = document.createElement("div");
       element.classList.add("shortcutVideoElement");
       element.innerHTML = `
@@ -253,13 +244,19 @@ class videoDetails {
         </div>
             <div class="shorcutElementDetails">
                 <p class="shortcutText headerText-AppTheme">${idx + 1}. ${
-        el.title
-      }</p>
+                     el.title
+                 }</p>
                 <p class="shortcutDuration bodyText-AppTheme">${Utilities.timeConvert(
-                  el.timeStamp,
-                  "hh:mm:ss"
-                )}</p>
+                   el.timeStamp,
+                      "hh:mm:ss"
+                     )}
+                    <span class="material-icons icon videoBookmarkIcon hidden " id='${el.id}icon'>
+                        bookmark_border
+                     </span>
+                </p>
+                
             </div>
+            
             <div class="shortcutActions">
                 <span class="material-icons icon">
                     play_circle_filled
@@ -271,17 +268,35 @@ class videoDetails {
 
             </div>`;
       div.appendChild(element);
+      container.appendChild(div);
       let shortcutDrawerElements = element.querySelectorAll(
         ".videoShortCutDrawer"
       );
-      shortcutDrawerElements.forEach((e) => {
+      shortcutDrawerElements.forEach(async(e) => {
+        const shortcutDrawerItemsList=[
+          {
+            text: Strings.SHORTCUT_BOOKMARK_SHORTCUT,
+            secondaryText: "",
+            imageUrl: "",
+            selected: false,
+          },
+          {
+            text: Strings.SHORTCUT_SET_REMINDER,
+            secondaryText: "",
+            imageUrl: "",
+            selected: false,
+          },
+        ];
+        const icon= document.getElementById(`${el.id}icon`);
+       await this.checkIsBookmarked(shortcutDrawerItemsList,el.id ,icon, "shortcut");
         e.addEventListener("click", () => {
-          PageDetails.openDrawerAudioOrVideoOrArticle(
-            this.state.shortcutDrawerItemsList
+         PageDetails.openDrawerAudioOrVideoOrArticle(
+            shortcutDrawerItemsList,el
           );
+        
         });
       });
-      container.appendChild(div);
+      
     });
     this.state.activeTab = "shortcuts";
     Utilities.setAppTheme();
@@ -297,22 +312,25 @@ class videoDetails {
       : "";
   };
 
-  static checkIsBookmarked = async() => {
+  static checkIsBookmarked = async(drawerList, id ,icon, to) => {
     let allBookmarks=await getAllBookmarks();
-    let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===this.state.data.id);
-    filteredBookmarks.length>0?
-      this.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK
-      :
-      this.state.videoDrawerItemsList[0].text=Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK
-    ;
+    let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===id);
+    if(filteredBookmarks.length>0){
+     drawerList[0].text= (to == "video"?Strings.VIDEO_SHORTCUTS_DRAWER_REMOVE_BOOKMARK:Strings.SHORTCUT_BOOKMARK_REMOVE)
+     icon? icon.classList.remove('hidden'):"";
+    }else{
+     drawerList[0].text=(to == "video"? Strings.VIDEO_SHORTCUTS_DRAWER_BOOKMARK:Strings.SHORTCUT_BOOKMARK_SHORTCUT)
+     
+    }
+    
   };
 
   static initVideoDetails = (id,data) => {
     this.setState(id,data);
-    this.checkTabsExistance();
+    this.checkTabsExistence();
     this.renderVideoMainPage();
     this.renderTabs();
     this.initActiveTab();
-    this.checkIsBookmarked();
+    this.checkIsBookmarked(this.state.videoDrawerItemsList,this.state.data.id ,null, "video");
   };
 }

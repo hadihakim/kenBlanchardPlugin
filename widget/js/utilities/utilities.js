@@ -433,6 +433,49 @@ class Utilities {
     return { addBookmark, deletesBookmark, getAllBookmarks };
   };
 
+  static bookmark = () => {
+    const addBookmark = (options, type) => {
+      buildfire.bookmarks.add(options, (err, bookmark) => {
+        if (err) return console.error(err);
+        this.showToast(
+          options.type === "video"
+            ? Strings.VIDEO_ADDED_BOOKMARK
+            : options.type === "audio"
+            ? Strings.AUDIO_ADDED_BOOKMARK
+            : options.type === "article"
+            ? Strings.ARTICLE_ADDED_BOOKMARK
+            : Strings.SHORTCUT_ADDED_BOOKMARK
+        );
+        console.log("Bookmark ", bookmark);
+      });
+    };
+
+    const deletesBookmark = (id, type) => {
+      buildfire.bookmarks.delete(id, () => {
+        this.showToast(
+          type === "video"
+            ? Strings.VIDEO_REMOVED_BOOKMARK
+            : type === "audio"
+            ? Strings.AUDIO_REMOVED_BOOKMARK
+            : type === "article"
+            ? Strings.ARTICLE_REMOVED_BOOKMARK
+            : Strings.SHORTCUT_REMOVED_BOOKMARK
+        );
+        console.log("Bookmark deleted successfully");
+      });
+    };
+
+    const getAllBookmarks = () => {
+      return new Promise((resolve, reject) => {
+        buildfire.bookmarks.getAll((err, bookmarks) => {
+          if (err) reject(err);
+          resolve(bookmarks);
+        });
+      });
+    };
+    return { addBookmark, deletesBookmark, getAllBookmarks };
+  };
+
   static achievedBadgeDialog = () => {
     buildfire.dialog.alert({
       isMessageHTML: true,
@@ -514,25 +557,24 @@ class Utilities {
     });
   };
 
-  static setReminder=(time,text="")=> {
-	let sendTime = new Date();
-	sendTime.setSeconds(sendTime.getSeconds() + time);
+  static setReminder = (time, text = "") => {
+    let sendTime = new Date();
+    sendTime.setSeconds(sendTime.getSeconds() + time);
     buildfire.notifications.localNotification.schedule(
       {
         title: "Task Reminder",
         text: `Time to complete this task: ${text}`,
         at: sendTime,
-		data:{test:"test"},
-		returnToPluginInstanceId:"true"
+        data: { test: "test" },
+        returnToPluginInstanceId: "true",
       },
       (err, result) => {
         if (err) return console.error(err);
         console.log("Notification scheduled", result);
       }
     );
-	buildfire.notifications.localNotification.onClick = (data) => {
-		console.log("Notification clicked. Notification data is", data);
-	  };
-  }
-  
+    buildfire.notifications.localNotification.onClick = (data) => {
+      console.log("Notification clicked. Notification data is", data);
+    };
+  };
 }
