@@ -194,7 +194,7 @@ class MyList {
 
         listView.loadListViewItems(this.listState.data);
     }
-    
+
     static lazyLoad = (e) => {
         if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.listState.fetchNext) {
             this.listState.fetchNext = false;

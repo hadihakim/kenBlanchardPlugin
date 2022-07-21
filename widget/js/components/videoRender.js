@@ -48,8 +48,10 @@ class videoDetails {
     videoDetailsContainer: "videoDetailsContainer",
     pageDetails: "pageDetails",
   };
-
-  static checkTabsExistance = () => {
+  /**
+   * @param {} void  check the active tabs 
+   */
+  static checkTabsExistence = () => {
     if (this.state.data.showDetails) this.state.tabs.push("details");
     if (this.state.data.showTranscript) this.state.tabs.push("transcript");
     if (this.state.data.showCheckList) this.state.tabs.push("shortcuts");
@@ -325,7 +327,7 @@ class videoDetails {
 
   static initVideoDetails = (id,data) => {
     this.setState(id,data);
-    this.checkTabsExistance();
+    this.checkTabsExistence();
     this.renderVideoMainPage();
     this.renderTabs();
     this.initActiveTab();
