@@ -5,11 +5,13 @@ class PageDetails {
     data: {},
     chapterData: {},
     isBookmarked: false,
+    fromNotification: false,
   }
-  static setState = async (id) => {
+  static setState = async (id,fromNotification) => {
     this.state.id = id;
     let newRes = await HandleAPI.getDataByID(id, "assets_info")
     this.state.data = newRes.data
+    this.state.fromNotification=fromNotification
   }
 
   static audioDrawerItemsListAction = (resultText) => {
@@ -213,15 +215,15 @@ class PageDetails {
         if (err) return console.error(err);
         buildfire.components.drawer.closeDrawer();        
         if (result.text===Strings.REMINDER_DRAWER_OP1) {
-          Utilities.setReminder(5,shortcut.title);
+          Utilities.setReminder(10,shortcut.title,this.state.id,this.state.data.meta.title);
         }else if (result.text===Strings.REMINDER_DRAWER_OP2){
           Utilities.setReminder(1800,shortcut.title);
           
         }else if (result.text===Strings.REMINDER_DRAWER_OP3){
-          Utilities.setReminder(3600,shortcut.title);
+          Utilities.setReminder(3600,shortcut.title,this.state.id,this.state.data.meta.title);
           
         }else if (result.text===Strings.REMINDER_DRAWER_OP4){
-          Utilities.setReminder(86400,shortcut.title);
+          Utilities.setReminder(86400,shortcut.title,this.state.id,this.state.data.meta.title);
         }
         if (result.text) {
           Utilities.showToast(`Reminder set for ${result.text}`);
@@ -237,7 +239,9 @@ class PageDetails {
       CourseRender.init(this.state.id, this.state.data)
     }
     else if (this.state.data.type === "audio") {
-      AudioRender.init(this.state.id, this.state.data);
+      AudioRender.init(this.state.id, this.state.data,this.state.fromNotification);
+      this.state.fromNotification?
+      AudioRender.tabClickHandler("shortcuts"):null;
     }
     else if (this.state.data.type === "article") {
       ArticleRender.init(this.state.id, this.state.data);
@@ -247,14 +251,16 @@ class PageDetails {
     }
     else if (this.state.data.type === "video") {
       videoDetails.initVideoDetails(this.state.id, this.state.data);
+      this.state.fromNotification?
+      videoDetails.renderVideoShortcuts("shortcuts"):null;
     }
 
     Utilities.setAppTheme();
   };
 
-  static init = async (id) => {
+  static init = async (id,fromNotification) => {
     document.getElementById("pageDetails").innerHTML = "";
-    await this.setState(id);
+    await this.setState(id,fromNotification);
     this.detailsRender()
   }
 }

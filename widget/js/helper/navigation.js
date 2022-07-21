@@ -144,7 +144,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openPageDetails = (id, title) => {
+	static openPageDetails = (id, title,fromNotification) => {
 		this.state.activeLayOut = 'page details';
 
 		if (!mainPage.classList.contains("hidden")) {
@@ -207,7 +207,7 @@ class Navigation {
 		mainContainer.classList.remove("hidden");
 
 		Search.state.searchText = '';
-		PageDetails.init(id);
+		fromNotification?PageDetails.init(id,true):PageDetails.init(id,false)
 		Utilities.scrollTop();
 
 		Utilities.setAppTheme();

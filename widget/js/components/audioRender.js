@@ -3,6 +3,7 @@ class AudioRender {
     id:"",
     data: {},
     tabs: [],
+    fromNotification: false,
     audioDrawerItemsList: [
       {
         text: Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK,
@@ -36,7 +37,7 @@ class AudioRender {
     pageDetails: "pageDetails",
     audioTemplate: "audioTemplate",
   };
-  static setState = (id,data) => {
+  static setState = (id,data,fromNotification) => {
     this.state.id=id;
     this.state.data = data;
     this.state.tabs = [];
@@ -49,6 +50,7 @@ class AudioRender {
     if (data.showCheckList) {
       this.state.tabs.push("shortcuts");
     }
+    this.state.fromNotification=fromNotification;
   };
 
   static render = () => {
@@ -104,7 +106,8 @@ class AudioRender {
       });
       let buttons = nodesClone.querySelectorAll(".mdc-tab");
       let tabIndicators = nodesClone.querySelectorAll(".test");
-      tabIndicators[0].classList.add("mdc-tab-indicator--active");
+      this.state.fromNotification? tabIndicators[tabIndicators.length - 1].classList.add("mdc-tab-indicator--active")
+      :tabIndicators[0].classList.add("mdc-tab-indicator--active");
       buttons.forEach((button, idx) => {
         button.addEventListener("click", () => {
           tabIndicators.forEach((e, index) => {
@@ -294,8 +297,8 @@ class AudioRender {
     }
     
   };
-  static init = (id,data) => {
-    this.setState(id,data);
+  static init = (id,data,fromNotification) => {
+    this.setState(id,data,fromNotification);
     this.render();
     this.checkIsBookmarked(this.state.audioDrawerItemsList,this.state.id, null,"audio");
     

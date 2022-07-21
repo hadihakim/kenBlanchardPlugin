@@ -557,7 +557,7 @@ class Utilities {
     });
   };
 
-  static setReminder = (time, text = "") => {
+  static setReminder = (time, text = "", assetId, title) => {
     let sendTime = new Date();
     sendTime.setSeconds(sendTime.getSeconds() + time);
     buildfire.notifications.localNotification.schedule(
@@ -565,7 +565,7 @@ class Utilities {
         title: "Task Reminder",
         text: `Time to complete this task: ${text}`,
         at: sendTime,
-        data: { test: "test" },
+        data: { id: assetId },
         returnToPluginInstanceId: "true",
       },
       (err, result) => {
@@ -574,7 +574,8 @@ class Utilities {
       }
     );
     buildfire.notifications.localNotification.onClick = (data) => {
-      console.log("Notification clicked. Notification data is", data);
+      console.log("data from notifications", data);
+      Navigation.openPageDetails(data.id, title, "from navigation");
     };
   };
 }
