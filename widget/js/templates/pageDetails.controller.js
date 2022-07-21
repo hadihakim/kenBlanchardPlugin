@@ -104,11 +104,11 @@ class PageDetails {
           icon: "",
           type: "shortcut",
         });
-        videoDetails.renderVideoShortcuts(videoDetails.state.tabs[0]);
+        videoDetails.renderVideoShortcuts("shortcuts");
         break;
       case Strings.SHORTCUT_BOOKMARK_REMOVE:
         deletesBookmark(shortcut.id, "shortcut");
-        videoDetails.renderVideoShortcuts(videoDetails.state.tabs[0]);
+        videoDetails.renderVideoShortcuts("shortcuts");
         break;
       default:
         break;
@@ -181,14 +181,14 @@ class PageDetails {
           }
           // for reminder
           if (result.text == Strings.SHORTCUT_SET_REMINDER) {
-            this.openReminderDrawer();
+            this.openReminderDrawer(shortcut);
           }
         }
       }
     );
   }
 
-  static openReminderDrawer = () => {
+  static openReminderDrawer = (shortcut) => {
     buildfire.components.drawer.open(
       {
         multiSelection: false,
@@ -199,20 +199,37 @@ class PageDetails {
         triggerCallbackOnUIDismiss: false,
         autoUseImageCdn: true,
         listItems: [
-          { text: "10 Minutes", imageUrl: "", selected: false, },
-          { text: "30 Minutes", imageUrl: "", selected: false },
-          { text: "1 Hour", imageUrl: "", selected: false },
-          { text: "1 day", imageUrl: "", selected: false, },
+          { text: Strings.REMINDER_DRAWER_OP1, imageUrl: "", selected: false, },
+          { text: Strings.REMINDER_DRAWER_OP2, imageUrl: "", selected: false },
+          { text: Strings.REMINDER_DRAWER_OP3, imageUrl: "", selected: false },
+          { text: Strings.REMINDER_DRAWER_OP4, imageUrl: "", selected: false, },
         ]
       },
+  //     REMINDER_DRAWER_OP1:"10 Minutes",
+	// REMINDER_DRAWER_OP2:"30 Minutes",
+	// REMINDER_DRAWER_OP3:"1 Hour",
+	// REMINDER_DRAWER_OP4:"1 Day",
       (err, result) => {
         if (err) return console.error(err);
-        buildfire.components.drawer.closeDrawer();
-        console.log("Selected reminder: ", result.text);
-
+        buildfire.components.drawer.closeDrawer();        
+        if (result.text===Strings.REMINDER_DRAWER_OP1) {
+          Utilities.setReminder(5,shortcut.title);
+        }else if (result.text===Strings.REMINDER_DRAWER_OP2){
+          Utilities.setReminder(1800,shortcut.title);
+          
+        }else if (result.text===Strings.REMINDER_DRAWER_OP3){
+          Utilities.setReminder(3600,shortcut.title);
+          
+        }else if (result.text===Strings.REMINDER_DRAWER_OP4){
+          Utilities.setReminder(86400,shortcut.title);
+        }
+        if (result.text) {
+          Utilities.showToast(`Reminder set for ${result.text}`);
+        }
       }
     );
   }
+
   static detailsRender = () => {
     if (this.state.data.type === "summary") {
       summaryRender.init(this.state.id, this.state.data);

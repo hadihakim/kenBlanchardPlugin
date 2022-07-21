@@ -254,7 +254,7 @@ class MyList {
             document.getElementById(this.pointers.chartDiv).classList.add('hidden');
             document.getElementById(this.pointers.listContainer).style.height = '100vh';
         }
-        this.loadBuildFireList();
-        // this.loadList();
+        // this.loadBuildFireList();
+        this.loadList();
     }
 }

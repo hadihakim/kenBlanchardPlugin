@@ -23,6 +23,14 @@ const Strings = {
 	// Graphical summary page
 	GRAPHICAL_DESCRIPTION_TEXT:"Description",
 	START_CHAPTER:"Start chapter",
+	GRAPHICAL_PREMIUM_TITLE:"UNLOCK PREMIUM CONTENT",
+	GRAPHICAL_PREMIUM_BODY_TEXT:"Unlock the full Ken Blancher library <br />Discover new titles <br />Receive access to exclusive resources</p>",
+	GRAPHICAL_PREMIUM_PLANS_TITLE:"START WITH 3-MONTH FREE TRIAL",
+	GRAPHICAL_PREMIUM_PLAN_1_TITLE:"$12.99/Month",
+	GRAPHICAL_PREMIUM_PLAN_1_SUBTITLE:"Get greater access & unsubscribe at any time",
+	GRAPHICAL_PREMIUM_PLAN_2_TITLE:"$129/Year",
+	GRAPHICAL_PREMIUM_PLAN_2_DISCOUNT_TEXT:"Save $25.98",
+	GRAPHICAL_PREMIUM_PLAN_2_SUBTITLE:"Get greater access & unsubscribe at any time",
 
 	// user profile page
 	USER_PROFILE_TAP_1:"ACTIVITY",
@@ -87,5 +95,11 @@ const Strings = {
 	ACHIEVED_BADGE_DIALOG_TITLE:"Congratulations!",
 	ACHIEVED_BADGE_DIALOG_SUBTITLE:"You just reached new level!",
 	ACHIEVED_BADGE_DIALOG_BUTTON:"COLLECT",
+
+	// reminder drawer texts
+	REMINDER_DRAWER_OP1:"10 Minutes",
+	REMINDER_DRAWER_OP2:"30 Minutes",
+	REMINDER_DRAWER_OP3:"1 Hour",
+	REMINDER_DRAWER_OP4:"1 Day",
 }
 
