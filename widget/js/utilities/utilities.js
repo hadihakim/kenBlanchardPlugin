@@ -557,13 +557,13 @@ class Utilities {
     });
   };
 
-  static setReminder = (time, text = "", assetId, title) => {
+  static setReminder = (time, shortcut, assetId, title) => {
     let sendTime = new Date();
     sendTime.setSeconds(sendTime.getSeconds() + time);
     buildfire.notifications.localNotification.schedule(
       {
         title: "Task Reminder",
-        text: `Time to complete this task: ${text}`,
+        text: `Time to complete this task: ${shortcut.title || ""}`,
         at: sendTime,
         data: { id: assetId },
         returnToPluginInstanceId: "true",
@@ -576,6 +576,9 @@ class Utilities {
     buildfire.notifications.localNotification.onClick = (data) => {
       console.log("data from notifications", data);
       Navigation.openPageDetails(data.id, title, true);
+      document
+      .getElementById(`${shortcut.id}reminderIcon`)
+      .classList.add("hidden");
     };
   };
 }
