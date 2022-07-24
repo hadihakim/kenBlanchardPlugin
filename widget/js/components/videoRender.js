@@ -253,6 +253,9 @@ class videoDetails {
                     <span class="material-icons icon videoBookmarkIcon hidden " id='${el.id}icon'>
                         bookmark_border
                      </span>
+                     <span class="material-icons icon  hidden " id='${el.id}reminderIcon'>
+                        notifications
+                     </span>
                 </p>
                 
             </div>

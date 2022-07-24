@@ -269,7 +269,6 @@ class TeamEffectivenessList {
     }
 
     static lazyLoad = (e) => {
-        console.log("www");
         if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
             this.state.fetchNext = false;
             switch (this.state.selectedNav) {

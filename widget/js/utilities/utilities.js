@@ -29,8 +29,8 @@ class Utilities {
         return hours !== "0"
           ? hours + "h " + (minutes !== "0" ? minutes + "min" : "")
           : minutes !== "0"
-          ? minutes + "min"
-          : "";
+            ? minutes + "min"
+            : "";
       default:
         return "unknown";
     }
@@ -199,8 +199,8 @@ class Utilities {
     if (!seeAllContainer.classList.contains("hidden") && config.page != 1) {
       if (
         (mainContainer.scrollTop + mainContainer.clientHeight) /
-          mainContainer.scrollHeight >
-          0.8 &&
+        mainContainer.scrollHeight >
+        0.8 &&
         !config.fetchingNextPage
       ) {
         this._fetchNextList();
@@ -262,7 +262,7 @@ class Utilities {
                   let id = result[result.length - 1].options.id;
                   Navigation.openPageDetails(
                     id,
-                    result[result.length - 1].options.title
+                    result[result.length - 1].options.title, false
                   );
                 } else if (
                   from == "user profile from list" ||
@@ -292,11 +292,7 @@ class Utilities {
         }
       );
       Utilities.scrollTop();
-      clearTimeout(timer);
-      // to ask charabel -->
-      timer = setTimeout(() => {
-        buildfire.history.pop();
-      }, 50);
+      buildfire.history.pop();
     };
   };
 
@@ -402,10 +398,9 @@ class Utilities {
           options.type === "video"
             ? Strings.VIDEO_ADDED_BOOKMARK
             : options.type === "audio"
-            ? Strings.AUDIO_ADDED_BOOKMARK
-            : Strings.ARTICLE_ADDED_BOOKMARK
+              ? Strings.AUDIO_ADDED_BOOKMARK
+              : Strings.ARTICLE_ADDED_BOOKMARK
         );
-        console.log("Bookmark ", bookmark);
       });
     };
 
@@ -415,10 +410,9 @@ class Utilities {
           type === "video"
             ? Strings.VIDEO_REMOVED_BOOKMARK
             : type === "audio"
-            ? Strings.AUDIO_REMOVED_BOOKMARK
-            : Strings.ARTICLE_REMOVED_BOOKMARK
+              ? Strings.AUDIO_REMOVED_BOOKMARK
+              : Strings.ARTICLE_REMOVED_BOOKMARK
         );
-        console.log("Bookmark deleted successfully");
       });
     };
 
@@ -441,12 +435,11 @@ class Utilities {
           options.type === "video"
             ? Strings.VIDEO_ADDED_BOOKMARK
             : options.type === "audio"
-            ? Strings.AUDIO_ADDED_BOOKMARK
-            : options.type === "article"
-            ? Strings.ARTICLE_ADDED_BOOKMARK
-            : Strings.SHORTCUT_ADDED_BOOKMARK
+              ? Strings.AUDIO_ADDED_BOOKMARK
+              : options.type === "article"
+                ? Strings.ARTICLE_ADDED_BOOKMARK
+                : Strings.SHORTCUT_ADDED_BOOKMARK
         );
-        console.log("Bookmark ", bookmark);
       });
     };
 
@@ -456,12 +449,11 @@ class Utilities {
           type === "video"
             ? Strings.VIDEO_REMOVED_BOOKMARK
             : type === "audio"
-            ? Strings.AUDIO_REMOVED_BOOKMARK
-            : type === "article"
-            ? Strings.ARTICLE_REMOVED_BOOKMARK
-            : Strings.SHORTCUT_REMOVED_BOOKMARK
+              ? Strings.AUDIO_REMOVED_BOOKMARK
+              : type === "article"
+                ? Strings.ARTICLE_REMOVED_BOOKMARK
+                : Strings.SHORTCUT_REMOVED_BOOKMARK
         );
-        console.log("Bookmark deleted successfully");
       });
     };
 
@@ -557,15 +549,15 @@ class Utilities {
     });
   };
 
-  static setReminder = (time, text = "") => {
+  static setReminder = (time, shortcut, assetId, title) => {
     let sendTime = new Date();
     sendTime.setSeconds(sendTime.getSeconds() + time);
     buildfire.notifications.localNotification.schedule(
       {
         title: "Task Reminder",
-        text: `Time to complete this task: ${text}`,
+        text: `Time to complete this task: ${shortcut.title || ""}`,
         at: sendTime,
-        data: { test: "test" },
+        data: { id: assetId },
         returnToPluginInstanceId: "true",
       },
       (err, result) => {
@@ -574,7 +566,10 @@ class Utilities {
       }
     );
     buildfire.notifications.localNotification.onClick = (data) => {
-      console.log("Notification clicked. Notification data is", data);
+      Navigation.openPageDetails(data.id, title, true);
+      document
+        .getElementById(`${shortcut.id}reminderIcon`)
+        .classList.add("hidden");
     };
   };
 }

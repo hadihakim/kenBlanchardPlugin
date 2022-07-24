@@ -3,6 +3,7 @@ class AudioRender {
     id:"",
     data: {},
     tabs: [],
+    fromNotification: false,
     audioDrawerItemsList: [
       {
         text: Strings.AUDIO_SHORTCUTS_DRAWER_BOOKMARK,
@@ -36,7 +37,7 @@ class AudioRender {
     pageDetails: "pageDetails",
     audioTemplate: "audioTemplate",
   };
-  static setState = (id,data) => {
+  static setState = (id,data,fromNotification) => {
     this.state.id=id;
     this.state.data = data;
     this.state.tabs = [];
@@ -49,6 +50,7 @@ class AudioRender {
     if (data.showCheckList) {
       this.state.tabs.push("shortcuts");
     }
+    this.state.fromNotification=fromNotification;
   };
 
   static render = () => {
@@ -104,7 +106,8 @@ class AudioRender {
       });
       let buttons = nodesClone.querySelectorAll(".mdc-tab");
       let tabIndicators = nodesClone.querySelectorAll(".test");
-      tabIndicators[0].classList.add("mdc-tab-indicator--active");
+     ( this.state.fromNotification&& this.state.tabs.indexOf("shortcuts")>-1)? tabIndicators[tabIndicators.length - 1].classList.add("mdc-tab-indicator--active")
+      :tabIndicators[0].classList.add("mdc-tab-indicator--active");
       buttons.forEach((button, idx) => {
         button.addEventListener("click", () => {
           tabIndicators.forEach((e, index) => {
@@ -126,6 +129,7 @@ class AudioRender {
         `[aria-type=${this.state.tabs[0]}]`
       );
       container[0].classList.add("hidden");
+     
       if (this.state.tabs[0] === "transcript") {
         this.tabClickHandler(this.state.tabs[0]);
       } else if (this.state.tabs[0] === "shortcuts") {
@@ -148,6 +152,10 @@ class AudioRender {
     audioTabs.forEach((e) => {
       e.classList.add("hidden");
     });
+    if(this.state.fromNotification&& this.state.tabs.indexOf(tab) <0){
+      tab = this.state.tabs[0];
+    }
+
     let element = document.querySelectorAll(`[aria-type=${tab}]`);
     if (element) {
       element[0].classList.remove("hidden");
@@ -234,6 +242,9 @@ class AudioRender {
             <span class="material-icons icon videoBookmarkIcon hidden " id='${shortcut.id}icon'>
             bookmark_border
          </span>
+         <span class="material-icons icon videoBookmarkIcon hidden " id='${shortcut.id}reminderIcon'>
+            notifications
+         </span>
             </span>
           </div>
           <label class="material-icons icon">headset</label>
@@ -261,14 +272,12 @@ class AudioRender {
             selected: false,
           },
         ]
-        // const icon= document.getElementById(`${shortcut.id}icon`);
-        // console.log(icon, "mmmmmmmmmmmmmm");
         await this.checkIsBookmarked(shortcutDrawerItemsList,shortcut.id,"icon","shortcut");
 
         e.addEventListener("click", () => {
           PageDetails.openDrawerAudioOrVideoOrArticle(
             shortcutDrawerItemsList,shortcut
-          );        });
+          );});
       });
     });
 
@@ -277,9 +286,6 @@ class AudioRender {
 
   static drawerHandler = (itemsList) => {
     PageDetails.openDrawerAudioOrVideoOrArticle(itemsList);
-  };
-  static openShortcutDrawer = () => {
-    console.log("hi");
   };
 
   static checkIsBookmarked = async(drawerList, id ,icon, to) => {
@@ -294,8 +300,8 @@ class AudioRender {
     }
     
   };
-  static init = (id,data) => {
-    this.setState(id,data);
+  static init = (id,data,fromNotification) => {
+    this.setState(id,data,fromNotification);
     this.render();
     this.checkIsBookmarked(this.state.audioDrawerItemsList,this.state.id, null,"audio");
     

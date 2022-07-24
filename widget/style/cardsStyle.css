@@ -3,7 +3,7 @@
 
 /* shared style for all cards */
 .sectionContainer {
-    padding: 1rem;
+    padding: 1rem 0 1rem 1rem;
 }
 
 .sectionContainer .sectionHeader {
@@ -22,6 +22,7 @@
 
 .sectionContainer .sectionHeader .seeAllBtn {
    cursor: pointer;
+   margin-right: 1rem;
 }
 
 .sectionContainer .sectionHeader .headerTextTheme{

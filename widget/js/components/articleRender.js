@@ -28,9 +28,8 @@ class ArticleRender {
   static setState = (id,data) => {
     this.state.id=id;
     this.state.data = data
-    console.log("Article data ->", data);
   }
-
+// to render the page with asset data & article template
   static render = () => {
     let container = document.getElementById(this.pointers.pageDetails);
     const template = document.getElementById(this.pointers.articleTemplate);
@@ -50,14 +49,17 @@ class ArticleRender {
   //  this.state.noteIcon = ui.createElement('span',title[0],"text_snippet",["material-icons","icon" , "hidden"])
   //  this.state.noteIcon.setAttribute('id','articleNoteIcon');
    
+   // to check the enable tabs 
     if (this.state.data.showKeyTakeaways) {
       tabHandler[0].innerHTML = "";
       this.state.tabs = [];
       this.state.tabs.push(Strings.ARTICLE_TAP_KEY_TAKEAWAYS);
+      // push it because it always enabled
       this.state.tabs.push(Strings.ARTICLE_TAP_FULL_ARTICLE);
-
+      // tab text
       articleFullArticle[0].innerHTML = "Most companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and development."
       articleKeyTakeaways[0].innerHTML = "The four stages of team development—Orientation, Dissatisfaction, Integration, and Productio Facilitate productive conversations  when con ndor and curiosity alive in your organization"
+      //tab title 
       this.state.tabs.forEach((tab, index) => {
         let button = document.createElement("button");
         button.classList.add("mdc-tab", "mdc-tab--active");
@@ -75,45 +77,47 @@ class ArticleRender {
                       `;
         button.innerHTML = tabButtonContent;
         button.setAttribute('id', `articleTab-${index}`)
+        // to add active tab style
         if (`articleTab-${index}` == this.state.selectedNav) {
           button.classList.add("articleSelectedNav");
         }
-
+        // change the active tab
         button.addEventListener('click', () => {
           document.getElementById(this.state.selectedNav)?.classList.remove("articleSelectedNav");
 
           this.state.selectedNav = `articleTab-${index}`;
           button.classList.add("articleSelectedNav");
-          //     KEY TAKEAWAYS', 'FULL ARTICLE' articleKeyTakeaways  articleFullArticle
+          //change the active text nested the active tab
           if (tab == 'FULL ARTICLE') {
             articleKeyTakeaways[0].classList.add("hidden");
             articleFullArticle[0].classList.remove("hidden");
-
-
           } else if (tab == 'KEY TAKEAWAYS') {
             articleKeyTakeaways[0].classList.remove("hidden");
             articleFullArticle[0].classList.add("hidden");
-
           }
         })
         tabHandler[0].appendChild(button);
       });
+
+    // if the summery tab disable we need just to render the full article text
     } else {
       articleFullArticle[0].classList.remove("hidden");
       articleKeyTakeaways[0].classList.add("noMargin");
       articleFullArticle[0].innerHTML = "Most companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and developmentMost companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and development Most companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and developmentMost companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and development...."
     }
-
+    // show the drawer list when click the three dots
     icon[0].addEventListener("click", () => {
       PageDetails.openDrawerAudioOrVideoOrArticle(this.state.articleDrawerItemsList)
     });
-
     container.appendChild(firstClone);
-    this.hasNotes(title[0]);
+    // this.hasNotes(title[0]);
     
+    //for the app theme
     Utilities.setAppTheme();
   }
 
+
+  // check if this article saved in the bookmarks if yes, change the text in drawer to delete it, if no, the drawer text will be to add the article to the bookmarks list
   static checkIsBookmarked = async() => {
     let allBookmarks=await getAllBookmarks();
     let filteredBookmarks=allBookmarks.filter(bookmark =>bookmark.id===this.state.data.id);
@@ -131,6 +135,7 @@ class ArticleRender {
    
   //  }
   // }
+
   static init = (id,data) => {
     this.setState(id,data);
     this.render();

@@ -144,7 +144,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openPageDetails = (id, title) => {
+	static openPageDetails = (id, title,fromNotification) => {
 		this.state.activeLayOut = 'page details';
 
 		if (!mainPage.classList.contains("hidden")) {
@@ -207,7 +207,7 @@ class Navigation {
 		mainContainer.classList.remove("hidden");
 
 		Search.state.searchText = '';
-		PageDetails.init(id);
+		PageDetails.init(id,fromNotification)
 		Utilities.scrollTop();
 
 		Utilities.setAppTheme();
@@ -217,7 +217,6 @@ class Navigation {
 		this.state.activeLayOut = 'course details';
 
 		if (from == "from active-card") {
-			console.log("lllllll.................");
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
 				from: "active list from CourseDetails",

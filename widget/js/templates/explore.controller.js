@@ -50,13 +50,12 @@ class Explore {
 			url('${Utilities.cropImage(asset.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(asset.id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
     container.appendChild(firstClone);
   }
 
   static horizontal_Render = (asset, container) => {
-    console.log('horizontal asset -=>', asset );
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
@@ -74,7 +73,7 @@ class Explore {
 						${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(asset.id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
     container.appendChild(nodesClone);
   }
@@ -100,7 +99,7 @@ class Explore {
                                 ${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(asset.id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
     container.appendChild(nodesClone);
   }

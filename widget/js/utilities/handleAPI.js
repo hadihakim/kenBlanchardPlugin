@@ -62,7 +62,6 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Profiles.get((err, res) => {
                 if (err) reject(err)
-                console.log("Profiles.get", res);
                 resolve(res)
             })
         });
@@ -92,7 +91,6 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Stats.get(async (err, res) => {
                 if (err) reject(err);
-                console.log("stats", res);
                 resolve(res);
             })
         });
@@ -119,8 +117,6 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Assets.getAssetTypetPerTopicsStats(type, async(err, res) => {
                 if(err) return reject(err);
-                console.log('result from the API -=>', res);
-                console.log('type in the API -=>', type);
                 resolve(res)
             })
         })
