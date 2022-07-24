@@ -61,8 +61,20 @@ class MyList {
 
         return myTopicsToRender;
     }
+     // function to delete charts 
+     static destroy = () => {
+        if (this.listState.barChart)
+            this.listState.barChart.destroy();
+        if (this.listState.progressChart)
+            this.listState.progressChart.destroy();
+
+        this.listState.page = 1;
+        this.listState.pageSize = 12;
+        this.listState.fetchNext = false;
+    }
     // run all charts in the course list 
     static loadCharts = () => {
+        this.destroy();
         // Bar chart
         var xValues = [["Just", "Started"], ["In", "Progress"], "Completed"];
         var yValues = [5, 11, 3];
@@ -142,12 +154,14 @@ class MyList {
         document.getElementById(this.pointers.percentageContainer).innerHTML = `${percent}%`;
         document.getElementById(this.pointers.averageLable).innerHTML = Strings.USER_PROFILE_AVERAGE_CHART_TEXT;
     }
-    // print the list of all topics by using buildfire list
+    // print the list of all topics by using BuildFire list
     static loadList = () => {
         const listView = new buildfire.components.listView(this.pointers.listContainer);
 
         // load list
-        listView.loadListViewItems(this.listState.data);
+        let cardsToPrint = this.cardsToPrint();
+
+        listView.loadListViewItems(cardsToPrint);
 
         // event on click
         listView.onItemClicked = item => {
@@ -169,53 +183,44 @@ class MyList {
             console.log(item.title);
         };
     }
+    // set the active cards in the list
+    static cardsToPrint = () => {
+        let firstIndex = (this.listState.page - 1) * this.listState.pageSize;
+        let lastIndex = this.listState.page * this.listState.pageSize;
+        if (lastIndex > this.listState.data.length)
+            lastIndex = this.listState.data.length;
+        this.listState.page += 1;
 
+        let newCards = [];
+        for (let i = firstIndex; i < lastIndex; i++) {
+            newCards.push(this.listState.data[i]);
+        }
+
+        return newCards;
+    }
+    // add new cards to the bottom of the page when the user  scroll down
     static lazyLoad = (e) => {
         if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.listState.fetchNext) {
             this.listState.fetchNext = false;
             this.loadList();
         }
     }
-
-    // function to delete charts 
-    static destroy = () => {
-        if (this.listState.barChart)
-            this.listState.barChart.destroy();
-        if (this.listState.progressChart)
-            this.listState.progressChart.destroy();
-
-        this.listState.page = 1;
-        this.listState.pageSize = 12;
-        this.listState.fetchNext = false;
-    }
-
     // function to manage view and hide archived items in the list 
     static initArchived = (e) => {
         this.listState.includeArchived = e.target.checked;
-        this.listState.page = 1;
 
-        document.getElementById(this.pointers.listContainer).innerHTML = "";
-        this.loadList();
+        this.initList();
 
         Utilities.setAppTheme();
     }
-
-    static init = () => {
-        this.destroy();
-
-        document.getElementById(this.pointers.includeArchived).addEventListener('click', (e) => this.initArchived(e))
+    // set page, pageSize, to be ready to print the list
+    static initList = () => {
+        this.listState.page = 1;
+        this.listState.pageSize = 12;
 
         let listContainer = document.getElementById(this.pointers.listContainer);
         listContainer.innerHTML = "";
-        listContainer.addEventListener('scroll', (e) => this.lazyLoad(e))
-
-        let userProfileContainer = document.getElementById(this.pointers.userProfileContainer);
-        userProfileContainer.innerHTML = '';
-
-        const myContainer = document.getElementById(this.pointers.userProfileTemplate);
-        const nodesClone = myContainer.content.cloneNode(true);
-
-        userProfileContainer.appendChild(nodesClone);
+        listContainer.addEventListener('scroll', (e) => this.lazyLoad(e));
 
         if (this.listState.type == 'course') {
             document.getElementById(this.pointers.chartDiv).classList.remove('hidden');
@@ -226,6 +231,20 @@ class MyList {
             document.getElementById(this.pointers.chartDiv).classList.add('hidden');
             document.getElementById(this.pointers.listContainer).style.height = '100vh';
         }
+
         this.loadList();
+    }
+    static init = () => {
+        document.getElementById(this.pointers.includeArchived).addEventListener('click', (e) => this.initArchived(e))
+
+        let userProfileContainer = document.getElementById(this.pointers.userProfileContainer);
+        userProfileContainer.innerHTML = '';
+
+        const myContainer = document.getElementById(this.pointers.userProfileTemplate);
+        const nodesClone = myContainer.content.cloneNode(true);
+
+        userProfileContainer.appendChild(nodesClone);
+
+        this.initList();
     }
 }
