@@ -243,6 +243,9 @@ class AudioRender {
             <span class="material-icons icon videoBookmarkIcon hidden " id='${shortcut.id}icon'>
             bookmark_border
          </span>
+         <span class="material-icons icon videoBookmarkIcon hidden " id='${shortcut.id}reminderIcon'>
+            notifications
+         </span>
             </span>
           </div>
           <label class="material-icons icon">headset</label>
@@ -277,7 +280,7 @@ class AudioRender {
         e.addEventListener("click", () => {
           PageDetails.openDrawerAudioOrVideoOrArticle(
             shortcutDrawerItemsList,shortcut
-          );        });
+          );});
       });
     });
 
