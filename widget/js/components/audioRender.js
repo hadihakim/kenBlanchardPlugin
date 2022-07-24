@@ -106,7 +106,7 @@ class AudioRender {
       });
       let buttons = nodesClone.querySelectorAll(".mdc-tab");
       let tabIndicators = nodesClone.querySelectorAll(".test");
-      this.state.fromNotification? tabIndicators[tabIndicators.length - 1].classList.add("mdc-tab-indicator--active")
+     ( this.state.fromNotification&& this.state.tabs.indexOf("shortcuts")>-1)? tabIndicators[tabIndicators.length - 1].classList.add("mdc-tab-indicator--active")
       :tabIndicators[0].classList.add("mdc-tab-indicator--active");
       buttons.forEach((button, idx) => {
         button.addEventListener("click", () => {
@@ -124,11 +124,13 @@ class AudioRender {
   };
 
   static tabsListHandler = (container) => {
+    console.log("hi");
     if (this.state.tabs.length <= 1) {
       let element = document.querySelectorAll(
         `[aria-type=${this.state.tabs[0]}]`
       );
       container[0].classList.add("hidden");
+     
       if (this.state.tabs[0] === "transcript") {
         this.tabClickHandler(this.state.tabs[0]);
       } else if (this.state.tabs[0] === "shortcuts") {
@@ -151,6 +153,10 @@ class AudioRender {
     audioTabs.forEach((e) => {
       e.classList.add("hidden");
     });
+    if(this.state.fromNotification&& this.state.tabs.indexOf(tab) <0){
+      tab = this.state.tabs[0];
+    }
+
     let element = document.querySelectorAll(`[aria-type=${tab}]`);
     if (element) {
       element[0].classList.remove("hidden");

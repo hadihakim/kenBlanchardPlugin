@@ -207,7 +207,7 @@ class Navigation {
 		mainContainer.classList.remove("hidden");
 
 		Search.state.searchText = '';
-		fromNotification?PageDetails.init(id,true):PageDetails.init(id,false)
+		PageDetails.init(id,fromNotification)
 		Utilities.scrollTop();
 
 		Utilities.setAppTheme();
