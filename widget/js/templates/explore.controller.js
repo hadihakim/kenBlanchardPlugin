@@ -50,7 +50,7 @@ class Explore {
 			url('${Utilities.cropImage(asset.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(asset.id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
     container.appendChild(firstClone);
   }
@@ -74,7 +74,7 @@ class Explore {
 						${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(asset.id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
     container.appendChild(nodesClone);
   }
@@ -100,7 +100,7 @@ class Explore {
                                 ${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails(asset.id, asset.meta.title);
+      Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
     container.appendChild(nodesClone);
   }

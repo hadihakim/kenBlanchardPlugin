@@ -314,7 +314,7 @@ class Search {
           )}</span>`;
         }
         card[0].addEventListener("click", () => {
-          Navigation.openPageDetails(id, printedAssetAtt[i].meta.title);
+          Navigation.openPageDetails(id, printedAssetAtt[i].meta.title,false);
         });
         document.getElementById(this.pointers.searchContainer).appendChild(nodesClone);
       }

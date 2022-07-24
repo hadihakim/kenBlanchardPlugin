@@ -262,7 +262,7 @@ class Utilities {
                   let id = result[result.length - 1].options.id;
                   Navigation.openPageDetails(
                     id,
-                    result[result.length - 1].options.title
+                    result[result.length - 1].options.title,false
                   );
                 } else if (
                   from == "user profile from list" ||
@@ -575,7 +575,7 @@ class Utilities {
     );
     buildfire.notifications.localNotification.onClick = (data) => {
       console.log("data from notifications", data);
-      Navigation.openPageDetails(data.id, title, "from navigation");
+      Navigation.openPageDetails(data.id, title, true);
     };
   };
 }
