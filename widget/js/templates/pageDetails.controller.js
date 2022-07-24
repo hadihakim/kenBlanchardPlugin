@@ -282,6 +282,7 @@ class PageDetails {
       ArticleRender.init(this.state.id, this.state.data);
     } else if (this.state.data.type === "PDF") {
       console.log(" PDF pageDetails ");
+      // should call external plugin
     } else if (this.state.data.type === "video") {
       videoDetails.initVideoDetails(this.state.id, this.state.data);
       this.state.fromNotification

@@ -56,7 +56,6 @@ class Explore {
   }
 
   static horizontal_Render = (asset, container) => {
-    console.log('horizontal asset -=>', asset );
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
@@ -113,9 +112,11 @@ class Explore {
     // get all assets in the section
     let myAssets = [];
     section.assets.forEach(asset => {
-      let returnedAsset = HandleAPI.state.data.assets_info[asset]
-      returnedAsset.id = asset;
-      myAssets.push(returnedAsset);
+      let returnedAsset = HandleAPI.state.data.assets_info[asset];
+      if(returnedAsset){
+        returnedAsset.id = asset;
+        myAssets.push(returnedAsset);
+      }
     })
 
     // sort all assets

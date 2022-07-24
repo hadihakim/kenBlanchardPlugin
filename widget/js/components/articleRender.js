@@ -28,7 +28,6 @@ class ArticleRender {
   static setState = (id,data) => {
     this.state.id=id;
     this.state.data = data
-    console.log("Article data ->", data);
   }
 // to render the page with asset data & article template
   static render = () => {

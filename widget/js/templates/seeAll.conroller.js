@@ -28,7 +28,6 @@ class SeeAll {
     - userData: user profile data 
   */
   static setData = (options) => {
-    console.log("options -=>", options);
     this.state = {...this.state, ...options};
   };
 
@@ -98,7 +97,6 @@ class SeeAll {
   }
 
   static lazyLoad = (e) => {
-    console.log("from scroll");
     if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.state.fetchNext) {
       this.state.fetchNext = false;
       this.printCards();

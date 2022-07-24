@@ -124,7 +124,6 @@ class AudioRender {
   };
 
   static tabsListHandler = (container) => {
-    console.log("hi");
     if (this.state.tabs.length <= 1) {
       let element = document.querySelectorAll(
         `[aria-type=${this.state.tabs[0]}]`
@@ -273,8 +272,6 @@ class AudioRender {
             selected: false,
           },
         ]
-        // const icon= document.getElementById(`${shortcut.id}icon`);
-        // console.log(icon, "mmmmmmmmmmmmmm");
         await this.checkIsBookmarked(shortcutDrawerItemsList,shortcut.id,"icon","shortcut");
 
         e.addEventListener("click", () => {
@@ -289,9 +286,6 @@ class AudioRender {
 
   static drawerHandler = (itemsList) => {
     PageDetails.openDrawerAudioOrVideoOrArticle(itemsList);
-  };
-  static openShortcutDrawer = () => {
-    console.log("hi");
   };
 
   static checkIsBookmarked = async(drawerList, id ,icon, to) => {

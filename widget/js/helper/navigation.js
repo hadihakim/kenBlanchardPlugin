@@ -217,7 +217,6 @@ class Navigation {
 		this.state.activeLayOut = 'course details';
 
 		if (from == "from active-card") {
-			console.log("lllllll.................");
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
 				from: "active list from CourseDetails",

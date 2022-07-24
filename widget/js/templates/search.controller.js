@@ -257,7 +257,6 @@ class Search {
   static search = (e) => {
     let searchedData = e.target.value.trim("");
     this.state.searchText = searchedData;
-    console.log(searchedData);
     this.state.page = 1;
 
     Navigation.openSearch();
@@ -320,7 +319,6 @@ class Search {
       }
     }
     if (this.state.emptySearch) {
-      console.log("Empty will be shown --->");
       Utilities.showEmpty(document.getElementById(this.pointers.searchContainer));
     }
     this.state.fetchNext = true;
