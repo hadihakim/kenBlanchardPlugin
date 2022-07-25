@@ -52,6 +52,8 @@ class AudioRender {
     this.state.fromNotification = fromNotification;
   };
 
+
+  //render the main data
   static render = () => {
     let container = document.getElementById(this.pointers.pageDetails);
     const template = document.getElementById(this.pointers.audioTemplate);
@@ -164,13 +166,16 @@ class AudioRender {
     let element = document.querySelectorAll(`[aria-type=${tab}]`);
     if (element) {
       element[0].classList.remove("hidden");
+      //to render transcript tab
       if (tab === "transcript") {
         element[0].innerHTML = "";
         element[0].appendChild(this.transcriptUi(this.state.data.transcript));
+      // to render shortcuts tab and handle the event listeners
       } else if (tab === "shortcuts") {
         element[0].innerHTML = "";
         element[0].appendChild(this.shortcutsUi(this.state.data.checkList));
 
+        // add the asset to user profile
         let playButtons = document.querySelectorAll(
           "[role='saveAssetToProfileAudio']"
         );
