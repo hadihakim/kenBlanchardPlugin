@@ -22,7 +22,6 @@ const init = async () => {
   Utilities.setAppTheme();
 
   await HandleAPI.getSettingsData();
-  await HandleAPI.getCurrentUser();
   loadData(HandleAPI.state.data);
 }
 
