@@ -105,7 +105,7 @@ class UserProfile {
   };
 
   static setData = (data) => {
-    this.state.userData = data;
+    this.state = {...this.state,...data};
   };
 
   static getUser = () => {
@@ -445,12 +445,11 @@ class UserProfile {
 
   static setAssetsArr = () => {
     let myAssetsAtt = {};
-    for (const asset in HandleAPI.state.assets_info) {
-      let returnObj = HandleAPI.state.assets_info[asset];
-      returnObj.id = asset;
+    for (const asset in this.state.data.assets) {
+      let returnObj = this.state.data.assets[asset];
       if (myAssetsAtt[returnObj.type])
-        myAssetsAtt[returnObj.type].push(returnObj);
-      else {
+      myAssetsAtt[returnObj.type].push(returnObj);
+      else if(returnObj.type){
         myAssetsAtt[returnObj.type] = [];
         myAssetsAtt[returnObj.type].push(returnObj);
       }
@@ -480,7 +479,9 @@ class UserProfile {
     return myTopics;
   }
 
-  static initActivity = (containerID) => {
+  static initActivity = async(containerID) => {
+    let userData=await HandleAPI.getUserData();
+    this.setData({data: userData});
     // user data will be stored in this class state
     let userContainer = document.getElementById(containerID);
     let assetsObj = this.setAssetsArr();
@@ -509,10 +510,11 @@ class UserProfile {
         Explore.horizontal_Render(card, newSectionCardsContainer);
       })
     }
+    Utilities.setAppTheme();
   }
 
   static init = (userData) => {
-    this.setData(userData);
+    this.setData({userData});
     this.getUser();
   };
 }

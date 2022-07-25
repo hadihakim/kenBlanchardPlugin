@@ -123,9 +123,11 @@ class Explore {
     myAssets = Search.sort(myAssets);
     // loop through assets in the section to print cards
     myAssets.forEach(asset => {
+    console.log("🚀 ~ file: explore.controller.js ~ line 126 ~ Explore ~ asset", asset)
       // check if the asset is included in the filter 
       // if the section is userSpecific it will not be affected with the filter
-      let printCardState = HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific;
+      let printCardState = (HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific) 
+      && !asset.isActive;
       if (printCardState) {
         emptySection = false;
         switch (section.layout) {

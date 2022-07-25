@@ -58,15 +58,22 @@ class HandleAPI {
         }
     }
 
-    static getCurrentUser = () => {
+    static getUserData= () => {
         return new Promise((resolve, reject) => {
             Profiles.get((err, res) => {
                 if (err) reject(err)
+                console.log("Profiles.get", res);
                 resolve(res)
             })
         });
     }
 
+    static saveAssetToProfile = async(assetData) => {
+        Profiles.savePropertyData("assets",assetData.id,assetData,(err,res)=>{
+            if (err) return console.error(err);
+            console.log("🚀 ~ file: handleAPI.js ~ line 74 ~ HandleAPI ~ Profiles.savePropertyData ~ res", res)
+        })
+    }
     static getSettingsData = () => {
         return new Promise(function (resolve, reject) {
             authManager.enforceLogin();
@@ -91,6 +98,7 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Stats.get(async (err, res) => {
                 if (err) reject(err);
+                console.log("stats", res);
                 resolve(res);
             })
         });
@@ -117,6 +125,8 @@ class HandleAPI {
         return new Promise((resolve, reject) => {
             Assets.getAssetTypetPerTopicsStats(type, async(err, res) => {
                 if(err) return reject(err);
+                console.log('result from the API -=>', res);
+                console.log('type in the API -=>', type);
                 resolve(res)
             })
         })

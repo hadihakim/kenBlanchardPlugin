@@ -99,7 +99,7 @@ class videoDetails {
           this.state.data.meta.image
         )}')" id="videoTopContainer">
           <!-- <img src="" alt="" class="videoImage" loading="lazy"> -->
-          <span class="material-icons icon videoSpan">
+          <span class="material-icons icon videoSpan" role="saveAssetToProfile" id="playerPlay">
             play_circle_outline
           </span>
         </div>
@@ -128,6 +128,9 @@ class videoDetails {
     document.getElementById("videoMore").addEventListener("click", () => {
       this.openMoreOptions();
     });
+    document.getElementById("playerPlay").addEventListener("click", () =>{
+        HandleAPI.saveAssetToProfile(this.state.data);
+      })
   };
 
   static tabClickHandler = (el) => {
@@ -261,7 +264,7 @@ class videoDetails {
             </div>
             
             <div class="shortcutActions">
-                <span class="material-icons icon">
+                <span class="material-icons icon" role="saveAssetToProfile">
                     play_circle_filled
                     </span>
 
@@ -302,6 +305,14 @@ class videoDetails {
       
     });
     this.state.activeTab = "shortcuts";
+    let playButtons=document.querySelectorAll("[role='saveAssetToProfile']");
+    playButtons.forEach(el=>{
+      el.addEventListener("click", () =>{
+        HandleAPI.saveAssetToProfile(this.state.data);
+      })
+    })
+    
+    
     Utilities.setAppTheme();
   };
 
@@ -327,6 +338,7 @@ class videoDetails {
     }
     
   };
+
 
   static initVideoDetails = (id,data) => {
     this.setState(id,data);
