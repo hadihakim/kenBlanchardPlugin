@@ -2,6 +2,7 @@ class Explore {
   static state = {
     data: [],
     userData: config.userConfig,
+    userprofileData:{}
   };
 
   static pointers = {
@@ -21,6 +22,7 @@ class Explore {
 
   static setPageData = (options) => {
     this.state = {...this.state, ...options};
+   
   };
 
   static seeAllButton = (id, title, type) => {
@@ -112,6 +114,9 @@ class Explore {
     // get all assets in the section
     let myAssets = [];
     section.assets.forEach(asset => {
+      if(this.state.userprofileData[asset]){
+        asset=this.state.userprofileData[asset].id
+      }
       let returnedAsset = HandleAPI.state.data.assets_info[asset];
       if(returnedAsset){
         returnedAsset.id = asset;
@@ -123,7 +128,6 @@ class Explore {
     myAssets = Search.sort(myAssets);
     // loop through assets in the section to print cards
     myAssets.forEach(asset => {
-    console.log("🚀 ~ file: explore.controller.js ~ line 126 ~ Explore ~ asset", asset)
       // check if the asset is included in the filter 
       // if the section is userSpecific it will not be affected with the filter
       let printCardState = (HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific) 
@@ -152,7 +156,7 @@ class Explore {
     Utilities.setAppTheme();
   }
 
-  static initContainers = page => {
+  static initContainers = (page) => {
     // all API data will be read from the HandleAPI class
     HandleAPI.state.data.sections.forEach(section => {
       // check if the section has assets 
@@ -171,13 +175,6 @@ class Explore {
           newSectionTitle.innerHTML = section.title;
         } else {
           newSectionSeeAll.addEventListener("click", () => {
-            //   let options = {
-            //     title: element.title,
-            //     data: myListData
-            //   }
-            //   Navigation.openUserList(options);
-            // } else {
-            // }
 
             // see all is working on explore and main page
             this.seeAllButton(section.id, section.title, page);
@@ -190,7 +187,9 @@ class Explore {
     })
   }
 
-  static init = () => {
+  static init = async() => {
+    
+    this.state.userprofileData=await HandleAPI.getUserData();
     sectionsContainer.innerHTML = '';
     exploreContainer.innerHTML = '';
     // init main page
