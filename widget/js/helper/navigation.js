@@ -144,7 +144,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openPageDetails = (id, title,fromNotification) => {
+	static openPageDetails = (id, title, fromNotification) => {
 		this.state.activeLayOut = 'page details';
 
 		if (!mainPage.classList.contains("hidden")) {
@@ -207,7 +207,7 @@ class Navigation {
 		mainContainer.classList.remove("hidden");
 
 		Search.state.searchText = '';
-		PageDetails.init(id,fromNotification)
+		PageDetails.init(id, fromNotification)
 		Utilities.scrollTop();
 
 		Utilities.setAppTheme();
@@ -300,7 +300,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openUserList = async(options) => {
+	static openUserList = async (options) => {
 		this.state.activeLayOut = 'user list';
 
 		mainContainer.classList.add("hidden");
@@ -333,7 +333,7 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openTeamEffectivenessList = (options) => {
+	static openTeamEffectivenessList = async (options) => {
 		this.state.activeLayOut = 'team effectiveness list';
 
 		mainContainer.classList.add("hidden");
@@ -362,7 +362,7 @@ class Navigation {
 			let _options = {
 				id: options.id,
 			}
-			TeamEffectivenessList.setStates(_options);
+			await TeamEffectivenessList.setStates(_options);
 		}
 		TeamEffectivenessList.init();
 

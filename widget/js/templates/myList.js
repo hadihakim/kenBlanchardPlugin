@@ -33,7 +33,7 @@ class MyList {
         Skeleton.verticalSeeAll_Skeleton(listViewContainer);
 
         await HandleAPI.getUserTopicsInfo(options.type).then(myTopics => {
-            options.data = this.handleTakenNumber(options.data, myTopics);
+            options.data = this.handleTakenNumber(options.data, myTopics, options.type);
         })
 
         this.listState = { ...this.listState, ...options };
@@ -41,7 +41,7 @@ class MyList {
     // manage topic objects to be ready to print out in the list 
     // allTopics is the all topics that will be printed in the list 
     // myTopics is the all user topics to calculate the number of taken topics
-    static handleTakenNumber = (allTopics, myTopics) => {
+    static handleTakenNumber = (allTopics, myTopics, type) => {
         let myTopicsToRender = [];
         for (const topic in allTopics) {
             let returnedTopic = {
@@ -55,14 +55,23 @@ class MyList {
                 }
             }
             let topicNumber = myTopics.find((topicNumberObj) => topicNumberObj._id === topic);
-            returnedTopic.description = `0 Taken On  <span class="material-icons dotIcon">fiber_manual_record</span>  ${topicNumber?.count || 0} In Total`;
+            let userTakenOn = this.calculateTaken(topicNumber._id, type);
+            returnedTopic.description = `${userTakenOn} Taken On  <span class="material-icons dotIcon">fiber_manual_record</span>  ${topicNumber?.count || 0} In Total`;
             myTopicsToRender.push(returnedTopic);
         }
-
         return myTopicsToRender;
     }
-     // function to delete charts 
-     static destroy = () => {
+    // calculate the total number of assets that user had taken per each topic 
+    static calculateTaken = (id, type) => {
+        let userTakenOn = 0;
+        for (const asset in UserProfile.state.data.assets) {
+            if (HandleAPI.state.assets_info[asset].type === type && HandleAPI.state.assets_info[asset].meta.topics.includes(id))
+                userTakenOn += 1;
+        }
+        return userTakenOn;
+    }
+    // function to delete charts 
+    static destroy = () => {
         if (this.listState.barChart)
             this.listState.barChart.destroy();
         if (this.listState.progressChart)
