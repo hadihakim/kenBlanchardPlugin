@@ -235,3 +235,14 @@
     font-size: 0.75rem;
     line-height: 1rem;
 }
+
+.cards-container .progressBarContainer .progressBar {
+    height: .25rem;
+    background-color: cadetblue;
+}
+
+.cards-container .progressBarContainer {
+    width: 100%;
+    height: .25rem;
+    background-color: hsl(182, 25%, 75%);
+}
