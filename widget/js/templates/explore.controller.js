@@ -55,11 +55,13 @@ class Explore {
     container.appendChild(firstClone);
   }
 
-  static horizontal_Render = (asset, container) => {
+  static horizontal_Render = (asset, container,pageType="") => {
+  console.log("🚀 ~ file: explore.controller.js ~ line 59 ~ Explore ~ container", container)
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
     let title = nodesClone.querySelectorAll(".title");
+    let progressBarContainer = nodesClone.querySelectorAll(".progressBarContainer");
     let progress = nodesClone.querySelectorAll(".progressBar");
     let duration = nodesClone.querySelectorAll(".duration");
     let card = nodesClone.querySelectorAll(".mdc-card");
@@ -74,8 +76,11 @@ class Explore {
 						${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     
-  (asset.progress ? progress[0].style.width = `${asset.progress}%` : progress[0].style.width = "0%");
-  
+    if(pageType==="profile"){
+      (asset.progress ? progress[0].style.width = `${asset.progress}%` : progress[0].style.width = "0%");
+    }else{
+      progressBarContainer[0].classList.add("hidden");
+    }
     card[0].addEventListener("click", () => {
       Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
@@ -127,7 +132,6 @@ class Explore {
     myAssets = Search.sort(myAssets);
     // loop through assets in the section to print cards
     myAssets.forEach(asset => {
-    console.log("🚀 ~ file: explore.controller.js ~ line 126 ~ Explore ~ asset", asset)
       // check if the asset is included in the filter 
       // if the section is userSpecific it will not be affected with the filter
       let printCardState = (HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific) 

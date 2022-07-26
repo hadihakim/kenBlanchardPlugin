@@ -65,7 +65,7 @@ class MyList {
     static calculateTaken = (id, type) => {
         let userTakenOn = 0;
         for (const asset in UserProfile.state.data.assets) {
-            if (HandleAPI.state.assets_info[asset].type === type && HandleAPI.state.assets_info[asset].meta.topics.includes(id))
+            if (HandleAPI?.state?.assets_info[asset]?.type === type && HandleAPI?.state.assets_info[asset]?.meta?.topics?.includes(id))
                 userTakenOn += 1;
         }
         return userTakenOn;
