@@ -53,16 +53,14 @@ class HandleAPI {
                 if (err) reject(err)
                 console.log("Profiles.get", res);
                 this.state.profileData=res;
-                console.log("🚀 ~ file: handleAPI.js ~ line 56 ~ HandleAPI ~ Profiles.get ~ this.state.profileData", this.state.profileData)
                 resolve(res)
             })
         });
     }
 
     static saveAssetToProfile = async(assetData) => {
-        Profiles.savePropertyData("assets",assetData.id,assetData,(err,res)=>{
+        Profiles.savePropertyData("assets",assetData.id,{},(err,res)=>{
             if (err) return console.error(err);
-            console.log("🚀 ~ file: handleAPI.js ~ line 74 ~ HandleAPI ~ Profiles.savePropertyData ~ res", res)
         })
     }
     static getSettingsData = () => {
@@ -116,7 +114,6 @@ class HandleAPI {
             Assets.getAssetTypetPerTopicsStats(type, async(err, res) => {
                 if(err) return reject(err);
                 console.log('result from the API -=>', res);
-                console.log('type in the API -=>', type);
                 resolve(res)
             })
         })
