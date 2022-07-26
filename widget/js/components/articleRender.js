@@ -91,6 +91,7 @@ class ArticleRender {
           if (tab == 'FULL ARTICLE') {
             articleKeyTakeaways[0].classList.add("hidden");
             articleFullArticle[0].classList.remove("hidden");
+            HandleAPI.saveAssetToProfile(this.state.data);
           } else if (tab == 'KEY TAKEAWAYS') {
             articleKeyTakeaways[0].classList.remove("hidden");
             articleFullArticle[0].classList.add("hidden");
@@ -104,6 +105,7 @@ class ArticleRender {
       articleFullArticle[0].classList.remove("hidden");
       articleKeyTakeaways[0].classList.add("noMargin");
       articleFullArticle[0].innerHTML = "Most companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and developmentMost companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and development Most companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and developmentMost companies want their employees to continue to grow and develop because they know employee growth benefits not only the individual but also the organization. For example, how would productivity change if an employee became a more effective communicator or learned to manage others using a coach approach? To foster employee growth and development, organizations often enroll people in training or provide them with a coach. What they don’t do enough of, however, is encourage the managers of these employees to support that growth and development...."
+      HandleAPI.saveAssetToProfile(this.state.data);
     }
     // show the drawer list when click the three dots
     icon[0].addEventListener("click", () => {
