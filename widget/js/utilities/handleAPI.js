@@ -5,6 +5,7 @@ class HandleAPI {
         assets_info: fakeData.data.assets_info,
         sections: fakeData.data.sections,
         topics: fakeData.data.topics,
+        profileData:{}
     }
 
     static setState = (options) => {
@@ -51,6 +52,8 @@ class HandleAPI {
             Profiles.get((err, res) => {
                 if (err) reject(err)
                 console.log("Profiles.get", res);
+                this.state.profileData=res;
+                console.log("🚀 ~ file: handleAPI.js ~ line 56 ~ HandleAPI ~ Profiles.get ~ this.state.profileData", this.state.profileData)
                 resolve(res)
             })
         });
@@ -119,3 +122,4 @@ class HandleAPI {
         })
     }
 }
+

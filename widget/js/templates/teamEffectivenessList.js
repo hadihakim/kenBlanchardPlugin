@@ -32,9 +32,9 @@ class TeamEffectivenessList {
         this.state.data = [];
         this.state.archivedData = [];
         for (const asset in UserProfile.state.data.assets) {
-            if (UserProfile.state.data.assets[asset].meta.topics.includes(topic) && UserProfile.state.data.assets[asset].isArchived) {
+            if (UserProfile.state.data?.assets[asset]?.meta?.topics.includes(topic) && !UserProfile.state?.data?.assets[asset]?.isArchived) {
                 let returnObj = {
-                    id: topic,
+                    id: UserProfile.state.data.assets[asset].id,
                     title: UserProfile.state.data.assets[asset].meta.title,
                     imageUrl: Utilities.cropImage(UserProfile.state.data.assets[asset].meta.image),
                     percentage: this.setProgressCard_Bard(UserProfile.state.data.assets[asset].progress),
@@ -45,9 +45,9 @@ class TeamEffectivenessList {
                 }
                 this.state.data.push(returnObj);
             }
-            if (UserProfile.state.data.assets[asset].meta.topics.includes(topic) && !UserProfile.state.data.assets[asset].isArchived) {
+            if (UserProfile?.state?.data?.assets[asset]?.meta?.topics.includes(topic) && UserProfile?.state?.data?.assets[asset]?.isArchived) {
                 let returnObj = {
-                    id: topic,
+                    id: UserProfile.state.data.assets[asset].id,
                     title: UserProfile.state.data.assets[asset].meta.title,
                     imageUrl: Utilities.cropImage(UserProfile.state.data.assets[asset].meta.image),
                     percentage: this.setProgressCard_Bard(UserProfile.state.data.assets[asset].progress),
@@ -92,7 +92,9 @@ class TeamEffectivenessList {
     }
 
     static moveToArchive = (id) => {
+    console.log("🚀 ~ file: teamEffectivenessList.js ~ line 95 ~ TeamEffectivenessList ~ id", id)
         let newActiveData = this.state.data.filter(item => {
+        console.log("🚀 ~ file: teamEffectivenessList.js ~ line 97 ~ TeamEffectivenessList ~ item", item)
             if (item.id != id)
                 return item
             else
