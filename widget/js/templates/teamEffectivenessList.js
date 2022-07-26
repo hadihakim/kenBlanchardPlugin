@@ -10,7 +10,7 @@ class TeamEffectivenessList {
         page: 1,
         pageSize: 7,
         fetchNext: false,
-        scrollTime:300,
+        scrollTime: 300,
     }
 
     static pointers = {
@@ -22,10 +22,51 @@ class TeamEffectivenessList {
     }
 
     static setStates = (options) => {
-        // we will use the id to get the data from the api -->
-        // calling the function
-        // after getting the data we will set it to the state to use it in the loading list function
-        this.state = {...this.state, ...options};
+        this.state = { ...this.state, ...options };
+
+        let myTopic = HandleAPI.getDataByID(options.id, 'topic');
+        this.setUserAssetsToSpecificTopic(myTopic.id);
+    }
+
+    static setUserAssetsToSpecificTopic = (topic) => {
+        this.state.data = [];
+        this.state.archivedData = [];
+        for (const asset in UserProfile.state.data.assets) {
+            if (UserProfile.state.data.assets[asset].meta.topics.includes(topic) && UserProfile.state.data.assets[asset].isArchived) {
+                let returnObj = {
+                    id: topic,
+                    title: UserProfile.state.data.assets[asset].meta.title,
+                    imageUrl: Utilities.cropImage(UserProfile.state.data.assets[asset].meta.image),
+                    percentage: this.setProgressCard_Bard(UserProfile.state.data.assets[asset].progress),
+                    action: {
+                        icon: 'material-icons icon',
+                        iconTextContent: 'chevron_right'
+                    }
+                }
+                this.state.data.push(returnObj);
+            }
+            if (UserProfile.state.data.assets[asset].meta.topics.includes(topic) && !UserProfile.state.data.assets[asset].isArchived) {
+                let returnObj = {
+                    id: topic,
+                    title: UserProfile.state.data.assets[asset].meta.title,
+                    imageUrl: Utilities.cropImage(UserProfile.state.data.assets[asset].meta.image),
+                    percentage: this.setProgressCard_Bard(UserProfile.state.data.assets[asset].progress),
+                    action: {
+                        icon: 'material-icons icon',
+                        iconTextContent: 'chevron_right'
+                    }
+                }
+                this.state.archivedData.push(returnObj);
+            }
+        }
+    }
+
+    static setProgressCard_Bard = (progress) => {
+        let progressBar = document.createElement('div');
+        progressBar.style.width = `${progress||50}%`;
+        progressBar.setAttribute('id', 'filled');
+        progressBar.setAttribute('class', 'infoTheme');
+        return progressBar;
     }
 
     static deleteItem = (id) => {
@@ -197,6 +238,7 @@ class TeamEffectivenessList {
 
         if (lastIndex > this.state.data.length)
             lastIndex = this.state.data.length;
+            console.log("🚀 ~ file: teamEffectivenessList.js ~ line 241 ~ TeamEffectivenessList ~ this.state.data", this.state)
 
         this.state.page += 1;
 
@@ -205,21 +247,24 @@ class TeamEffectivenessList {
             const nodesClone = document.getElementById(this.pointers.teamEffectiveness_Template).content.cloneNode(true);
 
             let titleCard = nodesClone.querySelectorAll(".title");
+            let bar = nodesClone.querySelector("#bar");
             let imageContainer = nodesClone.querySelector("#image");
             let titleContainer = nodesClone.querySelector("#title_text");
-            let filledData = nodesClone.querySelector("#filled");
+            let filledData = bar.querySelector("#filled");
             let actionBtn = nodesClone.querySelector("#action");
 
-            let percentFilled = (this.state.data[i].taken / this.state.data[i].totaltasks) * 100;
-            imageContainer.setAttribute('style', `background-image: url('${this.state.data[i].image}')`);
-            filledData.setAttribute('style', `width: ${percentFilled}%`);
+            // filledData.innerHTML = this.state.data[i].percentage;
+
+            imageContainer.setAttribute('style', `background-image: url('${this.state.data[i].imageUrl}')`);
+            bar.appendChild(this.state.data[i].percentage);
+
             titleContainer.innerHTML = this.state.data[i].title;
 
             document.getElementById(this.pointers.teamEffectiveness_ListContainer).appendChild(nodesClone);
 
             imageContainer.addEventListener('click', () => {
                 let courseData = HandleAPI.getDataByID(this.state.data[i].id, "assets_info")
-                Navigation.openCourseDetails(this.state.data[i].id,this.state.data[i].title, "from active-card")
+                Navigation.openCourseDetails(this.state.data[i].id, this.state.data[i].title, "from active-card")
             })
             titleCard[0].addEventListener('click', () => {
                 let courseData = HandleAPI.getDataByID(this.state.data[i].id, "assets_info")
@@ -245,16 +290,19 @@ class TeamEffectivenessList {
         this.state.page += 1;
 
         for (let i = firstIndex; i < lastIndex; i++) {
+
             const nodesClone = document.getElementById(this.pointers.teamEffectiveness_Template).content.cloneNode(true);
 
+            let titleCard = nodesClone.querySelectorAll(".title");
+            let bar = nodesClone.querySelector("#bar");
             let imageContainer = nodesClone.querySelector("#image");
             let titleContainer = nodesClone.querySelector("#title_text");
-            let filledData = nodesClone.querySelector("#filled");
+            let filledData = bar.querySelector("#filled");
             let actionBtn = nodesClone.querySelector("#action");
 
-            let percentFilled = (this.state.archivedData[i].taken / this.state.archivedData[i].totaltasks) * 100;
-            imageContainer.setAttribute('style', `background-image: url('${this.state.archivedData[i].image}')`);
-            filledData.setAttribute('style', `width: ${percentFilled}%`);
+            imageContainer.setAttribute('style', `background-image: url('${this.state.archivedData[i].imageUrl}')`);
+            bar.appendChild(this.state.archivedData[i].percentage);
+
             titleContainer.innerHTML = this.state.archivedData[i].title;
 
             document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer).appendChild(nodesClone);
@@ -283,9 +331,9 @@ class TeamEffectivenessList {
             }
         }
     }
-    static lazyLoadHandler=Utilities._debounce(e=>{
+    static lazyLoadHandler = Utilities._debounce(e => {
         this.lazyLoad(e)
-      },this.state.scrollTime);
+    }, this.state.scrollTime);
     static init = () => {
         let activeContainer = document.getElementById(this.pointers.teamEffectiveness_ListContainer);
         let archiveContainer = document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer);
@@ -296,7 +344,7 @@ class TeamEffectivenessList {
 
         activeContainer.addEventListener('scroll', (e) => this.lazyLoadHandler(e));
         archiveContainer.addEventListener('scroll', (e) => this.lazyLoadHandler(e));
-        
+
         this.loadTabs();
 
         switch (this.state.selectedNav) {

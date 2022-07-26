@@ -180,7 +180,11 @@ class MyList {
         };
         // on action button clicked
         listView.onItemActionClicked = item => {
-            console.log(item.title);
+            let _options = {
+                title: item.title,
+                id: item.id,
+            }
+            Navigation.openTeamEffectivenessList(_options);
         };
     }
     // set the active cards in the list
