@@ -361,8 +361,6 @@ class Navigation {
 			// call api
 			let _options = {
 				id: options.id,
-				data: options.activeData,
-				archivedData: options.archiveData,
 			}
 			TeamEffectivenessList.setStates(_options);
 		}
