@@ -21,41 +21,37 @@ class TeamEffectivenessList {
         teamEffectivenessArchived_ListContainer: "teamEffectivenessArchived_ListContainer",
     }
 
-    static setStates = (options) => {
+    static setStates = async(options) => {
+        this.loadTabs();
+        let activeContainer = document.getElementById(this.pointers.teamEffectiveness_ListContainer);
+        let archiveContainer = document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer);
+
+        Skeleton.verticalSeeAll_Skeleton(activeContainer);
+        Skeleton.verticalSeeAll_Skeleton(archiveContainer);
+
         this.state = { ...this.state, ...options };
 
         let myTopic = HandleAPI.getDataByID(options.id, 'topic');
-        this.setUserAssetsToSpecificTopic(myTopic.id);
+        await this.setUserAssetsToSpecificTopic(myTopic.id);
     }
 
-    static setUserAssetsToSpecificTopic = (topic) => {
+    static setUserAssetsToSpecificTopic = async (topic) => {
         this.state.data = [];
         this.state.archivedData = [];
         for (const asset in UserProfile.state.data.assets) {
-            if (UserProfile.state.data.assets[asset].meta.topics.includes(topic) && UserProfile.state.data.assets[asset].isArchived) {
-                let returnObj = {
-                    id: topic,
-                    title: UserProfile.state.data.assets[asset].meta.title,
-                    imageUrl: Utilities.cropImage(UserProfile.state.data.assets[asset].meta.image),
-                    percentage: this.setProgressCard_Bard(UserProfile.state.data.assets[asset].progress),
-                    action: {
-                        icon: 'material-icons icon',
-                        iconTextContent: 'chevron_right'
-                    }
-                }
+            let myAsset = await HandleAPI.getDataByID(asset, 'assets_info');
+            console.log("🚀 ~ file: teamEffectivenessList.js ~ line 36 ~ TeamEffectivenessList ~ setUserAssetsToSpecificTopic= ~ myAsset", myAsset)
+            myAsset = { ...myAsset, ...UserProfile.state.data.assets[asset] };
+            let returnObj = {
+                id: asset,
+                title: myAsset.meta.title,
+                imageUrl: Utilities.cropImage(myAsset.meta.image),
+                percentage: this.setProgressCard_Bard(myAsset.progress),
+            }
+            if (myAsset.meta.topics.includes(topic) && !myAsset.isArchived && myAsset.type === MyList.listState.type) {
                 this.state.data.push(returnObj);
             }
-            if (UserProfile.state.data.assets[asset].meta.topics.includes(topic) && !UserProfile.state.data.assets[asset].isArchived) {
-                let returnObj = {
-                    id: topic,
-                    title: UserProfile.state.data.assets[asset].meta.title,
-                    imageUrl: Utilities.cropImage(UserProfile.state.data.assets[asset].meta.image),
-                    percentage: this.setProgressCard_Bard(UserProfile.state.data.assets[asset].progress),
-                    action: {
-                        icon: 'material-icons icon',
-                        iconTextContent: 'chevron_right'
-                    }
-                }
+            if (myAsset.meta.topics.includes(topic) && myAsset.isArchived && myAsset.type === MyList.listState.type) {
                 this.state.archivedData.push(returnObj);
             }
         }
@@ -63,7 +59,7 @@ class TeamEffectivenessList {
 
     static setProgressCard_Bard = (progress) => {
         let progressBar = document.createElement('div');
-        progressBar.style.width = `${progress||50}%`;
+        progressBar.style.width = `${progress || 50}%`;
         progressBar.setAttribute('id', 'filled');
         progressBar.setAttribute('class', 'infoTheme');
         return progressBar;
@@ -89,6 +85,9 @@ class TeamEffectivenessList {
                 break;
         }
         this.init();
+        Profiles.deleteAsset(id, (err,res)=>{
+            if(err) return console.log(err);
+        });
     }
 
     static moveToArchive = (id) => {
@@ -100,6 +99,9 @@ class TeamEffectivenessList {
         })
         this.state.data = newActiveData;
         this.init();
+        Profiles.setAssetArchiveStatus(id, true, (err,res)=>{
+            if(err) return console.log(err);
+        });
     }
 
     static moveToActive = (id) => {
@@ -111,6 +113,9 @@ class TeamEffectivenessList {
         })
         this.state.archivedData = newArchivedData;
         this.init();
+        Profiles.setAssetArchiveStatus(id, false, (err,res)=>{
+            if(err) return console.log(err);
+        });
     }
 
     static resetItem = (id) => {
@@ -238,10 +243,8 @@ class TeamEffectivenessList {
 
         if (lastIndex > this.state.data.length)
             lastIndex = this.state.data.length;
-            console.log("🚀 ~ file: teamEffectivenessList.js ~ line 241 ~ TeamEffectivenessList ~ this.state.data", this.state)
 
         this.state.page += 1;
-
         // activeCard
         for (let i = firstIndex; i < lastIndex; i++) {
             const nodesClone = document.getElementById(this.pointers.teamEffectiveness_Template).content.cloneNode(true);
@@ -357,7 +360,6 @@ class TeamEffectivenessList {
             default:
                 break;
         }
-
         Utilities.setAppTheme();
     }
 }
