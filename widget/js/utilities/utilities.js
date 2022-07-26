@@ -81,8 +81,8 @@ class Utilities {
           arr[i].setAttribute("style", `color: ${color} !important`);
           break;
         case "back":
-          // arr[i].style.backgroundColor = color;
-          arr[i].setAttribute("style", `background-color: ${color} !important`);
+          arr[i].style.backgroundColor = color;
+          // arr[i].setAttribute("style", `background-color: ${color} !important`);
           break;
         case "borderColor":
           newColor = this.LightenDarkenColor(color, 20);
