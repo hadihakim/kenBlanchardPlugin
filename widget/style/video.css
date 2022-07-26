@@ -8,6 +8,8 @@
     height: 13.1875rem;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../.././resources/whiteBackground.png);
     background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #videoPageContainer .videoTopContainer .videoSpan {

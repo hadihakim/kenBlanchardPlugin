@@ -60,6 +60,7 @@ class Explore {
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
     let title = nodesClone.querySelectorAll(".title");
+    let progress = nodesClone.querySelectorAll(".progressBar");
     let duration = nodesClone.querySelectorAll(".duration");
     let card = nodesClone.querySelectorAll(".mdc-card");
     image[0].style.backgroundImage = `url('${Utilities.cropImage(
@@ -72,6 +73,9 @@ class Explore {
 					<span class="schedule-text bodyText-AppTheme">
 						${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
+    
+  (asset.progress ? progress[0].style.width = `${asset.progress}%` : progress[0].style.width = "0%");
+  
     card[0].addEventListener("click", () => {
       Navigation.openPageDetails(asset.id, asset.meta.title,false);
     });
