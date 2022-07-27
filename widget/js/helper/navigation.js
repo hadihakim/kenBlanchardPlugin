@@ -176,6 +176,13 @@ class Navigation {
 				from: "search from details",
 
 			});
+		} 
+		else if(!courseDetailsContainer.classList.contains("hidden")) {
+			buildfire.history.push(title, {
+				showLabelInTitlebar: true,
+				from: "from course details",
+
+			});
 		}
 		else {
 
@@ -223,13 +230,13 @@ class Navigation {
 				id: data.id,
 			});
 		}
-		else {
-			buildfire.history.push(data.title, {
-				showLabelInTitlebar: true,
-				from: "Details from CourseDetails",
-				id: data.id,
-			});
-		}
+		// else {
+		// 	buildfire.history.push(data.title, {
+		// 		showLabelInTitlebar: true,
+		// 		from: "Details from CourseDetails",
+		// 		id: data.id,
+		// 	});
+		// }
 		// buildfire.history.push("Details from CourseDetails",{id:id});
 		config.renderedCard = 0;
 		config.page = 1;

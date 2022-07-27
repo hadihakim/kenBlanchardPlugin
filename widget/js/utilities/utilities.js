@@ -285,6 +285,8 @@ class Utilities {
                   );
                 } else if (from == "search from details") {
                   Navigation.openSearch();
+                } else if (from == "from course details") {
+                  Navigation.openCourseDetails(CourseDetails.state.data, "")
                 }
                 break;
             }
