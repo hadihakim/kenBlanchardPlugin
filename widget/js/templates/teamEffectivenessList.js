@@ -40,18 +40,17 @@ class TeamEffectivenessList {
         this.state.archivedData = [];
         for (const asset in UserProfile.state.data.assets) {
             let myAsset = await HandleAPI.getDataByID(asset, 'assets_info');
-            console.log("🚀 ~ file: teamEffectivenessList.js ~ line 36 ~ TeamEffectivenessList ~ setUserAssetsToSpecificTopic= ~ myAsset", myAsset)
-            myAsset = { ...myAsset, ...UserProfile.state.data.assets[asset] };
+            myAsset = { ...myAsset.data, ...UserProfile.state.data.assets[asset] };
             let returnObj = {
                 id: asset,
                 title: myAsset.meta.title,
                 imageUrl: Utilities.cropImage(myAsset.meta.image),
                 percentage: this.setProgressCard_Bard(myAsset.progress),
             }
-            if (myAsset.meta.topics.includes(topic) && !myAsset.isArchived && myAsset.type === MyList.listState.type) {
+            if (myAsset?.meta?.topics?.includes(topic) && !myAsset?.isArchived && myAsset?.type === MyList?.listState?.type) {
                 this.state.data.push(returnObj);
             }
-            if (myAsset.meta.topics.includes(topic) && myAsset.isArchived && myAsset.type === MyList.listState.type) {
+            if (myAsset?.meta?.topics?.includes(topic) && myAsset?.isArchived && myAsset?.type === MyList?.listState?.type) {
                 this.state.archivedData.push(returnObj);
             }
         }
@@ -59,7 +58,7 @@ class TeamEffectivenessList {
 
     static setProgressCard_Bard = (progress) => {
         let progressBar = document.createElement('div');
-        progressBar.style.width = `${progress || 50}%`;
+        progressBar.style.width = `${progress || 20}%`;
         progressBar.setAttribute('id', 'filled');
         progressBar.setAttribute('class', 'infoTheme');
         return progressBar;

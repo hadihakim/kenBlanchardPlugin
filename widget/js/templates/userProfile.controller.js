@@ -443,10 +443,11 @@ class UserProfile {
     return nodesClone;
   };
 
-  static setAssetsArr = () => {
+  static setAssetsArr = async() => {
     let myAssetsAtt = {};
     for (const asset in this.state.data.assets) {
-      let returnObj = this.state.data.assets[asset];
+      let returnObj =await HandleAPI.getDataByID(asset,"assets_info");
+      returnObj={...returnObj.data,...this.state.data.assets[asset]}
       if (myAssetsAtt[returnObj.type])
       myAssetsAtt[returnObj.type].push(returnObj);
       else if(returnObj.type){
@@ -484,8 +485,9 @@ class UserProfile {
     this.setData({data: userData});
     // user data will be stored in this class state
     let userContainer = document.getElementById(containerID);
-    let assetsObj = this.setAssetsArr();
+    let assetsObj = await this.setAssetsArr();
     for (const asset in assetsObj) {
+      
       // build section container
       let newSectionDiv = ui.createElement('div', userContainer, '', ['sectionContainer'], `${assetsObj[asset].id}-mine`);
       let newSectionHeader = ui.createElement('div', newSectionDiv, '', ['sectionHeader'], '');
@@ -507,7 +509,7 @@ class UserProfile {
       // build cards
       assetsObj[asset].forEach(card => {
         // calling function to print all cards in the pages
-        Explore.horizontal_Render(card, newSectionCardsContainer);
+        Explore.horizontal_Render(card, newSectionCardsContainer,"profile");
       })
     }
     Utilities.setAppTheme();
