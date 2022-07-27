@@ -462,7 +462,9 @@ class SearchTableAssets extends SearchTableHelper {
     }
 
     onEditRow = (obj, tr) => {
-        AssetsDetails.init(obj, { activeTr: tr, target: "assets", isNew: false });
+        if (obj.type == "action-item") SectionsDetails.addOrEditActionItem("assets", obj);
+        else if (obj.type == "course") CourseDetails.init(obj, { activeTr: tr, target: "assets", isNew: false });
+        else AssetsDetails.init(obj, { activeTr: tr, target: "assets", isNew: false });
     }
 
     onSearch = (options, callback) => {
@@ -511,7 +513,8 @@ class SearchTableSectionAssets extends SearchTableHelper {
         //fetch the complete object from assets collection (not just the meta)
         Assets.get(obj.id, (err, res) => {
             if (err) return console.error(err);
-            if (res.data.type == "action-item") SectionsDetails._addOrEditActionItem(res.data);
+            if (res.data.type == "action-item") SectionsDetails.addOrEditActionItem("sections", res.data);
+            else if (res.data.type == "course") CourseDetails.init(res.data, { activeTr: tr, target: "sections", isNew: false });
             else AssetsDetails.init(res.data, { activeTr: tr, target: "sections", isNew: false });
         });
     }
@@ -547,14 +550,9 @@ class SearchTableAssetsModal extends SearchTableHelper {
         Assets.delete(obj.id, callback);
     }
 
-    onRowDeleted = (obj, tr) => {
-        // update state
-        delete state.settings.assets_info[obj.id]
-    }
+    onRowDeleted = (obj, tr) => {}
 
-    onEditRow = (obj, tr) => {
-        AssetsDetails.init(obj, { activeTr: tr, target: "assets", isNew: false });
-    }
+    onEditRow = (obj, tr) => {}
 
     onSearch = (options, callback) => {
         /* options = {filter, sort, page, pageSize=50} */

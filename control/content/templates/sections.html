@@ -119,13 +119,13 @@
     
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaTitle"
-                >Title <span class="text-danger">*</span>
+              <label for="mediaTitle-media"
+                >Title <span class="text-danger mediaTitle">*</span>
               </label>
             </div>
             <div class="col-md-9">
               <input
-                id="mediaTitle"
+                id="mediaTitle-media"
                 type="text"
                 class="form-control"
                 maxlength="100"
@@ -135,11 +135,11 @@
           </div>
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaDesc">Short Description</label>
+              <label for="mediaDesc-media">Short Description</label>
             </div>
             <div class="col-md-9">
               <input
-                id="mediaDesc"
+                id="mediaDesc-media"
                 type="text"
                 class="form-control"
                 maxlength="150"
@@ -149,11 +149,11 @@
           </div>
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaDur">Duration  <span class="text-danger">*</span></label>
+              <label for="mediaDur-media">Duration  <span class="text-danger">*</span></label>
             </div>
             <div class="col-md-9">
               <input
-                id="mediaDur"
+                id="mediaDur-media"
                 type="text"
                 class="form-control html-duration-picker"
                 placeholder=""
@@ -162,11 +162,11 @@
           </div>
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaURL">URL</label>
+              <label for="mediaURL-media">URL</label>
             </div>
             <div class="col-md-9">
               <input
-                id="mediaURL"
+                id="mediaURL-media"
                 type="text"
                 class="form-control"
                 placeholder="https://"
@@ -177,22 +177,22 @@
           <!-- List of Topics-->
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaTopic">Topic</label>
+              <label>Topic</label>
             </div>
             <div class="col-md-9">
-              <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState">
+              <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState-media">
                 <p class="info-note">
                   You haven't defined any topics yet. Go to
                   <a
                     class="link"
-                    id="assetTopicsEmptyStateLink"
+                    id="assetTopicsEmptyStateLink-media"
                     onclick="TopicsDetails.openAddTopicScreen()"
                     >Topics</a
                   >
                   to create some.
                 </p>
               </div>
-              <div class="row margin-bottom-fifteen" id="assetTopicsContainer">
+              <div class="row margin-bottom-fifteen" id="assetTopicsContainer-media">
                 <!-- checkboxes for topics-->
               </div>
             </div>
@@ -203,8 +203,8 @@
             <div class="section-title padding-top-zero">Details</div>
             <div class="form-group margin-top-ten">
               <div class="button-switch">
-                <input id="toggleDetails" type="checkbox" />
-                <label for="toggleDetails" class="label-success"></label>
+                <input id="toggleDetails-media" type="checkbox" />
+                <label for="toggleDetails-media" class="label-success"></label>
               </div>
             </div>
           </div>
@@ -221,8 +221,8 @@
             <div class="section-title padding-top-zero">Transcript</div>
             <div class="form-group margin-top-ten">
               <div class="button-switch">
-                <input id="toggleTranscript" type="checkbox"/>
-                <label for="toggleTranscript" class="label-success"></label>
+                <input id="toggleTranscript-media" type="checkbox"/>
+                <label for="toggleTranscript-media" class="label-success"></label>
               </div>
             </div>
           </div>
@@ -240,8 +240,8 @@
             <div class="section-title padding-top-zero">CheckList</div>
             <div class="form-group margin-top-ten">
               <div class="button-switch">
-                <input id="toggleCheckList" type="checkbox">
-                <label for="toggleCheckList" class="label-success"></label>
+                <input id="toggleCheckList-media" type="checkbox">
+                <label for="toggleCheckList-media" class="label-success"></label>
               </div>
             </div>
           </div>
@@ -288,7 +288,7 @@
           </button>
           <button
             class="btn btn-success"
-            id="saveAsset"
+            id="saveAsset-media"
             onclick="AssetsDetails.save();"
             disabled="disabled"
           >
@@ -298,7 +298,7 @@
       </template>
 
 <template id="addEditTemplate-article">
-        <div class="slide-in sub-page-body padding-bottom-sixty">
+        <div class="slide-in sub-page-body padding-bottom-sixty article-container">
           <h1>Article Details</h1>
     
           <div class="clearfix">
@@ -315,13 +315,13 @@
     
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaTitle"
+              <label for="mediaTitle-article"
                 >Title <span class="text-danger">*</span>
               </label>
             </div>
             <div class="col-md-9">
               <input
-                id="mediaTitle"
+                id="mediaTitle-article"
                 type="text"
                 class="form-control"
                 maxlength="100"
@@ -331,11 +331,11 @@
           </div>
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaDesc">Short Description</label>
+              <label for="mediaDesc-article">Short Description</label>
             </div>
             <div class="col-md-9">
               <input
-                id="mediaDesc"
+                id="mediaDesc-article"
                 type="text"
                 class="form-control"
                 maxlength="150"
@@ -345,7 +345,7 @@
           </div>
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaDur">Duration </label>
+              <label for="mediaDur-article">Duration </label>
               <span class="customTooltipBox btn-primary">
                 <span class="customTooltipText"
                   >Enter your estimate how long would it take the average person to
@@ -355,7 +355,7 @@
             </div>
             <div class="col-md-9">
               <input
-                id="mediaDur"
+                id="mediaDur-article"
                 type="text"
                 class="form-control html-duration-picker"
                 placeholder=""
@@ -370,11 +370,11 @@
           </div>
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaURL">Article URL</label>
+              <label for="mediaURL-article">Article URL</label>
             </div>
             <div class="col-md-9">
               <input
-                id="mediaURL"
+                id="mediaURL-article"
                 type="text"
                 class="form-control"
                 placeholder="https://"
@@ -385,22 +385,22 @@
           <!-- List of Topics-->
           <div class="row margin-bottom-fifteen">
             <div class="col-md-3">
-              <label for="mediaTopic">Topic</label>
+              <label>Topic</label>
             </div>
             <div class="col-md-9">
-              <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState">
+              <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState-article">
                 <p class="info-note">
                   You haven't defined any topics yet. Go to
                   <a
                     class="link"
-                    id="assetTopicsEmptyStateLink"
+                    id="assetTopicsEmptyStateLink-article"
                     onclick="TopicsDetails.openAddTopicScreen()"
                     >Topics</a
                   >
                   to create some.
                 </p>
               </div>
-              <div class="row margin-bottom-fifteen" id="assetTopicsContainer">
+              <div class="row margin-bottom-fifteen" id="assetTopicsContainer-article">
                 <!-- checkboxes for topics-->
               </div>
             </div>
@@ -410,8 +410,8 @@
             <div class="section-title padding-top-zero">Key Takeaways</div>
             <div class="form-group margin-top-ten">
               <div class="button-switch">
-                <input id="toggleKeyTakeAways" type="checkbox" />
-                <label for="toggleKeyTakeAways" class="label-success"></label>
+                <input id="toggleKeyTakeAways-article" type="checkbox" />
+                <label for="toggleKeyTakeAways-article" class="label-success"></label>
               </div>
             </div>
           </div>
@@ -430,7 +430,7 @@
           </button>
           <button
             class="btn btn-success"
-            id="saveAsset"
+            id="saveAsset-article"
             onclick="AssetsDetails.save();"
             disabled="disabled"
           >
@@ -440,7 +440,7 @@
       </template>
 
 <template id="addEditTemplate-book">
-      <div class="slide-in sub-page-body padding-bottom-sixty">
+      <div class="slide-in sub-page-body padding-bottom-sixty book-container">
         <h1>PDF Details</h1>
     
         <div class="clearfix">
@@ -455,20 +455,20 @@
     
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaTitle">Title <span class="text-danger">*</span>
+            <label for="mediaTitle-book">Title <span class="text-danger">*</span>
             </label>
           </div>
           <div class="col-md-9">
-            <input id="mediaTitle" type="text" class="form-control" maxlength="100" placeholder="Enter Title" />
+            <input id="mediaTitle-book" type="text" class="form-control" maxlength="100" placeholder="Enter Title" />
           </div>
         </div>
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaDesc">Short Description</label>
+            <label for="mediaDesc-book">Short Description</label>
           </div>
           <div class="col-md-9">
             <input
-              id="mediaDesc"
+              id="mediaDesc-book"
               type="text"
               class="form-control"
               maxlength="150"
@@ -478,7 +478,7 @@
         </div>
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaDur">Duration </label>
+            <label for="mediaDur-book">Duration </label>
             <span class="customTooltipBox btn-primary">
               <span class="customTooltipText"
                 >Enter your estimate how long would it take the average person to
@@ -488,7 +488,7 @@
           </div>
           <div class="col-md-9">
             <input
-              id="mediaDur"
+              id="mediaDur-book"
               type="text"
               class="form-control html-duration-picker"
               placeholder=""
@@ -497,11 +497,11 @@
         </div>
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaURL">PDF URL <span class="text-danger">*</span></label>
+            <label for="mediaURL-book">PDF URL <span class="text-danger">*</span></label>
           </div>
           <div class="col-md-9">
             <input
-              id="mediaURL"
+              id="mediaURL-book"
               type="text"
               class="form-control"
               placeholder="https://"
@@ -512,22 +512,22 @@
         <!-- List of Topics-->
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaTopic">Topic</label>
+            <label>Topic</label>
           </div>
           <div class="col-md-9">
-            <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState">
+            <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState-book">
               <p class="info-note">
                 You haven't defined any topics yet. Go to
                 <a
                   class="link"
-                  id="assetTopicsEmptyStateLink"
+                  id="assetTopicsEmptyStateLink-book"
                   onclick="TopicsDetails.openAddTopicScreen()"
                   >Topics</a
                 >
                 to create some.
               </p>
             </div>
-            <div class="row margin-bottom-fifteen" id="assetTopicsContainer">
+            <div class="row margin-bottom-fifteen" id="assetTopicsContainer-book">
               <!-- checkboxes for topics-->
             </div>
           </div>
@@ -541,7 +541,7 @@
         </button>
         <button
           class="btn btn-success"
-          id="saveAsset"
+          id="saveAsset-book"
           onclick="AssetsDetails.save();"
           disabled="disabled"
         >
@@ -566,13 +566,13 @@
     
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaTitle"
+            <label for="mediaTitle-summary"
               >Title <span class="text-danger">*</span>
             </label>
           </div>
           <div class="col-md-9">
             <input
-              id="mediaTitle"
+              id="mediaTitle-summary"
               type="text"
               class="form-control"
               maxlength="100"
@@ -582,11 +582,11 @@
         </div>
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaDesc">Short Description</label>
+            <label for="mediaDesc-summary">Short Description</label>
           </div>
           <div class="col-md-9">
             <input
-              id="mediaDesc"
+              id="mediaDesc-summary"
               type="text"
               class="form-control"
               maxlength="150"
@@ -605,22 +605,22 @@
         <!-- List of Topics-->
         <div class="row margin-bottom-fifteen">
           <div class="col-md-3">
-            <label for="mediaTopic">Topic</label>
+            <label>Topic</label>
           </div>
           <div class="col-md-9">
-            <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState">
+            <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState-summary">
               <p class="info-note">
                 You haven't defined any topics yet. Go to
                 <a
                   class="link"
-                  id="assetTopicsEmptyStateLink"
+                  id="assetTopicsEmptyStateLink-summary"
                   onclick="TopicsDetails.openAddTopicScreen()"
                   >Topics</a
                 >
                 to create some.
               </p>
             </div>
-            <div class="row margin-bottom-fifteen" id="assetTopicsContainer">
+            <div class="row margin-bottom-fifteen" id="assetTopicsContainer-summary">
               <!-- checkboxes for topics-->
             </div>
           </div>
@@ -675,7 +675,7 @@
         </button>
         <button
           class="btn btn-success"
-          id="saveAsset"
+          id="saveAsset-summary"
           onclick="AssetsDetails.save();"
           disabled="disabled"
         >
@@ -742,7 +742,6 @@
           </p>
         </div>
     
-        
         <div class="actions margin-bottom-twenty">
           
           <div class="btn-group open list-sort-dropdown">
@@ -787,7 +786,6 @@
       </div>
     </template>
 
-
 <template id="addEditTemplate-summary-page">
       <div class="slide-in sub-page-body padding-bottom-sixty page-container">
     
@@ -823,6 +821,248 @@
       </div>
     </template>
 
+<template id="addEditTemplate-course">
+      <div class="slide-in sub-page-body padding-bottom-sixty course-container">
+        <h1>Course Details</h1>
+    
+        <div class="clearfix">
+          <p class="info-note">
+            Here’s where you add course details like image, title, short description and full course overview.
+          </p>
+        </div>
+    
+        <div
+          class="margin-bottom-twenty image-picker aspect-1-1 thumbnail-picker thumbnail-picker-assets"
+        ></div>
+    
+        <div class="row margin-bottom-fifteen">
+          <div class="col-md-3">
+            <label for="mediaTitle-course"
+              >Title <span class="text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-md-9">
+            <input
+              id="mediaTitle-course"
+              type="text"
+              class="form-control"
+              maxlength="100"
+              placeholder="Enter Title"
+            />
+          </div>
+        </div>
+        <div class="row margin-bottom-fifteen">
+          <div class="col-md-3">
+            <label for="mediaDesc-course">Short Description</label>
+          </div>
+          <div class="col-md-9">
+            <input
+              id="mediaDesc-course"
+              type="text"
+              class="form-control"
+              maxlength="150"
+              placeholder="Enter Short Description"
+            />
+          </div>
+        </div>
+    
+        <div class="row margin-bottom-thirty">
+          <div class="col-md-12">
+            <label for="wysiwygCourseDescription">Course Overview</label>
+            <textarea id="wysiwygCourseDescription" name="wysiwygCourseDescription"></textarea>
+          </div>
+        </div>
+    
+        <!-- List of Topics-->
+        <div class="row margin-bottom-fifteen">
+          <div class="col-md-3">
+            <label>Topic</label>
+          </div>
+          <div class="col-md-9">
+            <div class="margin-bottom-fifteen hidden" id="assetTopicsEmptyState-course">
+              <p class="info-note">
+                You haven't defined any topics yet. Go to
+                <a
+                  class="link"
+                  id="assetTopicsEmptyStateLink-course"
+                  onclick="TopicsDetails.openAddTopicScreen()"
+                  >Topics</a
+                >
+                to create some.
+              </p>
+            </div>
+            <div class="row margin-bottom-fifteen" id="assetTopicsContainer-course">
+              <!-- checkboxes for topics-->
+            </div>
+          </div>
+        </div>
+    
+        <!-- Lessons -->   
+        <div class="flex-row space-between margin-top-thirty">
+          <div class="section-title padding-top-zero">Lessons</div>
+        </div>
+    
+    
+        <div class="clearfix">
+          <p class="info-note">
+            A course is divided into lessons for better organization. Every lesson can consist of only one asset, or can be broken down into multiple assets.
+          </p>
+        </div>
+    
+    
+        <div class="actions margin-bottom-twenty">
+          
+          <div class="btn-group open list-sort-dropdown">
+            <button type="button" class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="">
+              <span class="margin-right-ten text-light-grey">Sort:</span> 
+              <span class="list-sort-txt">Manually</span> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li data-sort="newest"><a>Newest First</a></li>
+              <li data-sort="oldest"><a>Oldest First</a></li>
+            </ul>
+          </div>
+    
+          <button class="btn btn-success btn-add pull-right margin-left-five btn-large add-List-item-btn" type="button"onclick="">Add Lesson</button>
+    
+        </div>
+    
+        <div class="sortable-List-container">
+    
+        </div>
+        <div class="empty-state emptyStateList">
+          <h4>You haven't added anything yet</h4>
+        </div>
+            
+    
+    
+        
+      </div>
+      <!-- Bottom actions require adding the .sub-page class on the <body> tag for correct scrolling  -->
+      <div class="bottom-actions">
+        <button class="btn btn-default" onclick="CourseDetails.cancel();">
+          Cancel
+        </button>
+        <button
+          class="btn btn-success"
+          id="saveAsset-course"
+          onclick="CourseDetails.save();"
+          disabled="disabled"
+        >
+          Save
+        </button>
+      </div>
+    </template>
 
-
+<template id="addEditTemplate-course-lesson">
+      <div class="slide-in sub-page-body padding-bottom-sixty lesson-container">
+        <h1>Lesson Details</h1>
+    
+        <div class="clearfix">
+          <p class="info-note">
+            Here’s where you add main title and subtitle for the lesson. Subtitle can be used as generic name for lessons like Introduction, Quiz, Syllabus, Exercise, Lesson 1, Lesson 2...      </p>
+        </div>
+    
+        <div class="row margin-bottom-fifteen">
+          <div class="col-md-3">
+            <label for="lessonTitle">Main Title <span class="text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-md-9">
+            <input
+              id="lessonTitle"
+              type="text"
+              class="form-control"
+              maxlength="100"
+              placeholder="Enter Main Title"
+            />
+          </div>
+        </div>
+    
+        <div class="row margin-bottom-fifteen">
+          <div class="col-md-3">
+            <label for="lessonSubTitle">Subtitle</label>
+          </div>
+          <div class="col-md-9">
+            <input
+              id="lessonSubTitle"
+              type="text"
+              class="form-control"
+              maxlength="100"
+              placeholder="Enter Subtitle"
+            />
+          </div>
+        </div>
+    
+        <!-- Lesson Assets -->   
+        <div class="flex-row space-between margin-top-thirty">
+          <div class="section-title padding-top-zero">Lesson Assets</div>
+        </div>
+    
+    
+        <div class="clearfix">
+          <p class="info-note">
+            Every lesson can consist of just one asset, or can be broken down into multiple assets. You can add existing asset or create new one. Action Item can be used to connect Free Text Questionnaire or any other content outside this plugin.
+          </p>
+        </div>
+    
+        <div class="actions margin-bottom-twenty">
+          
+          <div class="flex-fill">
+            <div class="btn-group open list-sort-dropdown">
+              <button type="button" class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="">
+                <span class="margin-right-ten text-light-grey">Sort:</span> 
+                <span class="list-sort-txt">Manually</span> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li data-sort="newest"><a>Newest First</a></li>
+                <li data-sort="oldest"><a>Oldest First</a></li>
+              </ul>
+            </div>
+          </div>
+    
+          <button class="btn btn-success btn-add pull-right margin-left-five" type="button" id="addBtnAssetsLessonModal" onclick="">Add Existing Asset</button>
+                
+          <div class="btn-group pull-right" id="add-assets-lesson-dropdown">
+            <button class="btn btn-success btn-add margin-left-five" type="button" id="addBtnAssetsLesson">Add New Asset
+              <span class="caret whiteTheme"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li data-type="video"><a>Video</a></li>
+              <li data-type="audio"><a>Audio</a></li>
+              <li data-type="article"><a>Article</a></li>
+              <li data-type="book"><a>PDF</a></li>
+              <li data-type="action-item"><a>Action Item</a></li>
+            </ul>
+          </div>
+    
+        </div>
+    
+        <div class="sortable-List-container">
+    
+        </div>
+    
+        <div class="empty-state emptyStateList">
+          <h4>You haven't added anything yet</h4>
+        </div>
+       
+      </div>
+    
+      <!-- Bottom actions require adding the .sub-page class on the <body> tag for correct scrolling  -->
+      <div class="bottom-actions">
+        <button class="btn btn-default" onclick="LessonDetails.cancel();">
+          Cancel
+        </button>
+        <button
+          class="btn btn-success"
+          id="saveLesson"
+          onclick="LessonDetails.save();"
+          disabled="disabled"
+        >
+          Save
+        </button>
+      </div>
+    </template>
 </template>

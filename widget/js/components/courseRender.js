@@ -30,7 +30,10 @@ class CourseRender{
         let lessonItem = firstClone.querySelectorAll(".learn-list");
         // give the button inner text -->
         startCourse[0].innerHTML = Strings.START_COURSE;
-        startButton[0].addEventListener("click", () => Navigation.openCourseDetails(this.state.id, this.state.data.title));
+        startButton[0].addEventListener("click", () =>{
+            Navigation.openCourseDetails(this.state.data);
+            HandleAPI.saveAssetToProfile(this.state.data);
+        });
         image[0].style.backgroundImage = `url('${Utilities.cropImage(
           this.state.data.meta.image,
           "full_width",
@@ -43,28 +46,7 @@ class CourseRender{
                             ${Utilities.timeConvert(this.state.data.meta.duration,"hh|mm")}</span>`;
         }
         descriptionTitle[0].innerHTML = Strings.COURSE_DETAILS_DESCRIPTION;
-        descriptionText[0].innerHTML =
-          "When one of your team members is at the Disillusioned learner stage on a goal, they have some knowledge and skills but are not yet competent. They can easily get stuck, become discouraged, and even feel ready to quit. Their commitment is low.";
-        learnTitle[0].innerHTML = Strings.COURSE_DETAILS_LEARN_LIST;
-        lessonTitle[0].innerHTML = Strings.COURSE_DETAILS_Lessons_LIST;
-        for (let i = 0; i < 4; i++) {
-          ui.createElement(
-            "li",
-            lessonItem[0],
-            "Introduction to the Course Focus",
-            ["lesson-list-item"],
-            `lesson-list-item${i}`
-          );
-        }
-        for (let i = 0; i < 4; i++) {
-          ui.createElement(
-            "li",
-            learnItem[0],
-            "Someone to listen to their concerns",
-            ["learn-list-item"],
-            `learn-list-item${i}`
-          );
-        }
+        descriptionText[0].innerHTML =this.state.data.meta.description;
         container.appendChild(firstClone);
     }
     static init =(id,data)=>{

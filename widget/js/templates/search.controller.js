@@ -319,7 +319,7 @@ class Search {
       }
     }
     if (this.state.emptySearch) {
-      Utilities.showEmpty(document.getElementById(this.pointers.searchContainer));
+      Utilities.showEmpty(document.getElementById(this.pointers.searchContainer),Strings.EMPTY_SEARCH_HEADER,Strings.EMPTY_SEARCH_HEAD_BODY);
     }
     this.state.fetchNext = true;
     // Utilities.setAppTheme();

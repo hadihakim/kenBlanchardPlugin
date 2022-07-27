@@ -39,8 +39,15 @@ const AssetsList = {
                 event.stopPropagation();
                 this._toggleDropdown(true);
                 let assetType = event.currentTarget.getAttribute('data-type');
-                let item = AssetsDetails.create({ type: assetType });
-                AssetsDetails.init(item, { target: "assets", isNew: true });
+                if (assetType == "action-item") {
+                    SectionsDetails.addOrEditActionItem("assets");
+                } else if (assetType == "course") {
+                    let item = CourseDetails.create({ type: "course" });
+                    CourseDetails.init(item, { target: "assets", isNew: true });
+                } else {
+                    let item = AssetsDetails.create({ type: assetType });
+                    AssetsDetails.init(item, { target: "assets", isNew: true });
+                }
             });
         });
 
@@ -86,6 +93,10 @@ const AssetsDetails = {
         this.activeTr = options.activeTr || null;
         this.target = options.target || "assets";
 
+        // for asset draggable list (inside lessons)
+        this.divRow = options.divRow || null;
+        this.index = options.index || 0;
+
         this._loadUI();
         this._initUIElements();
 
@@ -113,6 +124,8 @@ const AssetsDetails = {
         this.activeItem.checkList = (ListItemsUI.list && ListItemsUI.list.items) || [];
         // book summary specific items
         this.activeItem.chapters = (listOfChapters.list && listOfChapters.list.items) || [];
+        // course specific items
+        this.activeItem.lessons = (listOfLessons.list && listOfLessons.list.items) || [];
 
         // disable save button while saving
         this.uiElements.saveBtn.setAttribute("disabled", "disabled")
@@ -146,6 +159,8 @@ const AssetsDetails = {
                 return new Book(asset);
             case "action-item":
                 return new ActionItem(asset);
+            case "course":
+                return new Course(asset);
             default:
                 console.log("Unknown asset type");
                 break;
@@ -165,16 +180,19 @@ const AssetsDetails = {
             article: "Article",
             summary: "Book Summary",
             book: "PDF",
+            course: "Course",
         }
         let breadCrumb = [];
         let assetTitle = `${addOrEditAsset} ${assetTitles[this.activeItem.type]}`;
 
         if (this.target == "assets")
             breadCrumb = ["Assets", assetTitle];
-        else {
+        else if (this.target == "sections") {
             // if section title is set, add it to breadcrumb, otherwise add new/Edit Section
             let sectionTitle = SectionsDetails.validTitle() || `${addOrEditSection} Section`;
             breadCrumb = ["Sections", sectionTitle, assetTitle];
+        } else if (this.target == "courses") {
+            breadCrumb = [...LessonDetails.breadCrumb, assetTitle]
         }
 
         this.breadCrumb = breadCrumb;
@@ -244,20 +262,30 @@ const AssetsDetails = {
     },
 
     _initUIElements() {
+        let containerName = ["audio", "video"].includes(this.activeItem.type) ? "media" : this.activeItem.type
         this.uiElements = {
-            title: document.getElementById('mediaTitle'),
-            description: document.getElementById('mediaDesc'),
-            duration: document.getElementById('mediaDur'),
-            topicsContainer: document.getElementById('assetTopicsContainer'),
-            topicsEmptyState: document.getElementById('assetTopicsEmptyState'),
-            saveBtn: document.getElementById('saveAsset'),
-            url: document.getElementById('mediaURL'),
-            toggleTakeAways: document.getElementById("toggleKeyTakeAways"),
-            toggleDetails: document.getElementById("toggleDetails"),
-            toggleTranscript: document.getElementById("toggleTranscript"),
-            toggleCheckList: document.getElementById("toggleCheckList"),
+            title: document.getElementById(`mediaTitle-${containerName}`),
+            description: document.getElementById(`mediaDesc-${containerName}`),
+            duration: document.getElementById(`mediaDur-${containerName}`),
+            topicsContainer: document.getElementById(`assetTopicsContainer-${containerName}`),
+            topicsEmptyState: document.getElementById(`assetTopicsEmptyState-${containerName}`),
+            saveBtn: document.getElementById(`saveAsset-${containerName}`),
+            url: document.getElementById(`mediaURL-${containerName}`),
+            toggleTakeAways: document.getElementById(`toggleKeyTakeAways-${containerName}`),
+            toggleDetails: document.getElementById(`toggleDetails-${containerName}`),
+            toggleTranscript: document.getElementById(`toggleTranscript-${containerName}`),
+            toggleCheckList: document.getElementById(`toggleCheckList-${containerName}`),
         }
 
+        // if there is a sortable List, init it based on asset type
+        this._initSortableList();
+
+        // book summary, does not have URL field
+        if (this.uiElements.url) this.uiElements.url.addEventListener('input', () => { this._toggleSaveButton() });
+
+    },
+
+    _initSortableList() {
         // if audio or video, add task list modal button
         if (["audio", "video"].includes(this.activeItem.type)) {
             ListItemsUI.init("media-container");
@@ -265,26 +293,26 @@ const AssetsDetails = {
         // if book summary, init dropdown
         if (this.activeItem.type == "summary") listOfChapters.init("summary-container");
 
-        // book summary, does not have URL field
-        if (this.uiElements.url) this.uiElements.url.addEventListener('input', () => { this._toggleSaveButton() });
-
+        // if course, init dropdown
+        if (this.activeItem.type == "course") listOfLessons.init("course-container");
     },
 
     _closeAndReturn(target) {
+
+        if (this.activeItem.type != "action-item") Views().closeCurrentPage(this.breadCrumb.length - 2);
+
         switch (target) {
             case "assets":
-                Views().closeCurrentPage(0);
                 AssetsList.resultTable.refresh({});
                 break;
             case "sections":
-                Views().closeCurrentPage(1);
                 SectionsDetails.addOrUpdateAsset(this.activeItem);
                 SectionsDetails.resultTable.refresh({});
                 break;
-
-            default: // action item (without sub-page)
-                SectionsDetails.addOrUpdateAsset(this.activeItem);
-                SectionsDetails.resultTable.refresh({});
+            case "courses":
+                LessonDetails.addAsset(this.activeItem.id);
+                break;
+            default:
                 break;
         }
     },
@@ -316,8 +344,9 @@ const AssetsDetails = {
     },
 
     _initImageHolder(item) {
+        let containerName = ["audio", "video"].includes(this.activeItem.type) ? "media" : this.activeItem.type
         let thumbTitle = (["audio", "video"].includes(this.activeItem.type) ? "Media Thumbnail" : "Cover Image")
-        this.imageHolder = new buildfire.components.images.thumbnail(".thumbnail-picker-assets", {
+        this.imageHolder = new buildfire.components.images.thumbnail(`.${containerName}-container .thumbnail-picker-assets`, {
             imageUrl: '',
             title: thumbTitle,
             dimensionsLabel: "Recommended 1200x675",
@@ -332,7 +361,7 @@ const AssetsDetails = {
             this.activeItem.meta.image = "";
         };
 
-        this.imageHolder.init(".thumbnail-picker-assets");
+        this.imageHolder.init(`.${containerName}-container .thumbnail-picker-assets`);
         if (item.id && item.meta.image) this.imageHolder.loadbackground(item.meta.image);
 
     },
@@ -355,6 +384,7 @@ const AssetsDetails = {
     _toggleSaveButton() {
         let disabled = (this.activeItem.type == "book" && !this.uiElements.url.value) ||
             (this.activeItem.type == "summary" && !listOfChapters.list.items.length) ||
+            (this.activeItem.type == "course" && !listOfLessons.list.items.length) ||
             (!this.uiElements.title.value)
 
         if (disabled) this.uiElements.saveBtn.setAttribute("disabled", "disabled")
@@ -362,6 +392,8 @@ const AssetsDetails = {
     }
 
 }
+
+const CourseDetails = {...AssetsDetails };
 
 const AssetsBulkActionsUI = {
     uiElements: {},
@@ -622,7 +654,8 @@ const AssetBulkActions = {
 
 const AssetsDialog = {
     modal: null,
-    init() {
+    init(target = "sections") {
+        this.target = target;
         this.showDialog();
         this._initUIElements();
         this._initResultTable();
@@ -644,17 +677,27 @@ const AssetsDialog = {
     },
 
     _save() {
-        // call on add on remove AssetList.result table
-        SectionsDetails.resultTable.refresh({});
-        SectionsDetails.toggleSaveButton();
-        this.modal.close();
+        if (this.target == "sections") {
+            // call on add on remove AssetList.result table
+            SectionsDetails.resultTable.refresh({});
+            SectionsDetails.toggleSaveButton();
+            this.modal.close();
+        } else { // lessons
+            listOfLessonAssets._updateEmptyState();
+            listOfLessonAssets.list.render(listOfLessonAssets.list.items);
+            LessonDetails.toggleSaveButton();
+            this.modal.close();
+        }
     },
 
     _initResultTable() {
         this.resultTable = new SearchTableAssetsModal("tableAssetsModalList", searchTableExistingAssetsConfig);
         this.resultTable.sort = { "_buildfire.index.string1": -1 }
         this.resultTable.onFetchState("loading");
-        this.resultTable.search(Assets.getSearchFilter(this.uiElements.searchText.value));
+        let filter = Assets.getSearchFilter(this.uiElements.searchText.value);
+        if (this.target == "lessons")
+            filter["_buildfire.index.string1"] = { "$ne": "course" }
+        this.resultTable.search(filter);
     },
 
     _initSearch() {
@@ -682,7 +725,10 @@ const AssetsDialog = {
     },
 
     _toggleSaveButton() {
-        if (SectionsDetails.sectionAssets.length > 0)
+        let disabled = true;
+        if (this.target == "sections" && SectionsDetails.sectionAssets.length > 0) disabled = false;
+        if (this.target == "lessons" && listOfLessonAssets.list.items.length > 0) disabled = false;
+        if (!disabled)
             this.modal.btnSave.removeAttribute("disabled")
         else this.modal.btnSave.setAttribute("disabled", "disabled")
     }
@@ -892,6 +938,158 @@ const PageDetails = {
 
 }
 
+const LessonDetails = {
+
+    uiElements: {},
+    imageHolder: null,
+    lessonAssets: [],
+
+    init(item, index, divRow) {
+
+        this.item = {...item } || {};
+        this.index = index;
+        this.divRow = divRow;
+
+        this.lessonAssets = this.item.assets.filter((assetId, index) => {
+            return state.settings.assets_info[assetId]; // check if asset exists in settings - 
+        }).map(assetId => {
+            let asset = state.settings.assets_info[assetId];
+            asset.id = assetId;
+            asset.createdOn = asset.meta.createdOn;
+            return asset;
+        }); // now, we are sure that asset exists in settings
+
+        this._loadUI();
+        this._initUIElements();
+        this._fillUIFields(this.item);
+    },
+
+    save() {
+        this.item.title = this.uiElements.title.value;
+        this.item.subTitle = this.uiElements.subTitle.value;
+        this.item.assets = listOfLessonAssets.list.items.map(asset => asset.id);
+
+        // assets are automatically updated  using the sortable ui component
+        let lesson = new Lesson(this.item);
+        if (!this.divRow)
+            listOfLessons.list.addItem(lesson, () => {}) // addItem() auto update the list
+        else {
+            listOfLessons.list.items[this.index] = lesson; // update the list
+            listOfLessons.list._injectItemElements(this.item, this.index, this.divRow);
+        }
+        CourseDetails.activeItem.lessons = listOfLessons.list.items;
+        listOfLessons._updateEmptyState();
+        CourseDetails._toggleSaveButton();
+        this._closeAndReturn();
+    },
+
+    cancel() {
+        Views().closeCurrentPage(this.breadCrumb.length - 2);
+    },
+
+    addAsset(assetID) {
+        let item = state.settings.assets_info[assetID];
+        item.id = assetID;
+        item.createdOn = item.meta.createdOn;
+
+        if (!AssetsDetails.divRow)
+            listOfLessonAssets.list.addItem(item, () => {}) // addItem() auto update the list
+        else {
+            listOfLessonAssets.list.items[this.index] = item; // update the list
+            listOfLessonAssets.list._injectItemElements(item, AssetsDetails.index, AssetsDetails.divRow)
+        }
+
+        listOfLessonAssets._updateEmptyState();
+        LessonDetails.item.assets = listOfLessonAssets.list.items;
+        this.toggleSaveButton();
+    },
+
+    _loadUI() {
+        // breadCrumb
+        let addOrEdit = (this.divRow) ? "Edit" : "Add";
+        let breadCrumb = [...CourseDetails.breadCrumb, `${addOrEdit} Lesson`]
+        this.breadCrumb = breadCrumb;
+        Views().loadSubPage("addEditTemplate-course-lesson", breadCrumb);
+    },
+
+    // prefill UI with asset type specific fields values if we are editing an asset
+    _fillUIFields(item) {
+        this.uiElements.title.value = item.title || "";
+        this.uiElements.subTitle.value = item.subTitle || "";
+        this.toggleSaveButton();
+    },
+
+    _initUIElements() {
+        this.uiElements = {
+            title: document.getElementById('lessonTitle'),
+            subTitle: document.getElementById('lessonSubTitle'),
+            saveBtn: document.getElementById('saveLesson'),
+            addBtnModal: document.getElementById('addBtnAssetsLessonModal'),
+            addBtn: document.getElementById('addBtnAssetsLesson'),
+            dropDown: document.getElementById('add-assets-lesson-dropdown'),
+            dropDownItems: document.querySelectorAll('#add-assets-lesson-dropdown li'),
+        }
+
+        // List
+        listOfLessonAssets.init("lesson-container");
+
+        // Add event listeners
+        this.uiElements.addBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            this._toggleDropdown();
+        });
+
+        // close dropdown when clicked outside 
+        document.body.addEventListener('click', () => {
+            this._toggleDropdown(true);
+        });
+
+        // add event listener to dropdown items based on data-type
+        this.uiElements.dropDownItems.forEach((item) => {
+            item.addEventListener('click', (event) => {
+                event.stopPropagation();
+                this._toggleDropdown(true);
+                let assetType = event.currentTarget.getAttribute('data-type');
+                if (assetType == "action-item") {
+                    this.addOrEditActionItem("courses");
+                } else {
+                    let item = AssetsDetails.create({ type: assetType });
+                    AssetsDetails.init(item, { target: "courses", isNew: true });
+                }
+            });
+        });
+
+        // add asset from modal (load existing assets)
+        this.uiElements.addBtnModal.onclick = () => {
+            // send to the modal the already selected assets list
+            searchTableExistingAssetsConfig.options.checkedItems = listOfLessonAssets.list.items;
+            AssetsDialog.init("lessons");
+        };
+
+        this.uiElements.title.addEventListener('input', () => { this.toggleSaveButton() });
+
+    },
+
+    _closeAndReturn() {
+        breadCrumbIndex = (CourseDetails.target == "assets") ? 1 : 2;
+        Views().closeCurrentPage(breadCrumbIndex);
+    },
+
+    _toggleDropdown(forceClose) {
+        if (this.uiElements.dropDown.classList.contains("open") || forceClose) {
+            this.uiElements.dropDown.classList.remove("open");
+        } else this.uiElements.dropDown.classList.add("open");
+    },
+
+    toggleSaveButton() {
+        let disabled = (!this.uiElements.title.value || listOfLessonAssets.list.items.length == 0);
+
+        if (disabled) this.uiElements.saveBtn.setAttribute("disabled", "disabled")
+        else this.uiElements.saveBtn.removeAttribute("disabled")
+    }
+
+}
+
 const ListItemsUI = {
     uiElements: {},
 
@@ -924,6 +1122,14 @@ const ListItemsUI = {
                 this.list = new pagesListUI(`.${this.target} .sortable-List-container`);
                 this.list.init(ChapterDetails.item.pages || []);
                 break;
+            case "course-container":
+                this.list = new LessonsListUI(`.${this.target} .sortable-List-container`);
+                this.list.init(CourseDetails.activeItem.lessons);
+                break;
+            case "lesson-container":
+                this.list = new LessonsAssetsListUI(`.${this.target} .sortable-List-container`);
+                this.list.init(LessonDetails.lessonAssets || []);
+                break;
         }
         if (!this.list.items.length) return this._updateEmptyState("empty");
 
@@ -942,11 +1148,13 @@ const ListItemsUI = {
 
         this._initDropDown();
 
-        this.uiElements.addBtn.onclick = () => {
-            if (this.target == "media-container") CheckListDialog.init();
-            else if (this.target == "summary-container") ChapterDetails.init(new SummaryChapter());
-            else if (this.target == "chapter-container") PageDetails.init(new SummaryPage());
-        };
+        if (this.uiElements.addBtn)
+            this.uiElements.addBtn.onclick = () => {
+                if (this.target == "media-container") CheckListDialog.init();
+                else if (this.target == "summary-container") ChapterDetails.init(new SummaryChapter());
+                else if (this.target == "chapter-container") PageDetails.init(new SummaryPage());
+                else if (this.target == "course-container") LessonDetails.init(new Lesson());
+            };
 
     },
 
@@ -971,8 +1179,8 @@ const ListItemsUI = {
                 event.stopPropagation();
                 this._toggleDropdown(true);
                 let sortType = event.currentTarget.getAttribute('data-sort');
-                sortType == "newest" ? this._sort('createdOn', 'desc', 'Newest First') :
-                    this._sort('createdOn', 'asc', 'Oldest First');
+                sortType == "newest" ? this._sort('meta.createdOn', 'desc', 'Newest First') :
+                    this._sort('meta.createdOn', 'asc', 'Oldest First');
             });
         });
     },
@@ -998,6 +1206,8 @@ const ListItemsUI = {
 
 const listOfChapters = {...ListItemsUI };
 const listOfPages = {...ListItemsUI };
+const listOfLessons = {...ListItemsUI };
+const listOfLessonAssets = {...ListItemsUI };
 
 const CheckListDialog = {
     modal: null,
@@ -1087,6 +1297,7 @@ const wysiwygAssets = {
         ],
         "summary": [{ selector: '#wysiwygSummaryDescription', field: 'fullDescription' }],
         "summary-page": [{ selector: '#wysiwygSummaryPage', field: 'pageContent' }],
+        "course": [{ selector: '#wysiwygCourseDescription', field: 'fullDescription' }],
     },
 
     init(item, type, callback = () => {}) {

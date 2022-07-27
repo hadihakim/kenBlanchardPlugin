@@ -66,12 +66,13 @@ const Utils = {
     // sort an array of objects by a given key and order
     // key could be a string or date or number or whatever
     // order could be 'asc' or 'desc'
-    sortObjectArray: (array, key, order) => {
+    sortObjectArray: (array, keyPath, order) => {
         const sortDirection = order === 'asc' ? 1 : -1;
         return array.sort((a, b) => {
-            if (a[key] < b[key]) return -1 * sortDirection;
-            if (a[key] > b[key]) return 1 * sortDirection;
+            if (Utils.traverseObject(a, keyPath) < Utils.traverseObject(b, keyPath)) return -1 * sortDirection;
+            if (Utils.traverseObject(a, keyPath) > Utils.traverseObject(b, keyPath)) return 1 * sortDirection;
             return 0;
         });
     }
+
 }

@@ -42,10 +42,6 @@ const Strings = {
 	USER_PROFILE_AVERAGE_CHART_TEXT:"Average Progress",
 	USER_PROFILE_BADGES__TO_ACHIEVE_DIALOG_BODY:"Complete 3 courses or 25 content pieces and collect this badge!",	
 	
-	// Empty state
-	EMPTY_TITLE:"Nothing Found",
-	EMPTY_DESCRIPTION:"Refine your search...",
-
 	// Video Strings
 	VIDEO_DETAILS_TAB: "Details",
 	VIDEO_TRANSCRIPT_TAB: "Transcript",
@@ -101,6 +97,19 @@ const Strings = {
 	REMINDER_DRAWER_OP2:"30 Minutes",
 	REMINDER_DRAWER_OP3:"1 Hour",
 	REMINDER_DRAWER_OP4:"1 Day",
+
+	//Empty state strings
+	EMPTY_SEARCH_HEADER:"Nothing Found",
+	EMPTY_SEARCH_HEAD_BODY:'Refine your search...',
+	EMPTY_ACTIVE_LIST_HEADER:'Nothing Here',
+	EMPTY_ACTIVE_LIST_BODY:"Go to Explore page and start developing new skills! ",
+	EMPTY_ARCHIVE_LIST_HEADER:"Nothing Archived",
+	EMPTY_ARCHIVE_LIST_BODY:"Archived content will appear here",
+	EMPTY_PROFILE_ACTIVITY_HEADER:"No Activity Yet",
+	EMPTY_PROFILE_ACTIVITY_BODY:"Go to Explore page and start your growth!",
+	EMPTY_BADGES_HEADER:"No Badges Achieved Yet",
+	EMPTY_BADGES_BODY:"Watch videos, listen to audio and finish courses to earn badges!",
+
 
 	// team effectiveness strings
 	ARCHIVED_DRAWER_OP1:"Move to Active",

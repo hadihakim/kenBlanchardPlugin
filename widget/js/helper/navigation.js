@@ -213,21 +213,21 @@ class Navigation {
 		// Utilities.setAppTheme();
 	}
 
-	static openCourseDetails = (id, title, from) => {
+	static openCourseDetails = (data, from) => {
 		this.state.activeLayOut = 'course details';
 
 		if (from == "from active-card") {
-			buildfire.history.push(title, {
+			buildfire.history.push(data.title, {
 				showLabelInTitlebar: true,
 				from: "active list from CourseDetails",
-				id: id,
+				id: data.id,
 			});
 		}
 		else {
-			buildfire.history.push(title, {
+			buildfire.history.push(data.title, {
 				showLabelInTitlebar: true,
 				from: "Details from CourseDetails",
-				id: id,
+				id: data.id,
 			});
 		}
 		// buildfire.history.push("Details from CourseDetails",{id:id});
@@ -255,7 +255,7 @@ class Navigation {
 
 		Search.state.searchText = '';
 
-		CourseDetails.init(id);
+		CourseDetails.init(data);
 
 		// Utilities.setAppTheme();
 	}

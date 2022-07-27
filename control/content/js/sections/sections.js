@@ -143,7 +143,6 @@ const SectionsDetails = {
             title: document.getElementById('section-title'),
             searchText: document.getElementById('section-assets-search-input'),
             searchBtn: document.getElementById('section-assets-search-btn'),
-            addBtn: document.getElementById('addBtnSectionAssets'),
             addBtnModal: document.getElementById('addBtnAssetsModal'),
             saveBtn: document.getElementById('save-section'),
             sectionLayoutsContainer: document.getElementById('section-layouts'),
@@ -183,12 +182,17 @@ const SectionsDetails = {
                 event.stopPropagation();
                 this._toggleDropdown(true);
                 let assetType = event.currentTarget.getAttribute('data-type');
+
                 if (assetType == "action-item") {
-                    this._addOrEditActionItem();
+                    this.addOrEditActionItem("sections");
+                } else if (assetType == "course") {
+                    let item = CourseDetails.create({ type: "course" });
+                    CourseDetails.init(item, { target: "sections", isNew: true });
                 } else {
                     let item = AssetsDetails.create({ type: assetType });
                     AssetsDetails.init(item, { target: "sections", isNew: true });
                 }
+
             });
         });
 
@@ -203,7 +207,7 @@ const SectionsDetails = {
 
     },
 
-    _addOrEditActionItem(actionItem = { meta: { actionData: { action: "linkToApp" } } }) {
+    addOrEditActionItem(target, actionItem = { meta: { actionData: { action: "linkToApp" } } }) {
         buildfire.actionItems.showDialog(actionItem.meta.actionData, { showIcon: true },
             (err, result) => {
                 if (err) return console.error(err);
@@ -214,25 +218,43 @@ const SectionsDetails = {
                             title: result.title,
                             image: result.iconUrl,
                             actionData: result,
+                            actionType: ''
                         },
                         createdOn: new Date(),
                     }
                     let asset = AssetsDetails.create(assetData);
                     asset.id = actionItem.id || null;
-                    AssetsDetails.activeItem = asset; // asset details
 
-                    AssetsDetails._saveOrUpdate((err, res) => {
-                        if (err) console.log(err)
-                        else {
-                            AssetsDetails.activeItem.id = res.id;
-                            // update state
-                            state.settings.assets_info[res.id] = {
-                                meta: res.meta,
-                                type: res.type
-                            };
-                            AssetsDetails._closeAndReturn(); // return to assets list UI or to section details or ...
+                    // getting the buildfire plugin name based on instance ID
+                    if (target == "assets") {
+                        AssetsList.resultTable.onFetchState("loading");
+                        AssetsList.resultTable.tbody.innerHTML = "";
+
+                    } else {
+                        SectionsDetails.resultTable.onFetchState("loading");
+                        SectionsDetails.resultTable.tbody.innerHTML = "";
+                    }
+                    buildfire.pluginInstance.get(asset.meta.actionData.instanceId, (err, instance) => {
+                        if (err) return console.error(err);
+                        if (instance) {
+                            asset.meta.actionType = instance.title;
+                            AssetsDetails.activeItem = asset; // asset details
+
+                            AssetsDetails._saveOrUpdate((err, res) => {
+                                if (err) console.log(err)
+                                else {
+                                    AssetsDetails.activeItem.id = res.id;
+                                    // update state
+                                    state.settings.assets_info[res.id] = {
+                                        meta: res.meta,
+                                        type: res.type
+                                    };
+                                    AssetsDetails._closeAndReturn(target); // return to assets list UI or to section details or ...
+                                }
+                            });
                         }
                     });
+
                 }
             }
         );

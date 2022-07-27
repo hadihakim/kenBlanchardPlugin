@@ -7,9 +7,11 @@ class CourseDetails {
     courseDetailsContainer: "courseDetailsContainer",
     courseDetailsTemplate: "courseDetailsTemplate",
   };
-  static setData = (id) => {
+  static setData = (data) => {
+  console.log("🚀 ~ file: courseDetailsRender.js ~ line 11 ~ CourseDetails ~ data", data)
     // HandleAPI.getDataByID
-    this.state.data = coursesData.data.courses["62b3439f864d49037aac9b25"];
+    
+    this.state = {...this.state,data};
   }
 
   static showAssetDetails = (span, allAssets) => {
@@ -35,31 +37,41 @@ class CourseDetails {
     let title = firstClone.querySelectorAll(".course-title");
     let duration = firstClone.querySelectorAll(".duration-details");
     let lessons = firstClone.querySelectorAll(".course-lessons-list");
-
+      console.log("this.state = " , this.state);
     image[0].style.backgroundImage = `url('${Utilities.cropImage(
-      this.state.data.image,
+      this.state.data.meta.image,
       "full_width",
       "4:3"
     )}')`;
-    title[0].innerHTML = this.state.data.title;
+    title[0].innerHTML = this.state.data.meta.title;
     this.state.data.lessons.forEach((el) => {
+      console.log("🚀 ~ file: courseDetailsRender.js ~ line 48 ~ CourseDetails ~ this.state.data.lessons.forEach ~ el", el.assets.length, el)
+      let lessonContainer= ui.createElement("div", lessons[0],"",["lesson-container"]);
+      if(el.assets.length === 1) {
+        lessonContainer.style.cursor = "pointer";
+        lessonContainer.addEventListener('click', () => {
+          console.log("🚀 ~ file: courseDetailsRender.js ~ line 53 ~ CourseDetails ~ lessonContainer.addEventListener ~ click", "YESSS", el)
+          Navigation.openPageDetails(el.assets[0], this.state.data.meta.title,false);
+        })
+
+      }
       ui.createElement(
         "p",
-        lessons[0],
+        lessonContainer,
         el.title,
         ["course-lesson-title", "bodyText-AppTheme"],
         "course-lesson-title"
       );
       let title = ui.createElement(
         "p",
-        lessons[0],
-        el.subtitle,
+        lessonContainer,
+        el.subTitle,
         ["course-lesson-subtitle", "headerText-AppTheme", "assetsTitle"],
         "course-lesson-subtitle"
       );
       let durationForLesson = document.createElement("div");
       //value addad after calculated duration for lessons assets
-      lessons[0].appendChild(durationForLesson);
+      lessonContainer.appendChild(durationForLesson);
 
       let icons = document.createElement("div");
       icons.classList.add("icon-course");
@@ -68,7 +80,8 @@ class CourseDetails {
       allAssets.setAttribute("id", " allAssets");
       let lessonIcons = [];
       for (let i = 0; i < el.assets.length; i++) {
-        let assets = coursesData.data.assets_info[el.assets[i]];
+        let assets= HandleAPI.state.assets_info[el.assets[i]]
+        // let assets = coursesData.data.assets_info[el.assets[i]];
         let lessonIcon = document.createElement("div");
         let assetsIcon = document.createElement("div");
         lessonIcon.classList.add("icons");
@@ -104,13 +117,17 @@ class CourseDetails {
         let assetsDetails = document.createElement("div");
         // assetsDetails.classList.add("assets-container" , "hidden");
         assetsDetails.classList.add("assets-container");
+        assetsDetails.style.cursor = "pointer";
+        assetsDetails.addEventListener("click", ()=> {
+          Navigation.openPageDetails(el.assets[i], this.state.data.meta.title,false);
+        })
 
         assetsDetails.appendChild(assetsIcon);
 
         ui.createElement(
           "p",
           assetsDetails,
-          assets.title,
+          assets.meta.title,
           [
             "course-lesson-subtitle",
             "headerText-AppTheme",
@@ -123,16 +140,16 @@ class CourseDetails {
           assetsDetails,
           `<div class="duration duration-lesson-details">
                       <span class="schedule-text bodyText-AppTheme">
-                          ${Utilities.timeConvert(assets.duration, "hh|mm")}
+                          ${Utilities.timeConvert(assets.meta.duration, "hh|mm")}
                       </span>
                      </div>`,
           ["mdc-card-footer"]
         );
-        assetsDuration += assets.duration;
+        assetsDuration += assets.meta.duration;
         allAssets.appendChild(assetsDetails);
       }
 
-      lessons[0].appendChild(allAssets);
+      lessonContainer.appendChild(allAssets);
       if (el.assets.length < 2) {
         allAssets.classList.add("hidden");
       } else {
@@ -159,7 +176,7 @@ class CourseDetails {
       let div = document.createElement("div");
       div.classList.add("courseDetails-card-progressBar", "holderPercentage");
       let percentageDiv = document.createElement("div");
-      percentageDiv.style.width = `${el.progress}%`;
+      percentageDiv.style.width = `${el.progress || 50}%`;
       percentageDiv.classList.add(
         "percentageDiv",
         "progress-lesson",
@@ -180,10 +197,11 @@ class CourseDetails {
     // Utilities.setAppTheme();
   };
 
-  static init = async(id) => {
+  static init = async(data) => {
     document.getElementById(this.pointers.courseDetailsContainer).innerHTML =
       "";
-    await this.setData(id);
+    await this.setData(data);
     this.courseRender();
+    HandleAPI.updateAssetProgress(data.id,50);
   };
 }
