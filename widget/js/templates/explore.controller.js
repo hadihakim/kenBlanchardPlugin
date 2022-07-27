@@ -156,7 +156,7 @@ class Explore {
       mainSectionRow.remove();
     }
     // calling function to set the app theme 
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   }
 
   static initContainers = page => {

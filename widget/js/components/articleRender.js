@@ -115,7 +115,7 @@ class ArticleRender {
     // this.hasNotes(title[0]);
     
     //for the app theme
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   }
 
 

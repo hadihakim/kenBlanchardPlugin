@@ -188,7 +188,7 @@ class videoDetails {
     );
     container.innerHTML = `${this.state.data.transcript}`;
     this.state.activeTab = "transcript";
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
 
   static openMoreOptions = () => {
@@ -313,7 +313,7 @@ class videoDetails {
     })
     
     
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
 
   static initActiveTab = () => {

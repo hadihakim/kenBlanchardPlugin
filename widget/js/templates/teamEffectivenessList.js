@@ -60,8 +60,13 @@ class TeamEffectivenessList {
         let progressBar = document.createElement('div');
         progressBar.style.width = `${progress || 20}%`;
         progressBar.setAttribute('id', 'filled');
-        progressBar.setAttribute('class', 'infoTheme');
-        return progressBar;
+        progressBar.classList.add("progressBar");
+        progressBar.classList.add("infoTheme");
+
+        let progressBarHolder = document.createElement('div');
+        progressBarHolder.setAttribute('class', 'progressBarContainer ');
+
+        return {progressBar, progressBarHolder};
     }
 
     static deleteItem = (id) => {
@@ -257,7 +262,8 @@ class TeamEffectivenessList {
             // filledData.innerHTML = this.state.data[i].percentage;
 
             imageContainer.setAttribute('style', `background-image: url('${this.state.data[i].imageUrl}')`);
-            bar.appendChild(this.state.data[i].percentage);
+            bar.appendChild(this.state.data[i].percentage.progressBarHolder);
+            bar.appendChild(this.state.data[i].percentage.progressBar);
 
             titleContainer.innerHTML = this.state.data[i].title;
 
@@ -276,7 +282,7 @@ class TeamEffectivenessList {
             })
         }
         this.state.fetchNext = true;
-        Utilities.setAppTheme();
+        // Utilities.setAppTheme();
 
     }
 
@@ -302,7 +308,8 @@ class TeamEffectivenessList {
             let actionBtn = nodesClone.querySelector("#action");
 
             imageContainer.setAttribute('style', `background-image: url('${this.state.archivedData[i].imageUrl}')`);
-            bar.appendChild(this.state.archivedData[i].percentage);
+            bar.appendChild(this.state.archivedData[i].percentage.progressBarHolder);
+            bar.appendChild(this.state.archivedData[i].percentage.progressBar);
 
             titleContainer.innerHTML = this.state.archivedData[i].title;
 
@@ -313,7 +320,7 @@ class TeamEffectivenessList {
             })
         }
         this.state.fetchNext = true;
-        Utilities.setAppTheme();
+        // Utilities.setAppTheme();
 
     }
 
@@ -358,6 +365,6 @@ class TeamEffectivenessList {
             default:
                 break;
         }
-        Utilities.setAppTheme();
+        // Utilities.setAppTheme();
     }
 }

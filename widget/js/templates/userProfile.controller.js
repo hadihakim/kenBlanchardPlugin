@@ -289,7 +289,7 @@ class UserProfile {
         element[0].innerHTML = "";
         element[0].appendChild(this.badgesUi());
       }
-      Utilities.setAppTheme();
+      // Utilities.setAppTheme();
     }
   };
 
@@ -512,7 +512,7 @@ class UserProfile {
         Explore.horizontal_Render(card, newSectionCardsContainer,"profile");
       })
     }
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   }
 
   static init = (userData) => {

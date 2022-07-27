@@ -43,7 +43,7 @@ class Navigation {
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
 
 		Search.state.searchText = '';
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openExplore = () => {
@@ -68,7 +68,7 @@ class Navigation {
 
 		mainContainer.removeEventListener('scroll', Utilities.scrollNextPage);
 		Search.state.searchText = '';
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openSeeAll = (type, title, _seeAllOptions) => {
@@ -113,7 +113,7 @@ class Navigation {
 
 		SeeAll.init(_seeAllOptions);
 
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 
 	}
 
@@ -141,7 +141,7 @@ class Navigation {
 			});
 			Navigation.setData(false);
 		}
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openPageDetails = (id, title, fromNotification) => {
@@ -210,7 +210,7 @@ class Navigation {
 		PageDetails.init(id, fromNotification)
 		Utilities.scrollTop();
 
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openCourseDetails = (id, title, from) => {
@@ -257,7 +257,7 @@ class Navigation {
 
 		CourseDetails.init(id);
 
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openEmptySearch = () => {
@@ -274,7 +274,7 @@ class Navigation {
 		courseDetailsContainer.classList.add("hidden");
 		searchContainer.classList.add("hidden");
 
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openUserProfile = () => {
@@ -297,7 +297,7 @@ class Navigation {
 		});
 		Search.state.searchText = '';
 
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openUserList = async (options) => {
@@ -330,7 +330,7 @@ class Navigation {
 		}
 		MyList.init();
 
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 
 	static openTeamEffectivenessList = async (options) => {
@@ -366,6 +366,6 @@ class Navigation {
 		}
 		TeamEffectivenessList.init();
 
-		Utilities.setAppTheme();
+		// Utilities.setAppTheme();
 	}
 }

@@ -87,10 +87,9 @@ class AudioRender {
         });
         let buttonInnerHtml = `
             <span class="mdc-tab__content">
-          <span class="mdc-tab__text-label">${
-            tab.toLocaleLowerCase() === "transcript"
-              ? Strings.AUDIO_TAP_2
-              : tab.toLocaleLowerCase() === "shortcuts"
+          <span class="mdc-tab__text-label">${tab.toLocaleLowerCase() === "transcript"
+            ? Strings.AUDIO_TAP_2
+            : tab.toLocaleLowerCase() === "shortcuts"
               ? Strings.AUDIO_TAP_3
               : Strings.AUDIO_TAP_1
           }</span>
@@ -113,8 +112,8 @@ class AudioRender {
       let tabIndicators = nodesClone.querySelectorAll(".test");
       this.state.fromNotification && this.state.tabs.indexOf("shortcuts") > -1
         ? tabIndicators[tabIndicators.length - 1].classList.add(
-            "mdc-tab-indicator--active"
-          )
+          "mdc-tab-indicator--active"
+        )
         : tabIndicators[0].classList.add("mdc-tab-indicator--active");
       buttons.forEach((button, idx) => {
         button.addEventListener("click", () => {
@@ -170,11 +169,23 @@ class AudioRender {
       if (tab === "transcript") {
         element[0].innerHTML = "";
         element[0].appendChild(this.transcriptUi(this.state.data.transcript));
-      // to render shortcuts tab and handle the event listeners
+        // to render shortcuts tab and handle the event listeners
       } else if (tab === "shortcuts") {
         element[0].innerHTML = "";
         element[0].appendChild(this.shortcutsUi(this.state.data.checkList));
 
+        // load checkbox locally without connect with dataStore
+        for (let idx = 0; idx < this.state.data.checkList.length; idx++) {
+          let myCheckBox = document.getElementById(`checkbox-${idx}`);
+          myCheckBox?.addEventListener('change', (e) => {
+            if (UserProfile.state.data.assets[this.state.id].checklist) {
+              UserProfile.state.data.assets[this.state.id].checklist[idx] = e.target.checked;
+            } else {
+              UserProfile.state.data.assets[this.state.id].checklist = {};
+              UserProfile.state.data.assets[this.state.id].checklist[idx] = e.target.checked;
+            }
+          })
+        }
         // add the asset to user profile
         let playButtons = document.querySelectorAll(
           "[role='saveAssetToProfileAudio']"
@@ -189,7 +200,7 @@ class AudioRender {
         element[0].appendChild(this.detailsUi(this.state.data.details));
       }
 
-      Utilities.setAppTheme();
+      // Utilities.setAppTheme();
     }
   };
 
@@ -226,6 +237,10 @@ class AudioRender {
     let div = document.createElement("div");
     div.classList.add("audio-shortcuts");
     shortcutsArray.forEach((shortcut, idx) => {
+      let checked = false;
+      if (UserProfile.state.data.assets[this.state.id].checklist) {
+        checked = UserProfile.state.data.assets[this.state.id].checklist[idx] || false;
+      }
       shortcut.id = shortcut.title;
       let shortcutItem = document.createElement("div");
       shortcutItem.classList.add("shortcut-item");
@@ -234,8 +249,10 @@ class AudioRender {
           <input
             type="checkbox"
             class="mdc-checkbox__native-control"
-            id="checkbox-1"
+            id="checkbox-${idx}"
             name="check1"
+            ${checked ? 'checked' : ''
+        }
           />
           <div class="mdc-checkbox__background checkbox-border-color">
             <svg class="mdc-checkbox__checkmark checkbox-border-fill-color" viewBox="0 0 24 24">
@@ -251,21 +268,19 @@ class AudioRender {
         </div>
         <div class="right">
           <div class="shortcut-text">
-            <label for="check1" class="shortcut-label headerText-AppTheme"
+            <label for="checkbox-${idx}" class="shortcut-label headerText-AppTheme"
               >${idx + 1 + ". " + shortcut.title}</label
             >
             <span class="shortcut-time audioShortcutTime bodyText-AppTheme">${Utilities.timeConvert(
-              shortcut.timeStamp,
-              "hh:mm:ss"
-            )}
-            <span class="material-icons icon videoBookmarkIcon hidden " id='${
-              shortcut.id
-            }icon'>
+          shortcut.timeStamp,
+          "hh:mm:ss"
+        )}
+            <span class="material-icons icon videoBookmarkIcon hidden " id='${shortcut.id
+        }icon'>
             bookmark_border
          </span>
-         <span class="material-icons icon videoBookmarkIcon hidden " id='${
-           shortcut.id
-         }reminderIcon'>
+         <span class="material-icons icon videoBookmarkIcon hidden " id='${shortcut.id
+        }reminderIcon'>
             notifications
          </span>
             </span>
@@ -274,12 +289,12 @@ class AudioRender {
           <label class="material-icons icon shortcutDrawer">more_horiz</label>
         </div>
           `;
+
       shortcutItem.innerHTML = shortcutItemInnerHTML;
       div.appendChild(shortcutItem);
 
       let shortcutDrawerElements =
         shortcutItem.querySelectorAll(".shortcutDrawer");
-
       shortcutDrawerElements.forEach(async (e) => {
         const shortcutDrawerItemsList = [
           {
@@ -309,6 +324,7 @@ class AudioRender {
           );
         });
       });
+
     });
 
     return div;
@@ -348,6 +364,6 @@ class AudioRender {
       "audio"
     );
 
-    HandleAPI.updateAssetProgress(id,50);
+    HandleAPI.updateAssetProgress(id, 50);
   };
 }

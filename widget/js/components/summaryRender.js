@@ -73,7 +73,7 @@ class summaryRender {
     });
 
     container.appendChild(nodesClone);
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
 
   static graphicalSummariesSecondPage = () => {
@@ -96,7 +96,7 @@ class summaryRender {
     title[0].innerText = this.state.chapterData.title;
     subtitle[0].innerText = this.state.chapterData.subTitle;
     container.appendChild(nodesClone);
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
 
   static graphicalSummariesThirdPage = () => {
@@ -130,7 +130,7 @@ class summaryRender {
     });
     container.appendChild(nodesClone);
     Utilities.splideInit();
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
 
   static graphicalSummariesFourthPage = () => {
@@ -158,7 +158,7 @@ class summaryRender {
     plan2Subtitle.innerText = Strings.GRAPHICAL_PREMIUM_PLAN_2_DISCOUNT_TEXT;
     plan2DiscountText.innerText = Strings.GRAPHICAL_PREMIUM_PLAN_2_SUBTITLE;
     container.appendChild(nodesClone);
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
   static render = () => {
     let pageDetails = document.getElementById(this.pointers.pageDetails);

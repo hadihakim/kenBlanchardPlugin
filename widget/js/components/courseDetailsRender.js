@@ -177,7 +177,7 @@ class CourseDetails {
                               this.state.duration, "hh|mm"
                             )}</span>`;
     container.appendChild(firstClone);
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
 
   static init = async(id) => {

@@ -12,14 +12,14 @@ const loadData = async (data) => {
   Search.init();
   Utilities.initBack();
   Navigation.openMain();
-  Utilities.setAppTheme();
+  // Utilities.setAppTheme();
 };
 
 const init = async () => {
   Skeleton.initMainSkeleton(sectionsContainer);
   Utilities.getAppTheme();
   UserProfile.init();
-  Utilities.setAppTheme();
+  // Utilities.setAppTheme();
   await HandleAPI.getSettingsData();
   loadData(HandleAPI.state.data);
   let profileData = await HandleAPI.getUserData();
