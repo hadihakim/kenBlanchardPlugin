@@ -111,5 +111,12 @@ const Strings = {
 	EMPTY_BADGES_BODY:"Watch videos, listen to audio and finish courses to earn badges!",
 
 
+	// team effectiveness strings
+	ARCHIVED_DRAWER_OP1:"Move to Active",
+	ARCHIVED_DRAWER_OP2:"Remove",
+
+	ACTIVE_DRAWER_OP1:"Archive",
+	ACTIVE_DRAWER_OP2:"Reset",
+	ACTIVE_DRAWER_OP3:"Remove",
 }
 

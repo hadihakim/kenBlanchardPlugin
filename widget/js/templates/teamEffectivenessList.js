@@ -3,8 +3,8 @@ class TeamEffectivenessList {
     static state = {
         data: [],
         archivedData: [],
-        ArchivedDrawerOptions: ["Move to Active", "Remove Course"],
-        ActiveDrawerOptions: ["Archive Course", "Reset Course", "Remove Course"],
+        ArchivedDrawerOptions: [Strings.ARCHIVED_DRAWER_OP1, Strings.ARCHIVED_DRAWER_OP2],
+        ActiveDrawerOptions: [Strings.ACTIVE_DRAWER_OP1, Strings.ACTIVE_DRAWER_OP2, Strings.ACTIVE_DRAWER_OP3],
         tabs: ['active', 'archived'],
         selectedNav: 'tab-0',
         page: 1,
@@ -65,6 +65,7 @@ class TeamEffectivenessList {
     }
 
     static deleteItem = (id) => {
+       delete UserProfile.state.data.assets[id];
         switch (this.state.selectedNav) {
             case 'tab-0':
                 let newActiveState = this.state.data.filter(item => {
@@ -84,12 +85,12 @@ class TeamEffectivenessList {
                 break;
         }
         this.init();
-        Profiles.deleteAsset(id, (err,res)=>{
-            if(err) return console.log(err);
-        });
+
+        HandleAPI.deleteAsset(id);
     }
 
     static moveToArchive = (id) => {
+        UserProfile.state.data.assets[id].isArchived=true;
         let newActiveData = this.state.data.filter(item => {
             if (item.id != id)
                 return item
@@ -98,12 +99,11 @@ class TeamEffectivenessList {
         })
         this.state.data = newActiveData;
         this.init();
-        Profiles.setAssetArchiveStatus(id, true, (err,res)=>{
-            if(err) return console.log(err);
-        });
+        HandleAPI.setAssetArchiveStatus(id,true);
     }
 
     static moveToActive = (id) => {
+        UserProfile.state.data.assets[id].isArchived=false;
         let newArchivedData = this.state.archivedData.filter(item => {
             if (item.id != id)
                 return item
@@ -112,9 +112,7 @@ class TeamEffectivenessList {
         })
         this.state.archivedData = newArchivedData;
         this.init();
-        Profiles.setAssetArchiveStatus(id, false, (err,res)=>{
-            if(err) return console.log(err);
-        });
+        HandleAPI.setAssetArchiveStatus(id,false);
     }
 
     static resetItem = (id) => {
@@ -141,18 +139,14 @@ class TeamEffectivenessList {
                         case "Move to Active":
                             this.moveToActive(id);
                             break;
-                        case "Remove Course":
+                        case "Remove":
                             this.deleteItem(id);
                             break;
-                        case "Archive Course":
+                        case "Archive":
                             this.moveToArchive(id);
                             break;
-                        case "Reset Course":
+                        case "Reset":
                             this.resetItem(id);
-                            break;
-                        case "Remove Course":
-                            this.deleteItem(id)
-                            break;
 
                         default:
                             break;
@@ -165,7 +159,6 @@ class TeamEffectivenessList {
     }
 
     static openDrawer = (id, options) => {
-
         buildfire.components.drawer.open(
             {
                 multiSelection: false,
@@ -176,14 +169,20 @@ class TeamEffectivenessList {
                 triggerCallbackOnUIDismiss: true,
                 autoUseImageCdn: true,
                 listItems: options.map((cardOption) => {
-                    return { text: cardOption }
+                    if(cardOption===this.state.ArchivedDrawerOptions[0])
+                    {
+                        return { text: `${cardOption}`,type:cardOption}
+                    }else{
+                        return { text: `${cardOption} ${MyList.listState.type}`,type:cardOption}
+                    }
                 })
             },
             (err, result) => {
                 if (err) return console.error(err);
                 if (result) {
+                    console.log("🚀 ~ file: teamEffectivenessList.js ~ line 182 ~ TeamEffectivenessList ~ result", result)
                     buildfire.components.drawer.closeDrawer();
-                    this.confirmMessage(id, result.text, 'Are you sure you want to remove this course? This will permanently delete the course from your list!')
+                    this.confirmMessage(id, result.type.trim(" "), 'Are you sure you want to remove this course? This will permanently delete the course from your list!')
                 }
             });
     }

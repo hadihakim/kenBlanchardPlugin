@@ -487,8 +487,8 @@ class UserProfile {
     return true;
 }
   static initActivity = async(containerID) => {
-    let userData=await HandleAPI.getUserData();
-    this.setData({data: userData});
+    // let userData=await HandleAPI.getUserData();
+    // this.setData({data: userData});
     // user data will be stored in this class state
     let userContainer = document.getElementById(containerID);
     let assetsObj = await this.setAssetsArr();
