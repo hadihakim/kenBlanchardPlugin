@@ -524,3 +524,206 @@ class pagesListUI extends SortableListUI {
 
     }
 }
+
+class LessonsListUI extends SortableListUI {
+    constructor(elementId) {
+        super(elementId, { isDraggable: true });
+    }
+
+    // append new sortable item to the DOM
+    _injectItemElements(item, index, divRow) {
+        if (!item) throw "Missing Item";
+        divRow.innerHTML = "";
+        divRow.setAttribute("arrayIndex", index);
+
+        // Create the required DOM elements
+        var moveHandle = document.createElement("span"),
+            title = document.createElement("span"),
+            subTitle = document.createElement("span"),
+            deleteButton = document.createElement("span"),
+            editButton = document.createElement("span")
+
+        // Add the required classes to the elements
+        divRow.className = "d-item clearfix";
+        moveHandle.className = "icon icon-menu cursor-grab";
+        title.className = "text-primary flex-auto cursor-pointer";
+        subTitle.className = "text-muted text-small";
+
+        deleteButton.className = "btn--icon icon icon-cross2";
+        editButton.className = "btn--icon icon icon-pencil margin-left-thirty";
+        title.innerHTML = item.title;
+        subTitle.innerHTML = "<br/>" + item.subTitle;
+
+        // Append elements to the DOM
+        title.appendChild(subTitle);
+        divRow.appendChild(moveHandle);
+
+        divRow.appendChild(title);
+        divRow.appendChild(editButton);
+        divRow.appendChild(deleteButton);
+
+
+
+        title.onclick = () => {
+            let index = divRow.getAttribute("arrayIndex"); /// it may have bee reordered so get value of current property
+            index = parseInt(index);
+            this.onItemClick(item, index, divRow);
+            return false;
+        };
+
+        deleteButton.onclick = () => {
+            let index = divRow.getAttribute("arrayIndex"); /// it may have bee reordered so get value of current property
+            index = parseInt(index);
+            let t = this;
+            this.onDeleteItem(item, index, confirmed => {
+                if (confirmed) {
+                    divRow.parentNode.removeChild(divRow);
+                    t.reIndexRows();
+                }
+            });
+            return false;
+        };
+
+        editButton.onclick = () => {
+            let index = divRow.getAttribute("arrayIndex"); /// it may have bee reordered so get value of current property
+            index = parseInt(index);
+            this.onUpdateItem(item, index, divRow);
+            return false;
+        };
+    }
+
+    onOrderChange(item, oldIndex, newIndex) {
+        listOfLessons.uiElements.dropDownTxt.innerHTML = "Manually"
+    }
+
+    onToggleChange(item, isChecked, index, divRow) {
+
+    }
+
+    onUpdateItem(item, index, divRow) {
+        LessonDetails.init(item, index, divRow);
+    }
+
+    onItemClick(item, index, divRow) {
+        LessonDetails.init(item, index, divRow);
+    }
+
+    onDeleteItem(item, index, callback) {
+
+        // update the list of items
+        this.items.splice(index, 1);
+
+        if (!this.items.length) listOfLessons._updateEmptyState("empty");
+        CourseDetails._toggleSaveButton();
+        callback(item);
+
+    }
+}
+
+class LessonsAssetsListUI extends SortableListUI {
+    constructor(elementId) {
+        super(elementId, { isDraggable: true });
+    }
+
+    // append new sortable item to the DOM
+    _injectItemElements(item, index, divRow) {
+        if (!item) throw "Missing Item";
+
+        divRow.innerHTML = "";
+        divRow.setAttribute("arrayIndex", index);
+
+        // Create the required DOM elements
+        var moveHandle = document.createElement("span"),
+            title = document.createElement("span"),
+            subTitle = document.createElement("span"),
+            deleteButton = document.createElement("span"),
+            editButton = document.createElement("span")
+
+        // Add the required classes to the elements
+        divRow.className = "d-item clearfix";
+        moveHandle.className = "icon icon-menu cursor-grab";
+        title.className = "text-primary flex-auto cursor-pointer";
+        subTitle.className = "text-muted text-small";
+
+        deleteButton.className = "btn--icon icon icon-cross2";
+        editButton.className = "btn--icon icon icon-pencil margin-left-thirty";
+        title.innerHTML = item.meta.title;
+        subTitle.innerHTML = "<br/>" + item.type;
+
+        // Append elements to the DOM
+        title.appendChild(subTitle);
+        divRow.appendChild(moveHandle);
+
+        divRow.appendChild(title);
+        divRow.appendChild(editButton);
+        divRow.appendChild(deleteButton);
+
+
+
+        title.onclick = () => {
+            let index = divRow.getAttribute("arrayIndex"); /// it may have bee reordered so get value of current property
+            index = parseInt(index);
+            this.onItemClick(item, index, divRow);
+            return false;
+        };
+
+        deleteButton.onclick = () => {
+            let index = divRow.getAttribute("arrayIndex"); /// it may have bee reordered so get value of current property
+            index = parseInt(index);
+            let t = this;
+            this.onDeleteItem(item, index, confirmed => {
+                if (confirmed) {
+                    divRow.parentNode.removeChild(divRow);
+                    t.reIndexRows();
+                }
+            });
+            return false;
+        };
+
+        editButton.onclick = () => {
+            let index = divRow.getAttribute("arrayIndex"); /// it may have bee reordered so get value of current property
+            index = parseInt(index);
+            this.onUpdateItem(item, index, divRow);
+            return false;
+        };
+    }
+
+    onOrderChange(item, oldIndex, newIndex) {
+        listOfLessonAssets.uiElements.dropDownTxt.innerHTML = "Manually"
+    }
+
+    onToggleChange(item, isChecked, index, divRow) {
+
+    }
+
+    onUpdateItem(item, index, divRow) {
+        //fetch the complete object from assets collection (not just the meta)
+        Assets.get(item.id, (err, res) => {
+            if (err) return console.error(err);
+            if (res.data.type == "action-item") SectionsDetails.addOrEditActionItem("courses", res.data);
+            else if (res.data.type == "course") CourseDetails.init(res.data, { index: index, divRow: divRow, target: "courses" });
+            else AssetsDetails.init(res.data, { index: index, divRow: divRow, target: "courses" });
+        });
+    }
+
+    onItemClick(item, index, divRow) {
+        //fetch the complete object from assets collection (not just the meta)
+        Assets.get(item.id, (err, res) => {
+            if (err) return console.error(err);
+            if (res.data.type == "action-item") SectionsDetails.addOrEditActionItem("courses", res.data);
+            else if (res.data.type == "course") CourseDetails.init(res.data, { index: index, divRow: divRow, target: "courses" });
+            else AssetsDetails.init(res.data, { index: index, divRow: divRow, target: "courses" });
+        });
+    }
+
+    onDeleteItem(item, index, callback) {
+
+        // update the list of items
+        this.items.splice(index, 1);
+
+        if (!this.items.length) listOfLessonAssets._updateEmptyState("empty");
+        LessonDetails._toggleSaveButton();
+        callback(item);
+
+    }
+}

@@ -3,9 +3,9 @@ class Asset {
         this.meta = new AssetMeta(data);
         this.premium = (typeof data.premium === 'undefined') ? true : data.premium;
         this.isActive = (typeof data.isActive === 'undefined') ? true : data.isActive;
-        this.createdOn = data.createdOn || null;
+        this.createdOn = data.createdOn || new Date();
         this.createdBy = data.createdBy || null;
-        this.lastUpdatedOn = data.lastUpdatedOn || null;
+        this.lastUpdatedOn = data.lastUpdatedOn || new Date();
         this.lastUpdatedBy = data.lastUpdatedBy || null;
         this._buildfire = data._buildfire || {};
     }
@@ -20,8 +20,9 @@ class AssetMeta {
         this.image = data.meta.image || "";
         this.topics = data.meta.topics || [];
         this.duration = data.meta.duration || 0;
+        this.actionType = data.meta.actionType || "";
         this.actionData = data.meta.actionData || {};
-        this.createdOn = data.createdOn || null;
+        this.createdOn = data.createdOn || new Date();
     }
 }
 
@@ -98,8 +99,8 @@ class Course extends Asset {
 
 class Lesson {
     constructor(data = {}) {
-        this.id = data.id || null;
         this.title = data.title || "";
+        this.subTitle = data.subTitle || "";
         this.assets = data.assets || [];
     }
 

@@ -50,15 +50,15 @@ const searchTableAssetsConfig = {
         },
         {
             header: "Title",
-            data: "${data.meta.title}",
+            data: "${data.meta.title} <br/> <span class='text-info'>${data.meta.actionType || data.type}</span>",
             type: "boldText",
             sortBy: '_buildfire.index.text'
         },
         {
-            header: "Asset Type",
-            data: "${data.type}",
+            header: "Topics",
+            data: "${SectionsDetails.getAssetTopicsTitles(data.meta.topics).join(', ')}",
             type: "string",
-            width: "100px",
+            width: "150px",
         },
         {
             header: "Created On",
@@ -87,7 +87,7 @@ const searchTableSectionAssetsConfig = {
         },
         {
             header: "Title",
-            data: "${data.meta.title}",
+            data: "${data.meta.title} <br/> <span class='text-info'>${data.meta.actionType || data.type}</span>",
             type: "boldText",
             sortBy: 'meta.title'
         },
