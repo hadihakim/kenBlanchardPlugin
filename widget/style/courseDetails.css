@@ -46,10 +46,11 @@
 
 .courseDetails-card-progressBar {
   width: 90%;
-  height: 0.25rem;
+  height: 0.26rem;
   margin-left: 1rem;
   border-radius: 0.125rem;
   margin-bottom: 0.75rem;
+  overflow: hidden;
   -webkit-border-radius: 0.125rem;
   -moz-border-radius: 0.125rem;
   -ms-border-radius: 0.125rem;
