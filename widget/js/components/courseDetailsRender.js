@@ -45,7 +45,16 @@ class CourseDetails {
     )}')`;
     title[0].innerHTML = this.state.data.meta.title;
     this.state.data.lessons.forEach((el) => {
-      let lessonContainer= ui.createElement("div", lessons[0],"",["lesson-container"],"lessonContainer");
+      console.log("🚀 ~ file: courseDetailsRender.js ~ line 48 ~ CourseDetails ~ this.state.data.lessons.forEach ~ el", el.assets.length, el)
+      let lessonContainer= ui.createElement("div", lessons[0],"",["lesson-container"]);
+      if(el.assets.length === 1) {
+        lessonContainer.style.cursor = "pointer";
+        lessonContainer.addEventListener('click', () => {
+          console.log("🚀 ~ file: courseDetailsRender.js ~ line 53 ~ CourseDetails ~ lessonContainer.addEventListener ~ click", "YESSS", el)
+          Navigation.openPageDetails(el.assets[0], this.state.data.meta.title,false);
+        })
+
+      }
       ui.createElement(
         "p",
         lessonContainer,
@@ -108,6 +117,10 @@ class CourseDetails {
         let assetsDetails = document.createElement("div");
         // assetsDetails.classList.add("assets-container" , "hidden");
         assetsDetails.classList.add("assets-container");
+        assetsDetails.style.cursor = "pointer";
+        assetsDetails.addEventListener("click", ()=> {
+          Navigation.openPageDetails(el.assets[i], this.state.data.meta.title,false);
+        })
 
         assetsDetails.appendChild(assetsIcon);
 
