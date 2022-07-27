@@ -30,7 +30,10 @@ class CourseRender{
         let lessonItem = firstClone.querySelectorAll(".learn-list");
         // give the button inner text -->
         startCourse[0].innerHTML = Strings.START_COURSE;
-        startButton[0].addEventListener("click", () => Navigation.openCourseDetails(this.state.data));
+        startButton[0].addEventListener("click", () =>{
+            Navigation.openCourseDetails(this.state.data);
+            HandleAPI.saveAssetToProfile(this.state.data);
+        });
         image[0].style.backgroundImage = `url('${Utilities.cropImage(
           this.state.data.meta.image,
           "full_width",
