@@ -527,6 +527,7 @@ class UserProfile {
   }
 
   static init = (userData) => {
+    // HandleAPI.deleteAsset('undefined');
     this.setData({userData});
     this.getUser();
   };

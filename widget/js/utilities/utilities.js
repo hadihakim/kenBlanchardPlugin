@@ -221,6 +221,7 @@ class Utilities {
         },
         (err, result) => {
           if (err) return console.log(err);
+          console.log("result:",result);
           if (result.length) {
             switch (result[result.length - 1].label) {
               case "Explore":
@@ -261,8 +262,8 @@ class Utilities {
                 } else if (from == "Details from CourseDetails") {
                   let id = result[result.length - 1].options.id;
                   Navigation.openPageDetails(
-                    id,
-                    result[result.length - 1].options.title, false
+                   { id:id,
+                    title:result[result.length - 1].options.title, fromLocalNotifications: false,pushToHistory:false}
                   );
                 } else if (
                   from == "user profile from list" ||
@@ -285,6 +286,8 @@ class Utilities {
                   );
                 } else if (from == "search from details") {
                   Navigation.openSearch();
+                }else if(from == "course profile from Details"){
+                  Navigation.openCourseDetails( result[result.length - 1].options.data,"from asset")
                 }
                 break;
             }
@@ -566,7 +569,7 @@ class Utilities {
       }
     );
     buildfire.notifications.localNotification.onClick = (data) => {
-      Navigation.openPageDetails(data.id, title, true);
+      Navigation.openPageDetails({id:data.id, title:title, fromLocalNotifications:true,pushToHistory:true});
       document
         .getElementById(`${shortcut.id}reminderIcon`)
         .classList.add("hidden");
