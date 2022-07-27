@@ -114,7 +114,7 @@ class Search {
           this.runSortFilterResult();
         });
       });
-      Utilities.setAppTheme();
+      // Utilities.setAppTheme();
     }
   };
 
@@ -322,7 +322,7 @@ class Search {
       Utilities.showEmpty(document.getElementById(this.pointers.searchContainer),Strings.EMPTY_SEARCH_HEADER,Strings.EMPTY_SEARCH_HEAD_BODY);
     }
     this.state.fetchNext = true;
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   }
 
   static lazyLoad = (e) => {

@@ -296,7 +296,7 @@ class PageDetails {
         : null;
     }
 
-    Utilities.setAppTheme();
+    // Utilities.setAppTheme();
   };
 
   static init = async (id, fromNotification) => {

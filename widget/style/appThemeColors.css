@@ -1,0 +1,94 @@
+.icon, .arrow-color{
+    color: var(--bf-theme-icons) !important;
+}
+.primaryBtn-AppTheme{
+    background-color: var(--bf-theme-default) !important;
+}
+.defaultlink-AppTheme{
+    color: var(--bf-theme-default) !important;
+}
+.headerText-AppTheme{
+    color:var(--bf-theme-header-text);
+}
+.barText-AppTheme{
+    color: var(--bf-theme-title-bar-text-icons) !important;
+}
+.bodyText-AppTheme{
+    color: var(--bf-theme-body-text) !important;
+}
+.userContainer{
+    background-color: var(--bf-theme-title-bar) !important;
+}
+.checkbox-border-fill-color{
+    color: var(--bf-theme-icons) !important;
+}
+.info-btn-AppTheme, .infoTheme{
+    background-color: var(--bf-theme-info) !important;
+}
+.info-link-AppTheme{
+    color: var(--bf-theme-info) !important;
+}
+.holderPercentage{
+    position: relative;
+}
+.progressBarContainer {
+    background-color: var(--bf-theme-info) !important;
+    width: 100%;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.progressBar{
+    background-color: var(--bf-theme-info) !important;
+    position: absolute;
+    height: 0.25rem;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.mdc-checkbox__checkmark{
+  background-color: var(--bf-theme-icons) !important;
+}
+.mdc-checkbox__background{
+  border-color: var(--bf-theme-icons) !important;
+}
+.mdc-checkbox__checkmark-path{
+  color: white !important;
+}
+/* 
+      {
+        elements: document.getElementsByClassName("user-image-border"),
+        colorType: "borderColor",
+        colorDegree: this.state.appTheme.colors.titleBar,
+      },
+      {
+        elements: document.getElementsByClassName("primaryTheme-border"),
+        colorType: "normalBorderColor",
+        colorDegree: this.state.appTheme.colors.primaryTheme,
+      },
+      {
+        elements: document.getElementsByClassName("checkbox-border-color"),
+        colorType: "borderColor",
+        colorDegree: this.state.appTheme.colors.icons,
+      },
+      {
+        elements: document.getElementsByClassName("checkbox-border-fill-color"),
+        colorType: "back",
+        colorDegree: this.state.appTheme.colors.icons,
+      },
+      
+    ];
+
+    colorCollections.forEach((element) => {
+      this.setThemeHandler(
+        element.elements,
+        element.colorType,
+        element.colorDegree
+      );
+    });
+  }; */

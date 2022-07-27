@@ -224,7 +224,7 @@ class MyList {
 
         this.initList();
 
-        Utilities.setAppTheme();
+        // Utilities.setAppTheme();
     }
     // set page, pageSize, to be ready to print the list
     static initList = () => {
@@ -235,7 +235,7 @@ class MyList {
         listContainer.innerHTML = "";
         listContainer.addEventListener('scroll', (e) => this.lazyLoad(e));
 
-        if (this.listState.type == 'course') {
+        if (this.listState.type !== 'course') {
             document.getElementById(this.pointers.chartDiv).classList.remove('hidden');
             document.getElementById(this.pointers.listContainer).style.height = '70vh';
             this.loadCharts();
