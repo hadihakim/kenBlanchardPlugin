@@ -202,5 +202,6 @@ class CourseDetails {
       "";
     await this.setData(data);
     this.courseRender();
+    HandleAPI.updateAssetProgress(data.id,50);
   };
 }
