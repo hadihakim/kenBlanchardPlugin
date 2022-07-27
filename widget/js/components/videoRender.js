@@ -347,9 +347,6 @@ class videoDetails {
     this.renderTabs();
     this.initActiveTab();
     this.checkIsBookmarked(this.state.videoDrawerItemsList,this.state.data.id ,null, "video");
-    Profiles.updateAssetProgress(this.state.id, 50, (err,res)=>{
-      if (err) console.log(err);
-      console.log(res, "video Progress");
-    });
+    HandleAPI.updateAssetProgress(id,50);
   };
 }

@@ -347,8 +347,7 @@ class AudioRender {
       null,
       "audio"
     );
-    Profiles.updateAssetProgress(this.state.id, 50, (err,res)=>{
-      if (err) console.log(err);
-    });
+
+    HandleAPI.updateAssetProgress(id,50);
   };
 }

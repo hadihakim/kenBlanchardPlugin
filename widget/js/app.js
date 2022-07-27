@@ -20,9 +20,10 @@ const init = async () => {
   Utilities.getAppTheme();
   UserProfile.init();
   Utilities.setAppTheme();
-
   await HandleAPI.getSettingsData();
   loadData(HandleAPI.state.data);
+  let profileData = await HandleAPI.getUserData();
+  UserProfile.setData({data: profileData});
 }
 
 init();
