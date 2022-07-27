@@ -7,11 +7,17 @@ class PageDetails {
     isBookmarked: false,
     fromNotification: false,
     haveReminders: true,
+    isInProfile: false,
   };
   static setState = async (id, fromNotification) => {
     this.state.id = id;
     let newRes = await HandleAPI.getDataByID(id, "assets_info");
-    this.state.data = newRes.data;
+    if(this.state.isInProfile){
+      this.state.data = {...UserProfile.state.data.assets[id],...newRes.data};
+    }else{
+      this.state.data =newRes.data;
+      console.log("🚀 ~ file: pageDetails.controller.js ~ line 20 ~ PageDetails ~ setState= ~ this.state.data", this.state.data)
+    }
     this.state.fromNotification = fromNotification;
   };
 
@@ -295,6 +301,9 @@ class PageDetails {
 
   static init = async (id, fromNotification) => {
     document.getElementById("pageDetails").innerHTML = "";
+    if(UserProfile.state.data.assets.hasOwnProperty(id)){
+      this.state.isInProfile=true;
+    }
     await this.setState(id, fromNotification);
     this.detailsRender();
   };

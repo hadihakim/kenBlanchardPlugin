@@ -56,7 +56,6 @@ class Explore {
   }
 
   static horizontal_Render = (asset, container,pageType="") => {
-  console.log("🚀 ~ file: explore.controller.js ~ line 59 ~ Explore ~ container", container)
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
