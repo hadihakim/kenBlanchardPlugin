@@ -262,8 +262,8 @@ class Utilities {
                 } else if (from == "Details from CourseDetails") {
                   let id = result[result.length - 1].options.id;
                   Navigation.openPageDetails(
-                    id,
-                    result[result.length - 1].options.title, false,true
+                   { id:id,
+                    title:result[result.length - 1].options.title, fromLocalNotifications: false,pushToHistory:false}
                   );
                 } else if (
                   from == "user profile from list" ||
@@ -569,7 +569,7 @@ class Utilities {
       }
     );
     buildfire.notifications.localNotification.onClick = (data) => {
-      Navigation.openPageDetails(data.id, title, true,false);
+      Navigation.openPageDetails({id:data.id, title:title, fromLocalNotifications:true,pushToHistory:true});
       document
         .getElementById(`${shortcut.id}reminderIcon`)
         .classList.add("hidden");

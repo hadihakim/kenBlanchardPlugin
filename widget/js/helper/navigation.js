@@ -144,25 +144,25 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openPageDetails = (id, title, fromNotification,doNotPush) => {
+	static openPageDetails = (option) => {
 		this.state.activeLayOut = 'page details';
-		if (!doNotPush){
+		if (option.pushToHistory){
 		if (!mainPage.classList.contains("hidden")) {
 			// buildfire.history.push("Home from Details");
-			buildfire.history.push(title, {
+			buildfire.history.push(option.title, {
 				showLabelInTitlebar: true,
 				from: "Home from Details",
 
 			});
 		} else if (!seeAllContainer.classList.contains("hidden")) {
 			// buildfire.history.push("See All from Details");
-			buildfire.history.push(title, {
+			buildfire.history.push(option.title, {
 				showLabelInTitlebar: true,
 				from: "See All from Details",
 
 			});
 		} else if (!explorePage.classList.contains("hidden")) {
-			buildfire.history.push(title, {
+			buildfire.history.push(option.title, {
 				showLabelInTitlebar: true,
 				from: "Explore from Details",
 
@@ -171,13 +171,13 @@ class Navigation {
 			console.log("from chapters");
 		} else if (!searchContainer.classList.contains("hidden")) {
 			// search from details
-			buildfire.history.push(title, {
+			buildfire.history.push(option.title, {
 				showLabelInTitlebar: true,
 				from: "search from details",
 
 			});
 		}else if(!courseDetailsContainer.classList.contains("hidden")) {
-			buildfire.history.push(title, {
+			buildfire.history.push(option.title, {
 				showLabelInTitlebar: true,
 				from: "course profile from Details",
 				data:CourseDetails.state.data,
@@ -185,7 +185,7 @@ class Navigation {
 		}
 		else if (!userProfileContainer.classList.contains("hidden")){
 
-			buildfire.history.push(title, {
+			buildfire.history.push(option.title, {
 				showLabelInTitlebar: true,
 				from: "User profile from Details",
 
@@ -213,7 +213,7 @@ class Navigation {
 		mainContainer.classList.remove("hidden");
 
 		Search.state.searchText = '';
-		PageDetails.init(id, fromNotification)
+		PageDetails.init(option.id, option.fromLocalNotifications)
 		Utilities.scrollTop();
 
 		Utilities.setAppTheme();
