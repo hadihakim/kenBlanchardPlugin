@@ -244,7 +244,13 @@ class TeamEffectivenessList {
             lastIndex = this.state.data.length;
 
         this.state.page += 1;
-        // activeCard
+      
+         //render empty stat if there are no active item available
+        if(this.state.data.length<=0){
+            Utilities.showEmpty(document.getElementById(this.pointers.teamEffectiveness_ListContainer),Strings.EMPTY_ACTIVE_LIST_HEADER,Strings.EMPTY_ACTIVE_LIST_BODY);
+            return;
+        }
+          // activeCard
         for (let i = firstIndex; i < lastIndex; i++) {
             const nodesClone = document.getElementById(this.pointers.teamEffectiveness_Template).content.cloneNode(true);
 
@@ -282,15 +288,18 @@ class TeamEffectivenessList {
     }
 
     static loadArchivedList = () => {
-
         let firstIndex = (this.state.page - 1) * this.state.pageSize;
         let lastIndex = this.state.page * this.state.pageSize;
-
+        //render empty stat if there are no archives item available
+        if(this.state.archivedData.length<=0){
+            Utilities.showEmpty(document.getElementById(this.pointers.teamEffectivenessArchived_ListContainer),Strings.EMPTY_ARCHIVE_LIST_HEADER,Strings.EMPTY_ARCHIVE_LIST_BODY);
+            return;
+        }
         if (lastIndex > this.state.archivedData.length)
             lastIndex = this.state.archivedData.length;
 
         this.state.page += 1;
-
+      
         for (let i = firstIndex; i < lastIndex; i++) {
 
             const nodesClone = document.getElementById(this.pointers.teamEffectiveness_Template).content.cloneNode(true);

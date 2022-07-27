@@ -329,12 +329,12 @@ class Utilities {
     }
   };
 
-  static showEmpty = (container) => {
+  static showEmpty = (container,header, body) => {
     container.innerHTML = `
 		<div class="emptySearch_Container">
 			<img src="./media/empty_page.svg" alt="Empty Search" loading="lazy"/>
-			<p id="emptyTitle">Nothing Found</p>
-			<p id="emptyDescription">Refine your search...</p>
+			<p id="emptyTitle">${header}</p>
+			<p id="emptyDescription">${body}</p>
       	</div>
 		`;
   };

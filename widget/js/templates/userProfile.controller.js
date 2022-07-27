@@ -479,13 +479,24 @@ class UserProfile {
     })
     return myTopics;
   }
-
+ static isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
+}
   static initActivity = async(containerID) => {
     let userData=await HandleAPI.getUserData();
     this.setData({data: userData});
     // user data will be stored in this class state
     let userContainer = document.getElementById(containerID);
     let assetsObj = await this.setAssetsArr();
+    if(this.isEmpty(assetsObj)){
+      Utilities.showEmpty(userContainer,Strings.EMPTY_PROFILE_ACTIVITY_HEADER,Strings.EMPTY_PROFILE_ACTIVITY_BODY);
+      return;
+    }
+
     for (const asset in assetsObj) {
       
       // build section container
