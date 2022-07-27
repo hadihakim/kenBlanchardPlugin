@@ -88,7 +88,7 @@ class SeeAll {
           )}</span>`;
         }
         card[0].addEventListener("click", () => {
-          Navigation.openPageDetails(id, printArr[i].meta.title,false);
+          Navigation.openPageDetails(id, printArr[i].meta.title,false,false);
         });
         document.getElementById(this.pointers.seeAllContainer).appendChild(nodesClone);
       }

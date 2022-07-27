@@ -271,11 +271,11 @@ class TeamEffectivenessList {
 
             imageContainer.addEventListener('click', () => {
                 let courseData = HandleAPI.getDataByID(this.state.data[i].id, "assets_info")
-                Navigation.openCourseDetails(this.state.data[i].id, this.state.data[i].title, "from active-card")
+                Navigation.openCourseDetails(this.state.data[i].title, "from active-card")
             })
             titleCard[0].addEventListener('click', () => {
                 let courseData = HandleAPI.getDataByID(this.state.data[i].id, "assets_info")
-                Navigation.openCourseDetails(this.state.data[i].id, this.state.data[i].title, "from active-card")
+                Navigation.openCourseDetails(this.state.data[i].title, "from active-card")
             })
             actionBtn.addEventListener('click', () => {
                 this.openDrawer(this.state.data[i].id, this.state.ActiveDrawerOptions);

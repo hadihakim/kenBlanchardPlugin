@@ -51,7 +51,7 @@ class CourseDetails {
         lessonContainer.style.cursor = "pointer";
         lessonContainer.addEventListener('click', () => {
           console.log("🚀 ~ file: courseDetailsRender.js ~ line 53 ~ CourseDetails ~ lessonContainer.addEventListener ~ click", "YESSS", el)
-          Navigation.openPageDetails(el.assets[0], this.state.data.meta.title,false);
+          Navigation.openPageDetails(el.assets[0], this.state.data.meta.title,false,false);
         })
 
       }
@@ -119,7 +119,7 @@ class CourseDetails {
         assetsDetails.classList.add("assets-container");
         assetsDetails.style.cursor = "pointer";
         assetsDetails.addEventListener("click", ()=> {
-          Navigation.openPageDetails(el.assets[i], this.state.data.meta.title,false);
+          Navigation.openPageDetails(el.assets[i], this.state.data.meta.title,false,false);
         })
 
         assetsDetails.appendChild(assetsIcon);

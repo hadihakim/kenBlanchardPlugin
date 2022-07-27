@@ -144,9 +144,9 @@ class Navigation {
 		Utilities.setAppTheme();
 	}
 
-	static openPageDetails = (id, title, fromNotification) => {
+	static openPageDetails = (id, title, fromNotification,doNotPush) => {
 		this.state.activeLayOut = 'page details';
-
+		if (!doNotPush){
 		if (!mainPage.classList.contains("hidden")) {
 			// buildfire.history.push("Home from Details");
 			buildfire.history.push(title, {
@@ -176,8 +176,14 @@ class Navigation {
 				from: "search from details",
 
 			});
+		}else if(!courseDetailsContainer.classList.contains("hidden")) {
+			buildfire.history.push(title, {
+				showLabelInTitlebar: true,
+				from: "course profile from Details",
+				data:CourseDetails.state.data,
+			});
 		}
-		else {
+		else if (!userProfileContainer.classList.contains("hidden")){
 
 			buildfire.history.push(title, {
 				showLabelInTitlebar: true,
@@ -185,7 +191,7 @@ class Navigation {
 
 			});
 		}
-
+	}
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
@@ -216,20 +222,21 @@ class Navigation {
 	static openCourseDetails = (data, from) => {
 		this.state.activeLayOut = 'course details';
 
-		if (from == "from active-card") {
-			buildfire.history.push(data.title, {
-				showLabelInTitlebar: true,
-				from: "active list from CourseDetails",
-				id: data.id,
-			});
-		}
-		else {
+		if(from=="from course"){
 			buildfire.history.push(data.title, {
 				showLabelInTitlebar: true,
 				from: "Details from CourseDetails",
 				id: data.id,
 			});
 		}
+		else if (from == "from active-card") {
+			buildfire.history.push(data.title, {
+				showLabelInTitlebar: true,
+				from: "active list from CourseDetails",
+				id: data.id,
+			});
+		}
+		
 		// buildfire.history.push("Details from CourseDetails",{id:id});
 		config.renderedCard = 0;
 		config.page = 1;
