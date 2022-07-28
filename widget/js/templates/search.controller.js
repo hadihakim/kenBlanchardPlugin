@@ -313,7 +313,7 @@ class Search {
           )}</span>`;
         }
         card[0].addEventListener("click", () => {
-          Navigation.openPageDetails({id:id, title:printedAssetAtt[i].meta.title,fromLocalNotifications: false,pushToHistory:true});
+          Navigation.openPageDetails({id:id, title:printedAssetAtt[i].meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"search"});
         });
         document.getElementById(this.pointers.searchContainer).appendChild(nodesClone);
       }

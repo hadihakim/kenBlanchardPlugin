@@ -286,7 +286,7 @@ class Utilities {
                   );
                 } else if (from == "search from details") {
                   Navigation.openSearch();
-                }else if(from == "course profile from Details"){
+                }else if(from == "course from Details"){
                   Navigation.openCourseDetails( result[result.length - 1].options.data,"from asset")
                 }
                 break;

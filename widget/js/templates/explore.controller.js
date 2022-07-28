@@ -52,7 +52,7 @@ class Explore {
 			url('${Utilities.cropImage(asset.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true});
+      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
     });
     container.appendChild(firstClone);
   }
@@ -83,7 +83,7 @@ class Explore {
       progressBarContainer[0].classList.add("hidden");
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true});
+      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
     });
     container.appendChild(nodesClone);
   }
@@ -109,7 +109,7 @@ class Explore {
                                 ${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true});
+      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
     });
     container.appendChild(nodesClone);
   }
