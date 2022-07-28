@@ -224,14 +224,14 @@ class Navigation {
 	static openCourseDetails = (data, from) => {
 		this.state.activeLayOut = 'course details';
 
-		if (from == "from course") {
-			buildfire.history.push(data.title, {
-				showLabelInTitlebar: true,
-				from: "Details from CourseDetails",
-				id: data.id,
-			});
-		}
-		else if (from == "from active-card") {
+		// if (from == "from course") {
+		// 	buildfire.history.push(data.title, {
+		// 		showLabelInTitlebar: true,
+		// 		from: "Details from CourseDetails",
+		// 		id: data.id,
+		// 	});
+		// }
+		 if (from == "from active-card") {
 			buildfire.history.push(data.title, {
 				showLabelInTitlebar: true,
 				from: "active list from CourseDetails",
