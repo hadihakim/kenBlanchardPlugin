@@ -185,7 +185,6 @@ class TeamEffectivenessList {
             (err, result) => {
                 if (err) return console.error(err);
                 if (result) {
-                    console.log("🚀 ~ file: teamEffectivenessList.js ~ line 182 ~ TeamEffectivenessList ~ result", result)
                     buildfire.components.drawer.closeDrawer();
                     this.confirmMessage(id, result.type.trim(" "), 'Are you sure you want to remove this course? This will permanently delete the course from your list!')
                 }

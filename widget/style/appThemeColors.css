@@ -24,6 +24,7 @@
 }
 .info-btn-AppTheme, .infoTheme{
     background-color: var(--bf-theme-info) !important;
+    filter: brightness(100%);
 }
 .info-link-AppTheme{
     color: var(--bf-theme-info) !important;

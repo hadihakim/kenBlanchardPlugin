@@ -12,6 +12,8 @@
 }
 
 .search-container{
+    background-color: var(--c-white);
+    border-radius: 4px;
 	display: flex;
     flex-direction: row;
     justify-content: space-between;
