@@ -146,52 +146,54 @@ class Navigation {
 
 	static openPageDetails = (option) => {
 		this.state.activeLayOut = 'page details';
-		if (option.pushToHistory){
-		if (!mainPage.classList.contains("hidden")) {
-			// buildfire.history.push("Home from Details");
-			buildfire.history.push(option.title, {
-				showLabelInTitlebar: true,
-				from: "Home from Details",
+		if (option.pushToHistory) {
+			switch (option.openFrom) {
+				case "course":
+					buildfire.history.push(option.title, {
+						showLabelInTitlebar: true,
+						from: "course from Details",
+						data: CourseDetails.state.data,
+					});
+					break;
+				case "main_explore_profile":
+					if (!mainPage.classList.contains("hidden")) {
+						buildfire.history.push(option.title, {
+							showLabelInTitlebar: true,
+							from: "Home from Details",
 
-			});
-		} else if (!seeAllContainer.classList.contains("hidden")) {
-			// buildfire.history.push("See All from Details");
-			buildfire.history.push(option.title, {
-				showLabelInTitlebar: true,
-				from: "See All from Details",
+						});
+					} else if (!explorePage.classList.contains("hidden")) {
+						buildfire.history.push(option.title, {
+							showLabelInTitlebar: true,
+							from: "Explore from Details",
 
-			});
-		} else if (!explorePage.classList.contains("hidden")) {
-			buildfire.history.push(option.title, {
-				showLabelInTitlebar: true,
-				from: "Explore from Details",
+						});
+					} else if (!userProfileContainer.classList.contains("hidden")) {
+						buildfire.history.push(option.title, {
+							showLabelInTitlebar: true,
+							from: "User profile from Details",
 
-			});
-		} else if (!pageDetails.classList.contains("hidden")) {
-			console.log("from chapters");
-		} else if (!searchContainer.classList.contains("hidden")) {
-			// search from details
-			buildfire.history.push(option.title, {
-				showLabelInTitlebar: true,
-				from: "search from details",
+						});
+					}
+					break;
+				case "search":
+					buildfire.history.push(option.title, {
+						showLabelInTitlebar: true,
+						from: "search from details",
 
-			});
-		}else if(!courseDetailsContainer.classList.contains("hidden")) {
-			buildfire.history.push(option.title, {
-				showLabelInTitlebar: true,
-				from: "course profile from Details",
-				data:CourseDetails.state.data,
-			});
+					});
+					break;
+				case "seeAll":
+					buildfire.history.push(option.title, {
+						showLabelInTitlebar: true,
+						from: "See All from Details",
+
+					});
+					break;
+				default:
+					break;
+			}
 		}
-		else if (!userProfileContainer.classList.contains("hidden")){
-
-			buildfire.history.push(option.title, {
-				showLabelInTitlebar: true,
-				from: "User profile from Details",
-
-			});
-		}
-	}
 		config.renderedCard = 0;
 		config.page = 1;
 		config.lastIndex = 0;
@@ -222,7 +224,7 @@ class Navigation {
 	static openCourseDetails = (data, from) => {
 		this.state.activeLayOut = 'course details';
 
-		if(from=="from course"){
+		if (from == "from course") {
 			buildfire.history.push(data.title, {
 				showLabelInTitlebar: true,
 				from: "Details from CourseDetails",
@@ -236,7 +238,7 @@ class Navigation {
 				id: data.id,
 			});
 		}
-		
+
 		// buildfire.history.push("Details from CourseDetails",{id:id});
 		config.renderedCard = 0;
 		config.page = 1;
