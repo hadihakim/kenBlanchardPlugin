@@ -168,19 +168,12 @@ class CourseDetails {
       durationForLesson.appendChild(icons);
       this.state.duration += assetsDuration;
 
-      const progress = document.createElement("div");
-      progress.classList.add("progressBar");
-      let div = document.createElement("div");
-      div.classList.add("courseDetails-card-progressBar", "holderPercentage");
-      let percentageDiv = document.createElement("div");
+
+      let progress = ui.createElement("div",durationForLesson,"",["holderPercentage","course-holderPercentage"]);
+      let progressBarContainer = ui.createElement("div",progress,"",["progressBarContainer"]);
+      let percentageDiv = ui.createElement("div",progress,"",["progressBar"]);
       percentageDiv.style.width = `${el.progress || 50}%`;
-      percentageDiv.classList.add(
-        "percentageDiv",
-        "progress-lesson",
-        "infoTheme"
-      );
-      div.appendChild(percentageDiv);
-      progress.appendChild(div);
+      progress.append(progressBarContainer,percentageDiv);
 
       durationForLesson.appendChild(progress);
     });
