@@ -4,6 +4,7 @@ class UserProfile {
     data: {},
     testChart: null,
     userProfileTabs: ["activity", "insights", "badges"],
+    profileCardsLint: 5,
     // it should come from user api
     userBadgesAchieved: [
       {
@@ -105,7 +106,7 @@ class UserProfile {
   };
 
   static setData = (data) => {
-    this.state = {...this.state,...data};
+    this.state = { ...this.state, ...data };
   };
 
   static getUser = () => {
@@ -443,14 +444,14 @@ class UserProfile {
     return nodesClone;
   };
 
-  static setAssetsArr = async() => {
+  static setAssetsArr = async () => {
     let myAssetsAtt = {};
     for (const asset in this.state.data.assets) {
-      let returnObj =await HandleAPI.getDataByID(asset,"assets_info");
-      returnObj={...returnObj.data,...this.state.data.assets[asset]}
+      let returnObj = HandleAPI.state.data.assets_info[asset];
+      returnObj = { ...returnObj, ...this.state.data.assets[asset] }
       if (myAssetsAtt[returnObj.type])
-      myAssetsAtt[returnObj.type].push(returnObj);
-      else if(returnObj.type){
+        myAssetsAtt[returnObj.type].push(returnObj);
+      else if (returnObj.type) {
         myAssetsAtt[returnObj.type] = [];
         myAssetsAtt[returnObj.type].push(returnObj);
       }
@@ -471,34 +472,34 @@ class UserProfile {
   static getAssetTopics = assets => {
     let myTopics = {};
     assets.forEach(asset => {
-      asset.meta.topics.forEach(topicId=>{
-        if(!myTopics[topicId]){
+      asset.meta.topics.forEach(topicId => {
+        if (!myTopics[topicId]) {
           myTopics[topicId] = HandleAPI.getDataByID(topicId, 'topic');
         }
       })
     })
     return myTopics;
   }
- static isEmpty(obj) {
-    for(var prop in obj) {
-        if(obj.hasOwnProperty(prop))
-            return false;
+  static isEmpty(obj) {
+    for (var prop in obj) {
+      if (obj.hasOwnProperty(prop))
+        return false;
     }
     return true;
-}
-  static initActivity = async(containerID) => {
+  }
+  static initActivity = async (containerID) => {
     // let userData=await HandleAPI.getUserData();
     // this.setData({data: userData});
     // user data will be stored in this class state
     let userContainer = document.getElementById(containerID);
     let assetsObj = await this.setAssetsArr();
-    if(this.isEmpty(assetsObj)){
-      Utilities.showEmpty(userContainer,Strings.EMPTY_PROFILE_ACTIVITY_HEADER,Strings.EMPTY_PROFILE_ACTIVITY_BODY);
+    if (this.isEmpty(assetsObj)) {
+      Utilities.showEmpty(userContainer, Strings.EMPTY_PROFILE_ACTIVITY_HEADER, Strings.EMPTY_PROFILE_ACTIVITY_BODY);
       return;
     }
 
     for (const asset in assetsObj) {
-      
+
       // build section container
       let newSectionDiv = ui.createElement('div', userContainer, '', ['sectionContainer'], `${assetsObj[asset].id}-mine`);
       let newSectionHeader = ui.createElement('div', newSectionDiv, '', ['sectionHeader'], '');
@@ -518,9 +519,13 @@ class UserProfile {
       });
 
       // build cards
+      let cardsPrinted = 0;
       assetsObj[asset].forEach(card => {
-        // calling function to print all cards in the pages
-        Explore.horizontal_Render(card, newSectionCardsContainer,"profile");
+        if(cardsPrinted < this.state.profileCardsLint){
+          cardsPrinted+=1;
+          // calling function to print all cards in the pages
+          Explore.horizontal_Render(card, newSectionCardsContainer, "profile");
+        }
       })
     }
     // Utilities.setAppTheme();
@@ -528,7 +533,7 @@ class UserProfile {
 
   static init = (userData) => {
     // HandleAPI.deleteAsset('undefined');
-    this.setData({userData});
+    this.setData({ userData });
     this.getUser();
   };
 }

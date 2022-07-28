@@ -4,7 +4,7 @@ class MyList {
     static listState = {
         progressChart: null,
         barChart: null,
-        includeArchived: false,
+        includeArchived: true,
         type: 'course',
         title: "My List",
         data: [],
@@ -29,11 +29,11 @@ class MyList {
     // set state data to run the list and charts 
     static setData = async (options) => {
         document.getElementById(this.pointers.chartDiv).classList.add('hidden');
-        document.getElementById(this.pointers.listContainer).style.height = '100vh';
         Skeleton.verticalSeeAll_Skeleton(listViewContainer);
 
-        await HandleAPI.getUserTopicsInfo(options.type).then(myTopics => {
-            options.data = this.handleTakenNumber(options.data, myTopics, options.type);
+        await HandleAPI.getUserTopicsInfo(this.listState.type).then(myTopics => {
+            this.listState.myTopics = myTopics;
+            this.listState.takenData = this.handleTakenNumber(this.listState.data, myTopics, this.listState.type);
         })
 
         this.listState = { ...this.listState, ...options };
@@ -63,9 +63,13 @@ class MyList {
     }
     // calculate the total number of assets that user had taken per each topic 
     static calculateTaken = (id, type) => {
+
+        console.log('handle archived --=>', UserProfile?.state?.data);
         let userTakenOn = 0;
         for (const asset in UserProfile.state.data.assets) {
-            if (HandleAPI?.state?.assets_info[asset]?.type === type && HandleAPI?.state.assets_info[asset]?.meta?.topics?.includes(id))
+            if (HandleAPI?.state?.assets_info[asset]?.type === type
+                && HandleAPI?.state.assets_info[asset]?.meta?.topics?.includes(id)
+                && (this?.listState?.includeArchived || (!this?.listState?.includeArchived && !UserProfile?.state?.data?.assets[asset]?.isArchived)))
                 userTakenOn += 1;
         }
         return userTakenOn;
@@ -135,6 +139,8 @@ class MyList {
         });
 
         // Progress Chart
+        let defaultTheme = Utilities.getAppTheme();
+        defaultTheme = defaultTheme.colors.defaultTheme;
         let percent = 71;
         const data = {
             labels: ["Average Progress", ""],
@@ -142,7 +148,7 @@ class MyList {
                 {
                     label: 'Dataset 1',
                     data: [percent / 100, 1 - percent / 100],
-                    backgroundColor: [Utilities.state.appTheme.colors.primaryTheme, "#0000"],
+                    backgroundColor: [defaultTheme, "#0000"],
                     borderWidth: 4
                 }
             ]
@@ -165,15 +171,14 @@ class MyList {
     }
     // print the list of all topics by using BuildFire list
     static loadList = () => {
-        const listView = new buildfire.components.listView(this.pointers.listContainer);
-
         // load list
         let cardsToPrint = this.cardsToPrint();
 
-        listView.loadListViewItems(cardsToPrint);
+        // this.listState.listViewContainer
+        this.listState.listViewContainer.append(cardsToPrint);
 
         // event on click
-        listView.onItemClicked = item => {
+        this.listState.listViewContainer.onItemClicked = item => {
             let _options = {
                 title: item.title,
                 id: item.id,
@@ -184,37 +189,41 @@ class MyList {
         };
 
         // on add button clicked
-        listView.onAddButtonClicked = () => {
+        this.listState.listViewContainer.onAddButtonClicked = () => {
             console.log('button clicked');
         };
         // on action button clicked
-        listView.onItemActionClicked = item => {
+        this.listState.listViewContainer.onItemActionClicked = item => {
             let _options = {
                 title: item.title,
                 id: item.id,
             }
             Navigation.openTeamEffectivenessList(_options);
         };
+        this.listState.fetchNext = true;
+
     }
     // set the active cards in the list
     static cardsToPrint = () => {
         let firstIndex = (this.listState.page - 1) * this.listState.pageSize;
         let lastIndex = this.listState.page * this.listState.pageSize;
-        if (lastIndex > this.listState.data.length)
-            lastIndex = this.listState.data.length;
+        if (lastIndex > this.listState.takenData.length)
+            lastIndex = this.listState.takenData.length;
         this.listState.page += 1;
 
         let newCards = [];
         for (let i = firstIndex; i < lastIndex; i++) {
-            newCards.push(this.listState.data[i]);
+            newCards.push(this.listState.takenData[i]);
         }
 
         return newCards;
     }
     // add new cards to the bottom of the page when the user  scroll down
     static lazyLoad = (e) => {
+        console.log("lazy load called");
         if (((e.target.scrollTop + e.target.offsetHeight) / e.target.scrollHeight > 0.80) && this.listState.fetchNext) {
             this.listState.fetchNext = false;
+            console.log("lazy load worked ------>");
             this.loadList();
         }
     }
@@ -227,22 +236,27 @@ class MyList {
         // Utilities.setAppTheme();
     }
     // set page, pageSize, to be ready to print the list
-    static initList = () => {
+    static initList = async () => {
+        this.listState.listViewContainer = null;
+        this.listState.listViewContainer = new buildfire.components.listView(this.pointers.listContainer);
+
+        this.listState.takenData = this.handleTakenNumber(this.listState.data, this.listState.myTopics, this.listState.type);
+
         this.listState.page = 1;
         this.listState.pageSize = 12;
 
         let listContainer = document.getElementById(this.pointers.listContainer);
         listContainer.innerHTML = "";
-        listContainer.addEventListener('scroll', (e) => this.lazyLoad(e));
 
-        if (this.listState.type !== 'course') {
+        let listPage = document.getElementById(this.pointers.pagePointer);
+        listPage.addEventListener('scroll', (e) => this.lazyLoad(e));
+
+        if (this.listState.type === 'course') {
             document.getElementById(this.pointers.chartDiv).classList.remove('hidden');
-            document.getElementById(this.pointers.listContainer).style.height = '70vh';
             this.loadCharts();
         }
         else {
             document.getElementById(this.pointers.chartDiv).classList.add('hidden');
-            document.getElementById(this.pointers.listContainer).style.height = '100vh';
         }
 
         this.loadList();

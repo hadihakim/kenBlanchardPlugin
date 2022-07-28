@@ -37,10 +37,13 @@ class Utilities {
   };
 
   static getAppTheme = () => {
+    let myAppTheme
     buildfire.appearance.getAppTheme((err, appTheme) => {
       if (err) return console.error(err);
       this.state.appTheme = appTheme;
+      myAppTheme = appTheme;
     });
+    return myAppTheme;
   };
 
   static LightenDarkenColor = (col, amt) => {
