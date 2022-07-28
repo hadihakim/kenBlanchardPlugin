@@ -16,7 +16,6 @@ class PageDetails {
       this.state.data = {...UserProfile.state.data.assets[id],...newRes.data};
     }else{
       this.state.data =newRes.data;
-      console.log("🚀 ~ file: pageDetails.controller.js ~ line 20 ~ PageDetails ~ setState= ~ this.state.data", this.state.data)
     }
     this.state.fromNotification = fromNotification;
   };

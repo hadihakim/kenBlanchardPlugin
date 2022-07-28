@@ -130,6 +130,9 @@ class videoDetails {
     });
     document.getElementById("playerPlay").addEventListener("click", () =>{
         HandleAPI.saveAssetToProfile(this.state.data);
+        Stats.incrementViews(this.state.id, (err, res) => {
+          if (err) return console.log(err);
+        })
       })
   };
 

@@ -8,7 +8,6 @@ class CourseDetails {
     courseDetailsTemplate: "courseDetailsTemplate",
   };
   static setData = (data) => {
-  console.log("🚀 ~ file: courseDetailsRender.js ~ line 11 ~ CourseDetails ~ data", data)
     // HandleAPI.getDataByID
     
     this.state = {...this.state,data};
@@ -45,12 +44,10 @@ class CourseDetails {
     )}')`;
     title[0].innerHTML = this.state.data.meta.title;
     this.state.data.lessons.forEach((el) => {
-      console.log("🚀 ~ file: courseDetailsRender.js ~ line 48 ~ CourseDetails ~ this.state.data.lessons.forEach ~ el", el.assets.length, el)
       let lessonContainer= ui.createElement("div", lessons[0],"",["lesson-container"]);
       if(el.assets.length === 1) {
         lessonContainer.style.cursor = "pointer";
         lessonContainer.addEventListener('click', () => {
-          console.log("🚀 ~ file: courseDetailsRender.js ~ line 53 ~ CourseDetails ~ lessonContainer.addEventListener ~ click", "YESSS", el)
           Navigation.openPageDetails({id:el.assets[0], title:this.state.data.meta.title,fromLocalNotifications: false,pushToHistory:true, openFrom:"course"});
         })
 

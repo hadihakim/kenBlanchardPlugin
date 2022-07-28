@@ -67,6 +67,9 @@ class AudioRender {
     let audioPlayerPlay = nodesClone.getElementById("audioPlayerPlay");
     audioPlayerPlay.addEventListener("click", () => {
       HandleAPI.saveAssetToProfile(this.state.data);
+      Stats.incrementViews(this.state.id, (err, res) => {
+        if (err) return console.log(err);
+      })
     });
     audioDrawer.addEventListener("click", () =>
       this.drawerHandler(this.state.audioDrawerItemsList)

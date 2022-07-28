@@ -91,6 +91,9 @@ class summaryRender {
     startChapterLabel[0].innerText = Strings.START_CHAPTER;
     startChapter.addEventListener("click", () => {
       this.graphicalSummariesThirdPage();
+      Stats.incrementViews(this.state.id, (err, res) => {
+        if (err) return console.log(err);
+      })
     });
     topImage[0].src = Utilities.cropImage(this.state.chapterData.chapterImage);
     title[0].innerText = this.state.chapterData.title;

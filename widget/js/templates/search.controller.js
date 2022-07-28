@@ -58,15 +58,19 @@ class Search {
   static sort = (data, type = this.state.sortType) => {
     if (type === Strings.SORT_MOST_RECENT_TEXT) {
       data.sort((a, b) => {
-        if (new Date(a.meta.createdOn) < new Date(b.meta.createdOn)) {
+        console.log("jjjjjjjj");
+        if (new Date(a.meta.createdOn) > new Date(b.meta.createdOn)) {
           return -1;
         }
-        if (new Date(a.meta.createdOn) > new Date(b.meta.createdOn)) {
+        if (new Date(a.meta.createdOn) < new Date(b.meta.createdOn)) {
           return 1;
         }
       });
     }else if (type === Strings.SORT_MOST_POPULAR_TEXT) {
       data.sort((a, b) => {
+        console.log(a.meta.views ,"hj");
+        if(!a.meta.views) a.meta.views = 0;
+        if(!b.meta.views) b.meta.views = 0
         if (a.meta.views > b.meta.views) {
           return -1;
         }

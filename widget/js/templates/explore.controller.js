@@ -52,6 +52,9 @@ class Explore {
 			url('${Utilities.cropImage(asset.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
+      Stats.incrementViews(asset.id, (err, res) => {
+        if (err) return console.log(err);
+      })
       Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
     });
     container.appendChild(firstClone);
@@ -83,6 +86,12 @@ class Explore {
       progressBarContainer[0].classList.add("hidden");
     }
     card[0].addEventListener("click", () => {
+      card[0].addEventListener("click", () => {
+        Stats.incrementViews(asset.id, (err, res) => {
+          if (err) return console.log(err);
+        })
+        Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
+      });
       Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
     });
     container.appendChild(nodesClone);
@@ -109,6 +118,9 @@ class Explore {
                                 ${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
+      Stats.incrementViews(asset.id, (err, res) => {
+        if (err) return console.log(err);
+      })
       Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
     });
     container.appendChild(nodesClone);
