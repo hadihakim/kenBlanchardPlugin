@@ -2,7 +2,9 @@ class Explore {
   static state = {
     data: [],
     userData: config.userConfig,
-    userprofileData:{}
+    userprofileData: {},
+    mainCardsNumber: 5,
+    exploreCardsNumber: 5,
   };
 
   static pointers = {
@@ -21,8 +23,8 @@ class Explore {
   };
 
   static setPageData = (options) => {
-    this.state = {...this.state, ...options};
-   
+    this.state = { ...this.state, ...options };
+
   };
 
   static seeAllButton = (id, title, type) => {
@@ -52,12 +54,12 @@ class Explore {
 			url('${Utilities.cropImage(asset.meta.image)}')`;
 
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
+      Navigation.openPageDetails({ id: asset.id, title: asset.meta.title, fromLocalNotifications: false, pushToHistory: true, openFrom: "main_explore_profile" });
     });
     container.appendChild(firstClone);
   }
 
-  static horizontal_Render = (asset, container,pageType="") => {
+  static horizontal_Render = (asset, container, pageType = "") => {
     const nodesClone = recommendedTemplate.content.cloneNode(true);
     let image = nodesClone.querySelectorAll(".image");
     let category = nodesClone.querySelectorAll(".category");
@@ -76,14 +78,14 @@ class Explore {
 					<span class="schedule-text bodyText-AppTheme">
 						${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
-    
-    if(pageType==="profile"){
+
+    if (pageType === "profile") {
       (asset.progress ? progress[0].style.width = `${asset.progress}%` : progress[0].style.width = "0%");
-    }else{
+    } else {
       progressBarContainer[0].classList.add("hidden");
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
+      Navigation.openPageDetails({ id: asset.id, title: asset.meta.title, fromLocalNotifications: false, pushToHistory: true, openFrom: "main_explore_profile" });
     });
     container.appendChild(nodesClone);
   }
@@ -109,7 +111,7 @@ class Explore {
                                 ${Utilities.timeConvert(asset.meta.duration, "hh|mm")}</span>`;
     }
     card[0].addEventListener("click", () => {
-      Navigation.openPageDetails({id:asset.id, title:asset.meta.title,fromLocalNotifications: false,pushToHistory:true,openFrom:"main_explore_profile"});
+      Navigation.openPageDetails({ id: asset.id, title: asset.meta.title, fromLocalNotifications: false, pushToHistory: true, openFrom: "main_explore_profile" });
     });
     container.appendChild(nodesClone);
   }
@@ -122,11 +124,11 @@ class Explore {
     // get all assets in the section
     let myAssets = [];
     section.assets.forEach(asset => {
-      if(this.state.userprofileData[asset]){
-        asset=this.state.userprofileData[asset].id
+      if (this.state.userprofileData[asset]) {
+        asset = this.state.userprofileData[asset].id
       }
       let returnedAsset = HandleAPI.state.data.assets_info[asset];
-      if(returnedAsset){
+      if (returnedAsset) {
         returnedAsset.id = asset;
         myAssets.push(returnedAsset);
       }
@@ -135,12 +137,14 @@ class Explore {
     // sort all assets
     myAssets = Search.sort(myAssets);
     // loop through assets in the section to print cards
+    let cardsPrinted = 0;
     myAssets.forEach(asset => {
       // check if the asset is included in the filter 
       // if the section is userSpecific it will not be affected with the filter
-      let printCardState = (HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific) 
+      let printCardState = (HandleAPI.handleFilter(asset.meta.topics) || section.userSpecific)
       && !asset.isActive;
-      if (printCardState) {
+      if (printCardState && ((page == 'main' && cardsPrinted<this.state.mainCardsNumber) || (page == 'explore' && cardsPrinted<this.state.exploreCardsNumber))) {
+        cardsPrinted += 1;
         emptySection = false;
         switch (section.layout) {
           case 'horizontal-1':
@@ -155,7 +159,7 @@ class Explore {
         }
       }
     })
-    if(emptySection){
+    if (emptySection) {
       // if the section is empty it will be removed
       let mainSectionRow = document.getElementById(`${section.id}-mainSectionRow-${page}`);
       mainSectionRow.remove();
@@ -195,9 +199,9 @@ class Explore {
     })
   }
 
-  static init = async() => {
-    
-    this.state.userprofileData=await HandleAPI.getUserData();
+  static init = async () => {
+
+    this.state.userprofileData = await HandleAPI.getUserData();
     sectionsContainer.innerHTML = '';
     exploreContainer.innerHTML = '';
     // init main page

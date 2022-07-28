@@ -16,8 +16,8 @@
 .user-container .user-image-container .main-image {
   width: 4rem;
   height: 4rem;
-  border: 0.313rem solid;
-  border-radius: 50%;
+  border: 0.313rem solid rgb(255 255 255 / 20%);
+  border-radius: 100%;
 }
 
 .user-container .user-image-container .achievement-image {
