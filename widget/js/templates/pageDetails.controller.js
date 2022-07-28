@@ -286,17 +286,22 @@ class PageDetails {
         : null;
     } else if (this.state.data.type === "article") {
       ArticleRender.init(this.state.id, this.state.data);
-    } else if (this.state.data.type === "PDF") {
-      console.log(" PDF pageDetails ");
+    } else if (this.state.data.type === "book") {
+      HandleAPI.saveAssetToProfile(this.state.data);
       // should call external plugin
+      buildfire.navigation.openWindow(this.state.data.url, "_system");
     } else if (this.state.data.type === "video") {
       videoDetails.initVideoDetails(this.state.id, this.state.data);
       this.state.fromNotification
         ? videoDetails.renderVideoShortcuts("shortcuts")
         : null;
+    }else if (this.state.data.type === "action-item"){
+      HandleAPI.saveAssetToProfile(this.state.data);
+      // to navigate to external plugin
+      buildfire.navigation.navigateTo({
+        instanceId: this.state.data.meta.actionData.instanceId,
+      });
     }
-
-    // Utilities.setAppTheme();
   };
 
   static init = async (id, fromNotification) => {
