@@ -16,6 +16,8 @@
 .user-container .user-image-container .main-image {
   width: 4rem;
   height: 4rem;
+  max-width: 4rem !important;
+  max-height: 4rem !important;
   border: 0.313rem solid rgb(255 255 255 / 20%);
   border-radius: 100%;
 }
