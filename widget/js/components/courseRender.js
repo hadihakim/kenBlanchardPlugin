@@ -2,10 +2,11 @@ class CourseRender{
     static state={
         id:"",
         data:{},
+        
     }
     static pointers={
         pageDetails: "pageDetails",
-        detailsPageTemplate: "detailsPageTemplate",
+        courseDetailsFirstPageTemplate: "courseDetails-FirstPageTemplate",
     }
     static setData =(id,data)=>{
         this.state.data=data;
@@ -15,15 +16,15 @@ class CourseRender{
         let container = document.getElementById(this.pointers.pageDetails);
         container.innerHTML = "";
         
-        const template = document.getElementById(this.pointers.detailsPageTemplate);
+        const template = document.getElementById(this.pointers.courseDetailsFirstPageTemplate);
         const firstClone = template.content.cloneNode(true);
-        let image = firstClone.querySelectorAll(".details-img");
-        let title = firstClone.querySelectorAll(".details-title");
+        let image = firstClone.querySelectorAll(".courseDetails-FirstPage-img");
+        let title = firstClone.querySelectorAll(".courseDetails-FirstPage-title");
         let duration = firstClone.querySelectorAll(".duration-details");
         let startButton = firstClone.querySelectorAll(".mdc-button");
         let startCourse = firstClone.querySelectorAll(".startCourse");
-        let descriptionTitle = firstClone.querySelectorAll(".description-title");
-        let descriptionText = firstClone.querySelectorAll(".description-text");
+        let descriptionTitle = firstClone.querySelectorAll(".courseDetails-FirstPage-description-title");
+        let descriptionText = firstClone.querySelectorAll(".courseDetails-FirstPage-description-text");
         let learnTitle = firstClone.querySelectorAll(".learn-title");
         let lessonTitle = firstClone.querySelectorAll(".lesson-title");
         let learnItem = firstClone.querySelectorAll(".lesson-list");

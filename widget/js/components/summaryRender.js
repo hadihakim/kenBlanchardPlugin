@@ -132,7 +132,7 @@ class summaryRender {
       splideList[0].appendChild(li);
     });
     container.appendChild(nodesClone);
-    Utilities.splideInit();
+    Utilities.splideInit({hasProgressBar:true});
     // Utilities.setAppTheme();
   };
 
