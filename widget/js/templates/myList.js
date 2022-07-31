@@ -11,6 +11,8 @@ class MyList {
         page: 1,
         pageSize: 12,
         fetchNext: false,
+        chartArr: [0, 0, 0],
+        averageProgress: 0,
     }
 
     static pointers = {
@@ -42,6 +44,9 @@ class MyList {
     // allTopics is the all topics that will be printed in the list 
     // myTopics is the all user topics to calculate the number of taken topics
     static handleTakenNumber = (allTopics, myTopics, type) => {
+        this.listState.chartArr = [0, 0, 0];
+        this.listState.averageProgress = 0;
+
         let myTopicsToRender = [];
         for (const topic in allTopics) {
             let returnedTopic = {
@@ -59,18 +64,29 @@ class MyList {
             returnedTopic.description = `${userTakenOn} Taken On  <span class="material-icons dotIcon">fiber_manual_record</span>  ${topicNumber?.count || 0} In Total`;
             myTopicsToRender.push(returnedTopic);
         }
+        this.listState.averageProgress = parseFloat((this.listState.averageProgress / Object.keys(UserProfile.state.data.assets).length).toFixed(2));
         return myTopicsToRender;
     }
     // calculate the total number of assets that user had taken per each topic 
     static calculateTaken = (id, type) => {
-
-        console.log('handle archived --=>', UserProfile?.state?.data);
         let userTakenOn = 0;
         for (const asset in UserProfile.state.data.assets) {
             if (HandleAPI?.state?.assets_info[asset]?.type === type
                 && HandleAPI?.state.assets_info[asset]?.meta?.topics?.includes(id)
-                && (this?.listState?.includeArchived || (!this?.listState?.includeArchived && !UserProfile?.state?.data?.assets[asset]?.isArchived)))
+                && (this?.listState?.includeArchived || (!this?.listState?.includeArchived && !UserProfile?.state?.data?.assets[asset]?.isArchived))) {
                 userTakenOn += 1;
+                this.listState.averageProgress += UserProfile.state.data.assets[asset]?.progress || 0;
+            
+                if(UserProfile.state.data.assets[asset].progress === 0 || !UserProfile.state.data.assets[asset].progress){
+                    this.listState.chartArr[0]+=1;
+                }
+                if(UserProfile.state.data.assets[asset].progress > 0 && UserProfile.state.data.assets[asset].progress < 100){
+                    this.listState.chartArr[1]+=1;
+                }
+                if(UserProfile.state.data.assets[asset].progress === 100){
+                    this.listState.chartArr[2]+=1;
+                }
+            }
         }
         return userTakenOn;
     }
@@ -90,7 +106,7 @@ class MyList {
         this.destroy();
         // Bar chart
         var xValues = [["Just", "Started"], ["In", "Progress"], "Completed"];
-        var yValues = [5, 11, 3];
+        var yValues = this.listState.chartArr;
         var barColors = ["#E4572E", "#57CC99", "#FFBA08"];
 
         this.listState.barChart = new Chart(this.pointers.barChart, {
@@ -141,7 +157,7 @@ class MyList {
         // Progress Chart
         let defaultTheme = Utilities.getAppTheme();
         defaultTheme = defaultTheme.colors.defaultTheme;
-        let percent = 71;
+        let percent = this.listState.averageProgress;
         const data = {
             labels: ["Average Progress", ""],
             datasets: [

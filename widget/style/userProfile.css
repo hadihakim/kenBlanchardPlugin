@@ -24,6 +24,8 @@
   .user-profile-image {
     height: 4rem;
     width: 4rem;
+    max-height: 4rem !important;
+    max-width: 4rem !important;
     border: 0.313rem solid rgb(255 255 255 / 20%);
     border-radius: 100%;
 }
