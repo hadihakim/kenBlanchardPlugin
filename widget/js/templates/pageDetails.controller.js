@@ -12,10 +12,10 @@ class PageDetails {
   static setState = async (id, fromNotification) => {
     this.state.id = id;
     let newRes = await HandleAPI.getDataByID(id, "assets_info");
-    if(this.state.isInProfile){
-      this.state.data = {...UserProfile.state.data.assets[id],...newRes.data};
-    }else{
-      this.state.data =newRes.data;
+    if (this.state.isInProfile) {
+      this.state.data = { ...UserProfile.state.data.assets[id], ...newRes.data };
+    } else {
+      this.state.data = newRes.data;
     }
     this.state.fromNotification = fromNotification;
   };
@@ -229,18 +229,18 @@ class PageDetails {
             this.state.id,
             this.state.data.meta.title
           );
-          this.state.haveReminders?document
-          .getElementById(`${shortcut.id}reminderIcon`)
-          .classList.remove("hidden"):null;
+          this.state.haveReminders ? document
+            .getElementById(`${shortcut.id}reminderIcon`)
+            .classList.remove("hidden") : null;
         } else if (result.text === Strings.REMINDER_DRAWER_OP2) {
           Utilities.setReminder(
             1800,
             shortcut,
             this.state.data.meta.title
           );
-          this.state.haveReminders?document
-          .getElementById(`${shortcut.id}reminderIcon`)
-          .classList.remove("hidden"):null;
+          this.state.haveReminders ? document
+            .getElementById(`${shortcut.id}reminderIcon`)
+            .classList.remove("hidden") : null;
         } else if (result.text === Strings.REMINDER_DRAWER_OP3) {
           Utilities.setReminder(
             3600,
@@ -248,9 +248,9 @@ class PageDetails {
             this.state.id,
             this.state.data.meta.title
           );
-          this.state.haveReminders?document
-          .getElementById(`${shortcut.id}reminderIcon`)
-          .classList.remove("hidden"):null;
+          this.state.haveReminders ? document
+            .getElementById(`${shortcut.id}reminderIcon`)
+            .classList.remove("hidden") : null;
         } else if (result.text === Strings.REMINDER_DRAWER_OP4) {
           Utilities.setReminder(
             86400,
@@ -258,9 +258,9 @@ class PageDetails {
             this.state.id,
             this.state.data.meta.title
           );
-          this.state.haveReminders?document
-          .getElementById(`${shortcut.id}reminderIcon`)
-          .classList.remove("hidden"):null;
+          this.state.haveReminders ? document
+            .getElementById(`${shortcut.id}reminderIcon`)
+            .classList.remove("hidden") : null;
         }
         if (result.text) {
           Utilities.showToast(`Reminder set for ${result.text}`);
@@ -268,7 +268,7 @@ class PageDetails {
       }
     );
   };
-  
+
   static detailsRender = () => {
     if (this.state.data.type === "summary") {
       summaryRender.init(this.state.id, this.state.data);
@@ -294,7 +294,7 @@ class PageDetails {
       this.state.fromNotification
         ? videoDetails.renderVideoShortcuts("shortcuts")
         : null;
-    }else if (this.state.data.type === "action-item"){
+    } else if (this.state.data.type === "action-item") {
       HandleAPI.saveAssetToProfile(this.state.data);
       // to navigate to external plugin
       buildfire.navigation.navigateTo({
@@ -303,12 +303,67 @@ class PageDetails {
     }
   };
 
+  static courseSplide = () => {
+    // to save all ids in 1 dimensional array to make it easy to move from index to index
+    let arr = [];
+    let splide = document.createElement("div");
+    splide.setAttribute('id', "splideCourse");
+    splide.innerHTML = `<section class="splide"  id="splideSection" aria-label="...">
+                            <div class="splide__track">
+                               <ul class="splide__list" id="coursrSplideList"></ul>
+                            </div>
+                        </section>`
+    document.getElementById("pageDetails").appendChild(splide)
+    for (let i = 0; i < CourseDetails.state.courseLessonsArr.length; i++) {
+
+      // if we have one assets in the lesson no need to add 'lecture number' to the text 
+      if (CourseDetails.state.courseLessonsArr[i].length == 1) {
+        arr.push(CourseDetails.state.courseLessonsArr[i][0]);
+        let li = document.createElement("li");
+        li.classList.add("splide__slide");
+        let innerHTML = `<div class="content-item">
+                           <p class="splideText bodyText-AppTheme">Lesson ${i + 1}</p>
+                         </div>`;
+        li.innerHTML = innerHTML;
+        document.getElementById('coursrSplideList').appendChild(li);
+      } else {
+        for (let j = 0; j < CourseDetails.state.courseLessonsArr[i].length; j++) {
+          arr.push(CourseDetails.state.courseLessonsArr[i][j]);
+          let li = document.createElement("li");
+          li.classList.add("splide__slide");
+          let innerHTML = `<div class="content-item">
+                              <p class="splideText bodyText-AppTheme">Lesson ${i + 1} - Lecture ${j + 1}</p>
+                           </div>`;
+          li.innerHTML = innerHTML;
+          document.getElementById('coursrSplideList').appendChild(li);
+
+        }
+      }
+    }
+    Utilities.splideInit({ hasProgressBar: false, startPage: arr.indexOf(this.state.id) });
+    this.splideBtnAction(arr);
+  }
+
+  static splideBtnAction = (arr) => {
+    let nextBtn = document.getElementsByClassName("splide__arrow--next");
+    nextBtn[0].addEventListener("click", () => {
+      let nextAssetId = arr[arr.indexOf(this.state.id) + 1]
+      arr.indexOf(this.state.id) + 1<arr.length? this.init(nextAssetId, false):nextBtn[0].disabled = true;
+    });
+    let prevBtn = document.getElementsByClassName(" splide__arrow--prev");
+    prevBtn[0].addEventListener("click", () => {
+      let prevAssetId = arr[arr.indexOf(this.state.id) - 1]
+      this.init(prevAssetId, false);
+    });
+  }
   static init = async (id, fromNotification) => {
     document.getElementById("pageDetails").innerHTML = "";
-    if(UserProfile.state.data.assets.hasOwnProperty(id)){
-      this.state.isInProfile=true;
+    if (UserProfile.state.data.assets.hasOwnProperty(id)) {
+      this.state.isInProfile = true;
     }
     await this.setState(id, fromNotification);
     this.detailsRender();
+
+    CourseDetails.state.courseLessonsArr?.length > 0 ? this.courseSplide() : null;
   };
 }

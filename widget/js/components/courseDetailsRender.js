@@ -2,14 +2,14 @@ class CourseDetails {
   static state = {
     data: {},
     duration: 0,
+    // TODO: this should be 2 dimensional array ==> [[],[],[]] each index to lesson arr, and the lesson arr will contain assets id
+    courseLessonsArr:[],
   };
   static pointers = {
     courseDetailsContainer: "courseDetailsContainer",
-    courseDetailsTemplate: "courseDetailsTemplate",
+     courseDetailsSecondPageTemplate: "courseDetails-secondPageTemplate",
   };
   static setData = (data) => {
-    // HandleAPI.getDataByID
-    
     this.state = {...this.state,data};
   }
 
@@ -28,14 +28,14 @@ class CourseDetails {
       this.pointers.courseDetailsContainer
     );
     const template = document.getElementById(
-      this.pointers.courseDetailsTemplate
+      this.pointers. courseDetailsSecondPageTemplate
     );
     const firstClone = template.content.cloneNode(true);
 
-    let image = firstClone.querySelectorAll(".course-img");
-    let title = firstClone.querySelectorAll(".course-title");
+    let image = firstClone.querySelectorAll(".courseDetails-secondPage-course-img");
+    let title = firstClone.querySelectorAll(".courseDetails-secondPage-course-title");
     let duration = firstClone.querySelectorAll(".duration-details");
-    let lessons = firstClone.querySelectorAll(".course-lessons-list");
+    let lessons = firstClone.querySelectorAll(".courseDetails-secondPage-lessons-list");
       console.log("this.state = " , this.state);
     image[0].style.backgroundImage = `url('${Utilities.cropImage(
       this.state.data.meta.image,
@@ -44,6 +44,8 @@ class CourseDetails {
     )}')`;
     title[0].innerHTML = this.state.data.meta.title;
     this.state.data.lessons.forEach((el) => {
+      //create arr for each lesson
+      let lessonArr=[]
       let lessonContainer= ui.createElement("div", lessons[0],"",["lesson-container"]);
       if(el.assets.length === 1) {
         lessonContainer.style.cursor = "pointer";
@@ -51,7 +53,7 @@ class CourseDetails {
           Navigation.openPageDetails({id:el.assets[0], title:this.state.data.meta.title,fromLocalNotifications: false,pushToHistory:true, openFrom:"course"});
         })
 
-      }
+      } 
       ui.createElement(
         "p",
         lessonContainer,
@@ -67,7 +69,7 @@ class CourseDetails {
         "course-lesson-subtitle"
       );
       let durationForLesson = document.createElement("div");
-      //value addad after calculated duration for lessons assets
+      //value will be added after calculated duration for lessons assets
       lessonContainer.appendChild(durationForLesson);
 
       let icons = document.createElement("div");
@@ -77,8 +79,8 @@ class CourseDetails {
       allAssets.setAttribute("id", " allAssets");
       let lessonIcons = [];
       for (let i = 0; i < el.assets.length; i++) {
+        lessonArr.push(el.assets[i]);
         let assets= HandleAPI.state.assets_info[el.assets[i]]
-        // let assets = coursesData.data.assets_info[el.assets[i]];
         let lessonIcon = document.createElement("div");
         let assetsIcon = document.createElement("div");
         lessonIcon.classList.add("icons");
@@ -145,7 +147,8 @@ class CourseDetails {
         assetsDuration += assets.meta.duration;
         allAssets.appendChild(assetsDetails);
       }
-
+      //push the lesson to main arr
+      this.state.courseLessonsArr.push(lessonArr);
       lessonContainer.appendChild(allAssets);
       if (el.assets.length < 2) {
         allAssets.classList.add("hidden");
@@ -157,7 +160,7 @@ class CourseDetails {
         ]);
         span.addEventListener("click", () => {
           this.showAssetDetails(span, allAssets);
-        });
+        });     
       }
       durationForLesson.innerHTML = `<div class="duration duration-details">
              <span class="material-icons icon details-icon schedule-icon"  id="scheduleIcon"> schedule </span>

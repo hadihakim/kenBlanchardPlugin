@@ -217,7 +217,7 @@ class Utilities {
     buildfire.navigation.onBackButtonClick = () => {
       let input = document.getElementById("search-input");
       input.value = "";
-
+      CourseDetails.state.courseLessonsArr=[];
       buildfire.history.get(
         {
           pluginBreadcrumbsOnly: true,
@@ -306,8 +306,11 @@ class Utilities {
     mainContainer.scrollTo({ top: 0 });
   };
 
-  static splideInit = () => {
-    var splide = new Splide(".splide");
+  static splideInit = (options) => {
+    var splide = new Splide(".splide",{
+      start  : options.startPage,
+    });
+    if(options.hasProgressBar){
     var bar = splide.root.querySelector(".my-carousel-progress-bar");
     // Update the bar width:
     splide.on("mounted move", function () {
@@ -315,7 +318,7 @@ class Utilities {
       bar.style.width = String((100 * (splide.index + 1)) / end) + "%";
       document.getElementById("slideNum").innerText =
         splide.index + 1 + "/" + end;
-    });
+    });}
     splide.mount();
   };
 

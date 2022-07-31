@@ -1,10 +1,10 @@
-#details-img {
+#courseDetails-FirstPage-img {
 	width: 100%;
 	height:13.188rem;
 	background-size: cover;
 }
 
-#details-title {
+#courseDetails-FirstPage-title {
 	margin:1rem;
 	font-family: 'Roboto';
 	font-style: normal;
@@ -29,11 +29,11 @@
 
 }
 
-.pageDetails .detailsPageTemplate .details-card .mdc-card-footer .duration .details-icon {
+.pageDetails .courseDetails-FirstPageTemplate .courseDetails-FirstPage-card .mdc-card-footer .duration .details-icon {
 	font-size:1.125rem !important;
 }
 
-.description-container,
+.courseDetails-FirstPage-description-container,
 .learn-container,
 .lesson-container {
 	padding:1rem;
@@ -41,7 +41,7 @@
 
 }
 
-.description-title,
+.courseDetails-FirstPage-description-title,
 .lesson-title,
 .learn-title {
 	font-family: 'Roboto';
@@ -52,7 +52,7 @@
 	margin-bottom:1rem;
 }
 
-.description-text {
+.courseDetails-FirstPage-description-text {
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 400;
@@ -88,7 +88,7 @@
 	height: 2.5rem !important;
 }
 
-.details-btn-container {
+.courseDetails-FirstPage-details-btn-container {
 	width: 100%;
 	display: flex;
 	justify-content: center;
