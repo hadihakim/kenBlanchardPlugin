@@ -187,7 +187,7 @@ class Search {
      async (err, result) => {
         if (err) return console.error(err);
         if (result) {
-          if (result.text===Strings.SORT_MOST_POPULAR_TEXT && !this.state.mostPopularState) {
+          if (result.text===Strings.SORT_MOST_POPULAR_TEXT) {
             // mostPopular.views
             let mostPopularAssets=await HandleAPI.getStats();
             for (const key in mostPopularAssets.views) {
